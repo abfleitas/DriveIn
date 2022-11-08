@@ -1,0 +1,76 @@
+[
+    {
+        "id_contry": 1,
+        "country": "Argentina",
+        "province": [
+            {
+                "name": "Buenos Aires",
+                "cities": [
+                    {
+                        "city": "Tandil"
+                    }
+                ]
+            },
+            {
+                "name": "Cordoba",
+                "cities": [
+                    {
+                        "city": "Villa Carlos Paz"
+                    }
+                ]
+            },
+            {
+                "name": "Mendoza",
+                "cities": [
+                    {
+                        "city": "San Rafael"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id_contry": 2,
+        "country": "Bolivia"
+    },
+    {
+        "id_contry": 3,
+        "country": "Brasil"
+    },
+    {
+        "id_contry": 4,
+        "country": "Colombia"
+    },
+    {
+        "id_contry": 5,
+        "country": "Costa Rica"
+    },
+    {
+        "id_contry": 6,
+        "country": "Chile"
+    },
+    {
+        "id_contry": 7,
+        "country": "Ecuador"
+    },
+    {
+        "id_contry": 8,
+        "country": "El Salvador"
+    },
+    {
+        "id_contry": 9,
+        "country": "Guatemala"
+    },
+    {
+        "id_contry": 10,
+        "country": "Honduras"
+    },
+    {
+        "id_contry": 11,
+        "country": "Mexico"
+    },
+    {
+        "id_contry": 12,
+        "country": "Panama"
+    }
+]

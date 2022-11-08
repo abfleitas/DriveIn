@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const {getAllCountrys} = require('../middlewares/countrys');
+const {getAllCountrys} = require('../middlewares/countries');
 const router = Router();
 
 router.get('/', async(req, res) => {
@@ -11,3 +11,5 @@ router.get('/', async(req, res) => {
         return res.status(404).send(error);
     }
 });
+
+module.exports = router;
