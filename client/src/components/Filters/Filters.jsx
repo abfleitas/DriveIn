@@ -22,8 +22,8 @@ export default function Filters() {
          </div>
          <div>
             <label>Características: </label>
-            <input type="checkbox" name="manual" />Aire Acondicionado
-            <input type="checkbox" name="automatico" />+4 asientos
+            <input type="checkbox" name="A/A" />Aire Acondicionado
+            <input type="checkbox" name="+4" />+4 asientos
          </div>
          <div>
             <label>Marca: </label>
