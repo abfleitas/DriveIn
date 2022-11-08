@@ -21,16 +21,12 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    area: {
-      type: DataTypes.DECIMAL,
-      allowNull: true,
-    },
     score: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
     favorite: {
-      type: DataTypes.STRING,
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
     airconditioning: {
@@ -42,7 +38,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     seats: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     category: {
@@ -54,7 +50,11 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     price: {
-      type: DataTypes.STRING,
+      type: DataTypes.DECIMAL,
+      allowNull: true,
+    },
+    availability: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
   }, {timestamps: false}  

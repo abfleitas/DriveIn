@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
 
   sequelize.define('users', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,

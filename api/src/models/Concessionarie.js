@@ -5,9 +5,10 @@ module.exports = (sequelize) => {
 
   sequelize.define('concessionarie', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -32,6 +33,14 @@ module.exports = (sequelize) => {
       },
     history: {
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      phone: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      whatsapp: {
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
   }, {timestamps: false}  
