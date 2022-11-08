@@ -42,7 +42,15 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
-    
+    rol: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    IDhistory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      
   }, {timestamps: false}  
    );
 };
