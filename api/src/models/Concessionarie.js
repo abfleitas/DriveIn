@@ -5,33 +5,28 @@ module.exports = (sequelize) => {
 
   sequelize.define('concessionarie', {
     id: {
-      type: DataTypes.UUID,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     adress:{
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
-
     email: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
     password: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
     photo: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-    history: {
         type: DataTypes.STRING,
         allowNull: true,
       },
