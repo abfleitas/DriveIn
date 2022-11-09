@@ -42,14 +42,11 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
-    rol: {
-        type: DataTypes.STRING,
+    role: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-    IDhistory: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+
       
   }, {timestamps: false}  
    );
