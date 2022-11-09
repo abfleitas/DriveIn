@@ -1,11 +1,10 @@
 const { Router } = require('express');
-const VehicleDetails = require("./Vehicle_details")
-const vehiclePost = require("./vehicle_post")
+const vehicles = require("./route-vehicles")
 
 const router = Router();
 
-router.use("/vehicleDetails", VehicleDetails)
-router.use("/vehiclePost", vehiclePost)
+
+router.use("/vehicles", vehicles)
 
 
 module.exports = router;
