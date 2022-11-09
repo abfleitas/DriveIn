@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { filterCategory, filterTransmission, filterCharacteristics, filterBrand, filterPrice } from "../../redux/actions/actions";
 
-export default function Filters({brand}) {
+export default function Filters() {
 
    const dispatch = useDispatch();
 
@@ -33,35 +34,35 @@ export default function Filters({brand}) {
          <div>
             <label>Categoría: </label>
             <input type="checkbox" id="small" value="small" onChange={handleCategory} />
-            <label htmlFor="small">chico </label>
+            <label htmlFor="small">Chico </label>
 
             <input type="checkbox" id="medium" value="medium" onChange={handleCategory} />
-            <label htmlFor="medium">mediano </label>
+            <label htmlFor="medium">Mediano </label>
 
             <input type="checkbox" id="big" value="big" onChange={handleCategory} />
-            <label htmlFor="big">grande </label>
+            <label htmlFor="big">Grande </label>
 
             <input type="checkbox" id="premium" value="premium" onChange={handleCategory} />
-            <label htmlFor="premium">premium </label>
+            <label htmlFor="premium">Premium </label>
 
             <input type="checkbox" id="convertible" value="convertible" onChange={handleCategory} />
-            <label htmlFor="convertible">convertible</label>
+            <label htmlFor="convertible">Convertible</label>
          </div>
          <div>
             <label>Transmisión: </label>
             <input type="checkbox" id="manual" value="manual" onChange={handleTransmission} />
-            <label htmlFor="manual">manual </label>
+            <label htmlFor="manual">Manual </label>
 
             <input type="checkbox" id="automatic" value="automatic" onChange={handleTransmission} />
-            <label htmlFor="automatic">automático</label>
+            <label htmlFor="automatic">Automático</label>
          </div>
          <div>
             <label>Características: </label>
             <input type="checkbox" id="AC" value="AC" onChange={handleCharacteristics} />
-            <label htmlFor="AC">aire acondicionado </label>
+            <label htmlFor="AC">Aire Acondicionado </label>
 
             <input type="checkbox" id="seats" value="seats" onChange={handleCharacteristics} />
-            <label htmlFor="seats">+4 asientos</label>
+            <label htmlFor="seats">+4 Asientos</label>
          </div>
          <div>
             <label>Marca: </label>
@@ -75,12 +76,11 @@ export default function Filters({brand}) {
             }
          </div>
          <div>
-            <label>Precio: </label>
-            <input type="checkbox" id="lower" value="lower" onChange={handlePrice} />
-            <label htmlFor="lower">de menor a mayor </label>
-
-            <input type="checkbox" id="higher" value="higher" onChange={handlePrice} />
-            <label htmlFor="higher">de mayor a menor</label>
+            <select defaultValue="price" onChange={handlePrice}>
+               <option value="price" disabled>Precio</option>
+               <option value="lower">De menor a mayor</option>
+               <option value="higher">De mayor a menor</option>
+            </select>
          </div>
       </div>
    );
