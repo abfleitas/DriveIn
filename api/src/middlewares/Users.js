@@ -3,8 +3,8 @@ const axios = require("axios");
 const {Users} = require('../db.js')
 
 export async function postUser(req, res) {
-    const { name, lastName, phone, whatsapp, email, password, photo, active, role } = req.body;
-    const newUser ={ name, lastName, phone, whatsapp, email, password, photo, active, role };
+    const { name, lastName, phone, whatsapp, email, password, photo, active} = req.body;
+    const newUser ={ name, lastName, phone, whatsapp, email, password, photo, active };
     try {
       if (
         !name ||
@@ -12,8 +12,7 @@ export async function postUser(req, res) {
         !phone ||
         !whatsapp ||
         !email ||
-        !password ||
-        !role
+        !password 
       ) {
         return res.json({ error: "Incomplete information" });
       }
