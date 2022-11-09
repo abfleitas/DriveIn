@@ -10,34 +10,30 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
+    vehicules: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    adress:{
+    phone: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    whatsapp: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    email:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
     photo: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      phone: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      whatsapp: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
+      type: DataTypes.STRING(512),
+      allowNull: true,
+    },
   }, {timestamps: false}  
    );
 };

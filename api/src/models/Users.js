@@ -35,14 +35,22 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     photo: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(512),
         allowNull: true,
       },
     active: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
       },
-    
+    rol: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+    IDhistory: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      
   }, {timestamps: false}  
    );
 };

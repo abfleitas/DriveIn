@@ -9,25 +9,26 @@ module.exports = (sequelize) => {
       allowNull: false,
       primaryKey: true,
     },
-    concessionaire: {
-      type: DataTypes.STRING,
-      allowNull: true,
+    IDconcessionaire: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     model:{
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     brand: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     score: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     favorite: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
+      defaultValue: false
     },
     airconditioning: {
       type: DataTypes.BOOLEAN,
@@ -46,12 +47,12 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     photo: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(512),
       allowNull: true,
     },
     price: {
       type: DataTypes.DECIMAL,
-      allowNull: true,
+      allowNull: false,
     },
     availability: {
       type: DataTypes.BOOLEAN,
