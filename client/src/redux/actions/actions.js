@@ -1,3 +1,10 @@
+export const FILTER_CATEGORY = "FILTER_CATEGORY";
+export const FILTER_TRANSMISSION = "FILTER_TRANSMISSION";
+export const FILTER_CHARACTERISTICS = "FILTER_CHARACTERISTICS";
+export const FILTER_BRAND = "FILTER_BRAND";
+export const FILTER_PRICE = "FILTER_PRICE";
+export const ADD_FAVORITES = "ADD_FAVORITES";
+
 
 export const filterCategory = (payload) => {
    return {
@@ -32,3 +39,10 @@ export const filterPrice = (payload) => {
       payload
    };
 };
+//Action agregar auto a favoritos.
+export const addFavorites = (auto) => {
+   return {
+      type: "ADD_FAVORITES",
+      payload: auto
+   }
+}
