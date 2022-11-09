@@ -30,13 +30,16 @@ router.get ("/", async(req,res)=>{
 
 router.get("/:id", async(req, res)=>{
     const id = req.params.id.toUpperCase()
-    if(!id) res.send({ msg:"id no existe"})
     try{
-        const city = await city.findByPk(id,{include:{model:vehicle}})
+    if(!id) res.send({ msg:"id no existe"})
+   
+        const city = await City.findByPk(id)
+        
+        console.log()
         res.send (city)
     
     }catch(error){
-        console.log (error)
+        res.status(404).send("la busqueda fallo")
     }
 })
 
