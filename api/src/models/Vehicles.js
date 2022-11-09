@@ -55,6 +55,10 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
+    initialPrice: {
+      type: DataTypes.DECIMAL,
+      allowNull: true,
+    },
     // score: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,
