@@ -1,5 +1,6 @@
 import React from "react";
 import Searchbar from "./Searchbar";
+import Carousel from "./Carousel/Carousel";
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       Soy el Home
       <div>
         <Searchbar />
+        <Carousel />
       </div>
     </div>
   );
