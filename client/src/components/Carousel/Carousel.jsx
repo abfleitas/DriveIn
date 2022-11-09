@@ -97,14 +97,14 @@ const Carousel = () => {
 
   return (
     <>
-      <div className="ml-[20%] flex items-center">
+      <div className="ml-[20%] flex items-center text-2xl">
         <i className="fa-solid fa-star mr-5"></i>
         <h1>DESTINOS FAVORITOS</h1>
       </div>
       <div className="relative flex items-center">
         <i
           onClick={slideLeft}
-          className="fa-solid fa-angle-left p-5 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-100"
+          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-100"
         ></i>
         <div
           id="slider"
@@ -113,13 +113,16 @@ const Carousel = () => {
           {cities &&
             cities.map((c, index) => {
               return (
-                <div className="p-2 relative cursor-pointer" key={index}>
+                <div
+                  className="p-2 relative cursor-pointer h-[258px]"
+                  key={index}
+                >
                   <img
                     className=" rounded-lg max-w-sm h-full"
                     src={c.image}
                     alt={`${c.city}`}
                   />
-                  <div className="bg-[#f97316] text-white p-2 rounded-tr-lg rounded-bl-lg absolute bottom-2">
+                  <div className="bg-[#F97D67] text-white p-2 rounded-tr-lg rounded-bl-lg absolute bottom-2">
                     <h3>
                       {c.city}, {c.country}
                     </h3>
@@ -130,7 +133,7 @@ const Carousel = () => {
         </div>
         <i
           onClick={slideRight}
-          className="fa-solid fa-angle-right p-5 bg-slate-300 rounded-full absolute z-10 right-0 opacity-50 cursor-pointer hover:opacity-100"
+          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 right-0 opacity-50 cursor-pointer hover:opacity-100"
         ></i>
       </div>
     </>
