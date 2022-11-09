@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
      },
+     province:{
+      type: DataTypes.STRING,
+      allowNull: false,
+     },
     photo: {
       type: DataTypes.STRING(512),
       allowNull: true,
