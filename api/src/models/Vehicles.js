@@ -47,7 +47,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     photo: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(512),
       allowNull: true,
     },
     price: {
