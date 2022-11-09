@@ -31,7 +31,10 @@ export default function Comments() {
         {comments &&
           comments.map((c, index) => {
             return (
-              <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 py-6 bg-[#F97D67] mt-6  shadow-2xl rounded-lg">
+              <div
+                class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 py-6 bg-[#F97D67] mt-6  shadow-2xl rounded-lg"
+                key={index}
+              >
                 <div class="flex-shrink-0">
                   <div class="flex items-center mx-auto justify-center h-24 w-24 ">
                     <img src={c.image} className="rounded-full" />
