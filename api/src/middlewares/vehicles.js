@@ -1,5 +1,11 @@
 const axios = require("axios");
 
+const postVehicleFn = async (data) => {
+    const details = {post : "se posteo:", data}
+    return details;
+}
+
+
 
 //----------------------------vehicle details
 const vehicleExample = {
@@ -17,9 +23,10 @@ const vehicleExample = {
 }
 //----------------------------vehicle details
 
-const getVehicleDetails = async (id) => {
+const getVehicleDetailsFn = async (id) => {
     const details = {id, vehicleExample}
     return details;
 }
 
-module.exports = getVehicleDetails;
+
+module.exports = {postVehicleFn, getVehicleDetailsFn};
