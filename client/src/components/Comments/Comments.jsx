@@ -63,27 +63,5 @@ export default function Comments() {
         </div>
       </div>
     </>
-    // <>
-    //   <div className="ml-[20%] flex items-center text-2xl">
-    //     <i className="fa-solid fa-star mr-5"></i>
-    //     <h1>COMENTARIOS DESTACADOS</h1>
-    //   </div>
-    //   <div className="flex">
-    //     {comments &&
-    //       comments.map((c, index) => {
-    //         return (
-    //           <div className="border-solid border-2">
-    //             <img
-    //               src={c.image}
-    //               alt={c.name}
-    //               className="rounded-full max-h-80 max-w-80"
-    //             />
-    //             <span>{c.name}</span>
-    //             <p>"{c.text}"</p>
-    //           </div>
-    //         );
-    //       })}
-    //   </div>
-    // </>
   );
 }
