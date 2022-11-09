@@ -43,7 +43,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
     role: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 1
       },
