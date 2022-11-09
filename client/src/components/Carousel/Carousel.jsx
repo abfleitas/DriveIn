@@ -1,7 +1,7 @@
 import React from "react";
-import City from "./City";
+import { useState } from "react";
 
-const cities = [
+const ciudades = [
   {
     country: "Argentina",
     city: "Cordoba",
@@ -50,27 +50,90 @@ const cities = [
     image:
       "https://guadalajara.cc/wp-content/uploads/2014/06/guadalajara-zocalo1.jpg",
   },
+  {
+    country: "Mexico",
+    city: "Guadalajara",
+    image:
+      "https://guadalajara.cc/wp-content/uploads/2014/06/guadalajara-zocalo1.jpg",
+  },
+  {
+    country: "Mexico",
+    city: "Guadalajara",
+    image:
+      "https://guadalajara.cc/wp-content/uploads/2014/06/guadalajara-zocalo1.jpg",
+  },
+  {
+    country: "Brasil",
+    city: "Florianopolis",
+    image:
+      "https://volemos.nyc3.cdn.digitaloceanspaces.com/blog/wp-content/uploads/2021/10/25213736/mejor-epoca-para-viajar-florianopolis.jpg",
+  },
+  {
+    country: "Brasil",
+    city: "Florianopolis",
+    image:
+      "https://volemos.nyc3.cdn.digitaloceanspaces.com/blog/wp-content/uploads/2021/10/25213736/mejor-epoca-para-viajar-florianopolis.jpg",
+  },
+  {
+    country: "Brasil",
+    city: "Florianopolis",
+    image:
+      "https://volemos.nyc3.cdn.digitaloceanspaces.com/blog/wp-content/uploads/2021/10/25213736/mejor-epoca-para-viajar-florianopolis.jpg",
+  },
 ];
 
 const Carousel = () => {
   // ME TIENEN QUE LLEGAR POR PROPS LAS CITIES DESDE COMPONENTE HOME
+  const [cities, setCities] = useState(ciudades);
+
+  const slideLeft = () => {
+    var slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+  const slideRight = () => {
+    var slider = document.getElementById("slider");
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
 
   return (
-    <div>
-      <div>
-        {cities &&
-          cities.map((c, index) => {
-            return (
-              <City
-                country={c.country}
-                city={c.city}
-                image={c.image}
-                key={index}
-              />
-            );
-          })}
+    <>
+      <div className="ml-[20%] flex items-center">
+        <i className="fa-solid fa-star mr-5"></i>
+        <h1>DESTINOS FAVORITOS</h1>
       </div>
-    </div>
+      <div className="relative flex items-center">
+        <i
+          onClick={slideLeft}
+          className="fa-solid fa-angle-left p-5 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-100"
+        ></i>
+        <div
+          id="slider"
+          className="flex overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
+        >
+          {cities &&
+            cities.map((c, index) => {
+              return (
+                <div className="p-2 relative cursor-pointer" key={index}>
+                  <img
+                    className=" rounded-lg max-w-sm h-full"
+                    src={c.image}
+                    alt={`${c.city}`}
+                  />
+                  <div className="bg-[#f97316] text-white p-2 rounded-tr-lg rounded-bl-lg absolute bottom-2">
+                    <h3>
+                      {c.city}, {c.country}
+                    </h3>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        <i
+          onClick={slideRight}
+          className="fa-solid fa-angle-right p-5 bg-slate-300 rounded-full absolute z-10 right-0 opacity-50 cursor-pointer hover:opacity-100"
+        ></i>
+      </div>
+    </>
   );
 };
 
