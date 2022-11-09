@@ -57,7 +57,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { City, Users, Vehicles, Rent } = sequelize.models;
+const { City, Users, Vehicles, Rent, Comments } = sequelize.models;
 
 Users.belongsToMany(Vehicles, { through: 'Vehicles_Favorites'});
 Vehicles.belongsToMany(Users, { through: 'Vehicles_Favorites'});
@@ -65,6 +65,10 @@ City.hasMany(Vehicles);
 Users.hasMany(Rent);
 Rent.hasOne(Users);
 Vehicles.hasOne(Rent);
+Users.belongsToMany(Comments, { through: 'comments_by_users'});
+Comments.belongsToMany(Users, { through: 'comments_by_users'});
+Vehicles.belongsToMany(Comments, { through: 'comments_for_vehicles'});
+Comments.belongsToMany(Vehicles, { through: 'comments_for_vehicles'});
 
 module.exports = {
     ...sequelize.models,
