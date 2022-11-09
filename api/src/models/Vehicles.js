@@ -8,34 +8,30 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
-    IDconcessionaire: {
-      type: DataTypes.INTEGER,
+    brand: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     model:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    brand: {
+    year:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-    score: {
-      type: DataTypes.INTEGER,
+    color:{
+      type: DataTypes.STRING,
       allowNull: false,
-    },
-    favorite: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-      defaultValue: false
-    },
-    airconditioning: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
     },
     transmition: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    air: {
+      type: DataTypes.BOOLEAN,
       allowNull: true,
     },
     seats: {
@@ -50,14 +46,23 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING(512),
       allowNull: true,
     },
-    price: {
-      type: DataTypes.DECIMAL,
-      allowNull: false,
-    },
+
     availability: {
       type: DataTypes.BOOLEAN,
       allowNull: true,
     },
+    idCity: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    // score: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
+
+
+
+
   }, {timestamps: false}  
    );
 };

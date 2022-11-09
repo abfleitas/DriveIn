@@ -3,27 +3,22 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
 
-  sequelize.define('city', {
+  sequelize.define('rent', {
     id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
     },
-    name:{
-      type: DataTypes.STRING,
+    dateInit:{
+      type: DataTypes.DATEONLY,
       allowNull: false,
      },
-    country:{
-      type: DataTypes.STRING,
+    dateFinish:{
+      type: DataTypes.DATEONLY,
       allowNull: false,
      },
-     province:{
-      type: DataTypes.STRING,
-      allowNull: false,
-     },
-    photo: {
-      type: DataTypes.STRING(512),
+    totalPrice: {
+      type: DataTypes.DECIMAL,
       allowNull: true,
     },
 
