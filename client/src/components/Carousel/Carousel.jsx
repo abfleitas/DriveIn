@@ -104,7 +104,7 @@ const Carousel = () => {
       <div className="relative flex items-center">
         <i
           onClick={slideLeft}
-          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-100"
+          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-90"
         ></i>
         <div
           id="slider"
