@@ -16,8 +16,10 @@
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "fs": "^0.0.1-security",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
+    "path": "^0.12.7",
     "pg": "^8.8.0",
     "sequelize": "^6.25.5"
   }
