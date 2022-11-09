@@ -1,6 +1,9 @@
 const axios = require("axios");
 
 const postVehicleFn = async (data) => {
+    const {brand, model, year, color, transmition, air, seats, category, photo, idCity, price} = data
+    if (!brand || !model || !year || !color || !transmition || !air || !seats || !category || !photo || !idCity || !price) throw Error("Falta informacion del vehiculo")
+    
     const details = {post : "se posteo:", data}
     return details;
 }
@@ -9,17 +12,19 @@ const postVehicleFn = async (data) => {
 
 //----------------------------vehicle details
 const vehicleExample = {
-    Brand: "Toyota",
-    Model: "AE 86",
-    Puntuacion: 4.5,
-    AC: true,
+    id : 1, 
+    brand: "Toyota",
+    model: "AE 86",
+    year : "1983",
+    color : "White",
     transmition: "Manual",
-    NSeat: 4,
-    Category: "hatchback",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg",
-    History: [],
-    Price: 30,
-    Available: true
+    air: true,
+    seats: 4,
+    category: "hatchback",
+    photo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg",
+    availability : true,
+    idCity : 1,
+    price: 30
 }
 //----------------------------vehicle details
 
