@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
 
   sequelize.define('city', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,

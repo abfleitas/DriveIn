@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
 
   sequelize.define('rent', {
     id: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.INTEGER,
       primaryKey: true,
+      autoIncrement: true
     },
     dateInit:{
       type: DataTypes.DATEONLY,
@@ -22,6 +22,5 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
 
-  }, {timestamps: false}  
-   );
+  });
 };
