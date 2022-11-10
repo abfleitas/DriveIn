@@ -6,7 +6,6 @@ module.exports = (sequelize) => {
   sequelize.define('vehicles', {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
       autoIncrement: true,
     },
@@ -28,38 +27,35 @@ module.exports = (sequelize) => {
     },
     transmition: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     air: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
+      type: DataTypes.BOOLEAN
     },
     seats: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     category: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
     },
     photo: {
       type: DataTypes.STRING(512),
-      allowNull: true,
+      allowNull: false,
     },
 
     availability: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
+      type: DataTypes.BOOLEAN
     },
     initialPrice: {
       type: DataTypes.DECIMAL,
-      allowNull: true,
+      allowNull: false,
     },
     // score: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,
     // },
-
 
 
 

@@ -1,5 +1,13 @@
-const axios = require("axios");
 const { Vehicles } = require('../db.js');
+const vehiculos = require('./vehicles.json')
+
+const getVehicles = async () => {
+    try {
+        if(!(await Vehicles.findAll()).length) await Vehicles.bulkCreate(vehiculos);
+    } catch (error) {
+        console.log();
+    }
+}
 
 const postVehicleFn = async (data) => {
     const {brand, model, year, color, transmition, air, seats, category, photo, initialPrice} = data
@@ -17,5 +25,8 @@ const getVehicleDetailsFn = async (id) => {
     return vehicleDB
 }
 
-
-module.exports = {postVehicleFn, getVehicleDetailsFn};
+module.exports = {
+    getVehicles,
+    postVehicleFn,
+    getVehicleDetailsFn
+};
