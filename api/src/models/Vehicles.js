@@ -5,7 +5,7 @@ module.exports = (sequelize) => {
 
   sequelize.define('vehicles', {
     id: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     year:{
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     color:{
@@ -49,10 +49,6 @@ module.exports = (sequelize) => {
 
     availability: {
       type: DataTypes.BOOLEAN,
-      allowNull: true,
-    },
-    idCity: {
-      type: DataTypes.INTEGER,
       allowNull: true,
     },
     initialPrice: {

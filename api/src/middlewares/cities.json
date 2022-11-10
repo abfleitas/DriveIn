@@ -1,0 +1,113 @@
+[
+    {
+        "id": 1,
+        "name": "Villa Carlos Paz",
+        "province": "Cordoba",
+        "country": "Argentina",
+        "photo": "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/OZ5G3W3S2NCCBKXCNHCDY6VOS4.jpg",
+        "destacado": true
+    },
+    {
+        "id": 2,
+        "name": "San Rafael",
+        "province": "Mendoza",
+        "country": "Argentina",
+        "photo": "http://elportaldemendoza.com/wp-content/uploads/2015/11/San-rafael.jpg",
+        "destacado": true
+    },
+    {
+        "id": 3,
+        "name": "Cancun",
+        "province": "Quintana ROO",
+        "country": "México",
+        "photo": "https://www.eleconomista.com.mx/__export/1661879587551/sites/eleconomista/img/2022/08/29/cancun_shutterstock_2114994596.jpg_554688468.jpg",
+        "destacado": true
+    },
+    {
+        "id": 4,
+        "name": "Mérida",
+        "province": "Yucatan",
+        "country": "México",
+        "photo": "https://imageio.forbes.com/blogs-images/norawalsh/files/2017/11/Merida-Mexico-Plaza-Grande-1200x798.jpg?format=jpg&width=1200"
+    },
+    {
+        "id": 5,
+        "name": "Cartagena",
+        "province": "Bolivar",
+        "country": "Colombia",
+        "photo": "https://denomades.s3.us-west-2.amazonaws.com/blog/wp-content/uploads/2020/05/11141948/ca-times.brightspotcdn.com_.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Medellin",
+        "province": "Antioquia",
+        "country": "Colombia",
+        "photo": "https://www.semana.com/resizer/ZVlfE-eek63eT8oThAEGswxKeS8=/1280x720/smart/filters:format(jpg):quality(80)/cloudfront-us-east-1.images.arcpublishing.com/semana/BKOBKA4YWFG7LCD2ZBL3LLOCR4.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Caracas",
+        "province": "Distrito Capital",
+        "country": "Venezuela",
+        "photo": "https://talcualdigital.com/wp-content/uploads/2021/09/Caracas-Foto-tomada-de-Pinterest-@mahenriquezm-960x640.jpg",
+        "destacado": true
+    },
+    {
+        "id": 8,
+        "name": "Valencia",
+        "province": "Carabobo",
+        "country": "Venezuela",
+        "photo": "https://i0.wp.com/family-familia-famille.com/wp-content/uploads/2021/11/16f1b-4d77fd5983f328f91da1f111645f14da.jpg?fit=960%2C720&ssl=1"
+    },
+    {
+        "id": 9,
+        "name": "Maracaibo",
+        "province": "Zulia",
+        "country": "Venezuela",
+        "photo": "https://media-cdn.tripadvisor.com/media/photo-s/01/1f/81/c1/isla-dorada.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Punta del Este",
+        "province": "Maldonado",
+        "country": "Uruguay",
+        "photo": "https://dam.ngenespanol.com/wp-content/uploads/2018/12/punta-del-este-desde-el-aire-p.png",
+        "destacado": true
+    },
+    {
+        "id": 11,
+        "name": "Piriapolis",
+        "province": "Maldonado",
+        "country": "Uruguay",
+        "photo": "https://visitaruruguay.com/wp-content/uploads/2020/12/rambla-de-los-argentinos-piriapolis.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Rio de Janeiro",
+        "province": "Estado de Rio de Janeiro",
+        "country": "Brasil",
+        "photo": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/5d/c4/87/caption.jpg?w=500&h=400&s=1",
+        "destacado": true
+    },
+    {
+        "id": 13,
+        "name": "Florianópolis",
+        "province": "Santa Catarina",
+        "country": "Brasil",
+        "photo": "https://planetofhotels.com/guide/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/%20Florianopolis%20.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Quito",
+        "province": "Capital",
+        "country": "Ecuador",
+        "photo": "https://lp-cms-production.imgix.net/features/2018/06/Quito_Ecuador-56f41a5bc901.jpg"
+    },
+    {
+        "id": 15,
+        "name": "La Paz",
+        "province": "Capital",
+        "country": "Bolivia",
+        "photo": "https://billiken.lat/wp-content/uploads/2022/01/WEB3-LA-PAZ-BOLIVIA-Shutterstock_1791153806-R.M.-Nunes.jpg"
+    }
+]

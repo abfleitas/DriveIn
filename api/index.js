@@ -1,7 +1,8 @@
 const server = require("./src/app.js")
-const port = 3000;
+const { connect } = require('./src/db.js');
 
-
-server.listen(port, () => {
-    console.log(`server listening on port ${port}`)
+connect.sync({ force: true }).then(() => {
+  server.listen(process.env.PORT, () => {
+    console.log('listening at 3001'); 
+  });
 });

@@ -97,14 +97,14 @@ const Carousel = () => {
 
   return (
     <>
-      <div className="ml-[20%] flex items-center text-2xl">
+      <div className="ml-[20%] flex items-center text-2xl font-semibold">
         <i className="fa-solid fa-star mr-5"></i>
         <h1>DESTINOS FAVORITOS</h1>
       </div>
       <div className="relative flex items-center">
         <i
           onClick={slideLeft}
-          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-100"
+          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-90"
         ></i>
         <div
           id="slider"
