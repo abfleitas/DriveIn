@@ -33,7 +33,7 @@ export default function SearchBar({ onSearch }) {
   }
   console.log("SOY INPUT", input);
   return (
-    <div className="bg-stone-200 relative right-[60%] top-[220px]  w-[484px] h-[449px]   border-solid border-2 rounded-3xl  border-stone-200 flex flex-col text-sm font-medium text-white py-3 px-3">
+    <div className="bg-stone-200 relative  top-[220px]  w-[484px] h-[449px]   border-solid border-2 rounded-3xl  border-stone-200 flex flex-col text-sm font-medium text-white py-3 px-3">
       <form
         onSubmit={(e) => {
           e.preventDefault();
