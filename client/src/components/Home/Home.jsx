@@ -7,20 +7,6 @@ import banner from "../../images/banner.jpg";
 
 export default function Home() {
   return (
-
-    <div className="bg-[#D9D9D9] h-full">
-      <div>
-        <img src={logo} alt="driveIn logo" className="h-[153px]" />
-      </div>
-      <div className="relative left-[287.78px]">
-        <img
-          src={banner}
-          alt="driveIn banner"
-          className="w-[1603.22px] h-[636px] m-auto rounded-3xl "
-        />
-        <div className="absolute bottom-2/4 left-16">
-          <SearchBar />
-
     <>
       <div className="bg-[#D9D9D9] h-full">
         <div>
@@ -30,7 +16,7 @@ export default function Home() {
           <img
             src={banner}
             alt="driveIn banner"
-            className="w-[1400px] h-[670px] m-auto rounded-3xl"
+            className="w-[1603.22px] h-[636px] m-auto rounded-3xl"
           />
           <div className="absolute bottom-2/4 left-16">
             <SearchBar />
@@ -41,7 +27,6 @@ export default function Home() {
         </div>
         <div className="mt-8">
           <Comments />
-
         </div>
       </div>
     </>
