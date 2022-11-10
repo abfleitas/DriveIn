@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { addFavorites } from '../../redux/actions';
+import { addFavorites } from '../../redux/actions/actions';
 
 export default function Card(props){
     const dispatch = useDispatch();
