@@ -58,10 +58,6 @@ router.get("/:id", async(req, res)=>{
         })
         res.send(city)
    
-        // const city = await City.findByPk(id,{includes:{model:Vehicles}})
-        
-        // console.log()
-        // res.send (city)
     
     }catch(error){
         res.status(404).send("la busqueda fallo")
