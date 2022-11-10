@@ -46,3 +46,7 @@ export const addFavorites = (auto) => {
       payload: auto
    }
 };
+
+export const setVehicleDetailsState = (data) => {
+  return { type: "SETVEHICLEDETAILSSTATE", payload: data};
+}
