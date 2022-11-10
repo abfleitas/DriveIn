@@ -3,9 +3,7 @@ const {City} = require('../db')
 
 const createCitiesForCountry = async() => {
     try {
-        data.map(async (c) => {
-            await City.create(c);
-        });
+        await City.bulkCreate(data);
     } catch (error) {
         console.log(error)
     }
@@ -16,7 +14,7 @@ const getAllCountrys = async() => {
         const exist = await City.findOne({where: {id: 1}});
         if(!exist) await createCitiesForCountry();
         const results = await City.findAll();
-        const countrys = results.map(c => {
+        const countrys = results.length && results.map(c => {
             return c.country;
         });
         const allCountrys = countrys.filter((item, elem) => {

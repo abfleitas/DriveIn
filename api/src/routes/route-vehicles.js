@@ -1,22 +1,17 @@
 const { Router } = require("express");
-const {postVehicleFn, getVehicleDetailsFn} = require("../middlewares/vehicles");
-const axios = require("axios");
+const {Vehicles} =require('../db');
+const {postVehicleFn, getVehicleDetailsFn,getVehicles} = require("../middlewares/vehicles");
 const vehicles = Router();
 
-//
-
-
-vehicles.post("/", async (req, res) => {
+vehicles.get("/", async (req, res) =>{
     try {
-        const details = await postVehicleFn(req.body);
-        res.status(201).send(details)
+        await getVehicles();
+        const all = await Vehicles.findAll();
+        return res.status(200).send(all);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(404).send(error);
     }
-})
-
-
-
+});
 
 vehicles.get("/:id", async (req,res) => {
     try {
@@ -28,5 +23,13 @@ vehicles.get("/:id", async (req,res) => {
     }
 });
 
+vehicles.post("/", async (req, res) => {
+    try {
+        const details = await postVehicleFn(req.body);
+        res.status(201).send(details)
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
 
 module.exports = vehicles
