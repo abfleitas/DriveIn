@@ -10,11 +10,11 @@ export default function Home() {
       <div>
         <img src={logo} alt="driveIn logo" className="h-[153px]" />
       </div>
-      <div className="relative">
+      <div className="relative left-[287.78px]">
         <img
           src={banner}
           alt="driveIn banner"
-          className="w-[1400px] h-[670px] m-auto rounded-3xl"
+          className="w-[1603.22px] h-[636px] m-auto rounded-3xl "
         />
         <div className="absolute bottom-2/4 left-16">
           <SearchBar />
