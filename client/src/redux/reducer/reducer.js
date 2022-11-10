@@ -1,4 +1,15 @@
-import { ADD_FAVORITES } from "../actions/actions";
+import {
+  FILTER_TRANSMISSION,
+  FILTER_CATEGORY,
+  FILTER_CHARACTERISTICS,
+  FILTER_BRAND,
+  FILTER_PRICE,
+  ADD_FAVORITES,
+  GET_DETAILS,
+  GET_COUNTRIES,
+  GET_CITIES,
+  GET_CITIES_FEATURED,
+} from "../actions/actions";
 
 const initialState = {
   vehiclesCopy: [
@@ -64,13 +75,16 @@ const initialState = {
     },
   ],
   vehicles: [],
-  favorites:[],
-  vehicleDetailsState : []
+  favorites: [],
+  vehicleDetailsState: [],
+  countries: [],
+  cities: [],
+  citiesFeatured: [],
 };
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case "FILTER_CATEGORY":
+    case FILTER_CATEGORY:
       function sorted1(action) {
         if (action.payload === "small")
           return state.vehiclesCopy.filter(
@@ -98,7 +112,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         vehicles: sortedCategory,
       };
-    case "FILTER_TRANSMISSION":
+    case FILTER_TRANSMISSION:
       function sorted2(action) {
         if (action.payload === "manual")
           return state.vehiclesCopy.filter(
@@ -114,7 +128,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         vehicles: sortedTransmission,
       };
-    case "FILTER_CHARACTERISTICS":
+    case FILTER_CHARACTERISTICS:
       function sorted3(action) {
         if (action.payload === "AC")
           return state.vehiclesCopy.filter((v) => v.airconditioning);
@@ -125,7 +139,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         vehicles: sortedCharacteristics,
       };
-    case "FILTER_BRAND":
+    case FILTER_BRAND:
       function sorted4(action) {
         return state.vehiclesCopy.filter((v) => v.brand === action.payload);
       }
@@ -134,7 +148,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         vehicles: sortedBrand,
       };
-    case "FILTER_PRICE":
+    case FILTER_PRICE:
       function sorted5(action) {
         return action.payload === "lower"
           ? state.vehiclesCopy.sort((a, b) => a.price - b.price)
@@ -152,11 +166,26 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
-    case "SETVEHICLEDETAILSSTATE":
+    case GET_DETAILS:
       return {
         ...state,
-        vehicleDetailsState: action.payload
-      }
+        vehicleDetailsState: action.payload,
+      };
+    case GET_COUNTRIES:
+      return {
+        ...state,
+        countries: action.payload,
+      };
+    case GET_CITIES:
+      return {
+        ...state,
+        cities: action.payload,
+      };
+    case GET_CITIES_FEATURED:
+      return {
+        ...state,
+        citiesFeatured: action.payload,
+      };
     default:
       return { ...state };
   }
