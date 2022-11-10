@@ -97,7 +97,9 @@ const Carousel = () => {
 
   return (
     <>
-      <div className="ml-[20%] flex items-center text-2xl font-semibold">
+
+      <div className="ml-[20%] flex items-center text-2xl font-sans font-bold">
+
         <i className="fa-solid fa-star mr-5"></i>
         <h1>DESTINOS FAVORITOS</h1>
       </div>
