@@ -1,31 +1,20 @@
 const axios = require("axios");
+const { Vehicles } = require('../db.js');
 
 const postVehicleFn = async (data) => {
-    const details = {post : "se posteo:", data}
-    return details;
+    const {brand, model, year, color, transmition, air, seats, category, photo, initialPrice} = data
+        
+        if (!brand || !model || !year || !color || !transmition || !seats || !category || !photo || !initialPrice) throw Error("Falta informacion del vehiculo") //air esta omitido por tener la opcion de false
+        const newcar = await Vehicles.create({brand, model, year, color, transmition, air, seats, category, photo, availability: true,  initialPrice});  //availability esta forzado en true
+        console.log(newcar)
+        return newcar;
 }
 
-
-
-//----------------------------vehicle details
-const vehicleExample = {
-    Brand: "Toyota",
-    Model: "AE 86",
-    Puntuacion: 4.5,
-    AC: true,
-    transmition: "Manual",
-    NSeat: 4,
-    Category: "hatchback",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg",
-    History: [],
-    Price: 30,
-    Available: true
-}
-//----------------------------vehicle details
 
 const getVehicleDetailsFn = async (id) => {
-    const details = {id, vehicleExample}
-    return details;
+    let vehicleDB = await Vehicles.findAll({where: {id}});
+    vehicleDB = vehicleDB[0].dataValues
+    return vehicleDB
 }
 
 
