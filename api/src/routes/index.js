@@ -7,6 +7,7 @@ const router = Router();
 
 router.use("/country", countries)
 router.use("/vehicles", vehicles);
-router.use("/cities",city )
+router.use("/cities",city );
+
 
 module.exports = router;

@@ -1,11 +1,22 @@
 const {Router} = require('express');
 const {getAllCity} = require('../middlewares/city');
+const {getcityDestacadas}=require("../middlewares/city")
 const {City} = require('../db');
 const vehicles = require('./route-vehicles');
 const router = Router();
 const {Vehicles}=require("../db");
 
-
+router.get("/destacadas",async(req,res)=>{
+    try {
+        const destacadas= await getcityDestacadas()
+        
+         
+        return res.status(200).send(destacadas)
+    } catch (error) {
+        console.log("no carga nada",error)
+    }
+   
+})
 router.get ("/", async(req,res)=>{
     const  name= req.query.name
     try {     
