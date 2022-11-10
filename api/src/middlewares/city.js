@@ -5,6 +5,8 @@ const getAllCity= async()=>{
 
      try {
         const allCities = await City.findAll()
+    
+
         return allCities
 
      } catch (error) {
@@ -23,6 +25,19 @@ const getCitiesByCountry = async (country) => {
    } catch (error) {
       console.log(error);
    }
+}
+const getcityDestacadas=async()=>{
+    try {
+        const destacadas = await City.findAll({
+          where:{
+            destacado:true
+          }
+            
+       })
+       return destacadas
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports= {
