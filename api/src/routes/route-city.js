@@ -2,7 +2,6 @@ const {Router} = require('express');
 const {getAllCity, getCitiesByCountry} = require('../middlewares/city');
 const {City, Vehicles} = require('../db');
 const router = Router();
-const {Vehicles}=require("../db");
 
 router.get("/destacadas",async(req,res)=>{
     try {
