@@ -65,6 +65,7 @@ const initialState = {
   ],
   vehicles: [],
   favorites:[],
+  vehicleDetailsState : []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -151,7 +152,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
-
+    case "SETVEHICLEDETAILSSTATE":
+      return {
+        ...state,
+        vehicleDetailsState: action.payload
+      }
     default:
       return { ...state };
   }

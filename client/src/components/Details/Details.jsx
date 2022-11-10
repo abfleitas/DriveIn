@@ -1,54 +1,40 @@
 import React, { useEffect, useState } from "react";
-
-const vehicleExample = { data: {
-    Brand: "Toyota",
-    Model: "AE 86",
-    Puntuacion: 4.5,
-    AC: true,
-    transmition: "Manual",
-    NSeat: 4,
-    Category: "hatchback",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg",
-    History: [],
-    Price: 30,
-    Available: true
-    }
-}
-
+import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux'
+import { setVehicleDetailsState } from '../../redux/actions/actions';
 
 
 const VehicleDetails = (props) => {
 
-    const [vehicleDetailsState, setVehicleDetailsState] = useState([])
+    const dispatch = useDispatch()
+    const vehicleDetailsState = useSelector(state => state.vehicleDetailsState)
 
-    let urlRef = window.location.href
+    let urlRef = window.location.href // busco el id en la url
     urlRef = window.location.href.toString()
     urlRef = urlRef.split("details/")
-    urlRef = urlRef[1]
+    urlRef = urlRef[1] 
 
     useEffect(() => {
         async function fetchData() {
-            console.log(urlRef);
-            // const vehicleData = await axios.get(`localhost:3001/vehicle/${urlRef}`)
-            let vehicleData = vehicleExample
+            let vehicleData = await axios.get(`http://localhost:3001/vehicles/${urlRef}`)
             vehicleData = vehicleData.data
+            console.log(vehicleData.photo);
             const vehicleDetails = [
-                <div key={vehicleData.name}>
-                    <h1>{vehicleData.Brand}</h1>
-                    <img src={vehicleData.image} alt="car"/>
-                    <p>Modelo: {vehicleData.Model}</p>
-                    <p>Aire Acondicionado: {vehicleData.AC && "Si tiene"}</p>
+                <div key={vehicleData.id}>
+                    <h1>{vehicleData.brand}</h1>
+                    <img src={vehicleData.photo} alt="car"/>
+                    <p>Modelo: {vehicleData.model}</p>
+                    <p>Aire Acondicionado: {vehicleData.air ? "Si tiene" :"No tiene"}</p>
                     <p>Transmision: {vehicleData.transmition}</p>
-                    <p>numero de asientos: {vehicleData.NSeat}</p>
-                    <p>Tipo de carro: {vehicleData.Category}</p>
-                    <p>Puntuacion: {vehicleData.Puntuacion}</p>
-                    <p>Precio: ${vehicleData.Price}</p>
+                    <p>numero de asientos: {vehicleData.seats}</p>
+                    <p>Tipo de carro: {vehicleData.category}</p>
+                    <p>Precio: ${vehicleData.initialPrice}</p>
                 </div>
             ]
-            setVehicleDetailsState(vehicleDetails);
+            dispatch(setVehicleDetailsState(vehicleDetails));
         }
         fetchData();
-    },[urlRef])
+    }, [urlRef])
 
     return (
         <div>

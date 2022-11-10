@@ -1,0 +1,123 @@
+[
+    {
+        "brand" : "Toyota",
+        "model" : "AE 86",
+        "year" : "1983",
+        "color" : "blanco",
+        "transmition" : "manual",
+        "air" : true,
+        "seats" : 5,
+        "category" : "hatchback",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/1/1b/New_stock_ae86_coupe.jpg" ,
+        "initialPrice" : 35.5
+    },
+    {
+        "brand" : "Nissan",
+        "model" : "Centra",
+        "year" : "1987",
+        "color" : "Rojo",
+        "transmition" : "manual",
+        "air" : false,
+        "seats" : 5,
+        "category" : "sedan",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/c/c6/86-88_Nissan_Sentra_coupe.jpg" ,
+        "initialPrice" : 40
+    },
+    {
+        "brand" : "Audi",
+        "model" : "A4",
+        "year" : "2010",
+        "color" : "Gris",
+        "transmition" : "automatico",
+        "air" : true,
+        "seats" : 5,
+        "category" : "sedan",
+        "photo" : "https://www.compreautomovil.com/wp-content/uploads/2009/10/foto_audi_a4_2010-diagonal.jpg" ,
+        "initialPrice" : 60
+    },
+    {
+        "brand" : "Honda",
+        "model" : "Civic type r",
+        "year" : "2005",
+        "color" : "Azul",
+        "transmition" : "manual",
+        "air" : true,
+        "seats" : 5,
+        "category" : "hatchback",
+        "photo" : "https://c8.alamy.com/compes/a27ngf/2005-honda-civic-type-r-a27ngf.jpg" ,
+        "initialPrice" : 20
+    },
+    {
+        "brand" : "Mitsubishi",
+        "model" : "Lancer",
+        "year" : "2012",
+        "color" : "Rojo",
+        "transmition" : "manual",
+        "air" : true,
+        "seats" : 5,
+        "category" : "sedan",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg" ,
+        "initialPrice" : 30.5
+    },
+    {
+        "brand" : "Toyota",
+        "model" : "yaris",
+        "year" : "2015",
+        "color" : "blanco",
+        "transmition" : "automatico",
+        "air" : false,
+        "seats" : 5,
+        "category" : "sedan",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg" ,
+        "initialPrice" : 35.5
+    },
+    {
+        "brand" : "Toyota",
+        "model" : "AE 86",
+        "year" : "1983",
+        "color" : "blanco",
+        "transmition" : "manual",
+        "air" : true,
+        "seats" : 5,
+        "category" : "hatchback",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg" ,
+        "initialPrice" : 35.5
+    },
+    {
+        "brand" : "Toyota",
+        "model" : "corolla",
+        "year" : "XSE",
+        "color" : "celeste",
+        "transmition" : "automatico",
+        "air" : false,
+        "seats" : 5,
+        "category" : "hatchback",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg" ,
+        "initialPrice" : 50
+    },
+    {
+        "brand" : "Volkswagen",
+        "model" : "Polo",
+        "year" : "2017",
+        "color" : "naranja",
+        "transmition" : "automatico",
+        "air" : true,
+        "seats" : 5,
+        "category" : "hatchback",
+        "photo" : "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Sprinter_Trueno_1600_GT_%28AE86%29.jpg/220px-Sprinter_Trueno_1600_GT_%28AE86%29.jpg" ,
+        "initialPrice" : 20
+    },
+    {
+        "brand" : "DMC",
+        "model" : "delorean",
+        "year" : "1981",
+        "color" : "Gris",
+        "transmition" : "manual",
+        "air" : true,
+        "seats" : 2,
+        "category" : "Sport",
+        "photo" : "https://en.wikipedia.org/wiki/DMC_DeLorean#/media/File:Delorean_DMC-12_side.jpg" ,
+        "initialPrice" : 50
+    }
+    
+]
