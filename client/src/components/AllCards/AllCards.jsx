@@ -64,6 +64,7 @@ export default function AllCards() {
 
   return (
     <div className="container">
+      {/* Nota cambiar vehicles en el map por currentVehicles */}
       {vehicles.length ? (
         vehicles.map((obj, i) => (
           <div key={i} className="width">
