@@ -27,7 +27,7 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
-          <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+          <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
             <li>
               <div
                 class="text-sm text-[#2e3a46] hover:text-[#f97d67] cursor-pointer"
@@ -213,7 +213,7 @@ export default function Navbar() {
             <div class="mt-auto">
               <div class="pt-6">
                 <div
-                  class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+                  class="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
                   href="#"
                 >
                   Iniciar Sesión

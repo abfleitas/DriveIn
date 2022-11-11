@@ -1,12 +1,10 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
-
 import Inicio from "./components/Inicio/Inicio";
-
 import VehicleDetails from "./components/Details/Details";
-
-import Creation from "./components/Creation/Creation"
+import Ciudad from "./components/Ciudad/Ciudad";
+import Creation from "./components/Creation/Creation";
 
 function App() {
   return (
@@ -15,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/ciudad" element={<Ciudad />} />
           <Route path="/details/:id" element={<VehicleDetails />} />
           <Route path="/creation" element={<Creation />} />
         </Routes>
