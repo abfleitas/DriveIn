@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { getVehicles } from "../../redux/actions/actions";
 import Card from "../Card/Card";
-import "./AllCards.css";
 
 export default function AllCards() {
   const vehicles = useSelector((state) => state.vehiclesCopy);
@@ -53,42 +52,51 @@ export default function AllCards() {
    * => setChange(event.target.value); <=
    **/
   const [change, setChange] = useState("");
-  useEffect(() => {
-    setCurrentPage(1);
-  }, []);
-  //Paginado fin bloque...
 
   useEffect(() => {
+    setCurrentPage(1);
     dispatch({ type: "GET_VEHICLES" }); // hardcodeado
   }, []);
 
   return (
-    <div className="container">
-      {/* Nota cambiar vehicles en el map por currentVehicles */}
-      {vehicles.length ? (
-        vehicles.map((obj, i) => (
-          <div key={i} className="width">
-            <Card {...obj} />
-          </div>
-        ))
-      ) : (
-        <h3>Error</h3>
-      )}
-      {/* Inicia renderizado de botones de paginación
-      El nombre de la clase para el css queda a discreción del maquetador, 
-      en los button pasados por map */}
-      <footer>
+    <>
+      <div className=" flex flex-wrap gap-x-16 gap-y-24 mt-10 mb-5 justify-center">
+        {currentVehicles.length ? (
+          currentVehicles.map((v, index) => (
+            <div>
+              <Card
+                key={index}
+                brand={v.brand}
+                model={v.model}
+                score={v.score}
+                airconditioning={v.airconditioning}
+                transmition={v.transmition}
+                seats={v.seats}
+                category={v.category}
+                photo={v.photo}
+                price={v.price}
+              />
+            </div>
+          ))
+        ) : (
+          <h3>Error</h3>
+        )}
+      </div>
+      <footer className="mb-5">
         {currentPage !== 1 ? (
-          <button className="prev" onClick={prevHandler}>
-            Previous
+          <button
+            className="bg-[#009A88] p-3 rounded-full"
+            onClick={prevHandler}
+          >
+            Anterior
           </button>
         ) : null}
         {pageNumbers.map((number) => (
           <button
             className={
               currentPage === number
-                ? "pagination_button active"
-                : "pagination_button"
+                ? "bg-[#F97D67] p-3 rounded-full"
+                : " p-3 rounded-full"
             }
             key={number}
             onClick={() => Page(number)}
@@ -97,11 +105,14 @@ export default function AllCards() {
           </button>
         ))}
         {currentPage !== pageNumbers.length ? (
-          <button className="next" onClick={nextHandler}>
-            Next
+          <button
+            className="bg-[#009A88] p-3 rounded-full"
+            onClick={nextHandler}
+          >
+            Siguiente
           </button>
         ) : null}
       </footer>
-    </div>
+    </>
   );
 }

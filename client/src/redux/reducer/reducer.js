@@ -14,8 +14,8 @@ import {
 const initialState = {
   vehiclesCopy: [
     {
-      brand: "chevrolet",
-      model: "onix",
+      brand: "Chevrolet",
+      model: "Onix",
       score: 4.9,
       airconditioning: true,
       transmition: "manual",
@@ -26,8 +26,8 @@ const initialState = {
       price: 2000,
     },
     {
-      brand: "volkswagen",
-      model: "cross",
+      brand: "Volkswagen",
+      model: "Cross",
       score: 4.2,
       airconditioning: false,
       transmition: "automatic",
@@ -38,8 +38,8 @@ const initialState = {
       price: 2500,
     },
     {
-      brand: "ford",
-      model: "maverick",
+      brand: "Ford",
+      model: "Maverick",
       score: 5,
       airconditioning: true,
       transmition: "manual",
@@ -50,8 +50,8 @@ const initialState = {
       price: 3500,
     },
     {
-      brand: "toyota",
-      model: "rav4",
+      brand: "Toyota",
+      model: "Rav4",
       score: 4.6,
       airconditioning: true,
       transmition: "automatic",
@@ -62,8 +62,104 @@ const initialState = {
       price: 3000,
     },
     {
-      brand: "chevrolet",
-      model: "plus",
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
+      score: 3.5,
+      airconditioning: false,
+      transmition: "manual",
+      seats: 4,
+      category: "small",
+      photo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+      price: 1800,
+    },
+    {
+      brand: "Chevrolet",
+      model: "Plus",
       score: 3.5,
       airconditioning: false,
       transmition: "manual",
@@ -84,9 +180,9 @@ const initialState = {
 
 //Inicio localStorage
 
-if(localStorage.getItem('favorites')) {
-  initialState.favorites = JSON.parse(localStorage.getItem('favorites'));
-}else{
+if (localStorage.getItem("favorites")) {
+  initialState.favorites = JSON.parse(localStorage.getItem("favorites"));
+} else {
   initialState.favorites = [];
 }
 
