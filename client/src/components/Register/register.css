@@ -1,0 +1,58 @@
+.container-reg{
+    background-image: url('../../images/inicio.jpg');
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+.container-data h2{
+    font-family: "Poppins", sans-serif;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    transform: translateX(-275px);
+    font-size: x-large;
+}
+
+.c-input{
+    width: 300px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, .1);
+}
+
+.c-input .data{
+    height: 30px;
+    width: 100%;
+    position: relative;
+}
+
+.c-input .data input{
+    height: 100%;
+    width: 100%;
+    border: none;
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
+    border-bottom: 2px solid gray;
+    outline: none;
+}
+
+.data input:focus ~ span{
+    transform: translateY(-15px);
+    color:#13ce66;
+    font-size: small;
+}
+
+.data input:focus{
+    border-bottom: 2px solid #13ce66;
+}
+
+.c-input .data span{
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    color: gray;
+    pointer-events: none;
+    font-family: 'Poppins', sans-serif;
+}
