@@ -1,6 +1,8 @@
 const {Router} = require('express');
 const router = Router();
 const {Comments} = require('../db.js')
+const {getAllComentarios}= require("../middlewares/comments")
+const comments = require("../middlewares/comments.json")
 
 router.post('/', async(req, res) => {
     try {
@@ -16,15 +18,16 @@ router.post('/', async(req, res) => {
   })
   router.get('/', async(req, res) => {
     try {
-      const comentarios = await Comments.findAll(
-        {
-            include: {
-                model: users,
-                model: vehicles
-            }
-        }
-      );
-      return res.status(200).json(comentarios);
+      // const comentarios = await Comments.findAll(
+      //   {
+      //       include: {
+      //           model: users,
+      //           model: vehicles
+      //       }
+      //   }
+      // );
+    
+      return res.status(200).json(comments);
     } catch (error) {
       return  res.status(400).json(error);
     }

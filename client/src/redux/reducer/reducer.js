@@ -1,12 +1,33 @@
-import { FILTER, ADD_FAVORITES, FILTER_PRICE } from "../actions/actions";
+import {
+  FILTER,
+  FILTER_PRICE,
+  ADD_FAVORITES,
+  GET_DETAILS,
+  GET_COUNTRIES,
+  GET_CITIES,
+  GET_CITIES_FEATURED,
+} from "../actions/actions";
 
 const initialState = {
   vehiclesCopy: [],
   vehicles: [],
   favorites:[],
   vehicleDetailsState : [],
-  filters: [{key:"brand", value:"all"},{key:"category", value:"all"},{key:"transmition", value:"all"},{key:"AC", value:"all"},{key:"seats", value:"all"}]
+  filters: [{key:"brand", value:"all"},{key:"category", value:"all"},{key:"transmition", value:"all"},{key:"AC", value:"all"},{key:"seats", value:"all"}],
+  countries: [],
+  cities: [],
+  citiesFeatured: [],
 };
+
+//Inicio localStorage
+
+if(localStorage.getItem('favorites')) {
+  initialState.favorites = JSON.parse(localStorage.getItem('favorites'));
+}else{
+  initialState.favorites = [];
+}
+
+//Fin localStorage
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
@@ -67,11 +88,26 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
-    case "SETVEHICLEDETAILSSTATE":
+    case GET_DETAILS:
       return {
         ...state,
-        vehicleDetailsState: action.payload
-      }
+        vehicleDetailsState: action.payload,
+      };
+    case GET_COUNTRIES:
+      return {
+        ...state,
+        countries: action.payload,
+      };
+    case GET_CITIES:
+      return {
+        ...state,
+        cities: action.payload,
+      };
+    case GET_CITIES_FEATURED:
+      return {
+        ...state,
+        citiesFeatured: action.payload,
+      };
     default:
       return { ...state };
   }

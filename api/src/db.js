@@ -61,14 +61,13 @@ const { City, Users, Vehicles, Rent, Comments } = sequelize.models;
 
 Users.belongsToMany(Vehicles, { through: 'Vehicles_Favorites'});
 Vehicles.belongsToMany(Users, { through: 'Vehicles_Favorites'});
+Vehicles.belongsTo(City)
 City.hasMany(Vehicles);
 Users.hasMany(Rent);
-Rent.hasOne(Users);
+Rent.belongsTo(Users);
 Vehicles.hasOne(Rent);
 Users.belongsToMany(Comments, { through: 'comments_by_users'});
 Comments.belongsToMany(Users, { through: 'comments_by_users'});
-Vehicles.belongsToMany(Comments, { through: 'comments_for_vehicles'});
-Comments.belongsToMany(Vehicles, { through: 'comments_for_vehicles'});
 
 module.exports = {
     ...sequelize.models,
