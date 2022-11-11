@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCities, getCountries } from "../../redux/actions/actions";
+import { NavLink } from "react-router-dom";
 
-export default function SearchBar({ onSearch }) {
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-
+export default function SearchBar() {
+  const dispatch = useDispatch();
+  const countries = useSelector((state) => state.countries);
+  const cities = useSelector((state) => state.cities);
   const [input, setInput] = useState({
-    //podemos seguir agregando estados
-    cities: [],
-    country: [],
+    country: "",
+    id: 1,
   });
 
   const handleInputChange = (e) => {
@@ -19,84 +21,97 @@ export default function SearchBar({ onSearch }) {
   };
   const handleCity = (e) => {
     e.preventDefault();
-    //!vamos a hacer un dispatch de las ciudades q vengan de la API
+    setInput({
+      ...input,
+      id: e.target.value,
+    });
   };
-
   const handleCountry = (e) => {
     e.preventDefault();
-    //!vamos a hacer un dispatch de las Paises q vengan de la API
+    setInput({
+      ...input,
+      country: e.target.value,
+    });
+    dispatch(getCities(e.target.value));
   };
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    //Aca un dispatch para traer los paises y ciudades
-  }
-  console.log("SOY INPUT", input);
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [dispatch]);
+
   return (
-    <div className="bg-stone-200 relative  top-[220px]  w-[484px] h-[449px]   border-solid border-2 rounded-3xl  border-stone-200 flex flex-col text-sm font-medium text-white py-3 px-3">
+    <div className="bg-stone-200 relative  top-[220px]  w-[484px] h-[449px]   border-solid border-2 rounded-3xl  border-stone-200 flex flex-col text-sm font-medium text-white py-3 px-3 justify-center">
+      <div className="text-2xl text-[#009A88] font-bold mb-5">
+        <h2>Encontrá el vehículo ideal para alquilar en cada ciudad!</h2>
+      </div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-
-          onSearch(city);
         }}
       >
-        <div className="text-2xl text-[#009A88] font-bold">
-          <h2>Encontrá el vehículo ideal para alquilar en cada ciudad!</h2>
-        </div>
-        <select
-          onChange={(e) => handleCity(e)}
-          placeholder="Ciudad..."
-          className="relative block w-[440px] cursor-default rounded-md border border-[#F97D67]-300 bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm my-6"
-        >
-          <option value="City">Ciudad...</option>
-          <option value="asc"> City 1</option>
-          <option value="desc"> City 2</option>
-          {/* Traeremos la ciudad que haya en la API y formaremos los selects con un map */}
-        </select>
         <select
           onChange={(e) => handleCountry(e)}
           placeholder="País..."
           className="relative block w-[440px] cursor-default rounded-md border border-[#F97D67]-300 bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
         >
           <option value="City">Pais...</option>
-          <option value="asc"> Country 1</option>
-          <option value="desc"> Country 2</option>
-          {/* Traeremos la País que haya en la API y formaremos los selects con un map */}
+          {countries &&
+            countries.map((c, index) => {
+              return (
+                <option key={index} value={c}>
+                  {c}
+                </option>
+              );
+            })}
         </select>
-        <div className="relative flex my-4">
+        <select
+          onChange={(e) => handleCity(e)}
+          placeholder="Ciudad..."
+          className="relative block w-[440px] cursor-default rounded-md border border-[#F97D67]-300 bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm my-6"
+        >
+          <option value="City">Ciudad...</option>
+          {cities &&
+            cities.map((c, index) => {
+              return (
+                <option key={index} value={c.id}>
+                  {c.name}
+                </option>
+              );
+            })}
+        </select>
+        <div className="relative flex my-4 justify-center space-x-4">
           <div className="relative block">
             <label className="text-[#009A88] m-0">Desde</label>
-
             <input
               onChange={handleInputChange}
               type="date"
               placeholder="FI"
               name="FI"
-              className="relative flex left-px w-20  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
+              className="relative flex left-px w-50  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
             />
           </div>
           <div className="relative block">
-            <label className="relative left-[40px] text-[#009A88]">Hasta</label>
+            <label className="relative text-[#009A88]">Hasta</label>
             <input
               onChange={handleInputChange}
               type="date"
               placeholder="Hasta"
               name="Hasta"
-              className="relative flex  left-[40px] bottom-[23px] w-20  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm my-6"
+              className="relative flex  left-[40px] bottom-[23px] w-50  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm my-6"
             />
           </div>
         </div>
-        <button
-          type="submit"
-          value="Buscar"
-          onClick={(e) => handleSubmit(e)}
-          className=" inline-block rounded-lg bg-[#009A88] px-4 py-1.5 text-base font-semibold leading-7 text-white ring-1 ring-[#6ee7b7] hover:bg-[#34d399] hover:ring-[#34d399] "
-        >
-          <p className="justify-items-center justify-center text-center px-4 py-1.5">
-            Buscar
-          </p>
-        </button>
+        <NavLink to={`/ciudad/${input.id}`}>
+          <button
+            type="submit"
+            value="Buscar"
+            className="inline-block rounded-lg bg-[#009A88] px-4 py-1.5 text-base font-semibold leading-7 text-white ring-1 ring-[#6ee7b7] hover:bg-[#34d399] hover:ring-[#34d399] "
+          >
+            <p className="justify-items-center justify-center text-center px-4 py-1.5">
+              Buscar
+            </p>
+          </button>
+        </NavLink>
       </form>
     </div>
   );
