@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Inicio from "./components/Inicio/Inicio";
 import VehicleDetails from "./components/Details/Details";
+
 import Ciudad from "./components/Ciudad/Ciudad";
 import Creation from "./components/Creation/Creation";
+
 
 function App() {
   return (

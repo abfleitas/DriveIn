@@ -11,8 +11,13 @@ import {
 const initialState = {
   vehiclesCopy: [
     {
+
+      brand: "chevrolet",
+      model: "onix",
+
       brand: "Chevrolet",
       model: "Onix",
+
       score: 4.9,
       airconditioning: true,
       transmition: "manual",
