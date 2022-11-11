@@ -45,8 +45,20 @@ export const filterPrice = (payload) => {
 };
 //Action agregar auto a favoritos.
 export const addFavorites = (auto) => {
+  const favorite = localStorage.getItem("favorite")
+    ? JSON.parse(localStorage.getItem("favorite"))
+    : [];
+    const duplicates = favorite.filter(favoriteItem => favoriteItem.id === auto.id)
+    if(duplicates.lenght === 0){
+      const vehicleToAdd = {
+        ...auto,
+        count: 1
+      }
+      favorite.push(vehicleToAdd);
+      localStorage.setItem('favorite', JSON.stringify('favorite'))
+    }
   return {
-    type: ADD_FAVORITES,
+    type: "ADD_FAVORITES",
     payload: auto,
   };
 };

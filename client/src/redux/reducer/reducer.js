@@ -82,6 +82,16 @@ const initialState = {
   citiesFeatured: [],
 };
 
+//Inicio localStorage
+
+if(localStorage.getItem('favorites')) {
+  initialState.favorites = JSON.parse(localStorage.getItem('favorites'));
+}else{
+  initialState.favorites = [];
+}
+
+//Fin localStorage
+
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case FILTER_CATEGORY:
