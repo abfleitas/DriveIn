@@ -14,6 +14,7 @@ import {
 const initialState = {
   vehiclesCopy: [
     {
+      id: "1",
       brand: "chevrolet",
       model: "onix",
       score: 4.9,

@@ -6,7 +6,6 @@ import Inicio from "./components/Inicio/Inicio";
 
 import VehicleDetails from "./components/Details/Details";
 
-
 function App() {
   return (
     <BrowserRouter>
