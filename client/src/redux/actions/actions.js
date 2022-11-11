@@ -1,4 +1,3 @@
-
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_TRANSMISSION = "FILTER_TRANSMISSION";
 export const FILTER_CHARACTERISTICS = "FILTER_CHARACTERISTICS";
@@ -41,12 +40,24 @@ export const filterPrice = (payload) => {
 };
 //Action agregar auto a favoritos.
 export const addFavorites = (auto) => {
-   return {
-      type: 'ADD_FAVORITES',
-      payload: auto
-   }
+  const favorite = localStorage.getItem("favorite")
+    ? JSON.parse(localStorage.getItem("favorite"))
+    : [];
+    const duplicates = favorite.filter(favoriteItem => favoriteItem.id === auto.id)
+    if(duplicates.lenght === 0){
+      const vehicleToAdd = {
+        ...auto,
+        count: 1
+      }
+      favorite.push(vehicleToAdd);
+      localStorage.setItem('favorite', JSON.stringify('favorite'))
+    }
+  return {
+    type: "ADD_FAVORITES",
+    payload: auto,
+  };
 };
 
 export const setVehicleDetailsState = (data) => {
-  return { type: "SETVEHICLEDETAILSSTATE", payload: data};
-}
+  return { type: "SETVEHICLEDETAILSSTATE", payload: data };
+};
