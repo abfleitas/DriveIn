@@ -6,6 +6,7 @@ import Inicio from "./components/Inicio/Inicio";
 
 import VehicleDetails from "./components/Details/Details";
 
+import Creation from "./components/Creation/Creation"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/home" element={<Home />} />
           <Route path="/details/:id" element={<VehicleDetails />} />
+          <Route path="/creation" element={<Creation />} />
         </Routes>
       </div>
     </BrowserRouter>
