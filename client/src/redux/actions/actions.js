@@ -6,14 +6,20 @@ export const GET_DETAILS = "GET_DETAILS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_CITIES = "GET_CITIES";
 export const GET_CITIES_FEATURED = "GET_CITIES_FEATURED";
+
+export const GET_CITY = "GET_CITY";
+export const GET_VEHICLES = "GET_VEHICLES";
+export const GET_COMMENTS = "GET_COMMENTS";
+
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
+
 
 export const filter = (payload) => {
   return {
     type: "FILTER",
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const filterPrice = (payload) => {
   return {
@@ -26,15 +32,17 @@ export const addFavorites = (auto) => {
   const favorite = localStorage.getItem("favorite")
     ? JSON.parse(localStorage.getItem("favorite"))
     : [];
-    const duplicates = favorite.filter(favoriteItem => favoriteItem.id === auto.id)
-    if(duplicates.lenght === 0){
-      const vehicleToAdd = {
-        ...auto,
-        count: 1
-      }
-      favorite.push(vehicleToAdd);
-      localStorage.setItem('favorite', JSON.stringify('favorite'))
-    }
+  const duplicates = favorite.filter(
+    (favoriteItem) => favoriteItem.id === auto.id
+  );
+  if (duplicates.lenght === 0) {
+    const vehicleToAdd = {
+      ...auto,
+      count: 1,
+    };
+    favorite.push(vehicleToAdd);
+    localStorage.setItem("favorite", JSON.stringify("favorite"));
+  }
   return {
     type: "ADD_FAVORITES",
     payload: auto,
@@ -84,5 +92,38 @@ export const getCitiesFeatured = () => {
         return error;
       }
     );
+  };
+};
+
+export const getCity = (id) => {
+  return function (dispatch) {
+    axios.get(`http://localhost:3001/cities/${id}`).then(
+      (response) => {
+        dispatch({ type: GET_CITY, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+
+export const getVehicles = () => {
+  return function (dispatch) {
+    axios.get("http://localhost:3001/vehicles").then(
+      (response) => {
+        dispatch({ type: GET_VEHICLES, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+
+export const getComments = () => {
+  return async function (dispatch) {
+    const response = await axios.get("http://localhost:3001/comments");
+    dispatch({ type: GET_COMMENTS, payload: response.data });
   };
 };

@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
 
 export default function AllCards() {
-  const vehicles = useSelector((state) => state.vehiclesCopy);
-  const dispatch = useDispatch();
+  const vehicles = useSelector((state) => state.vehiclesByCity.vehicles);
 
   //Paginado inicio bloque...
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,7 +54,6 @@ export default function AllCards() {
 
   useEffect(() => {
     setCurrentPage(1);
-    dispatch({ type: "GET_VEHICLES" }); // hardcodeado
   }, []);
 
   return (
@@ -74,7 +72,7 @@ export default function AllCards() {
                 seats={v.seats}
                 category={v.category}
                 photo={v.photo}
-                price={v.price}
+                price={v.initialPrice}
               />
             </div>
           ))
