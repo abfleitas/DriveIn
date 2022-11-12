@@ -9,10 +9,11 @@ import {
   GET_CITY,
   GET_VEHICLES,
   GET_COMMENTS,
+  REMOVE_FAVORITES,
 } from "../actions/actions";
 
 const initialState = {
-  vehiclesCopy: [],
+    vehiclesCopy: [],
   vehiclesByCity: [],
   allVehicles: [],
   favorites: [],
@@ -120,6 +121,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         citiesFeatured: action.payload,
       };
+
     case GET_VEHICLES:
       return {
         ...state,
@@ -135,7 +137,15 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         comments: action.payload,
       };
+
+    case REMOVE_FAVORITES:
+      return {
+        ...state,
+        favorites:state.favorites.filter((el)=>el.id !== action.payload)
+      }
+
     default:
       return { ...state };
   }
 }
+

@@ -1,5 +1,6 @@
 import React from "react";
 import DriveIn from "../../images/LogoVerde.png";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -134,7 +135,7 @@ export default function Navbar() {
             Iniciar Sesión
           </div>
           <div class="hidden lg:inline-block py-2 px-6 bg-[#009A88] hover:bg-[#34d399] hover:ring-[#34d399] text-sm text-white font-bold font-sans rounded-xl transition duration-200 cursor-pointer">
-            Registrarse
+            <Link to="/register">Registrarse</Link>
           </div>
         </nav>
         <div class="navbar-menu relative z-50 hidden">
