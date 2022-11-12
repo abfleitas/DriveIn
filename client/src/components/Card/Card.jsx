@@ -6,7 +6,6 @@ import addFav from "../../images/fav.png";
 import noFav from "../../images/fav1.png";
 
 export default function Card({ id, photo, brand, model, price }) {
-  const dispatch = useDispatch();
   const [fav, setFav] = useState(false);
   const favorites = useState([]);
 
@@ -28,7 +27,7 @@ export default function Card({ id, photo, brand, model, price }) {
       />
       <p className="font-bold">{brand}</p>
       <p>{model}</p>
-      <p className="font-bold text-[#F97D67]">$ {price}</p>
+      <p className="font-bold text-[#F97D67]">USD {price}</p>
 
       <NavLink
         to={`/detail/${id}`}
