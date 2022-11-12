@@ -45,10 +45,10 @@ export async function postUser(req, res) {
 
       let users = await Users.findAll(
         {
-            include: {
-                model: favorites,
-                model: rent
-            }
+            // include: {
+            //     model: favorites,
+            //     model: rent
+            // }
         }
       );
       return res.status(200).json(users)

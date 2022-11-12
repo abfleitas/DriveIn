@@ -47,6 +47,10 @@ module.exports = (sequelize) => {
         allowNull: false,
         defaultValue: 1
       },
+    favorite:{
+      type:DataTypes.ARRAY(DataTypes.STRING),
+      allowNull:true,
+    }
 
       
   });
