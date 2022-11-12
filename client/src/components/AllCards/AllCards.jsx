@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
 
 export default function AllCards() {
-  const vehicles = useSelector((state) => state.vehiclesByCity.vehicles);
-
+  const vehicles = useSelector((state) => state.vehiclesByCity);
   //Paginado inicio bloque...
   const [currentPage, setCurrentPage] = useState(1);
   const vehicleByPage = 8;
@@ -15,7 +14,7 @@ export default function AllCards() {
   const currentVehicles =
     vehicles !== undefined ? vehicles.slice(firstVehicle, lastVehicle) : [];
   const pageNumbers = [];
-  const totalVehicles = vehicles.length;
+  const totalVehicles = vehicles && vehicles.length;
 
   //Realizar la división del total de vehículos disponibles y posterior asignación al arreglo.
   for (
