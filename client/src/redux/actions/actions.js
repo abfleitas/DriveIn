@@ -6,6 +6,7 @@ export const GET_DETAILS = "GET_DETAILS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_CITIES = "GET_CITIES";
 export const GET_CITIES_FEATURED = "GET_CITIES_FEATURED";
+export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
 export const filter = (payload) => {
   return {
@@ -39,6 +40,9 @@ export const addFavorites = (auto) => {
     payload: auto,
   };
 };
+export const deleteFavoritos = (id)=>{
+  return {type:" REMOVE_FAVORITES", payload: id};
+}
 
 export const setVehicleDetailsState = (data) => {
   return { type: GET_DETAILS, payload: data };
