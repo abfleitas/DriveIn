@@ -6,6 +6,7 @@ import {
   GET_COUNTRIES,
   GET_CITIES,
   GET_CITIES_FEATURED,
+  REMOVE_FAVORITES,
 } from "../actions/actions";
 
 const initialState = {
@@ -276,7 +277,13 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         citiesFeatured: action.payload,
       };
+    case REMOVE_FAVORITES:
+      return {
+        ...state,
+        favorites:state.favorites.filter((el)=>el.id !== action.payload)
+      }
     default:
       return { ...state };
   }
 }
+
