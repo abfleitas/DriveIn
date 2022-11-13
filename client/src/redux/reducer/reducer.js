@@ -46,7 +46,7 @@ export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case FILTER:
       const filtrados = [];
-      let vehiclefiltrado = state.vehiclesCopy;
+      let vehiclefiltrado = state.vehiclesByCity;
       state.filters.map((filter) => {
         if (filter.key === action.payload.key) {
           let value = action.payload.value;
@@ -57,32 +57,33 @@ export default function rootReducer(state = initialState, action) {
         }
       });
 
-      if (filtrados[1].key === "category" && filtrados[1].value !== "all") {
-        vehiclefiltrado = vehiclefiltrado.filter(
-          (v) => v.category === filtrados[1].value
-        );
-      }
+      // if (filtrados[1].key === "category" && filtrados[1].value !== "all") {
+      //   vehiclefiltrado = vehiclefiltrado.filter(
+      //     (v) => v.category === filtrados[1].value
+      //   );
+      // }
       if (filtrados[0].key === "brand" && filtrados[0].value !== "all") {
         vehiclefiltrado = vehiclefiltrado.filter(
           (v) => v.brand === filtrados[0].value
         );
       }
-      if (filtrados[2].key === "transmition" && filtrados[2].value !== "all") {
-        vehiclefiltrado = vehiclefiltrado.filter(
-          (v) => v.transmition === filtrados[2].value
-        );
-      }
-      if (filtrados[3].key === "AC" && filtrados[3].value !== "all") {
-        vehiclefiltrado = vehiclefiltrado.filter((v) => v.airconditioning);
-      }
-      if (filtrados[4].key === "seats" && filtrados[4].value !== "all") {
-        vehiclefiltrado = vehiclefiltrado.filter((v) => v.seats > 4);
-      }
+      // if (filtrados[2].key === "transmition" && filtrados[2].value !== "all") {
+      //   vehiclefiltrado = vehiclefiltrado.filter(
+      //     (v) => v.transmition === filtrados[2].value
+      //   );
+      // }
+      // if (filtrados[3].key === "AC" && filtrados[3].value !== "all") {
+      //   vehiclefiltrado = vehiclefiltrado.filter((v) => v.airconditioning);
+      // }
+      // if (filtrados[4].key === "seats" && filtrados[4].value !== "all") {
+      //   vehiclefiltrado = vehiclefiltrado.filter((v) => v.seats > 4);
+      // }
 
       return {
         ...state,
         filters: filtrados,
         vehicles: vehiclefiltrado,
+        vehiclesByCity: vehiclefiltrado
       };
     case FILTER_PRICE:
       function sorted5(action) {

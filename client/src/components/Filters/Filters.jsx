@@ -1,8 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { filterPrice, filter } from "../../redux/actions/actions";
+import { useSelector } from "react-redux";
 
 export default function Filters() {
+
+
+  const vehicles = useSelector((state) => state.vehiclesByCity);
+console.log (vehicles)
+
   const dispatch = useDispatch();
 
   const handleFilters = (e) => {
@@ -17,7 +23,7 @@ export default function Filters() {
   };
 
   // brand llega por props
-  let brand = ["toyota", "ford", "chevrolet", "volkswagen"];
+  let brand = ["Toyota", "ford", "chevrolet", "volkswagen"];
 
   return (
     <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-[#F97D67] h-fit rounded-full">
