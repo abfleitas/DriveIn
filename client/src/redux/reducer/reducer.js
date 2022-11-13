@@ -13,7 +13,7 @@ import {
 } from "../actions/actions";
 
 const initialState = {
-    vehiclesCopy: [],
+  vehiclesCopy: [],
   vehiclesByCity: [],
   allVehicles: [],
   favorites: [],
@@ -130,7 +130,8 @@ export default function rootReducer(state = initialState, action) {
     case GET_CITY:
       return {
         ...state,
-        vehiclesByCity: action.payload,
+        vehiclesByCity: action.payload[0].vehicles,
+        city: action.payload,
       };
     case GET_COMMENTS:
       return {
@@ -141,11 +142,10 @@ export default function rootReducer(state = initialState, action) {
     case REMOVE_FAVORITES:
       return {
         ...state,
-        favorites:state.favorites.filter((el)=>el.id !== action.payload)
-      }
+        favorites: state.favorites.filter((el) => el.id !== action.payload),
+      };
 
     default:
       return { ...state };
   }
 }
-
