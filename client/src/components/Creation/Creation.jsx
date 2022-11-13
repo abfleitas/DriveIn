@@ -254,7 +254,7 @@ const Creation = (props) => {
                                     <option value="Pickup">Pickup</option>
                                     <option value="Coupe">Coupe</option>
                                     <option value="Deportivo">Deportivo</option>
-                                    <option value="Minivan">Hatchback</option>
+                                    <option value="Minivan">Minivan</option>
                                 </select>
                             </div>
                             <div>
