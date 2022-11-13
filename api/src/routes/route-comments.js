@@ -13,23 +13,26 @@ router.post("/", async (req, res) => {
     await Comments.create(comment);
     return res.status(200).json(comment);
   } catch (error) {
-    return res.status(400).json(error);
+
+    res.status(400).json(error);
+
   }
 });
 router.get("/", async (req, res) => {
   try {
-    // const comentarios = await Comments.findAll(
-    //   {
-    //       include: {
-    //           model: users,
-    //           model: vehicles
-    //       }
-    //   }
-    // );
-    const comentarios = comments;
-    return res.status(200).json(comentarios);
+
+    const comentarios = await Comments.findAll({
+      include: {
+        model: users,
+        model: vehicles,
+      },
+    });
+
+    return res.status(200).json(comments);
   } catch (error) {
-    return res.status(400).json(error);
+    res.status(400).json(error);
+
+
   }
 });
 module.exports = router;

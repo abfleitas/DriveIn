@@ -52,9 +52,31 @@ export const deleteFavoritos = (id)=>{
   return {type:" REMOVE_FAVORITES", payload: id};
 }
 
-export const setVehicleDetailsState = (data) => {
-  return { type: GET_DETAILS, payload: data };
-};
+// export function setVehicleDetailsState(id) {
+//   return async function (dispatch) {
+//     try {
+//       let detailsJson = await axios.get(`http://localhost:3001/vehicles/${id}`);
+//       console.log("SOY AUTOS", detailsJson.data);
+//       return dispatch({
+//         type: "GET_DETAILS",
+//         payload: detailsJson.data,
+//       });
+//     } catch (error) {
+//       alert("No se encontró ningun Vehículo con ese ID");
+//     }
+//   };
+// }
+
+export function setVehicleDetailsState(id) {
+  return function (dispatch) {
+    axios.get(`http://localhost:3001/vehicles/${id}`).then((response) => {
+      return dispatch({
+        type: "GET_DETAILS",
+        payload: response.data,
+      });
+    });
+  };
+}
 
 export const getCountries = () => {
   return function (dispatch) {

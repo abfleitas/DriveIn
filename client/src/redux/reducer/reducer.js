@@ -13,11 +13,13 @@ import {
 } from "../actions/actions";
 
 const initialState = {
+
   vehiclesCopy: [],
   vehiclesByCity: [],
   allVehicles: [],
+
   favorites: [],
-  vehicleDetailsState: [],
+  // vehicleDetailsState: [],
   filters: [
     { key: "brand", value: "all" },
     { key: "category", value: "all" },
@@ -28,8 +30,12 @@ const initialState = {
   countries: [],
   cities: [],
   citiesFeatured: [],
+
+  details: [],
+
   city: [],
   comments: [],
+
 };
 
 //Inicio localStorage
@@ -105,7 +111,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_DETAILS:
       return {
         ...state,
-        vehicleDetailsState: action.payload,
+        details: action.payload,
       };
     case GET_COUNTRIES:
       return {
