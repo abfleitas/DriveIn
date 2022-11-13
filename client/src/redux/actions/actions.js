@@ -10,9 +10,9 @@ export const GET_CITIES_FEATURED = "GET_CITIES_FEATURED";
 export const filter = (payload) => {
   return {
     type: "FILTER",
-    payload
-  }
-}
+    payload,
+  };
+};
 
 export const filterPrice = (payload) => {
   return {
@@ -25,24 +25,48 @@ export const addFavorites = (auto) => {
   const favorite = localStorage.getItem("favorite")
     ? JSON.parse(localStorage.getItem("favorite"))
     : [];
-    const duplicates = favorite.filter(favoriteItem => favoriteItem.id === auto.id)
-    if(duplicates.lenght === 0){
-      const vehicleToAdd = {
-        ...auto,
-        count: 1
-      }
-      favorite.push(vehicleToAdd);
-      localStorage.setItem('favorite', JSON.stringify('favorite'))
-    }
+  const duplicates = favorite.filter(
+    (favoriteItem) => favoriteItem.id === auto.id
+  );
+  if (duplicates.lenght === 0) {
+    const vehicleToAdd = {
+      ...auto,
+      count: 1,
+    };
+    favorite.push(vehicleToAdd);
+    localStorage.setItem("favorite", JSON.stringify("favorite"));
+  }
   return {
     type: "ADD_FAVORITES",
     payload: auto,
   };
 };
 
-export const setVehicleDetailsState = (data) => {
-  return { type: GET_DETAILS, payload: data };
-};
+// export function setVehicleDetailsState(id) {
+//   return async function (dispatch) {
+//     try {
+//       let detailsJson = await axios.get(`http://localhost:3001/vehicles/${id}`);
+//       console.log("SOY AUTOS", detailsJson.data);
+//       return dispatch({
+//         type: "GET_DETAILS",
+//         payload: detailsJson.data,
+//       });
+//     } catch (error) {
+//       alert("No se encontró ningun Vehículo con ese ID");
+//     }
+//   };
+// }
+
+export function setVehicleDetailsState(id) {
+  return function (dispatch) {
+    axios.get(`http://localhost:3001/vehicles/${id}`).then((response) => {
+      return dispatch({
+        type: "GET_DETAILS",
+        payload: response.data,
+      });
+    });
+  };
+}
 
 export const getCountries = () => {
   return function (dispatch) {

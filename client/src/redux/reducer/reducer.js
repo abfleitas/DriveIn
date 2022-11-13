@@ -9,172 +9,172 @@ import {
 } from "../actions/actions";
 
 const initialState = {
-  vehiclesCopy: [
-    {
+  // vehiclesCopy: [
+  //   {
 
-      brand: "chevrolet",
-      model: "onix",
+  //     brand: "chevrolet",
+  //     model: "onix",
 
-      brand: "Chevrolet",
-      model: "Onix",
+  //     brand: "Chevrolet",
+  //     model: "Onix",
 
-      score: 4.9,
-      airconditioning: true,
-      transmition: "manual",
-      seats: 5,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 2000,
-    },
-    {
-      brand: "Volkswagen",
-      model: "Cross",
-      score: 4.2,
-      airconditioning: false,
-      transmition: "automatic",
-      seats: 4,
-      category: "medium",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 2500,
-    },
-    {
-      brand: "Ford",
-      model: "Maverick",
-      score: 5,
-      airconditioning: true,
-      transmition: "manual",
-      seats: 4,
-      category: "big",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 3500,
-    },
-    {
-      brand: "Toyota",
-      model: "Rav4",
-      score: 4.6,
-      airconditioning: true,
-      transmition: "automatic",
-      seats: 6,
-      category: "premium",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 3000,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-    {
-      brand: "Chevrolet",
-      model: "Plus",
-      score: 3.5,
-      airconditioning: false,
-      transmition: "manual",
-      seats: 4,
-      category: "small",
-      photo:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
-      price: 1800,
-    },
-  ],
+  //     score: 4.9,
+  //     airconditioning: true,
+  //     transmition: "manual",
+  //     seats: 5,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 2000,
+  //   },
+  //   {
+  //     brand: "Volkswagen",
+  //     model: "Cross",
+  //     score: 4.2,
+  //     airconditioning: false,
+  //     transmition: "automatic",
+  //     seats: 4,
+  //     category: "medium",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 2500,
+  //   },
+  //   {
+  //     brand: "Ford",
+  //     model: "Maverick",
+  //     score: 5,
+  //     airconditioning: true,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "big",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 3500,
+  //   },
+  //   {
+  //     brand: "Toyota",
+  //     model: "Rav4",
+  //     score: 4.6,
+  //     airconditioning: true,
+  //     transmition: "automatic",
+  //     seats: 6,
+  //     category: "premium",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 3000,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  //   {
+  //     brand: "Chevrolet",
+  //     model: "Plus",
+  //     score: 3.5,
+  //     airconditioning: false,
+  //     transmition: "manual",
+  //     seats: 4,
+  //     category: "small",
+  //     photo:
+  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-VV_jdP3L6XORPGvTvDx66wGBDbNIggTqBEG6jDur52A52gLmHheWTb8lq1ACDdL7o84&usqp=CAU",
+  //     price: 1800,
+  //   },
+  // ],
   vehicles: [],
   favorites: [],
-  vehicleDetailsState: [],
+  // vehicleDetailsState: [],
   filters: [
     { key: "brand", value: "all" },
     { key: "category", value: "all" },
@@ -185,6 +185,7 @@ const initialState = {
   countries: [],
   cities: [],
   citiesFeatured: [],
+  details: [],
 };
 
 //Inicio localStorage
@@ -259,7 +260,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_DETAILS:
       return {
         ...state,
-        vehicleDetailsState: action.payload,
+        details: action.payload,
       };
     case GET_COUNTRIES:
       return {
