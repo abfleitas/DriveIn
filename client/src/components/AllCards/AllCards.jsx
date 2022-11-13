@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
 
 export default function AllCards() {
-  const vehicles = useSelector((state) => state.vehiclesCopy);
-  const dispatch = useDispatch();
-
+  const vehicles = useSelector((state) => state.vehiclesByCity);
   //Paginado inicio bloque...
   const [currentPage, setCurrentPage] = useState(1);
   const vehicleByPage = 8;
@@ -16,7 +14,7 @@ export default function AllCards() {
   const currentVehicles =
     vehicles !== undefined ? vehicles.slice(firstVehicle, lastVehicle) : [];
   const pageNumbers = [];
-  const totalVehicles = vehicles.length;
+  const totalVehicles = vehicles && vehicles.length;
 
   //Realizar la división del total de vehículos disponibles y posterior asignación al arreglo.
   for (
@@ -55,7 +53,6 @@ export default function AllCards() {
 
   useEffect(() => {
     setCurrentPage(1);
-    dispatch({ type: "GET_VEHICLES" }); // hardcodeado
   }, []);
 
   return (
@@ -74,7 +71,7 @@ export default function AllCards() {
                 seats={v.seats}
                 category={v.category}
                 photo={v.photo}
-                price={v.price}
+                price={v.initialPrice}
               />
             </div>
           ))

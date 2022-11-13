@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCities, getCountries } from "../../redux/actions/actions";
+import { getCities } from "../../redux/actions/actions";
 import { NavLink } from "react-router-dom";
 
 export default function SearchBar() {
@@ -34,10 +34,6 @@ export default function SearchBar() {
     });
     dispatch(getCities(e.target.value));
   };
-
-  useEffect(() => {
-    dispatch(getCountries());
-  }, [dispatch]);
 
   return (
     <div className="bg-stone-200 relative  top-[220px]  w-[484px] h-[449px]   border-solid border-2 rounded-3xl  border-stone-200 flex flex-col text-sm font-medium text-white py-3 px-3 justify-center">

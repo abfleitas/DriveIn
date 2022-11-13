@@ -21,8 +21,8 @@ const Creation = (props) => {
     const [transmition, setTrasmition] = useState("manual");
     const [air, setAir] = useState("true");
     const [seats, setSeats] = useState(2);
-    const [category, setCategory] = useState("Pequeño");
-    const [photo, setPhoto] = useState("");
+    const [category, setCategory] = useState("");
+    const [ImageCloud, setImageCloud] = useState("");
     const [price, setPrice] = useState("1.00");
     const [isPending, setIsPending] = useState(false); //estado para desabilitar el boton
 
@@ -39,7 +39,13 @@ const Creation = (props) => {
     const airChangeHandler = (event) => {setAir(event.target.value)};
     const seatsChangeHandler = (event) => {setSeats(event.target.value)};
     const categoryChangeHandler = (event) => {setCategory(event.target.value)};
-    const photoChangeHandler = (event) => {setPhoto(event.target.value)};
+    const imageCloudChangeHandler = (event) => {
+        const imageData = new FormData()
+        imageData.append("file", event.target.files[0])
+        imageData.append("upload_preset", "drivein_uploader")
+        axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+        .then(response => {setImageCloud(response.data.secure_url)})
+    };
     const priceChangeHandler = (event) => {setPrice(event.target.value)};
 
 
@@ -121,17 +127,11 @@ const Creation = (props) => {
             alert("Tipo de vehiculo no puede estar vacio");
             return false
         }
-        let splitedCategory = category.split("")
-        let letterCategory = splitedCategory.shift().toUpperCase()
-        const finalCategory = letterCategory + (splitedCategory.join(""))
-        //Photo
-        if(photo === "") {
+        //Image
+        if(ImageCloud === "") {
             alert("Foto no puede estar vacio");
             return false
         }
-        let splitedPhoto = photo.split("")
-        let letterPhoto = splitedPhoto.shift().toUpperCase()
-        const finalPhoto = letterPhoto + (splitedPhoto.join(""))
         //Price
         if(parseInt(price) <= 0) {
             alert("Precio no puede ser menor a 1");
@@ -149,8 +149,8 @@ const Creation = (props) => {
             transmition: transmition,
             air: air,
             seats: seats,
-            category: finalCategory,
-            photo: photo,
+            category: category,
+            photo: ImageCloud,
             initialPrice: price,
             cityId: cityIdValue
         }
@@ -241,17 +241,21 @@ const Creation = (props) => {
                         </div>
                         <div>
                             <div>
-                                <label htmlFor="category">Tamaño de vehiculo:</label>
+                                <label htmlFor="category">Tipo de vehiculo:</label>
                                 <select name="category" onChange={categoryChangeHandler} value={category}  className="Creation_input">
-                                    <option value="Pequeño">Pequeño</option>
-                                    <option value="Mediano">Mediano</option>
-                                    <option value="Grande">Grande</option>
-                                    <option value="Premium">Premium</option>
+                                    <option value=""></option>
+                                    <option value="Micro">Micro</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="CUV">CUV</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                    <option value="Convertible">Convertible</option>
+                                    <option value="Cabriolet">Cabriolet</option>
+                                    <option value="Pickup">Pickup</option>
+                                    <option value="Coupe">Coupe</option>
+                                    <option value="Deportivo">Deportivo</option>
+                                    <option value="Minivan">Minivan</option>
                                 </select>
-                            </div>
-                            <div>
-                                <label htmlFor="photo">Foto:</label>
-                                <input type="text" key="photo" onChange={photoChangeHandler} value={photo}  className="Creation_input"></input>
                             </div>
                             <div>
                                 <label htmlFor="price" >Precio:</label>
@@ -260,7 +264,11 @@ const Creation = (props) => {
                             </div>
                         </div>
                     </div>
-                    
+                    <div className="Creation_Image_Box">
+                        <p>Foto:</p>
+                        <img src={ImageCloud ? ImageCloud : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} className="Creation_Image"></img>
+                        <input type="file" onChange={imageCloudChangeHandler} className="Creation_Image_input"></input>
+                    </div>
 
                     { isPending ? <button disable="true" className="Creation_button">Creating ...</button> : <button className="Creation_button">Create</button>}
                 </form>
