@@ -14,43 +14,49 @@ export default function Comments() {
           <div class="flex-shrink-0">
             <div class="flex items-center mx-auto justify-center">
               <img
-                // src={comments[0].user.photo}
+                src={comments[0] && comments[0].user.photo}
                 className="rounded-full h-[100px] max-w-min"
               />
             </div>
           </div>
           <h3 class="text-2xl sm:text-xl text-white font-semibold  py-4">
-            {/* {comments[0].user.name} */}
+            {comments[0] && comments[0].user.name}
           </h3>
-          {/* <p class="text-md  text-white py-4">{comments[0].description}</p> */}
+          <p class="text-md  text-white py-4">
+            {comments[0] && comments[0].description}
+          </p>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 px-4 py-4 mt-6 sm:mt-16 md:mt-20 lg:mt-24 bg-[#F97D67] shadow-lg rounded-lg">
           <div class="flex-shrink-0">
             <div class="flex items-center mx-auto justify-center">
               <img
-                // src={comments[1].user.photo}
+                src={comments[1] && comments[1].user.photo}
                 className="rounded-full h-[100px] max-w-min"
               />
             </div>
           </div>
           <h3 class="text-2xl sm:text-xl text-white font-semibold dark:text-white py-4">
-            {/* {comments[1].user.name} */}
+            {comments[1] && comments[1].user.name}
           </h3>
-          {/* <p class="text-md text-white py-4">{comments[1].description}</p> */}
+          <p class="text-md text-white py-4">
+            {comments[1] && comments[1].description}
+          </p>
         </div>
         <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/4 mt-6 px-4 py-4 bg-[#F97D67] shadow-lg rounded-lg ">
           <div class="flex-shrink-0">
             <div class="flex items-center mx-auto justify-center">
               <img
-                // src={comments[2].user.photo}
+                src={comments[2] && comments[2].user.photo}
                 className="rounded-full h-[100px] max-w-min"
               />
             </div>
           </div>
           <h3 class="text-2xl sm:text-xl text-white font-semibold py-4">
-            {/* {comments[2].user.name} */}
+            {comments[2] && comments[2].user.name}
           </h3>
-          {/* <p class="text-md  text-white  py-4">{comments[2].description}</p> */}
+          <p class="text-md  text-white  py-4">
+            {comments[2] && comments[2].description}
+          </p>
         </div>
       </div>
     </>

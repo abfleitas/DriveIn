@@ -26,7 +26,8 @@ router.get("/", async (req, res) => {
     //       }
     //   }
     // );
-    return res.status(200).json(comments);
+    const comentarios = comments;
+    return res.status(200).json(comentarios);
   } catch (error) {
     return res.status(400).json(error);
   }
