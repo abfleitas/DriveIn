@@ -1,12 +1,12 @@
 import React from "react";
 import DriveIn from "../../images/LogoVerde.png";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
     <div>
-      <body class="bg-blue-500">
-        <nav class="relative px-4 py-4 flex justify-between items-center bg-white shadow-lg rounded-2xl">
+      <div class="bg-blue-500">
+        <nav class="relative px-4 py-4 flex justify-between items-center bg-white shadow-lg rounded-bl-2xl">
           <div class="text-3xl font-bold leading-none" href="#">
             <img src={DriveIn} alt="" class="h-12 mr-1 " />
             {/* <svg class="h-10" alt="logo" viewBox="0 0 10240 10240">
@@ -30,12 +30,14 @@ export default function Navbar() {
           </div>
           <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
             <li>
-              <div
-                class="text-sm text-[#2e3a46] hover:text-[#f97d67] cursor-pointer"
-                href="#"
-              >
-                Home
-              </div>
+              <NavLink to="/home">
+                <div
+                  class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
+                  href="#home"
+                >
+                  Home
+                </div>
+              </NavLink>
             </li>
             <li class="text-[#f97d67]">
               <svg
@@ -79,7 +81,7 @@ export default function Navbar() {
             </li>
             <li>
               <div
-                class="text-sm text-[#2e3a46] hover:text-[#f97d67] cursor-pointer"
+                class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
                 href="#"
               >
                 Servicios
@@ -103,7 +105,7 @@ export default function Navbar() {
             </li>
             <li>
               <div
-                class="text-sm text-[#2e3a46] hover:text-[#f97d67] cursor-pointer"
+                class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
                 href="#"
               >
                 Contactos
@@ -135,7 +137,7 @@ export default function Navbar() {
             Iniciar Sesión
           </div>
           <div class="hidden lg:inline-block py-2 px-6 bg-[#009A88] hover:bg-[#34d399] hover:ring-[#34d399] text-sm text-white font-bold font-sans rounded-xl transition duration-200 cursor-pointer">
-            <Link to="/register">Registrarse</Link>
+            <NavLink to="/register">Registrarse</NavLink>
           </div>
         </nav>
         <div class="navbar-menu relative z-50 hidden">
@@ -229,7 +231,7 @@ export default function Navbar() {
             </div>
           </nav>
         </div>
-      </body>
+      </div>
     </div>
   );
 }

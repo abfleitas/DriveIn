@@ -4,10 +4,8 @@ import { filterPrice, filter } from "../../redux/actions/actions";
 import { useSelector } from "react-redux";
 
 export default function Filters() {
-
-
   const vehicles = useSelector((state) => state.vehiclesByCity);
-console.log (vehicles)
+  console.log(vehicles);
 
   const dispatch = useDispatch();
 
@@ -26,11 +24,10 @@ console.log (vehicles)
   let brand = ["Toyota", "ford", "chevrolet", "volkswagen"];
 
   return (
-    <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-[#F97D67] h-fit rounded-full">
+    <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-[#F97D67] h-fit rounded-tr-[100px] rounded-br-2xl">
       <div>
+        <h2 className="font-bold text-black mt-2">ORDENAR POR:</h2>
         <div className="p-5">
-          <h2 className="font-bold text-black">ORDENAR POR:</h2>
-
           <select
             defaultValue="price"
             onChange={handlePrice}
@@ -43,19 +40,20 @@ console.log (vehicles)
             <option value="higher">De mayor a menor</option>
           </select>
         </div>
-        <h2 className="font-bold text-black">FILTRAR POR:</h2>
         <br></br>
-        <div className="bg-[#F97D67]">
+        <h2 className="font-bold text-black">FILTRAR POR:</h2>
+
+        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
           <label className="font-bold">Categoría: </label>
-          <br></br>
-          <div className="rounded-md border border-[#F97D67]-300 p-3">
+
+          <div className="rounded-md border border-[#F97D67]-300 p-3 flex flex-wrap gap-x-1">
             <input
               type="checkbox"
               name="category"
               id="small"
               value="small"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="small">Chico </label>
 
@@ -65,7 +63,7 @@ console.log (vehicles)
               id="medium"
               value="medium"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="medium">Mediano </label>
 
@@ -75,7 +73,7 @@ console.log (vehicles)
               id="big"
               value="big"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="big">Grande </label>
 
@@ -85,7 +83,7 @@ console.log (vehicles)
               id="premium"
               value="premium"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="premium">Premium </label>
 
@@ -95,22 +93,22 @@ console.log (vehicles)
               id="convertible"
               value="convertible"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="convertible">Convertible</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
           <label className="font-bold">Transmisión: </label>
-          <br></br>
-          <div className="rounded-md border border-[#F97D67]-300 p-3">
+
+          <div className="rounded-md border border-[#F97D67]-300 p-3 flex flex-wrap gap-x-2">
             <input
               type="checkbox"
               name="transmition"
               id="manual"
               value="manual"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="manual">Manual </label>
 
@@ -120,22 +118,22 @@ console.log (vehicles)
               id="automatic"
               value="automatic"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="automatic">Automático</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
           <label className="font-bold">Características: </label>
-          <br></br>
-          <div className="rounded-md border border-[#F97D67]-300 p-3">
+
+          <div className="rounded-md border border-[#F97D67]-300 p-3 flex flex-wrap gap-x-2">
             <input
               type="checkbox"
               name="AC"
               id="AC"
               value="AC"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="AC">Aire Acondicionado </label>
 
@@ -145,15 +143,15 @@ console.log (vehicles)
               id="seats"
               value="seats"
               onChange={handleFilters}
-              className="mx-2"
+              className="border-gray-300 rounded h-5 w-5 mx-2"
             />
             <label htmlFor="seats">+4 Asientos</label>
           </div>
         </div>
-        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
+        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67] rounded-br-2xl">
           <label className="font-bold">Marca: </label>
-          <br></br>
-          <div className="rounded-md border border-[#F97D67]-300 p-3">
+
+          <div className="rounded-md border border-[#F97D67]-300 p-3 flex flex-wrap gap-x-2">
             {brand &&
               brand.map((el, i) => (
                 <span key={i}>
@@ -163,7 +161,7 @@ console.log (vehicles)
                     id={el}
                     value={el}
                     onChange={handleFilters}
-                    className="mx-2"
+                    className="border-gray-300 rounded h-5 w-5 mx-2"
                   />
                   <label htmlFor={el}>{el}</label>
                 </span>

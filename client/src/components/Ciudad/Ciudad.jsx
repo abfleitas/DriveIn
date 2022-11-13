@@ -21,7 +21,7 @@ export default function Ciudad() {
         <NavBar />
       </div>
       <div className="flex">
-        <div className="w-3/12 bg-[#D9D9D9] flex ml-2 mr-1">
+        <div className="w-3/12 bg-[#D9D9D9] mr-1">
           <Filters />
         </div>
         <div className="w-9/12 h-full flex flex-col ">
