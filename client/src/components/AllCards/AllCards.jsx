@@ -77,40 +77,44 @@ export default function AllCards() {
             </div>
           ))
         ) : (
-          <h3>Error</h3>
+          <h1 className="text-[#009A88] underline decoration-4">
+            No existen autos con las caracteristicas solicitadas
+          </h1>
         )}
       </div>
-      <footer className="mb-5">
-        {currentPage !== 1 ? (
-          <button
-            className="bg-[#009A88] p-3 rounded-full"
-            onClick={prevHandler}
-          >
-            Anterior
-          </button>
-        ) : null}
-        {pageNumbers.map((number) => (
-          <button
-            className={
-              currentPage === number
-                ? "bg-[#F97D67] p-3 rounded-full"
-                : " p-3 rounded-full"
-            }
-            key={number}
-            onClick={() => Page(number)}
-          >
-            {number}
-          </button>
-        ))}
-        {currentPage !== pageNumbers.length ? (
-          <button
-            className="bg-[#009A88] p-3 rounded-full"
-            onClick={nextHandler}
-          >
-            Siguiente
-          </button>
-        ) : null}
-      </footer>
+      {currentVehicles.length ? (
+        <footer className="mb-5">
+          {currentPage !== 1 ? (
+            <button
+              className="bg-[#009A88] p-3 rounded-full"
+              onClick={prevHandler}
+            >
+              Anterior
+            </button>
+          ) : null}
+          {pageNumbers.map((number) => (
+            <button
+              className={
+                currentPage === number
+                  ? "bg-[#F97D67] p-3 rounded-full"
+                  : " p-3 rounded-full"
+              }
+              key={number}
+              onClick={() => Page(number)}
+            >
+              {number}
+            </button>
+          ))}
+          {currentPage !== pageNumbers.length ? (
+            <button
+              className="bg-[#009A88] p-3 rounded-full"
+              onClick={nextHandler}
+            >
+              Siguiente
+            </button>
+          ) : null}
+        </footer>
+      ) : null}
     </>
   );
 }
