@@ -8,7 +8,9 @@ export default function Navbar() {
       <div class="bg-blue-500">
         <nav class="relative px-4 py-4 flex justify-between items-center bg-white shadow-lg rounded-bl-2xl">
           <div class="text-3xl font-bold leading-none" href="#">
+          <NavLink to="/">
             <img src={DriveIn} alt="" class="h-12 mr-1 " />
+            </NavLink>
             {/* <svg class="h-10" alt="logo" viewBox="0 0 10240 10240">
               <path
                 xmlns="http://www.w3.org/2000/svg"
