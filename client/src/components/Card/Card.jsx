@@ -1,23 +1,40 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorites } from "../../redux/actions/actions";
+import { addFavorites, removeFavorites } from "../../redux/actions/actions";
 import addFav from "../../images/fav.png";
 import noFav from "../../images/fav1.png";
 
 export default function Card({ id, photo, brand, model, price }) {
-  const [fav, setFav] = useState(false);
-  const favorites = useState([]);
+  //Cambios abrir
+  const [favorito, setFavorito] = useState(false);
+  //const favorites = useState([]);
+  const dispatch = useDispatch();
 
-  const handleClickFavorito = (e) => {};
-
+  const handleClickFavorito = (event) => {
+    const data = {
+      id,
+      photo,
+      brand,
+      model,
+      price,
+    };
+    if (!favorito) {
+      dispatch(addFavorites(data));
+      setFavorito(true);
+    } else {
+      dispatch(removeFavorites(id));
+      setFavorito(false);
+    }
+  };
+  //Cambios cerrar
   return (
     <div
       className="flex flex-col bg-white p-5 rounded-lg w-[300px] h-[400px] justify-around shadow-xl"
       value={id}
     >
-      <button className="w-max" onClick={() => handleClickFavorito()}>
-        <img src={fav ? addFav : noFav} className="w-[30px]" />
+      <button className="w-max" onClick={(event) => handleClickFavorito(event)}>
+        <img src={favorito ? addFav : noFav} className="w-[30px]" />
       </button>
 
       <img

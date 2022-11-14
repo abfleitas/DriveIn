@@ -13,7 +13,6 @@ export const GET_COMMENTS = "GET_COMMENTS";
 
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
-
 export const filter = (payload) => {
   return {
     type: "FILTER",
@@ -28,29 +27,31 @@ export const filterPrice = (payload) => {
   };
 };
 //Action agregar auto a favoritos.
-export const addFavorites = (auto) => {
-  const favorite = localStorage.getItem("favorite")
-    ? JSON.parse(localStorage.getItem("favorite"))
+export const addFavorites = (data) => {
+  //const favoriteItems = localStorage.setItem("favoriteItems", JSON.stringify(data));
+  const favoriteItems = localStorage.getItem("favoriteItems")
+    ? JSON.parse(localStorage.getItem("favoriteItems"))
     : [];
-  const duplicates = favorite.filter(
-    (favoriteItem) => favoriteItem.id === auto.id
+  const duplicates = favoriteItems.filter(
+    (favoriteItem) => favoriteItem.id === data.id
   );
-  if (duplicates.lenght === 0) {
+  if (duplicates.length === 0) {
     const vehicleToAdd = {
-      ...auto,
-      count: 1,
+      ...favoriteItems,
+      data,
+      //count: 1,
     };
-    favorite.push(vehicleToAdd);
-    localStorage.setItem("favorite", JSON.stringify("favorite"));
+    favoriteItems.push(vehicleToAdd);
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   }
   return {
     type: "ADD_FAVORITES",
-    payload: auto,
+    payload: data,
   };
 };
-export const deleteFavoritos = (id)=>{
-  return {type:" REMOVE_FAVORITES", payload: id};
-}
+export const removeFavorites = (id) => {
+  return { type: "REMOVE_FAVORITES", payload: id };
+};
 
 // export function setVehicleDetailsState(id) {
 //   return async function (dispatch) {
