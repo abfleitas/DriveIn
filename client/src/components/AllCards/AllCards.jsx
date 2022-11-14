@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card/Card";
 
 export default function AllCards() {
-  const vehicles = useSelector((state) => state.vehiclesByCity);
+  const vehicles = useSelector((state) => state.vehiclesCopy);
   //Paginado inicio bloque...
   const [currentPage, setCurrentPage] = useState(1);
   const vehicleByPage = 8;

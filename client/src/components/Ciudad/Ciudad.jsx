@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -12,6 +12,8 @@ export default function Ciudad() {
   const dispatch = useDispatch();
   const city = useSelector((state) => state.city);
 
+  const [change, setChange] = useState();
+
   useEffect(() => {
     dispatch(getCity(id));
   }, [dispatch]);
@@ -22,7 +24,7 @@ export default function Ciudad() {
       </div>
       <div className="flex">
         <div className="w-3/12 bg-[#D9D9D9] mr-1">
-          <Filters />
+          <Filters setChange={setChange} />
         </div>
         <div className="w-9/12 h-full flex flex-col ">
           <div className="relative max-h-50 shadow-xl rounded-bl-3xl rounded-br-3xl">
