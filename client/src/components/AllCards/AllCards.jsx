@@ -63,6 +63,7 @@ export default function AllCards() {
             <div>
               <Card
                 key={index}
+                id={v.id}
                 brand={v.brand}
                 model={v.model}
                 score={v.score}
