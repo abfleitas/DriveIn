@@ -40,8 +40,8 @@ const initialState = {
 
 //Inicio localStorage
 
-if (localStorage.getItem("favorites")) {
-  initialState.favorites = JSON.parse(localStorage.getItem("favorites"));
+if (localStorage.getItem("favoriteItems")) {
+  initialState.favorites = JSON.parse(localStorage.getItem("favoriteItems"));
 } else {
   initialState.favorites = [];
 }
