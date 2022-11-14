@@ -63,44 +63,43 @@ export default function rootReducer(state = initialState, action) {
         }
       });
 
-      // if (filtrados[1].key === "category" && filtrados[1].value !== "all") {
-      //   vehiclefiltrado = vehiclefiltrado.filter(
-      //     (v) => v.category === filtrados[1].value
-      //   );
-      // }
+      if (filtrados[1].key === "category" && filtrados[1].value !== "all") {
+        vehiclefiltrado = vehiclefiltrado.filter(
+          (v) => v.category === filtrados[1].value
+        );
+      }
       if (filtrados[0].key === "brand" && filtrados[0].value !== "all") {
         vehiclefiltrado = vehiclefiltrado.filter(
           (v) => v.brand === filtrados[0].value
         );
       }
-      // if (filtrados[2].key === "transmition" && filtrados[2].value !== "all") {
-      //   vehiclefiltrado = vehiclefiltrado.filter(
-      //     (v) => v.transmition === filtrados[2].value
-      //   );
-      // }
-      // if (filtrados[3].key === "AC" && filtrados[3].value !== "all") {
-      //   vehiclefiltrado = vehiclefiltrado.filter((v) => v.airconditioning);
-      // }
-      // if (filtrados[4].key === "seats" && filtrados[4].value !== "all") {
-      //   vehiclefiltrado = vehiclefiltrado.filter((v) => v.seats > 4);
-      // }
+      if (filtrados[2].key === "transmition" && filtrados[2].value !== "all") {
+        vehiclefiltrado = vehiclefiltrado.filter(
+          (v) => v.transmition === filtrados[2].value
+        );
+      }
+      if (filtrados[3].key === "AC" && filtrados[3].value !== "all") {
+        vehiclefiltrado = vehiclefiltrado.filter((v) => v.air);
+      }
+      if (filtrados[4].key === "seats" && filtrados[4].value !== "all") {
+        vehiclefiltrado = vehiclefiltrado.filter((v) => v.seats > 4);
+      }
 
       return {
         ...state,
         filters: filtrados,
-        vehicles: vehiclefiltrado,
-        vehiclesByCity: vehiclefiltrado
+        vehiclesCopy: vehiclefiltrado,
       };
     case FILTER_PRICE:
       function sorted5(action) {
         return action.payload === "lower"
-          ? state.vehiclesCopy.sort((a, b) => a.price - b.price)
-          : state.vehiclesCopy.sort((a, b) => b.price - a.price);
+          ? state.vehiclesByCity.sort((a, b) => a.initialPrice - b.initialPrice)
+          : state.vehiclesByCity.sort((a, b) => b.initialPrice - a.initialPrice);
       }
       let sortedPrice = sorted5(action);
       return {
         ...state,
-        vehicles: sortedPrice,
+        vehiclesCopy: sortedPrice,
       };
     //ADD_FAVORITES
     case ADD_FAVORITES:
@@ -137,6 +136,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_CITY:
       return {
         ...state,
+        vehiclesCopy: action.payload[0].vehicles,
         vehiclesByCity: action.payload[0].vehicles,
         city: action.payload,
       };
