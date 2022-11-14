@@ -27,13 +27,13 @@ export default function Ciudad() {
           <Filters setChange={setChange} />
         </div>
         <div className="w-10/12 h-full flex flex-col">
-          <div className="relative max-h-50 shadow-xl rounded-bl-3xl rounded-br-3xl">
+          <div className="relative max-h-50 rounded-bl-3xl rounded-br-3xl ml-[340px]">
             <h1 className="absolute bottom-0 bg-slate-200 bg-opacity-50 p-2 rounded-bl-3xl rounded-tr-3xl font-bold text-3xl text-white">
               {city[0] && city[0].name}
             </h1>
             <img
               src={city[0] && city[0].photo}
-              className="rounded-b-3xl min-w-full max-h-40 "
+              className="rounded-b-3xl w-[900px] max-h-40 shadow-xl"
             />
           </div>
           <AllCards />
