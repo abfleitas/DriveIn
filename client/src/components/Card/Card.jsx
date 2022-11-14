@@ -43,7 +43,7 @@ export default function Card({ id, photo, brand, model, price }) {
       <img
         src={photo}
         alt="Loading Auto"
-        className="flex items-center h-40 w-40 m-auto rounded-full border-[#009A88] border-2 p-1"
+        className="flex items-center h-40 w-[250px] m-auto rounded-lg border-[#009A88] border-2 p-1"
       />
       <p className="font-bold">{brand}</p>
       <p>{model}</p>

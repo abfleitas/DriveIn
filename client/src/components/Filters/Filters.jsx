@@ -56,14 +56,14 @@ export default function Filters({ setChange }) {
     console.log(e.target.name);
   };
   return (
-    <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-[#F97D67] h-fit rounded-tr-[100px] rounded-br-2xl">
+    <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-white h-fit rounded-tr-[100px] rounded-br-2xl shadow-xl">
       <div>
         <h2 className="font-bold text-black mt-2">ORDENAR POR:</h2>
         <div className="p-5">
           <select
             defaultValue="price"
             onChange={handlePrice}
-            className=" cursor-default rounded-md border border-[#F97D67]-300 bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
+            className=" cursor-default rounded-md text-white bg-[#2E3A46] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
           >
             <option value="price" disabled>
               Precio
@@ -75,10 +75,10 @@ export default function Filters({ setChange }) {
         <br></br>
         <h2 className="font-bold text-black">FILTRAR POR:</h2>
 
-        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
-          <label className="font-bold">Categoría: </label>
+        <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
+          <label className="font-bold text-[#009A88]">Categoría: </label>
 
-          <div className="rounded-md border border-[#F97D67]-300 p-3  flex flex-wrap gap-x-2">
+          <div className="rounded-md p-3  flex flex-col items-start">
             <div>
               <input
                 type="radio"
@@ -88,7 +88,7 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2 "
               />
-              <label htmlFor="Sedan">Todos</label>
+              <label htmlFor="Sedan" className="">Todos</label>
             </div>
             <div>
               <input
@@ -149,10 +149,10 @@ export default function Filters({ setChange }) {
             </div>
           </div>
         </div>
-        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
-          <label className="font-bold">Transmisión: </label>
+        <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
+          <label className="font-bold text-[#009A88] ml-2">Transmisión: </label>
 
-          <div className="rounded-md border border-[#F97D67]-300 p-3 flex flex-wrap gap-x-2">
+          <div className="rounded-md  p-3 flex flex-col items-start">
             <div>
               <input
                 type="radio"
@@ -190,10 +190,10 @@ export default function Filters({ setChange }) {
             </div>
           </div>
         </div>
-        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
-          <label className="font-bold">Características: </label>
+        <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
+          <label className="font-bold text-[#009A88]">Características: </label>
 
-          <div className="rounded-md border border-[#F97D67]-300 p-3 flex flex-wrap gap-x-2">
+          <div className="rounded-md p-3 flex flex-wrap gap-x-2">
             <div>
               <input
                 type="checkbox"
@@ -218,12 +218,12 @@ export default function Filters({ setChange }) {
             </div>
           </div>
         </div>
-        <div className="p-5 border-[#F97D67]-300 bg-[#F97D67] rounded-br-2xl">
-          <label className="font-bold">Marca: </label>
+        <div className="p-5 bg-white text-[#2E3A46] rounded-br-2xl shadow-xl">
+          <label className="font-bold text-[#009A88]">Marca: </label>
 
           <div>
             <select
-              className=" cursor-default rounded-md border border-[#F97D67]-300 bg-[#F97D67] py-2 pl-3 pr-10 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
+              className=" cursor-default rounded-md bg-[#2E3A46] py-2 pl-3 pr-10 text-white text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
               name="brand"
               onChange={handlerBrand}
               defaultValue="Marca"
