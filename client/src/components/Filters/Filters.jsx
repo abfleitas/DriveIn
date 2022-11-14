@@ -1,11 +1,37 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { filterPrice, filter } from "../../redux/actions/actions";
-import { useSelector } from "react-redux";
 
-export default function Filters() {
-  const vehicles = useSelector((state) => state.vehiclesByCity);
-  console.log(vehicles);
+export default function Filters({ setChange }) {
+  const vehicles = useSelector((state) => state.allVehicles);
+  const brand = [...new Set(vehicles.map(el => el.brand))];
+  const vehiclesCopy = useSelector((state) => state.vehiclesCopy);
+  let data = {
+    Sedan: 0,
+    SUV: 0,
+    Pickup: 0,
+    Hatchback: 0,
+    CUV: 0,
+    Manual: 0,
+    Automatico: 0,
+    air: 0,
+    seats: 0,
+    toyota: 0,
+    mitsubishi: 0
+  }
+  vehiclesCopy.map(v => {
+    if (v.category === "Sedan") data.Sedan++;
+    if (v.category === "SUV") data.SUV++;
+    if (v.category === "Pickup") data.Pickup++;
+    if (v.category === "Hatchback") data.Hatchback++;
+    if (v.category === "CUV") data.CUV++;
+    if (v.transmition === "Manual") data.Manual++;
+    if (v.transmition === "Automatico") data.Automatico++;
+    if (v.air) data.air++;
+    if (v.seats > 4) data.seats++;
+    if (v.brand === "Toyota") data.toyota++;
+    if (v.brand === "Mitsubishi") data.mitsubishi++;
+  });
 
   const dispatch = useDispatch();
 
@@ -18,10 +44,8 @@ export default function Filters() {
 
   const handlePrice = (e) => {
     dispatch(filterPrice(e.target.value));
+    setChange(e.target.value);
   };
-
-  // brand llega por props
-  let brand = ["Toyota", "ford", "chevrolet", "volkswagen"];
 
   return (
     <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-[#F97D67] h-fit rounded-tr-[100px] rounded-br-2xl">
@@ -50,52 +74,52 @@ export default function Filters() {
             <input
               type="checkbox"
               name="category"
-              id="small"
-              value="small"
+              id="Sedan"
+              value="Sedan"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="small">Chico </label>
+            <label htmlFor="Sedan">Sedan {data.Sedan} </label>
 
             <input
               type="checkbox"
               name="category"
-              id="medium"
-              value="medium"
+              id="SUV"
+              value="SUV"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="medium">Mediano </label>
+            <label htmlFor="SUV">Suv {data.SUV} </label>
 
             <input
               type="checkbox"
               name="category"
-              id="big"
-              value="big"
+              id="Pickup"
+              value="Pickup"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="big">Grande </label>
+            <label htmlFor="Pickup">Pickup {data.Pickup} </label>
 
             <input
               type="checkbox"
               name="category"
-              id="premium"
-              value="premium"
+              id="Hatchback"
+              value="Hatchback"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="premium">Premium </label>
+            <label htmlFor="Hatchback">Hatchback {data.Hatchback} </label>
 
             <input
               type="checkbox"
               name="category"
-              id="convertible"
-              value="convertible"
+              id="CUV"
+              value="CUV"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="convertible">Convertible</label>
+            <label htmlFor="CUV">Cuv {data.CUV}</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
@@ -105,22 +129,22 @@ export default function Filters() {
             <input
               type="checkbox"
               name="transmition"
-              id="manual"
-              value="manual"
+              id="Manual"
+              value="Manual"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="manual">Manual </label>
+            <label htmlFor="Manual">Manual {data.Manual} </label>
 
             <input
               type="checkbox"
               name="transmition"
-              id="automatic"
-              value="automatic"
+              id="Automatico"
+              value="Automatico"
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="automatic">Automático</label>
+            <label htmlFor="Automatico">Automático {data.Automatico}</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
@@ -135,7 +159,7 @@ export default function Filters() {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="AC">Aire Acondicionado </label>
+            <label htmlFor="AC">Aire Acondicionado {data.air} </label>
 
             <input
               type="checkbox"
@@ -145,7 +169,7 @@ export default function Filters() {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="seats">+4 Asientos</label>
+            <label htmlFor="seats">+4 Asientos {data.seats}</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67] rounded-br-2xl">
@@ -167,6 +191,8 @@ export default function Filters() {
                 </span>
               ))}
           </div>
+          <p>{data.toyota}</p>
+          <p>{data.mitsubishi}</p>
         </div>
       </div>
     </div>
