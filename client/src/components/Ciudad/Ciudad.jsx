@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -23,10 +23,10 @@ export default function Ciudad() {
         <NavBar />
       </div>
       <div className="flex">
-        <div className="w-3/12 bg-[#D9D9D9] mr-1">
+        <div className="w-2/12 bg-[#D9D9D9] mr-1">
           <Filters setChange={setChange} />
         </div>
-        <div className="w-9/12 h-full flex flex-col ">
+        <div className="w-10/12 h-full flex flex-col">
           <div className="relative max-h-50 shadow-xl rounded-bl-3xl rounded-br-3xl">
             <h1 className="absolute bottom-0 bg-slate-200 bg-opacity-50 p-2 rounded-bl-3xl rounded-tr-3xl font-bold text-3xl text-white">
               {city[0] && city[0].name}
