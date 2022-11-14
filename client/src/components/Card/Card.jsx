@@ -50,7 +50,7 @@ export default function Card({ id, photo, brand, model, price }) {
       <p className="font-bold text-[#F97D67]">USD {price}</p>
 
       <NavLink
-        to={`/detail/${id}`}
+        to={`/details/${id}`}
         className="bg-[#009A88] w-max self-center p-4 rounded-3xl hover:bg-[#F97D67] text-white mt-2"
       >
         <span>Ver Oferta</span>
