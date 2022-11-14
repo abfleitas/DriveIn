@@ -1,15 +1,15 @@
 import React from "react";
-import fondo from "../../images/turismo.jpeg";
-import fondo2 from "../../images/register-fondo.webp"
 import './register.css';
+import { Link } from "react-router-dom";
+import iconG from "../../images/google.png";
 
 export const Register = () => {
     
 
     return (
-        <div className="h-screen flex justify-center items-center container-reg">
-            <div className="flex w-[750px] h-[400px] flex-col bg-red-600 container-data">
-                <h2>Registration</h2>
+        <div className="h-screen bg-slate-900 flex justify-center items-center container-reg">
+            <div className="flex w-[600px] h-[600px] flex-col rounded-lg shadow-[0_35px_60px_-15px_#009A88] container-data">
+                <h2>Registrarme</h2>
                 <form className="flex flex-row w-full justify-around">
                 <div className="flex flex-col w-2/5">
                     <div className="c-input">
@@ -26,13 +26,13 @@ export const Register = () => {
                     </div>
                     <div className="c-input mt-2">
                         <div className="data">
-                        <input type="text" className="" required/>
+                        <input type="password" className="" required/>
                         <span className="">Contraseña</span>
                         </div>
                     </div>
                     <div className="c-input mt-2">
                         <div className="data">
-                        <input type="text" className="" required/>
+                        <input type="password" className="" required/>
                         <span className="">Repetir Contraseña</span>
                         </div>
                     </div>
@@ -58,9 +58,10 @@ export const Register = () => {
                     </div>
                 </div>
                 </form>
-                <div className="flex flex-row justify-around items-center w-[300px]">
-                    <button>Registrarme</button>
-                    <button>Registrarme con Goggle</button>
+                <div className="flex flex-col justify-around items-center w-[300px] m-auto">
+                    <button className="w-full h-[40px] rounded-lg bg-[#009A88] text-white font-semibold">Registrarme</button>
+                    <button className="relative mt-6 w-full h-[40px] rounded-lg bg-white text-black text-sm font-semibold btn-google"><img src={iconG} alt="icon-g" className="absolute mx-6 mt-[2px]"></img>Registrarme con Google</button>
+                    <span className="text-white mt-6">Ya tienes una cuenta? <Link to="/home" className="text-[#F97D67]">Inicia sesión</Link></span>
                 </div>
             </div>
         </div>
