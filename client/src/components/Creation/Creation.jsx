@@ -4,6 +4,8 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries, getCities } from '../../redux/actions/actions';
 import "./Creation.css"
+import swal from "sweetalert";
+import Logo from "../../images/LogoVerde.png"
 
 const Creation = (props) => {
 
@@ -63,7 +65,7 @@ const Creation = (props) => {
         var letters = /^[A-Za-z\s]*$/;
         if (brand === "") {setBrandValidation([])}
         else if (!(brand.match(letters))) {
-            setBrandValidation([<p key="brand_validation">Marca no puede contener numeros o simbolos.</p>]);
+            setBrandValidation([<p key="brand_validation" style={{color:"red"}}>Marca no puede contener<br></br>numeros o simbolos.</p>]);
             return
         }
         setBrandValidation([])
@@ -74,7 +76,7 @@ const Creation = (props) => {
         var numbers = /^\d+\.\d{2,2}$/;
         if (price === "") {setPriceValidation([])}
         else if (!(price.match(numbers))) {
-            setPriceValidation([<p key="price_validation">Precio tiene que ser mayor a 0 y solo puede contener 2 decimales.</p>]);
+            setPriceValidation([<p key="price_validation" style={{color:"red"}}>Precio tiene que ser mayor<br></br>a 0 y tiene que contener<br></br>2 decimales.</p>]);
             return
         }
         setPriceValidation([])
@@ -92,17 +94,17 @@ const Creation = (props) => {
 
         //Country
         if(country === "") {
-            alert("País no puede estar vacio");
+            swal({text: "País no puede estar vacío!"});
             return false
         }
         //city
         if(city === "") {
-            alert("Ciudad no puede estar vacio");
+            swal({text: "Ciudad no puede estar vacío!"});
             return false
         }
         //Brand
         if(brand === "") {
-            alert("Marca no puede estar vacio");
+            swal({text: "Marca no puede estar vacío!"});
             return false
         }
         let splitedBrand = brand.split("")
@@ -111,12 +113,12 @@ const Creation = (props) => {
     
         //Model
         if(model === "") {
-            alert("Modelo no puede estar vacio");
+            swal({text: "Modelo no puede estar vacío!"});
             return false
         }
         //Color
         if(color === "") {
-            alert("Color no puede estar vacio");
+            swal({text: "Color no puede estar vacío!"});
             return false
         }
         let splitedColor = color.split("")
@@ -124,17 +126,17 @@ const Creation = (props) => {
         const finalColor = letterColor + (splitedColor.join(""))
         //Category
         if(category === "") {
-            alert("Tipo de vehiculo no puede estar vacio");
+            swal({text: "Asigna una categoria al vehiculo!"});
             return false
         }
         //Image
         if(ImageCloud === "") {
-            alert("Foto no puede estar vacio");
+            swal({text: "Ponle una foto al vehiculo!"});
             return false
         }
         //Price
         if(parseInt(price) <= 0) {
-            alert("Precio no puede ser menor a 1");
+            swal({text: "Precio no puede ser menor a 1!"});
             return false
         }
 
@@ -158,11 +160,11 @@ const Creation = (props) => {
         axios.post("http://localhost:3001/vehicles", vehicleCreation)
         .then(function (response) {
             console.log(response.data); //console log de lo que recibe la api
-            alert("El vehiclulo fue creado")
+            swal ( "Bien!" ,  "El vehiculo fue creado!" ,  "success" )
             setIsPending(false)
         })
         .catch(function (error) {
-            alert("Error: hay que investigar" + error)
+            swal ( error ,  "El vehiculo no se pudo crear!" ,  "error" )
             setIsPending(false)
         });
     }
@@ -170,11 +172,21 @@ const Creation = (props) => {
     return (
         <div className="Creation_Main">
             <div className="Creation_Second">
+                <div>
+                <img src={Logo} style={{height:"100px"}}></img>
                 <h1 className="Creation_Title">Creacion del vehiculo:</h1>
+                </div>
                 <form onSubmit={submitHandler}  className="Creation_Form">
                     <div className="Creation_Form_Sections">
                         <div>
-                            <div>
+                            <div className="Creation_Image_Box">
+                                <p>Foto:</p>
+                                <img src={ImageCloud ? ImageCloud : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} className="Creation_Image"></img>
+                                <input type="file" onChange={imageCloudChangeHandler} className="Creation_Image_input"></input>
+                            </div>
+                        </div>
+                        <div className="Creation_Form_Column">
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="countries">País: </label>
                                 <select name="countries" onChange={countryChangeHandler} value={country}  className="Creation_input">
                                     <option key="empty" value=""></option>
@@ -183,7 +195,7 @@ const Creation = (props) => {
                                     })}
                                 </select>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="cities">Ciudad: </label>
                                 <select name="cities" onChange={cityChangeHandler} value={city}  className="Creation_input">
                                     <option key="empty" value=""></option>
@@ -192,42 +204,40 @@ const Creation = (props) => {
                                     })}
                                 </select>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="brand">Marca:</label>
                                 <input type="text" key="brand" onChange={brandChangeHandler} value={brand}  className="Creation_input"></input>
                                 {brandValidation}
                             </div>
-                        </div>
-                        <div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="model">Modelo:</label>
                                 <input type="text" key="model" onChange={modelChangeHandler} value={model}  className="Creation_input"></input>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="year">Año:</label>
                                 <input type="number" key="year" onChange={yearChangeHandler} value={year}  className="Creation_input"></input>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="color">Color:</label>
                                 <input type="text" key="color" onChange={colorChangeHandler} value={color}  className="Creation_input"></input>
                             </div>
                         </div>
-                        <div>
-                            <div>
+                        <div className="Creation_Form_Column">
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="transmition">Transmision: </label>
                                 <select name="transmition" onChange={transmitionChangeHandler} value={transmition}  className="Creation_input">
                                     <option value="manual">Manual</option>
                                     <option value="automatic">Automatico</option>
                                 </select>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="air">Aire acondicionado: </label>
                                 <select name="air" onChange={airChangeHandler} value={air}  className="Creation_input">
                                     <option value="true">Equipado</option>
                                     <option value="false">No equipado</option>
                                 </select>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="seats">Asientos:</label>
                                 <select name="seats" onChange={seatsChangeHandler} value={seats}  className="Creation_input">
                                     <option value="2">2</option>
@@ -238,9 +248,7 @@ const Creation = (props) => {
                                     <option value="8">+7</option>
                                 </select>
                             </div>
-                        </div>
-                        <div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="category">Tipo de vehiculo:</label>
                                 <select name="category" onChange={categoryChangeHandler} value={category}  className="Creation_input">
                                     <option value=""></option>
@@ -257,17 +265,12 @@ const Creation = (props) => {
                                     <option value="Minivan">Minivan</option>
                                 </select>
                             </div>
-                            <div>
+                            <div className="Creation_Form_Column">
                                 <label htmlFor="price" >Precio:</label>
                                 <input type="text" key="price" onChange={priceChangeHandler} value={price} className="Creation_input"></input>
                                 {priceValidation}
                             </div>
                         </div>
-                    </div>
-                    <div className="Creation_Image_Box">
-                        <p>Foto:</p>
-                        <img src={ImageCloud ? ImageCloud : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"} className="Creation_Image"></img>
-                        <input type="file" onChange={imageCloudChangeHandler} className="Creation_Image_input"></input>
                     </div>
 
                     { isPending ? <button disable="true" className="Creation_button">Creating ...</button> : <button className="Creation_button">Create</button>}
