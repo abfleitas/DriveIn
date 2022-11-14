@@ -7,7 +7,10 @@ import noFav from "../../images/fav1.png";
 
 export default function Card({ id, photo, brand, model, price }) {
   //Cambios abrir
-  const [favorito, setFavorito] = useState(false);
+  const fav = useSelector(state => state.favorites);
+  console.log(fav);
+  const [favorito, setFavorito] = useState(fav ? fav.some(item => item.id === id) : false);
+  console.log("include ",fav.some(item => item.id));
   //const favorites = useState([]);
   const dispatch = useDispatch();
 
