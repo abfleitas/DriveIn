@@ -37,9 +37,8 @@ export const addFavorites = (data) => {
   );
   if (duplicates.length === 0) {
     const vehicleToAdd = {
-      ...favoriteItems,
-      data,
-      //count: 1,
+      ...data,
+      //data,
     };
     favoriteItems.push(vehicleToAdd);
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
