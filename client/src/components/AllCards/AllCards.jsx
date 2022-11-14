@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { getVehicles } from "../../redux/actions/actions";
 import Card from "../Card/Card";
+import { Link } from "react-router-dom";
 
 export default function AllCards() {
   const vehicles = useSelector((state) => state.vehiclesCopy);
@@ -57,6 +58,11 @@ export default function AllCards() {
 
   return (
     <>
+      <Link to="/creation">
+        <button className=" align-right flex-row bg-[#009A88] w-max self-center px-4 py-1 rounded-lg hover:bg-[#F97D67] text-white mt-1">
+          Agregar Vehículo
+        </button>
+      </Link>
       <div className=" flex flex-wrap gap-x-16 gap-y-24 mt-10 mb-5 justify-center">
         {currentVehicles.length ? (
           currentVehicles.map((v, index) => (
