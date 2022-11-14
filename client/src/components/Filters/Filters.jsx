@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterPrice, filter } from "../../redux/actions/actions";
+import { filterPrice, filter, getVehicles } from "../../redux/actions/actions";
 
 export default function Filters({ setChange }) {
   const vehicles = useSelector((state) => state.allVehicles);
@@ -34,6 +34,11 @@ export default function Filters({ setChange }) {
   });
 
   const dispatch = useDispatch();
+  useEffect(() => {
+
+    dispatch(getVehicles());
+
+  }, [dispatch]);
 
   const handleFilters = (e) => {
     if (e.target.checked)
@@ -79,7 +84,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="Sedan">Sedan {data.Sedan} </label>
+            <label htmlFor="Sedan">Sedan {`(${data.Sedan})`} </label>
 
             <input
               type="checkbox"
@@ -89,7 +94,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="SUV">Suv {data.SUV} </label>
+            <label htmlFor="SUV">Suv {`(${data.SUV})`} </label>
 
             <input
               type="checkbox"
@@ -99,7 +104,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="Pickup">Pickup {data.Pickup} </label>
+            <label htmlFor="Pickup">Pickup {`(${ data.Pickup})`} </label>
 
             <input
               type="checkbox"
@@ -109,7 +114,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="Hatchback">Hatchback {data.Hatchback} </label>
+            <label htmlFor="Hatchback">Hatchback {`(${ data.Hatchback})`} </label>
 
             <input
               type="checkbox"
@@ -119,7 +124,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="CUV">Cuv {data.CUV}</label>
+            <label htmlFor="CUV">Cuv {`(${ data.CUV})`}</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
@@ -134,7 +139,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="Manual">Manual {data.Manual} </label>
+            <label htmlFor="Manual">Manual {`(${data.Manual})`} </label>
 
             <input
               type="checkbox"
@@ -144,7 +149,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="Automatico">Automático {data.Automatico}</label>
+            <label htmlFor="Automatico">Automático {`(${data.Automatico})`}</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67]">
@@ -159,7 +164,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="AC">Aire Acondicionado {data.air} </label>
+            <label htmlFor="AC">Aire Acondicionado {`(${data.air})`} </label>
 
             <input
               type="checkbox"
@@ -169,7 +174,7 @@ export default function Filters({ setChange }) {
               onChange={handleFilters}
               className="border-gray-300 rounded h-5 w-5 mx-2"
             />
-            <label htmlFor="seats">+4 Asientos {data.seats}</label>
+            <label htmlFor="seats">+4 Asientos {`(${data.seats})`}</label>
           </div>
         </div>
         <div className="p-5 border-[#F97D67]-300 bg-[#F97D67] rounded-br-2xl">
@@ -191,8 +196,8 @@ export default function Filters({ setChange }) {
                 </span>
               ))}
           </div>
-          <p>{data.toyota}</p>
-          <p>{data.mitsubishi}</p>
+          {/* <p>{data.toyota}</p>
+          <p>{data.mitsubishi}</p> */}
         </div>
       </div>
     </div>
