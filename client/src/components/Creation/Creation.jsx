@@ -226,8 +226,8 @@ const Creation = (props) => {
                             <div className="Creation_Form_Column">
                                 <label htmlFor="transmition">Transmision: </label>
                                 <select name="transmition" onChange={transmitionChangeHandler} value={transmition}  className="Creation_input">
-                                    <option value="manual">Manual</option>
-                                    <option value="automatic">Automatico</option>
+                                    <option value="Manual">Manual</option>
+                                    <option value="Automatico">Automatico</option>
                                 </select>
                             </div>
                             <div className="Creation_Form_Column">
