@@ -157,7 +157,7 @@ const Creation = (props) => {
             cityId: cityIdValue
         }
         console.log(vehicleCreation);
-        axios.post("http://localhost:3001/vehicles", vehicleCreation)
+        axios.post("/vehicles", vehicleCreation)
         .then(function (response) {
             console.log(response.data); //console log de lo que recibe la api
             swal ( "Bien!" ,  "El vehiculo fue creado!" ,  "success" )

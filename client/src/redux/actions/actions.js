@@ -69,7 +69,7 @@ export const removeFavorites = (id) => {
 
 export function setVehicleDetailsState(id) {
   return function (dispatch) {
-    axios.get(`http://localhost:3001/vehicles/${id}`).then((response) => {
+    axios.get(`/vehicles/${id}`).then((response) => {
       return dispatch({
         type: "GET_DETAILS",
         payload: response.data,
@@ -80,7 +80,7 @@ export function setVehicleDetailsState(id) {
 
 export const getCountries = () => {
   return function (dispatch) {
-    axios.get("http://localhost:3001/country").then(
+    axios.get("/country").then(
       (response) => {
         dispatch({ type: GET_COUNTRIES, payload: response.data });
       },
@@ -93,7 +93,7 @@ export const getCountries = () => {
 
 export const getCities = (country) => {
   return function (dispatch) {
-    axios.get(`http://localhost:3001/cities?country=${country}`).then(
+    axios.get(`/cities?country=${country}`).then(
       (response) => {
         dispatch({ type: GET_CITIES, payload: response.data });
       },
@@ -106,7 +106,7 @@ export const getCities = (country) => {
 
 export const getCitiesFeatured = () => {
   return function (dispatch) {
-    axios.get("http://localhost:3001/cities/destacadas").then(
+    axios.get("/cities/destacadas").then(
       (response) => {
         dispatch({ type: GET_CITIES_FEATURED, payload: response.data });
       },
@@ -119,7 +119,7 @@ export const getCitiesFeatured = () => {
 
 export const getCity = (id) => {
   return function (dispatch) {
-    axios.get(`http://localhost:3001/cities/${id}`).then(
+    axios.get(`/cities/${id}`).then(
       (response) => {
         dispatch({ type: GET_CITY, payload: response.data });
       },
@@ -132,7 +132,7 @@ export const getCity = (id) => {
 
 export const getVehicles = () => {
   return function (dispatch) {
-    axios.get("http://localhost:3001/vehicles").then(
+    axios.get("/vehicles").then(
       (response) => {
         dispatch({ type: GET_VEHICLES, payload: response.data });
       },
@@ -145,7 +145,7 @@ export const getVehicles = () => {
 
 export const getComments = () => {
   return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/comments");
+    const response = await axios.get("/comments");
     dispatch({ type: GET_COMMENTS, payload: response.data });
   };
 };
