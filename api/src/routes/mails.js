@@ -5,8 +5,9 @@ const router = Router();
 
 router.post("/", async (req, res) => {
     try {
-      const { content } = req.body;
-      await mails(content);
+      const { content, to, subject} = req.body;
+     
+      await mails(content, to, subject);
       
       return res.status(200).json(content);
     } catch (error) {

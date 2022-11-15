@@ -6,16 +6,16 @@ export const GET_DETAILS = "GET_DETAILS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_CITIES = "GET_CITIES";
 export const GET_CITIES_FEATURED = "GET_CITIES_FEATURED";
-
 export const GET_CITY = "GET_CITY";
 export const GET_VEHICLES = "GET_VEHICLES";
 export const GET_COMMENTS = "GET_COMMENTS";
-
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
+
+export const POST_MAIL = "POST_MAIL";
 
 export const filter = (payload) => {
   return {
-    type: "FILTER",
+    type: FILTER,
     payload,
   };
 };
@@ -26,6 +26,7 @@ export const filterPrice = (payload) => {
     payload,
   };
 };
+
 //Action agregar auto a favoritos.
 export const addFavorites = (data) => {
   //const favoriteItems = localStorage.setItem("favoriteItems", JSON.stringify(data));
@@ -44,18 +45,27 @@ export const addFavorites = (data) => {
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   }
   return {
-    type: "ADD_FAVORITES",
+    type: ADD_FAVORITES,
     payload: data,
   };
 };
+
 export const removeFavorites = (id) => {
-  return { type: "REMOVE_FAVORITES", payload: id };
+  const deleteFromFavorites = localStorage.getItem("favoriteItems")
+    ? JSON.parse(localStorage.getItem("favoriteItems"))
+    : [];
+  
+    const updateFavorites = deleteFromFavorites.filter(items => items.id !== id)
+
+    localStorage.setItem("favoriteItems", JSON.stringify(updateFavorites))
+
+  return { type: REMOVE_FAVORITES, payload: id };
 };
 
 // export function setVehicleDetailsState(id) {
 //   return async function (dispatch) {
 //     try {
-//       let detailsJson = await axios.get(`http://localhost:3001/vehicles/${id}`);
+//       let detailsJson = await axios.get(`/vehicles/${id}`);
 //       console.log("SOY AUTOS", detailsJson.data);
 //       return dispatch({
 //         type: "GET_DETAILS",
@@ -69,12 +79,14 @@ export const removeFavorites = (id) => {
 
 export function setVehicleDetailsState(id) {
   return function (dispatch) {
-    axios.get(`/vehicles/${id}`).then((response) => {
-      return dispatch({
-        type: "GET_DETAILS",
-        payload: response.data,
-      });
-    });
+    axios.get(`/vehicles/${id}`).then(
+      (response) => {
+        return dispatch({ type: GET_DETAILS, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
   };
 }
 
@@ -144,8 +156,38 @@ export const getVehicles = () => {
 };
 
 export const getComments = () => {
-  return async function (dispatch) {
-    const response = await axios.get("/comments");
-    dispatch({ type: GET_COMMENTS, payload: response.data });
+  return function (dispatch) {
+    axios.get("/comments").then(
+      (response) => {
+        dispatch({ type: GET_COMMENTS, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
   };
+};
+
+export const postPayment = (payload) => {
+  return function () {
+    axios.post("/payment", payload).then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+
+export const postMails = (content, to, subject) => {
+  return  async function (dispatch) {
+    try {
+      let respuesta = await axios.post("http://localhost:3001/mails", content, to, subject)
+      dispatch({type: POST_MAIL, payload: respuesta})
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };

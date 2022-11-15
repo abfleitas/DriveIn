@@ -1,7 +1,6 @@
 import {
   FILTER,
   FILTER_PRICE,
-  ADD_FAVORITES,
   GET_DETAILS,
   GET_COUNTRIES,
   GET_CITIES,
@@ -9,11 +8,12 @@ import {
   GET_CITY,
   GET_VEHICLES,
   GET_COMMENTS,
+  ADD_FAVORITES,
   REMOVE_FAVORITES,
+  POST_MAIL
 } from "../actions/actions";
 
 const initialState = {
-
   vehiclesCopy: [],
   vehiclesByCity: [],
   allVehicles: [],
@@ -35,7 +35,6 @@ const initialState = {
 
   city: [],
   comments: [],
-
 };
 
 //Inicio localStorage
@@ -107,6 +106,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
+      case POST_MAIL:
+        return {
+          ...state,
+        };
     case GET_DETAILS:
       return {
         ...state,
