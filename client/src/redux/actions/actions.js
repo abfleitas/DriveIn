@@ -63,7 +63,7 @@ export const removeFavorites = (id) => {
 // export function setVehicleDetailsState(id) {
 //   return async function (dispatch) {
 //     try {
-//       let detailsJson = await axios.get(`http://localhost:3001/vehicles/${id}`);
+//       let detailsJson = await axios.get(`/vehicles/${id}`);
 //       console.log("SOY AUTOS", detailsJson.data);
 //       return dispatch({
 //         type: "GET_DETAILS",
