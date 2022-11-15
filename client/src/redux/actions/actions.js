@@ -11,6 +11,8 @@ export const GET_VEHICLES = "GET_VEHICLES";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
+export const POST_MAIL = "POST_MAIL";
+
 export const filter = (payload) => {
   return {
     type: FILTER,
@@ -177,4 +179,15 @@ export const postPayment = (payload) => {
       }
     );
   };
+};
+
+export const postMails = (content, to, subject) => {
+  return  async function (dispatch) {
+    try {
+      let respuesta = await axios.post("http://localhost:3001/mails", content, to, subject)
+      dispatch({type: POST_MAIL, payload: respuesta})
+    } catch (error) {
+      console.log(error);
+    }
+  }
 };
