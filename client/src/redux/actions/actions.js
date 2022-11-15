@@ -158,7 +158,7 @@ export const getComments = () => {
 
 export const postPayment = (payload) => {
   return function () {
-    axios.post("http://localhost:3001/payment", payload).then(
+    axios.post("/payment", payload).then(
       (response) => {
         return response.data;
       },
