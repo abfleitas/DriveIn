@@ -24,6 +24,7 @@ export const filterPrice = (payload) => {
     payload,
   };
 };
+
 //Action agregar auto a favoritos.
 export const addFavorites = (data) => {
   //const favoriteItems = localStorage.setItem("favoriteItems", JSON.stringify(data));
@@ -46,7 +47,16 @@ export const addFavorites = (data) => {
     payload: data,
   };
 };
+
 export const removeFavorites = (id) => {
+  const deleteFromFavorites = localStorage.getItem("favoriteItems")
+    ? JSON.parse(localStorage.getItem("favoriteItems"))
+    : [];
+  
+    const updateFavorites = deleteFromFavorites.filter(items => items.id !== id)
+
+    localStorage.setItem("favoriteItems", JSON.stringify(updateFavorites))
+
   return { type: REMOVE_FAVORITES, payload: id };
 };
 
