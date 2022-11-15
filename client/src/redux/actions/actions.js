@@ -6,16 +6,14 @@ export const GET_DETAILS = "GET_DETAILS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_CITIES = "GET_CITIES";
 export const GET_CITIES_FEATURED = "GET_CITIES_FEATURED";
-
 export const GET_CITY = "GET_CITY";
 export const GET_VEHICLES = "GET_VEHICLES";
 export const GET_COMMENTS = "GET_COMMENTS";
-
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 
 export const filter = (payload) => {
   return {
-    type: "FILTER",
+    type: FILTER,
     payload,
   };
 };
@@ -44,12 +42,12 @@ export const addFavorites = (data) => {
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   }
   return {
-    type: "ADD_FAVORITES",
+    type: ADD_FAVORITES,
     payload: data,
   };
 };
 export const removeFavorites = (id) => {
-  return { type: "REMOVE_FAVORITES", payload: id };
+  return { type: REMOVE_FAVORITES, payload: id };
 };
 
 // export function setVehicleDetailsState(id) {
@@ -69,12 +67,14 @@ export const removeFavorites = (id) => {
 
 export function setVehicleDetailsState(id) {
   return function (dispatch) {
-    axios.get(`http://localhost:3001/vehicles/${id}`).then((response) => {
-      return dispatch({
-        type: "GET_DETAILS",
-        payload: response.data,
-      });
-    });
+    axios.get(`http://localhost:3001/vehicles/${id}`).then(
+      (response) => {
+        return dispatch({ type: GET_DETAILS, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
   };
 }
 
@@ -144,8 +144,27 @@ export const getVehicles = () => {
 };
 
 export const getComments = () => {
-  return async function (dispatch) {
-    const response = await axios.get("http://localhost:3001/comments");
-    dispatch({ type: GET_COMMENTS, payload: response.data });
+  return function (dispatch) {
+    axios.get("http://localhost:3001/comments").then(
+      (response) => {
+        dispatch({ type: GET_COMMENTS, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+
+export const postPayment = (payload) => {
+  return function () {
+    axios.post("http://localhost:3001/payment", payload).then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        return error;
+      }
+    );
   };
 };
