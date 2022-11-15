@@ -10,6 +10,7 @@ import {
   GET_VEHICLES,
   GET_COMMENTS,
   REMOVE_FAVORITES,
+  POST_MAIL
 } from "../actions/actions";
 
 const initialState = {
@@ -107,6 +108,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
+      case POST_MAIL:
+        return {
+          ...state,
+        };
     case GET_DETAILS:
       return {
         ...state,
