@@ -1,22 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import { loadStripe } from "@stripe/stripe-js";
+// import { Elements } from "@stripe/react-stripe-js";
 import { setVehicleDetailsState } from "../../redux/actions/actions";
 import Aire from "../../images/aireVerde.png";
 import Asientos from "../../images/asientosVerde.png";
 import Dinero from "../../images/dineroVerde.png";
 import Back from "../../images/backblanco.png";
-
 import Transmision from "../../images/transmisionVerde.png";
+import PaymentForm from "../PaymentForm/PaymentForm";
+// import CheckOutForm from "../CheckoutForm/CheckOutForm";
+
+// const stripePromise = loadStripe(
+//   "pk_test_51LzLEhFe0h06NHhlterICFvudMvQM3gMYk3ovf0tFaq99Duy5IWvFsCBSUP0AJ2ap24m4Fkskh4oW2cSccosfuBG00g1BUYu08"
+// );
 
 export default function Details() {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const vehicleDetailsState = useSelector((state) => state.details);
 
-  console.log(vehicleDetailsState);
-  // const id = props.match.params.id;
   const { id } = useParams();
 
   useEffect(() => {
@@ -51,11 +56,19 @@ export default function Details() {
                   specimen book.
                 </p>
 
-                <button className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative">
+                <button
+                  onClick={() => setOpen(true)}
+                  className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative"
+                >
                   ALQUILAR
                 </button>
               </div>
             </div>
+            {!open ? null : (
+              <div>
+                <PaymentForm />
+              </div>
+            )}
           </div>
           <div className="mt-8 sm:grid grid-cols-3 sm:space-x-4">
             {/* <div className="bg-slate-600 p-6 rounded-md mb-4"> */}
@@ -125,8 +138,8 @@ export default function Details() {
             </div>
             <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4">
               <div>
-                <span className="text-md text-slate-400">Precio</span>
-                <h1 className="text-3xl font-bold text-[#F97D67]">US$400</h1>
+                <span className="text-md text-slate-400">Precio por dia</span>
+                <h1 className="text-3xl font-bold text-[#F97D67]">{`US$ ${vehicleDetailsState.initialPrice}`}</h1>
               </div>
 
               <div>

@@ -10,7 +10,8 @@ import {
   GET_COMMENTS,
   ADD_FAVORITES,
   REMOVE_FAVORITES,
-  POST_MAIL
+  POST_MAIL,
+  GET_PAYMENT,
 } from "../actions/actions";
 
 const initialState = {
@@ -35,6 +36,8 @@ const initialState = {
 
   city: [],
   comments: [],
+
+  payment: [],
 };
 
 //Inicio localStorage
@@ -106,10 +109,10 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: [...state.favorites, action.payload],
       };
-      case POST_MAIL:
-        return {
-          ...state,
-        };
+    case POST_MAIL:
+      return {
+        ...state,
+      };
     case GET_DETAILS:
       return {
         ...state,
@@ -154,7 +157,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         favorites: state.favorites.filter((el) => el.id !== action.payload),
       };
-
+    case GET_PAYMENT:
+      return {
+        ...state,
+        payment: action.payload,
+      };
     default:
       return { ...state };
   }
