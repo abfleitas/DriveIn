@@ -13,6 +13,7 @@ import Vehicles from "./components/Vehicles/Vehicles";
 
 import Ciudad from "./components/Ciudad/Ciudad";
 import Creation from "./components/Creation/Creation";
+import Favorites from "./components/Favorites/Favorites";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/creation" element={<Creation />} />
 
             <Route path="/admin/*" element={<Administrador />} />
+            <Route path="/favorite" element={<Favorites />} />
         
 
 
