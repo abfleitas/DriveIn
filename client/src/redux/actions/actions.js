@@ -170,6 +170,19 @@ export const getComments = () => {
   };
 };
 
+export const postComment = (payload) => {
+  return function () {
+    axios.post("/comments", payload).then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+
 export const postMails = (content, to, subject) => {
   return async function (dispatch) {
     try {

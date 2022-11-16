@@ -1,4 +1,4 @@
-import React from "React";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFavorites } from "../../redux/actions/actions";
 import { useNavigate, Link } from "react-router-dom";
@@ -20,7 +20,7 @@ export default function Favorites() {
           {favorites &&
             favorites.map((favoriteItem) => {
               return (
-                <div>
+                <div key={favoriteItem.id}>
                   <div>
                     <Link to={`/details/${favoriteItem.id}`}>
                       <img src={favoriteItem.photo} alt="Auto" />
@@ -38,7 +38,7 @@ export default function Favorites() {
                       <p>{favoriteItem.price}</p>
                     </div>
                   </div>
-                  <button onClick={() => handleClickRemove(favorites.id)}>
+                  <button onClick={() => handleClickRemove(favoriteItem.id)}>
                     Quitar Favorito
                   </button>
                   <button onClick={(event) => handleClickPurchase(event)}>
