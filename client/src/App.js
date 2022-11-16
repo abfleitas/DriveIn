@@ -5,6 +5,7 @@ import Inicio from "./components/Inicio/Inicio";
 import Details from "./components/Details/Details";
 import { Register } from "./components/Register/Register";
 import { Login } from "./components/Login/login";
+import Vehicles from "./components/Vehicles/Vehicles";
 
 import Ciudad from "./components/Ciudad/Ciudad";
 import Creation from "./components/Creation/Creation";
@@ -25,6 +26,8 @@ function App() {
           <Route path="/details/:id" element={<Details />} />
 
           <Route path="/creation" element={<Creation />} />
+
+          <Route path="/vehicles-list-test" element={<Vehicles />} /> 
         </Routes>
       </div>
     </BrowserRouter>
