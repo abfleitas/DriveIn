@@ -10,8 +10,8 @@ export const GET_CITY = "GET_CITY";
 export const GET_VEHICLES = "GET_VEHICLES";
 export const GET_COMMENTS = "GET_COMMENTS";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
-
 export const POST_MAIL = "POST_MAIL";
+export const GET_PAYMENT = "GET_PAYMENT";
 
 export const filter = (payload) => {
   return {
@@ -54,10 +54,12 @@ export const removeFavorites = (id) => {
   const deleteFromFavorites = localStorage.getItem("favoriteItems")
     ? JSON.parse(localStorage.getItem("favoriteItems"))
     : [];
-  
-    const updateFavorites = deleteFromFavorites.filter(items => items.id !== id)
 
-    localStorage.setItem("favoriteItems", JSON.stringify(updateFavorites))
+  const updateFavorites = deleteFromFavorites.filter(
+    (items) => items.id !== id
+  );
+
+  localStorage.setItem("favoriteItems", JSON.stringify(updateFavorites));
 
   return { type: REMOVE_FAVORITES, payload: id };
 };
@@ -168,26 +170,13 @@ export const getComments = () => {
   };
 };
 
-export const postPayment = (payload) => {
-  return function () {
-    axios.post("/payment", payload).then(
-      (response) => {
-        return response.data;
-      },
-      (error) => {
-        return error;
-      }
-    );
-  };
-};
-
 export const postMails = (content, to, subject) => {
-  return  async function (dispatch) {
+  return async function (dispatch) {
     try {
-      let respuesta = await axios.post("http://localhost:3001/mails", content, to, subject)
-      dispatch({type: POST_MAIL, payload: respuesta})
+      let respuesta = await axios.post("/mails", content, to, subject);
+      dispatch({ type: POST_MAIL, payload: respuesta });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 };
