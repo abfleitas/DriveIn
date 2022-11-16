@@ -5,9 +5,10 @@ import Inicio from "./components/Inicio/Inicio";
 import Details from "./components/Details/Details";
 import { Register } from "./components/Register/Register";
 import { Login } from "./components/Login/login";
-
+import Administrador from "./components/Administrador/Administrador"
 import Ciudad from "./components/Ciudad/Ciudad";
 import Creation from "./components/Creation/Creation";
+
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
           <Route path="/details/:id" element={<Details />} />
 
           <Route path="/creation" element={<Creation />} />
+          
+  
+            <Route path="/admin/*" element={<Administrador />} />
+        
+
         </Routes>
       </div>
     </BrowserRouter>
