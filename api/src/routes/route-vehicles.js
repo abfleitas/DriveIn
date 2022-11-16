@@ -36,4 +36,19 @@ vehicles.post("/", async (req, res) => {
   }
 });
 
+vehicles.post("/:id", async (req, res) => {
+  try {
+    const state = req.body.availability
+    const id = req.params.id
+    const vehicle = await Vehicles.findByPk(id);
+    vehicle.availability = state;
+    await vehicle.update({id})
+    await vehicle.save()
+    const VehicleFinal = await getVehicleDetailsFn(id);
+    res.status(201).send(VehicleFinal);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
 module.exports = vehicles;

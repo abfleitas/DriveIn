@@ -1,0 +1,62 @@
+.Vehicles_Main {
+    background-color: rgb(184, 184, 184);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.Vehicles_Second {
+    background-color: rgb(216, 216, 216);
+    display: flex;
+    flex-direction:column;
+    border-radius: 30px;
+    font-style: italic;
+    font-weight: 600;
+
+}
+
+
+.Vehicles_Unit_Box {
+    height: 500px;
+    overflow:auto;
+    margin-bottom: 20px;
+    border-radius: 20px;
+}
+
+.Vehicles_Unit {
+    display: flex;
+    align-items: row;
+    align-items: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 5px;
+
+}
+
+.Vehicles_photo {
+    height: 80px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.Vehicles_Text1 {
+    font-size: 20px;
+}
+
+.Vehicles_Text2 {
+    width: 130px;
+}
+
+.Vehicles_Button_Box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.Vehicles_Button {
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100px;
+}
