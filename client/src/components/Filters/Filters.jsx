@@ -88,7 +88,7 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2 "
               />
-              <label htmlFor="Sedan" className="">Todos</label>
+              <label htmlFor="all" className="">Todos</label>
             </div>
             <div>
               <input
@@ -157,12 +157,12 @@ export default function Filters({ setChange }) {
               <input
                 type="radio"
                 name="transmition"
-                id="all"
+                id="all2"
                 value="all"
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="Manual">Todos</label>
+              <label htmlFor="all2">Todos</label>
             </div>
             <div>
               <input
