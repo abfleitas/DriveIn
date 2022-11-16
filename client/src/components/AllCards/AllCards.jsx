@@ -68,7 +68,7 @@ export default function AllCards() {
           currentVehicles.map((v, index) => (
             <div>
               <Card
-                key={index}
+                key={index + v.id}
                 id={v.id}
                 brand={v.brand}
                 model={v.model}
