@@ -168,6 +168,19 @@ export const getComments = () => {
   };
 };
 
+export const postComment = (payload) => {
+  return function () {
+    axios.post("/comments", payload).then(
+      (response) => {
+        return response.data;
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+
 export const postPayment = (payload) => {
   return function () {
     axios.post("/payment", payload).then(
