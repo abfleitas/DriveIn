@@ -9,6 +9,7 @@ import { Login } from "./components/Login/login";
 import Administrador from "./components/Administrador/Administrador"
 
 import Vehicles from "./components/Vehicles/Vehicles";
+import Users from "./components/Users/Users";
 
 
 import Ciudad from "./components/Ciudad/Ciudad";
@@ -40,6 +41,7 @@ function App() {
 
 
           <Route path="/vehicles-list-test" element={<Vehicles />} /> 
+          <Route path="/users-list-test" element={<Users />} /> 
 
         </Routes>
       </div>
