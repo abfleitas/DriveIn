@@ -29,7 +29,7 @@ const CheckOutForm = () => {
   const elements = useElements();
 
   const handleChange = async (e) => {
-    e.preventDefault;
+    e.preventDefault();
     console.log(e.target.value);
     setDate({
       ...date,
@@ -45,9 +45,9 @@ const CheckOutForm = () => {
     });
 
     const handlePrice = () => {
-      var fechaInicio = new Date(date.Desde).getTime();
-      var fechaFin = new Date(date.Hasta).getTime();
-      var diff = fechaFin - fechaInicio;
+      const fechaInicio = new Date(date.Desde).getTime();
+      const fechaFin = new Date(date.Hasta).getTime();
+      const diff = fechaFin - fechaInicio;
       let days = diff / (1000 * 60 * 60 * 24);
       if (fechaFin < fechaInicio) {
         swal({
@@ -65,7 +65,9 @@ const CheckOutForm = () => {
             model: vehiclesDetail.model,
             category: vehiclesDetail.category,
             vehicleId: vehiclesDetail.id,
-            userEmail: user.email,
+            user: user,
+            dateInit: fechaInicio,
+            dateFinish: fechaFin
           };
           console.log(payload);
           dispatch(getPayment(payload));

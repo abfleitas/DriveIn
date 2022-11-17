@@ -1,4 +1,4 @@
-const {Users, Vehicles} = require('../db.js')
+const {Users, Vehicles, Rent} = require('../db.js')
 
 async function postUser(req, res) {
     const { name, lastName, phone, whatsapp, email, password} = req.body;
@@ -47,7 +47,8 @@ async function getUsers(req, res) {
 
       let users = await Users.findAll({
         include: {
-          model: Vehicles
+          model: Vehicles,
+          model: Rent
         }
       });
       return res.status(200).json(users)
