@@ -9,6 +9,7 @@ export const User = ({img, name}) => {
     const { isAuthenticated, logout, isLoading } = useAuth0();
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
 
     useEffect(()=>{
         dispatch(refreshAuthUser())
@@ -23,13 +24,13 @@ export const User = ({img, name}) => {
           navigate("/login");
         }
     }
-
+    console.log(userLogin);
 
     return (
-        <nav className="w-[200px] h-[60px] bg-slate-900 rounded-xl">
-            <div className="w-full flex flex-row justify-around ">
-                <figure className="w-[50px] h-[50px] ml-4 mt-[4px]">
-                    <img src={img} alt="img-user" className="rounded-2xl"/>
+        <nav className="w-[200px] h-[50px] bg-slate-900 rounded-xl">
+            <div className="w-full flex flex-row justify-around">
+                <figure className="w-[40px] h-[40px] ml-4 mt-[4px] m-auto">
+                    <img src={img} alt="img-user" className=" w-full h-full rounded-full"/>
                 </figure>
                 <span className="text-white m-auto">{name}</span>
             </div>
