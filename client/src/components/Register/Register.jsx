@@ -1,9 +1,9 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import './register.css';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import iconG from "../../images/google.png";
-import { useDispatch,useSelector} from "react-redux";
-// import { postUser } from 
+import { useDispatch, useSelector} from "react-redux";
+import { registerUser, statusLogin } from "../../redux/actions/actions";
 
 function validate(input){
     let errors={};
@@ -54,7 +54,8 @@ function validate(input){
 
 export const Register=() => {
     const dispatch= useDispatch();
-    // const history = useHistory();
+    const navigate = useNavigate();
+    const stateLogin = useSelector(state => state.user)
     const [errors, setErrors] =useState({});
     
     const [input,setInput]=useState({
@@ -63,12 +64,14 @@ export const Register=() => {
         email:"",
         password:"",
         password2:"",
-        phone:"",
-        celular:"",
-        
-
+        phone: "",
+        whatsapp: "",
     });
     console.log(input);
+
+    useEffect(()=>{
+        dispatch(statusLogin())
+    }, [stateLogin])
     
     function handleChange(e){
         setInput({
@@ -83,114 +86,122 @@ export const Register=() => {
         )
     }
     function handleSubmit(e){
-        e.preventDefault();
+        const post = {
+            name: input.name,
+            lastName: input.lastName,
+            email: input.email,
+            password: input.password,
+            phone: input.phone,
+            whatsapp: input.whatsapp
+        }
+        dispatch(registerUser(post))
         alert("Usuario creado con exito")
-        // history.pushState("/home")
+        navigate("/login")
     }
     
 
     return (
         <div className="h-screen bg-slate-900 flex justify-center items-center container-reg">
-            <div className="flex w-[600px] h-[600px] flex-col rounded-lg shadow-[0_35px_60px_-15px_#009A88] container-data"onSubmit={(e)=>handleSubmit(e)}>
+            <div className="flex w-[600px] h-[600px] flex-col rounded-lg shadow-[0_35px_60px_-15px_#009A88] container-data">
                 <h2>Registrarme</h2>
-                <form className="flex flex-row w-full justify-around" >
-                <div className="flex flex-col w-2/5">
-                    <div className="c-input">
-                        <div className="data">
+                <form onSubmit={handleSubmit}>
+                    <div className="flex flex-row w-full justify-around">
+                    <div className="flex flex-col w-2/5">
+                        <div className="c-input">
+                            <div className="data">
+                                <input
+                                type="text"
+                                value={input.name}
+                                name="name"                             
+                                onChange={(e)=>handleChange(e)}
+                                className="" required/>
+                                {errors.name && <p>{errors.name}</p>}
+                                <span className="">Nombre</span>
+                                
+                            </div>
+                        </div>
+                        <div className="c-input mt-2">
+                            <div className="data">
                             <input
-                             type="text"
-                             value={input.name}
-                             name="name"                             
-                             onChange={(e)=>handleChange(e)}
+                            type="text"
+                            value={input.email}
+                            name="email"                        
+                            onChange={(e)=> handleChange(e)}
                             className="" required/>
-                            {errors.name && <p>{errors.name}</p>}
-                            <span className="">Nombre</span>
-                            
+                            {errors.email && <p>{errors.email}</p>}
+                            <span className="">E-mail</span>
+                            </div>
+                        </div>
+                        <div className="c-input mt-2">
+                            <div className="data">
+                            <input 
+                            type="password"
+                            value={input.password}
+                            name= "password"                       
+                            onChange={(e)=>handleChange(e)}
+                            className="" required/>
+                            {errors. password && <p>{errors.password}</p>}
+                            <span className="">Contraseña</span>
+                            </div>
+                        </div>
+                        <div className="c-input mt-2">
+                            <div className="data">
+                            <input 
+                            type="password"
+                            value={input.password2}
+                            name="password2"                        
+                            onChange={(e)=>handleChange(e)}
+                            className="" required/>
+                            {errors.password2 && <p>{errors.password2}</p>}
+                            <span className="">Repetir Contraseña</span>
+                            </div>
                         </div>
                     </div>
-                    <div className="c-input mt-2">
-                        <div className="data">
-                        <input
-                         type="text"
-                         value={input.email}
-                         name="email"                        
-                         onChange={(e)=> handleChange(e)}
-                          className="" required/>
-                          {errors.email && <p>{errors.email}</p>}
-                        <span className="">E-mail</span>
+                    <div className="flex flex-col w-2/5">
+                        <div className="c-input">
+                            <div className="data">
+                            <input 
+                            type="text" 
+                            value={input.lastName}
+                            name="lastName"                        
+                            onChange={(e)=>handleChange(e)}
+                            className="" required/>
+                            {errors.lastName && <p>{errors.lastName}</p>}
+                            <span className="">Apellido</span>
+                            </div>
+                        </div>
+                        <div className="c-input mt-2">
+                            <div className="data">
+                            <input
+                            type="text"
+                            value={input.phone} 
+                            name="phone"                       
+                            onChange={(e)=>handleChange(e)}
+                            className="" required/>
+                            {errors.phone && <p>{errors.phone}</p>}
+                            <span className="">Telefono</span>
+                            </div>
+                        </div>
+                        <div className="c-input mt-2">
+                            <div className="data">
+                            <input 
+                            type="text"
+                            value={input.whatsapp}
+                            name="whatsapp"                      
+                            onChange={(e)=>handleChange(e)}
+                            className="" required/>
+                            {errors.whatsapp && <p>{errors.phone}</p>}
+                            <span className="">Celular</span>
+                            </div>
                         </div>
                     </div>
-                    <div className="c-input mt-2">
-                        <div className="data">
-                        <input 
-                        type="password"
-                        value={input.password}
-                        name= "password"                       
-                        onChange={(e)=>handleChange(e)}
-                         className="" required/>
-                         {errors. password && <p>{errors.password}</p>}
-                        <span className="">Contraseña</span>
-                        </div>
                     </div>
-                    <div className="c-input mt-2">
-                        <div className="data">
-                        <input 
-                        type="password"
-                        value={input.password2}
-                        name="password2"                        
-                        onChange={(e)=>handleChange(e)}
-                         className="" required/>
-                         {errors.password2 && <p>{errors.password2}</p>}
-                        <span className="">Repetir Contraseña</span>
-                        </div>
+                    <div className="flex flex-col justify-around items-center w-[300px] m-auto">
+                        <button className="w-full h-[40px] rounded-lg bg-[#009A88] text-white font-semibold"
+                        type="submit">Registrarme</button>
+                        <span className="text-white mt-6">Ya tienes una cuenta? <Link to="/login" className="text-[#F97D67]">Inicia sesión</Link></span>
                     </div>
-                </div>
-                <div className="flex flex-col w-2/5">
-                    <div className="c-input">
-                        <div className="data">
-                        <input 
-                        type="text" 
-                        value={input.lastName}
-                        name="lastName"                        
-                        onChange={(e)=>handleChange(e)}
-                        className="" required/>
-                         {errors.lastName && <p>{errors.lastName}</p>}
-                        <span className="">Apellido</span>
-                        </div>
-                    </div>
-                    <div className="c-input mt-2">
-                        <div className="data">
-                        <input
-                        type="text"
-                        value={input.phone} 
-                        name="phone"                       
-                        onChange={(e)=>handleChange(e)}
-                        className="" required/>
-                        {errors.phone && <p>{errors.phone}</p>}
-                        <span className="">Telefono</span>
-                        </div>
-                    </div>
-                    <div className="c-input mt-2">
-                        <div className="data">
-                        <input 
-                        type="text"
-                        value={input.celular}
-                        name="celular"                      
-                        onChange={(e)=>handleChange(e)}
-                        className="" required/>
-                        {errors.celular && <p>{errors.phone}</p>}
-                        <span className="">Celular</span>
-                        </div>
-                    </div>
-                </div>
                 </form>
-                <div className="flex flex-col justify-around items-center w-[300px] m-auto">
-                    <button className="w-full h-[40px] rounded-lg bg-[#009A88] text-white font-semibold"
-                    type="submit"
-                    disabled={!input.name}>Registrarme</button>
-                    <button className="relative mt-6 w-full h-[40px] rounded-lg bg-white text-black text-sm font-semibold btn-google"><img src={iconG} alt="icon-g" className="absolute mx-6 mt-[2px]"></img>Registrarme con Google</button>
-                    <span className="text-white mt-6">Ya tienes una cuenta? <Link to="/login" className="text-[#F97D67]">Inicia sesión</Link></span>
-                </div>
             </div>
         </div>
     )

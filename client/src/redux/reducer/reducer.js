@@ -12,15 +12,19 @@ import {
   REMOVE_FAVORITES,
   POST_MAIL,
   GET_PAYMENT,
+  LOGIN_USER,
+  LOGIN_USER_AUTH0,
+  STATUS_LOGIN,
+  EXIT_SESION,
+  GET_ALL_USERS,
+  REFRESH_AUTH
 } from "../actions/actions";
 
 const initialState = {
   vehiclesCopy: [],
   vehiclesByCity: [],
   allVehicles: [],
-
   favorites: [],
-  // vehicleDetailsState: [],
   filters: [
     { key: "brand", value: "all" },
     { key: "category", value: "all" },
@@ -31,13 +35,13 @@ const initialState = {
   countries: [],
   cities: [],
   citiesFeatured: [],
-
   details: [],
-
   city: [],
   comments: [],
-
   payment: [],
+  users: [],
+  statusLogin: true,
+  user: 'No logueado'
 };
 
 //Inicio localStorage
@@ -162,6 +166,40 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         payment: action.payload,
       };
+      case ADD_USER:
+        return {
+          ...state
+        }
+      case STATUS_LOGIN:
+        return {
+          ...state,
+          statusLogin: action.payload
+        }
+      case LOGIN_USER:
+        return {
+          ...state,
+          user: action.payload
+        }
+      case LOGIN_USER_AUTH0:
+        return {
+          ...state,
+          user: action.payload
+        }
+      case EXIT_SESION:
+        return {
+          ...state,
+          user: action.payload
+        }
+      case REFRESH_AUTH:
+        return {
+          ...state,
+          user: action.payload
+        }
+      case GET_ALL_USERS:
+        return {
+           ...state,
+           users: action.payload
+        }
     default:
       return { ...state };
   }

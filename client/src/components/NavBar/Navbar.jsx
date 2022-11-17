@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DriveIn from "../../images/LogoVerde.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react"
+import { useDispatch, useSelector } from "react-redux";
+import { loginUserAuth } from "../../redux/actions/actions";
+import { User } from "../User/User";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const status = useSelector(state => state.user);
+  const { user, isAuthenticated } = useAuth0();
+
+  useEffect(()=> {
+    if(isAuthenticated){
+      const nuevo = {
+        name: user.given_name,
+        email: user.email,
+        photo: user.picture
+      }
+      dispatch(loginUserAuth(nuevo))
+    }
+  }, [status, isAuthenticated])
+
+  const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
+  let location = useLocation();
+
   return (
     <div>
       <div class="bg-blue-500">
@@ -135,11 +157,20 @@ export default function Navbar() {
               </a>
             </li> */}
           </ul>
-          <div class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-300 hover:bg-gray-100 text-sm text-[#2e3a46] font-bold font-sans  rounded-xl transition duration-200 hover:bg-[#f97d67] hover:ring-[#f97d67] cursor-pointer">
-            Iniciar Sesión
-          </div>
-          <div class="hidden lg:inline-block py-2 px-6 bg-[#009A88] hover:bg-[#34d399] hover:ring-[#34d399] text-sm text-white font-bold font-sans rounded-xl transition duration-200 cursor-pointer">
-            <NavLink to="/register">Registrarse</NavLink>
+          <div>
+            { userLogin ? 
+              <User img={userLogin.photo} name={userLogin.name}/> : 
+              location.pathname !== '/login' && location.pathname !== '/register' && 
+              (
+                <div>
+                  <div class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-300 hover:bg-gray-100 text-sm text-[#2e3a46] font-bold font-sans  rounded-xl transition duration-200 hover:bg-[#f97d67] hover:ring-[#f97d67] cursor-pointer">
+                    Iniciar Sesión
+                  </div>
+                  <div class="hidden lg:inline-block py-2 px-6 bg-[#009A88] hover:bg-[#34d399] hover:ring-[#34d399] text-sm text-white font-bold font-sans rounded-xl transition duration-200 cursor-pointer">
+                    <NavLink to="/register">Registrarse</NavLink>
+                  </div>
+                </div>
+              )}
           </div>
         </nav>
         <div class="navbar-menu relative z-50 hidden">
