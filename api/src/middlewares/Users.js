@@ -1,10 +1,8 @@
-const {Sequelize} = require('sequelize');
-const axios = require("axios");
-const {Users} = require('../db.js')
+const {Users, Vehicles} = require('../db.js')
 
-export async function postUser(req, res) {
-    const { name, lastName, phone, whatsapp, email, password, photo, active} = req.body;
-    const newUser ={ name, lastName, phone, whatsapp, email, password, photo, active };
+async function postUser(req, res) {
+    const { name, lastName, phone, whatsapp, email, password} = req.body;
+    const newUser ={ name, lastName, phone, whatsapp, email, password };
     try {
       if (
         !name ||
@@ -16,9 +14,13 @@ export async function postUser(req, res) {
       ) {
         return res.json({ error: "Incomplete information" });
       }
+
+      const existUser = await Users.findOne({where: {email}});
+
+      if(existUser) return res.status(404).send("Ya existe un usuario con el ese e-mail")
       
       await Users.create(newUser);
-      res.status(200).json(newUser);
+      res.status(200).json("Usuario creado");
       return;
     } catch (error) {
       res.json(error);
@@ -27,7 +29,7 @@ export async function postUser(req, res) {
   }
 
 
-  export async function getUserById(req, res) {
+async function getUserById(req, res) {
     try {
       const {id} = req.params;
       
@@ -40,17 +42,14 @@ export async function postUser(req, res) {
     }
   }
 
-  export async function getUsers(req, res) {
+async function getUsers(req, res) {
     try {
 
-      let users = await Users.findAll(
-        {
-            include: {
-                model: favorites,
-                model: rent
-            }
+      let users = await Users.findAll({
+        include: {
+          model: Vehicles
         }
-      );
+      });
       return res.status(200).json(users)
     } catch (error) {
       res.json(error);
@@ -58,3 +57,44 @@ export async function postUser(req, res) {
     }
   }
 
+async function getUserByEmail(req, res){
+  try {
+    const {email} = req.params;
+    const exist = await Users.findOne({
+      where: {email},
+      include: {
+        model: Vehicles
+      }
+    });
+    return res.status(200).send(exist);
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+async function getLoginUser(req, res){
+  try {
+    const { email, password } = req.body;
+    const exist = await Users.findOne({
+      where: {
+        email,
+        password
+      },
+      include: {
+        model: Vehicles
+      }
+    });
+    if(exist) return res.status(200).send(exist)
+    return res.status(400).send("No existe el usuario con esos datos")
+  } catch (error) {
+    res.status(404).send(error);
+  }
+}
+
+module.exports = {
+  postUser,
+  getUserById,
+  getUsers,
+  getUserByEmail,
+  getLoginUser
+}

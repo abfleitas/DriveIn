@@ -16,15 +16,15 @@ module.exports = (sequelize) => {
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     phone: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     whatsapp: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true,
     },
     email:{
       type: DataTypes.STRING,
@@ -32,15 +32,17 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     photo: {
         type: DataTypes.STRING(512),
         allowNull: true,
+        defaultValue: "https://www.pngitem.com/pimgs/m/499-4992374_sin-imagen-de-perfil-hd-png-download.png"
       },
     active: {
         type: DataTypes.BOOLEAN,
         allowNull: true,
+        defaultValue: true
       },
     role: {
         type: DataTypes.INTEGER,
