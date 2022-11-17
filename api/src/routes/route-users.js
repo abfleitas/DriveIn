@@ -32,4 +32,20 @@ user.post("/login/auth0", async(req, res) => {
     }
 })
 
+user.put("/:id", async (req, res) => {
+  try {
+    const state = req.body.active
+    const id = req.params.id
+    const user = await Users.findByPk(id);
+    user.active = state;
+    await user.update({id})
+    await user.save()
+    const userFinal = await Users.findByPk(id);
+    res.status(201).send(userFinal);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error.message);
+  }
+});
+
 module.exports = user;
