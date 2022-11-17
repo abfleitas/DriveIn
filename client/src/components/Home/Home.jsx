@@ -27,9 +27,6 @@ export default function Home() {
         <br />
         <br />
         <br />
-        {/* <div>
-          <img src={logo} alt="driveIn logo" className="h-[153px]" />
-        </div> */}
         <div className="relative">
           <img
             src={banner}

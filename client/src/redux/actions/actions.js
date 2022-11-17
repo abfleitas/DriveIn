@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 export const FILTER = "FILTER";
 export const FILTER_PRICE = "FILTER_PRICE";
 export const ADD_FAVORITES = "ADD_FAVORITES";
@@ -12,13 +13,13 @@ export const GET_COMMENTS = "GET_COMMENTS";
 export const REMOVE_FAVORITES = "REMOVE_FAVORITES";
 export const POST_MAIL = "POST_MAIL";
 export const GET_PAYMENT = "GET_PAYMENT";
-export const ADD_USER = "ADD_USER"
-export const GET_ALL_USERS = "GET_ALL_USERS"
-export const STATUS_LOGIN = "STATUS_LOGIN"
-export const LOGIN_USER = "LOGIN_USER"
-export const EXIT_SESION = "EXIT_SESION"
-export const LOGIN_USER_AUTH0 = "LOGIN_USER_AUTH0"
-export const REFRESH_AUTH = "REFRESH_AUTH"
+export const ADD_USER = "ADD_USER";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const STATUS_LOGIN = "STATUS_LOGIN";
+export const LOGIN_USER = "LOGIN_USER";
+export const EXIT_SESION = "EXIT_SESION";
+export const LOGIN_USER_AUTH0 = "LOGIN_USER_AUTH0";
+export const REFRESH_AUTH = "REFRESH_AUTH";
 
 export const filter = (payload) => {
   return {
@@ -201,29 +202,29 @@ export const postMails = (content, to, subject) => {
   };
 };
 
-export const registerUser = (payload) => async(dispatch) => {
+export const registerUser = (payload) => async (dispatch) => {
   try {
-    const newUser = await axios.post('/user/register', payload);
+    const newUser = await axios.post("/user/register", payload);
     return dispatch({
-      type: ADD_USER
-    })
+      type: ADD_USER,
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export const loginUser = (payload) => async(dispatch) => {
-    const user = await axios.post('/user/login', payload);
-    await localStorage.setItem("UserLogin", JSON.stringify(user.data))
-    return dispatch({
-      type: LOGIN_USER,
-      payload: "USUARIO LOGUEADO"
-    })
-}
+export const loginUser = (payload) => async (dispatch) => {
+  const user = await axios.post("/user/login", payload);
+  await localStorage.setItem("UserLogin", JSON.stringify(user.data));
+  return dispatch({
+    type: LOGIN_USER,
+    payload: "USUARIO LOGUEADO",
+  });
+};
 
-export const loginUserAuth = (payload) => async(dispatch) => {
+export const loginUserAuth = (payload) => async (dispatch) => {
   try {
-    const userAuth = await axios.post('/user/login/auth0', payload);
+    const userAuth = await axios.post("/user/login/auth0", payload);
     localStorage.setItem("UserLogin", JSON.stringify(userAuth.data));
     return dispatch({
       type: LOGIN_USER_AUTH0,
@@ -232,19 +233,19 @@ export const loginUserAuth = (payload) => async(dispatch) => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const exitSesion = () => (dispatch) => {
   try {
     localStorage.removeItem("UserLogin");
     return dispatch({
       type: EXIT_SESION,
-      payload: "USUARIO NO LOGUEADO"
-    })
+      payload: "USUARIO NO LOGUEADO",
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const statusLogin = () => {
   const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
@@ -259,12 +260,36 @@ export const statusLogin = () => {
       payload: "Logueado",
     };
   }
-}
+};
 
 export const refreshAuthUser = () => {
   const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
   return {
     type: REFRESH_AUTH,
-    payload: userLogin ? userLogin : 'No hay usuario'
-  }
-}
+    payload: userLogin ? userLogin : "No hay usuario",
+  };
+};
+
+export const getPayment = (payload) => {
+  return async function (dispatch) {
+    axios.post("/payment", payload).then(
+      (response) => {
+        dispatch({ type: GET_PAYMENT, payload: response.data });
+        swal({
+          title: "Pago aceptado",
+          text: "Dirígite a tu perfil para mas informacion",
+          icon: "success",
+        });
+        setSuccess(true);
+      },
+      (error) => {
+        dispatch({ type: GET_PAYMENT, payload: error.response.data });
+        swal({
+          title: "Pago rechazado",
+          text: `${error.response.data.raw.message}`,
+          icon: "error",
+        });
+      }
+    );
+  };
+};
