@@ -17,7 +17,8 @@ import {
   STATUS_LOGIN,
   EXIT_SESION,
   GET_ALL_USERS,
-  REFRESH_AUTH
+  REFRESH_AUTH,
+  ADD_USER
 } from "../actions/actions";
 
 const initialState = {
