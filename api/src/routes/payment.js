@@ -5,7 +5,8 @@ const { SK_TEST } = process.env;
 const stripe = new Stripe(SK_TEST);
 router.post("/", async (req, res) => {
   try {
-    const { id, amount, brand, model, category, vehicleId } = req.body;
+    const { id, amount, brand, model, category, vehicleId, userEmail } =
+      req.body;
     //vehicleId para actualizar estado del vehiculo
 
     // Faltan datos de usuario para hacer las actualizaciones necesarias en su perfil
@@ -16,7 +17,7 @@ router.post("/", async (req, res) => {
       description: `${brand}, ${model}, ${category}`,
       payment_method: id,
       confirm: true,
-      // receipt_email
+      receipt_email: userEmail,
     });
 
     res.send(payment);
