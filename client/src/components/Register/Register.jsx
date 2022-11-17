@@ -3,7 +3,8 @@ import './register.css';
 import {Link, useNavigate} from "react-router-dom";
 import iconG from "../../images/google.png";
 import { useDispatch, useSelector} from "react-redux";
-import { registerUser, statusLogin } from "../../redux/actions/actions";
+import { registerUser, statusLogin, postMails } from "../../redux/actions/actions";
+import swal from "sweetalert";
 
 function validate(input){
     let errors={};
@@ -94,8 +95,19 @@ export const Register=() => {
             phone: input.phone,
             whatsapp: input.whatsapp
         }
+
+        const mailRegistro = {
+            to: input.email,
+	        subject: "Registro de Usuario",
+		    content: `<b>Bienvenido ${input.name}, se ha registrado correctamente a nuestra plataforma!!!</b>`
+        }
         dispatch(registerUser(post))
-        alert("Usuario creado con exito")
+        dispatch(postMails(mailRegistro))
+        swal({
+            title: "Bienvenido a DriveIn",
+            text: "Se ha registrado correctamente",
+            icon: "success"
+        })
         navigate("/login")
     }
     

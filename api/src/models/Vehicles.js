@@ -46,7 +46,8 @@ module.exports = (sequelize) => {
     },
 
     availability: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
     },
     initialPrice: {
       type: DataTypes.DECIMAL,

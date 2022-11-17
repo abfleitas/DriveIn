@@ -3,9 +3,11 @@ const router = Router();
 const Stripe = require("stripe");
 const { SK_TEST } = process.env;
 const stripe = new Stripe(SK_TEST);
+const { Users, Vehicles, Rent } = require('../db');
+
 router.post("/", async (req, res) => {
   try {
-    const { id, amount, brand, model, category, vehicleId, userEmail } =
+    const { id, amount, brand, model, category, vehicleId, user, dateInit, dateFinish } =
       req.body;
     //vehicleId para actualizar estado del vehiculo
 
@@ -17,8 +19,19 @@ router.post("/", async (req, res) => {
       description: `${brand}, ${model}, ${category}`,
       payment_method: id,
       confirm: true,
-      receipt_email: userEmail,
+      receipt_email: user.email,
     });
+
+    const vehicle = await Vehicles.findByPk(vehicleId);
+    vehicle.availability = false;
+    await Rent.create({
+      dateInit,
+      dateFinish,
+      totalPrice: amount/100,
+      userId: user.id,
+      vehicleId
+    })
+
 
     res.send(payment);
   } catch (error) {

@@ -15,8 +15,10 @@ export const User = ({img, name}) => {
         dispatch(refreshAuthUser())
      },[isLoading])
 
-    const handlerExitSession = () => {
+    const handlerExitSession = (e) => {
+        e.preventDefault();
         if (isAuthenticated) {
+            dispatch(exitSesion());
           logout();
           localStorage.removeItem("UserLogin");
         } else {
