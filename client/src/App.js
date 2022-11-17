@@ -4,17 +4,14 @@ import Home from "./components/Home/Home";
 import Inicio from "./components/Inicio/Inicio";
 import Details from "./components/Details/Details";
 import { Register } from "./components/Register/Register";
-import { Login } from "./components/Login/login";
-
-import Administrador from "./components/Administrador/Administrador"
-
-import Vehicles from "./components/Vehicles/Vehicles";
-
+import { Admin } from "react-admin";
+import jsonServerProvider from "ra-data-json-server";
 
 import Ciudad from "./components/Ciudad/Ciudad";
 import Creation from "./components/Creation/Creation";
-import Favorites from "./components/Favorites/Favorites";
-
+import Layout from "./components/Admin/Layout";
+import TopSidebar from "./components/Admin/TopSidebar";
+import Prueba from "./components/Admin/Prueba";
 
 function App() {
   return (
@@ -27,20 +24,13 @@ function App() {
           <Route path="/ciudad/:id" element={<Ciudad />} />
 
           <Route path="/register" element={<Register />} />
-          <Route path="login"element={<Login/>}/>
+          <Route path="login" element={<Login />} />
 
           <Route path="/details/:id" element={<Details />} />
 
           <Route path="/creation" element={<Creation />} />
 
-            <Route path="/admin/*" element={<Administrador />} />
-            <Route path="/favorite" element={<Favorites />} />
-        
-
-
-
-          <Route path="/vehicles-list-test" element={<Vehicles />} /> 
-
+          <Route path="/admin" element={<Prueba />} />
         </Routes>
       </div>
     </BrowserRouter>
