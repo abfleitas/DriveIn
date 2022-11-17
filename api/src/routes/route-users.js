@@ -1,32 +1,35 @@
 const { Router } = require("express");
-const { postUser, getUserById, getUsers } = require("../middlewares/Users");
-const router = Router();
+const { postUser, getUserById, getUsers, getUserByEmail, getLoginUser } = require("../middlewares/Users");
+const { Users, Vehicles} = require('../db')
+const user = Router();
 
-router.post("/", async (req, res) => {
-  try {
-    data = req.body;
-    const details = await postUser(data);
-    res.status(201).send(details);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+user.get("/", getUsers);
 
-router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const response = await getUserById(id);
-    res.status(201).send(response);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+user.get("/info/:email", getUserByEmail);
 
-router.get("/", async (req, res) => {
-  try {
-    const response = await getUsers();
-    res.status(201).send(response);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+user.post("/register", postUser);
+
+user.post("/login", getLoginUser);
+
+user.post("/login/auth0", async(req, res) => {
+    try {
+        const { name, lastName, email, photo} = req.body;
+        const exist = await Users.findOne({
+            where: {email},
+            include: {
+                model: Vehicles
+            }
+        });
+
+        if(!exist){
+            const nuevo = await Users.create({name, lastName, email, photo});
+            return res.status(200).send(nuevo);
+        }
+
+        return res.status(200).send(exist)
+    } catch (error) {
+        res.status(404).send(error)
+    }
+})
+
+module.exports = user;
