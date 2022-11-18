@@ -16,6 +16,7 @@
     "postcss": "^8.4.18",
     "prop-types": "^15.8.1",
     "ra-data-json-server": "^4.5.0",
+    "ra-data-simple-rest": "^4.5.2",
     "react": "^18.2.0",
     "react-admin": "^4.5.1",
     "react-bootstrap": "^2.6.0",
