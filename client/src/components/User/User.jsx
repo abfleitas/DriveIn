@@ -22,6 +22,7 @@ export const User = ({img, name}) => {
           localStorage.removeItem("UserLogin");
           logout();
         } else {
+            localStorage.removeItem("UserLogin");
           dispatch(exitSesion());
           navigate("/");
         }
@@ -36,7 +37,7 @@ export const User = ({img, name}) => {
                 </figure>
                 <span className="text-white m-auto">{name}</span>
             </div>
-            <ul className="z-999 -mt-[2px] ml-16 hidden absolute r-0 w-[130px] bg-slate-900 list">
+            <ul className="z-999 -mt-[5px] ml-16 hidden absolute r-0 w-[130px] bg-slate-900 list">
                 <li>
                     <button className="w-full text-white border-none hover:bg-[#34d399]">Usuario</button>
                 </li>

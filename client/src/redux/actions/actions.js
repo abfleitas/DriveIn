@@ -2,7 +2,7 @@ import axios from "axios";
 import swal from "sweetalert";
 export const FILTER = "FILTER";
 export const FILTER_PRICE = "FILTER_PRICE";
-export const ADD_FAVORITES = "ADD_FAVORITES";
+export const USER_FAVORITES = "USER_FAVORITES";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_COUNTRIES = "GET_COUNTRIES";
 export const GET_CITIES = "GET_CITIES";
@@ -20,6 +20,7 @@ export const LOGIN_USER = "LOGIN_USER";
 export const EXIT_SESION = "EXIT_SESION";
 export const LOGIN_USER_AUTH0 = "LOGIN_USER_AUTH0";
 export const REFRESH_AUTH = "REFRESH_AUTH";
+export const VEHICLE_FAVORITE = "VEHICLE_FAVORITE";
 
 export const filter = (payload) => {
   return {
@@ -36,27 +37,27 @@ export const filterPrice = (payload) => {
 };
 
 //Action agregar auto a favoritos.
-export const addFavorites = (data) => {
-  //const favoriteItems = localStorage.setItem("favoriteItems", JSON.stringify(data));
-  const favoriteItems = localStorage.getItem("favoriteItems")
-    ? JSON.parse(localStorage.getItem("favoriteItems"))
-    : [];
-  const duplicates = favoriteItems.filter(
-    (favoriteItem) => favoriteItem.id === data.id
-  );
-  if (duplicates.length === 0) {
-    const vehicleToAdd = {
-      ...data,
-      //data,
-    };
-    favoriteItems.push(vehicleToAdd);
-    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
-  }
-  return {
-    type: ADD_FAVORITES,
-    payload: data,
-  };
-};
+// export const addFavorites = (data) => {
+//   //const favoriteItems = localStorage.setItem("favoriteItems", JSON.stringify(data));
+//   const favoriteItems = localStorage.getItem("favoriteItems")
+//     ? JSON.parse(localStorage.getItem("favoriteItems"))
+//     : [];
+//   const duplicates = favoriteItems.filter(
+//     (favoriteItem) => favoriteItem.id === data.id
+//   );
+//   if (duplicates.length === 0) {
+//     const vehicleToAdd = {
+//       ...data,
+//       //data,
+//     };
+//     favoriteItems.push(vehicleToAdd);
+//     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+//   }
+//   return {
+//     type: ADD_FAVORITE,
+//     payload: data,
+//   };
+// };
 
 export const removeFavorites = (id) => {
   const deleteFromFavorites = localStorage.getItem("favoriteItems")
@@ -302,3 +303,44 @@ export const getPayment = (payload) => {
     );
   };
 };
+
+export const addFavorite = (payload) => async(dispatch) => {
+  try {
+    await axios.put('/user/addfavorite', payload);
+    const user = JSON.parse(localStorage.getItem("UserLogin"));
+    const dataUser = await axios.get(`/user/info/${user.email}`);
+    return dispatch({
+      type: VEHICLE_FAVORITE,
+      payload: dataUser.data.vehicles
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const userFavorite = () => async(dispatch) => {
+  try {
+    const user = JSON.parse(localStorage.getItem("UserLogin"));
+    const favorites = await axios.get(`/user/info/${user.email}`)
+    return dispatch({
+      type: USER_FAVORITES,
+      payload: favorites.data.vehicles
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const deleteFavorite = (payload) => async(dispatch) => {
+  try {
+    await axios.delete(`/user/addFavorite?id=${payload.id}&idUser=${payload.idUser}`);
+    const user = JSON.parse(localStorage.getItem("UserLogin"));
+    const favorites = await axios.get(`/user/info/${user.email}`)
+    return dispatch({
+      type: REMOVE_FAVORITES,
+      payload: favorites.data.vehicles
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
