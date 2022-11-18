@@ -1,0 +1,3 @@
+.header:hover .list, list:hover{
+    display: block;
+}
