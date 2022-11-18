@@ -17,11 +17,11 @@ export const User = ({img, name}) => {
 
     const handlerExitSession = () => {
         if (isAuthenticated) {
-          logout();
           localStorage.removeItem("UserLogin");
+          logout();
         } else {
           dispatch(exitSesion());
-          navigate("/login");
+          navigate("/");
         }
     }
     console.log(userLogin);
