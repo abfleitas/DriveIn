@@ -37,7 +37,7 @@ export default function Details() {
         <NavBar />
       </div>
       {vehicleDetailsState && (
-        <div className=" h-full w-full py-10 px-10 ">
+        <div className=" h-full w-[990px] py-10 px-10 m-auto bg-white">
           <div>
             <div className="sm:flex space-x-7 md:items-start items-center ">
               <div className="mb-4 ">
@@ -59,23 +59,11 @@ export default function Details() {
                   printer took a galley of type and scrambled it to make a type
                   specimen book.
                 </p>
-
-                <button
-                  onClick={handleOpen}
-                  className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative"
-                >
-                  ALQUILAR
-                </button>
               </div>
             </div>
-            {!open ? null : (
-              <div>
-                <PaymentForm />
-              </div>
-            )}
           </div>
-          <div className="mt-8 sm:grid grid-cols-3 sm:space-x-4">
-            <div className="bg-slate-100 p-6 rounded-md mb-4">
+          <div className="mt-8 flex sm:space-x-4 justify-center items-center m-auto">
+            <div className="bg-slate-100 p-6 rounded-md mb-4 w-[200px]">
               <span className="text-slate-400 text-md">Modelo</span>
 
               <h2 className="text-[#F97D67] text-2xl font-semibold">
@@ -83,21 +71,13 @@ export default function Details() {
               </h2>
             </div>
 
-            <div className="bg-slate-100 p-6 rounded-md mb-4">
+            <div className="bg-slate-100 p-6 rounded-md mb-4 w-[200px]">
               <span className="text-slate-400 text-md">Tipo de vehículo</span>
               <h2 className="text-[#F97D67] text-2xl font-semibold">
                 {vehicleDetailsState.category}
               </h2>
             </div>
-          </div>
-          <div className="sm:grid lg:grid-cols-4 grid-cols-2 sm:gap-x-4">
-            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4">
-              <div>
-                <span className="text-md text-slate-400">Asientos</span>
-                <h1 className="text-3xl font-bold text-[#F97D67]">
-                  {vehicleDetailsState.seats}
-                </h1>
-              </div>
+            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4 gap-x-2">
               <div>
                 <img
                   src={Asientos}
@@ -105,16 +85,16 @@ export default function Details() {
                   alt="asientos"
                 />
               </div>
-            </div>
-            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4">
               <div>
-                <span className="text-md text-slate-400">
-                  Aire Acondicionado
-                </span>
+                <span className="text-md text-slate-400">Asientos</span>
                 <h1 className="text-3xl font-bold text-[#F97D67]">
-                  {vehicleDetailsState.air}
+                  {vehicleDetailsState.seats}
                 </h1>
               </div>
+            </div>
+          </div>
+          <div className="flex justify-center items-center m-auto sm:gap-x-4">
+            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4 gap-x-2">
               <div>
                 <img
                   src={Aire}
@@ -122,14 +102,16 @@ export default function Details() {
                   alt="aire"
                 />
               </div>
-            </div>
-            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4">
-              <div>
-                <span className="text-md text-slate-400">Transmision</span>
+              {vehicleDetailsState.air && <div>
+                <span className="text-md text-slate-400">
+                  Aire Acondicionado
+                </span>
                 <h1 className="text-3xl font-bold text-[#F97D67]">
-                  {vehicleDetailsState.transmition}
+                  {vehicleDetailsState.air}
                 </h1>
-              </div>
+              </div>}
+            </div>
+            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4 gap-x-2">
               <div>
                 <img
                   src={Transmision}
@@ -137,13 +119,14 @@ export default function Details() {
                   alt="auto"
                 />
               </div>
-            </div>
-            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4">
               <div>
-                <span className="text-md text-slate-400">Precio por dia</span>
-                <h1 className="text-3xl font-bold text-[#F97D67]">{`US$ ${vehicleDetailsState.initialPrice}`}</h1>
+                <span className="text-md text-slate-400">Transmision</span>
+                <h1 className="text-3xl font-bold text-[#F97D67]">
+                  {vehicleDetailsState.transmition}
+                </h1>
               </div>
-
+            </div>
+            <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4 gap-x-2">
               <div>
                 <img
                   src={Dinero}
@@ -151,8 +134,21 @@ export default function Details() {
                   alt="auto"
                 />
               </div>
+              <div>
+                <span className="text-md text-slate-400">Precio por dia</span>
+                <h1 className="text-3xl font-bold text-[#F97D67]">{`US$ ${vehicleDetailsState.initialPrice}`}</h1>
+              </div>
             </div>
           </div>
+          <button
+              onClick={handleOpen}
+              className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative m-auto"
+              >
+              ALQUILAR
+          </button>
+          {!open ? null : (
+                <PaymentForm />
+            )}
         </div>
       )}
     </div>
