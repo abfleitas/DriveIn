@@ -191,11 +191,11 @@ export const postComment = (payload) => {
   };
 };
 
-export const postMails = (content, to, subject) => {
+export const postMails = (payload) => {
   return async function (dispatch) {
     try {
-      let respuesta = await axios.post("/mails", content, to, subject);
-      dispatch({ type: POST_MAIL, payload: respuesta });
+      let respuesta = await axios.post("/mails", payload);
+      dispatch({ type: POST_MAIL, payload: respuesta.data });
     } catch (error) {
       console.log(error);
     }
@@ -235,9 +235,19 @@ export const loginUserAuth = (payload) => async (dispatch) => {
   }
 };
 
-export const exitSesion = () => (dispatch) => {
+export const exitSesion = () => async(dispatch) => {
   try {
+    const user = JSON.parse(localStorage.getItem("UserLogin"));
+    const favoritos = JSON.parse(localStorage.getItem("favoriteItems")).map(item => item.id)
+    const data = {
+      vehicles: favoritos,
+      idUser: user.id
+    }
+    console.log(favoritos);
+    await axios.put('/user/addFavorites', data);
     localStorage.removeItem("UserLogin");
+    localStorage.removeItem("favoriteItems")
+
     return dispatch({
       type: EXIT_SESION,
       payload: "USUARIO NO LOGUEADO",
@@ -280,7 +290,6 @@ export const getPayment = (payload) => {
           text: "Dirígite a tu perfil para mas informacion",
           icon: "success",
         });
-        setSuccess(true);
       },
       (error) => {
         dispatch({ type: GET_PAYMENT, payload: error.response.data });

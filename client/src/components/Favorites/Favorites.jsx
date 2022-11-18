@@ -2,9 +2,11 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFavorites } from "../../redux/actions/actions";
 import { useNavigate, Link } from "react-router-dom";
+import Card from "../Card/Card";
 
 export default function Favorites() {
   const favorites = useSelector((state) => state.favorites);
+  const userLogin = JSON.parse(localStorage.getItem("UserLogin"))
   const dispatch = useDispatch();
   const handleClickRemove = (id) => {
     dispatch(removeFavorites(id));
@@ -16,6 +18,37 @@ export default function Favorites() {
     <>
       <div>
         {/* css maquetadores, son la mera verg.... */}
+        <div>
+          {!userLogin ? favorites && favorites.map((v, index) => {
+            return <Card
+            key={index + v.id}
+            id={v.id}
+            brand={v.brand}
+            model={v.model}
+            score={v.score}
+            airconditioning={v.airconditioning}
+            transmition={v.transmition}
+            seats={v.seats}
+            category={v.category}
+            photo={v.photo}
+            price={v.initialPrice}
+          />
+          }) : userLogin.vehicles.map((v, index) => {
+            return <Card
+            key={index + v.id}
+            id={v.id}
+            brand={v.brand}
+            model={v.model}
+            score={v.score}
+            airconditioning={v.airconditioning}
+            transmition={v.transmition}
+            seats={v.seats}
+            category={v.category}
+            photo={v.photo}
+            price={v.initialPrice}
+          />
+          })}
+        </div>
         <div>
           {favorites &&
             favorites.map((favoriteItem) => {

@@ -32,4 +32,36 @@ user.post("/login/auth0", async(req, res) => {
     }
 })
 
+
+user.put("/addfavorites", async(req,res)=>{
+    try {
+        const {vehicles, idUser} = req.body 
+        const usuario = await Users.findByPk(idUser);
+        
+        if(usuario){
+            let allVehicles = await Vehicles.findAll({where: {id: vehicles}});
+            await usuario.addVehicles(allVehicles);
+            return res.status(200).send("Favoritos agregados");
+        }
+    }catch(error){
+        res.status(404).send(error)
+    }
+}) 
+user.put("/:id", async (req, res) => {
+  try {
+    const state = req.body.active
+    const id = req.params.id
+    const user = await Users.findByPk(id);
+    user.active = state;
+    await user.update({id})
+    await user.save()
+    const userFinal = await Users.findByPk(id);
+    res.status(201).send(userFinal);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error.message);
+  }
+
+});
+
 module.exports = user;

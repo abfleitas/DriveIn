@@ -24,25 +24,15 @@ function App() {
         <Routes>
           <Route path="/" element={<Inicio />} />
           <Route path="/home" element={<Home />} />
-
           <Route path="/ciudad/:id" element={<Ciudad />} />
-
           <Route path="/register" element={<Register />} />
           <Route path="login"element={<Login/>}/>
-
           <Route path="/details/:id" element={<Details />} />
-
           <Route path="/creation" element={<Creation />} />
-
-            <Route path="/admin/*" element={<Administrador />} />
-            <Route path="/favorite" element={<Favorites />} />
-        
-
-
-
+          <Route path="/admin/*" element={<Administrador />} />
+          <Route path="/favorite" element={<Favorites />} />
           <Route path="/vehicles-list-test" element={<Vehicles />} /> 
           <Route path="/users-list-test" element={<Users />} /> 
-
         </Routes>
       </div>
     </BrowserRouter>

@@ -13,7 +13,7 @@ const Users = () => {
 
     //-------------------------Users List-----------------------------------------
     const fun = async () => {
-        let list = await axios.get("/users");
+        let list = await axios.get("/user");
         list = list.data.sort(function (a, b) {
             if (a.name > b.name) {
               return 1;
@@ -62,7 +62,7 @@ const Users = () => {
     const statusChangeHandler = async (event) => {
         const state = event.target.value.split(",")
         console.log(state);
-        await axios.put(`/users/${state[1]}`, {active : (state[0] === "true" ? false : true)})
+        await axios.put(`/user/${state[1]}`, {active : (state[0] === "true" ? false : true)})
         fun()
     };
 
