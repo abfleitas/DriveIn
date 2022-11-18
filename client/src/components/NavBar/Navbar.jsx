@@ -10,6 +10,9 @@ export default function Navbar() {
   const dispatch = useDispatch();
   const status = useSelector(state => state.user);
   const { user, isAuthenticated } = useAuth0();
+  let activeStyle = {
+    color: "#41D3C0"
+  }
 
   useEffect(()=> {
     if(isAuthenticated){
@@ -41,7 +44,7 @@ export default function Navbar() {
             </svg> */}
           </div>
           <div class="lg:hidden">
-            <button class="navbar-burger flex items-center text-blue-600 p-3">
+            <button className="navbar-burger flex items-center text-blue-600 p-3">
               <svg
                 class="block h-4 w-4 fill-current"
                 viewBox="0 0 20 20"
@@ -52,18 +55,19 @@ export default function Navbar() {
               </svg>
             </button>
           </div>
-          <ul class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
+          <ul className="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
             <li>
-              <NavLink to="/home">
                 <div
-                  class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
+                  className="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
                   href="#home"
                 >
+              <NavLink to="/home" style={({isActive})=> isActive ? activeStyle : undefined}>
                   Home
+                  </NavLink>
                 </div>
-              </NavLink>
+            
             </li>
-            <li class="text-[#f97d67]">
+            <li className="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -81,13 +85,13 @@ export default function Navbar() {
             </li>
             <li>
               <div
-                class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
+                className="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
                 href="#"
               >
                 Nosotros
               </div>
             </li>
-            <li class="text-[#f97d67]">
+            <li className="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -111,7 +115,7 @@ export default function Navbar() {
                 Servicios
               </div>
             </li>
-            <li class="text-[#f97d67]">
+            <li className="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -129,13 +133,14 @@ export default function Navbar() {
             </li>
             <li>
               <div
-                class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
+                className="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
                 href="#"
               >
                 Contactos
               </div>
             </li>
-            <li class="text-[#f97d67]">
+           {userLogin && <>
+            <li className="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -153,12 +158,13 @@ export default function Navbar() {
             </li>
             <li>
               <div
-                class="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
+                className="text-sm text-[#2e3a46] hover:text-[#f97d67] font-bold font-sans cursor-pointer"
                 href="#"
               >
-                <NavLink to="/favorite">Favoritos</NavLink>
+                <NavLink to="/favorite" style={({isActive})=> isActive ? activeStyle : undefined}>Favoritos</NavLink>
               </div>
             </li>
+            </>}
             {/* <li class="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

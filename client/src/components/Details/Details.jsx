@@ -32,7 +32,7 @@ export default function Details() {
   }, [dispatch, id]);
 
   return (
-    <div className="bg-[#D9D9D9] h-screen">
+    <div className="bg-[#D9D9D9] min-h-screen">
       <div>
         <NavBar />
       </div>
@@ -102,14 +102,16 @@ export default function Details() {
                   alt="aire"
                 />
               </div>
-              {vehicleDetailsState.air && <div>
-                <span className="text-md text-slate-400">
-                  Aire Acondicionado
-                </span>
-                <h1 className="text-3xl font-bold text-[#F97D67]">
-                  {vehicleDetailsState.air}
-                </h1>
-              </div>}
+              {vehicleDetailsState.air && (
+                <div>
+                  <span className="text-md text-slate-400">
+                    Aire Acondicionado
+                  </span>
+                  <h1 className="text-3xl font-bold text-[#F97D67]">
+                    {vehicleDetailsState.air}
+                  </h1>
+                </div>
+              )}
             </div>
             <div className="flex justify-between items-center bg-slate-100 p-6 rounded-md mb-4 gap-x-2">
               <div>
@@ -136,19 +138,17 @@ export default function Details() {
               </div>
               <div>
                 <span className="text-md text-slate-400">Precio por dia</span>
-                <h1 className="text-3xl font-bold text-[#F97D67]">{`US$ ${vehicleDetailsState.initialPrice}`}</h1>
+                <h1 className="text-3xl font-bold text-[#F97D67]">{`$USD ${vehicleDetailsState.initialPrice}`}</h1>
               </div>
             </div>
           </div>
           <button
-              onClick={handleOpen}
-              className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative m-auto"
-              >
-              ALQUILAR
+            onClick={handleOpen}
+            className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative m-auto"
+          >
+            ALQUILAR
           </button>
-          {!open ? null : (
-                <PaymentForm />
-            )}
+          {!open ? null : <PaymentForm />}
         </div>
       )}
     </div>

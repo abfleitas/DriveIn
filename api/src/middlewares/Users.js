@@ -1,4 +1,7 @@
-const { Users, Vehicles, Rent } = require("../db.js");
+
+const {Users, Vehicles, Rent} = require('../db.js')
+const usersList = require('./users.json')
+
 
 async function postUser(req, res) {
   const { name, lastName, phone, whatsapp, email, password } = req.body;
@@ -37,17 +40,22 @@ async function getUserById(req, res) {
 }
 
 async function getUsers(req, res) {
-  try {
-    let users = await Users.findAll({
-      include: {
-        model: Vehicles,
-        model: Rent,
-      },
-    });
-    return res.status(200).json(users);
-  } catch (error) {
-    res.json(error);
-    return;
+
+    try {
+      if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
+      console.log(await Users.findAll());
+      let users = await Users.findAll({
+        include: {
+          model: Vehicles,
+          model: Rent
+        }
+      });
+      return res.status(200).json(users)
+    } catch (error) {
+      res.json(error);
+      return;
+    }
+
   }
 }
 
