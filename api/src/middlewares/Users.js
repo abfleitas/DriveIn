@@ -1,4 +1,5 @@
 const {Users, Vehicles, Rent} = require('../db.js')
+const usersList = require('./users.json')
 
 async function postUser(req, res) {
     const { name, lastName, phone, whatsapp, email, password} = req.body;
@@ -44,7 +45,8 @@ async function getUserById(req, res) {
 
 async function getUsers(req, res) {
     try {
-
+      if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
+      console.log(await Users.findAll());
       let users = await Users.findAll({
         include: {
           model: Vehicles,
