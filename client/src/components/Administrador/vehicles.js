@@ -1,8 +1,24 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, NumberField } from 'react-admin';
+import { List, Datagrid, TextField, EmailField, NumberField, Pagination, Button, FilterButton, TopToolbar,ExportButton, CreateButton  } from 'react-admin';
+
+const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
+
+const ListActions = (props) => (
+    <TopToolbar>
+        <CreateButton/>
+        <ExportButton/>
+        {/* Add your custom actions */}
+        <Button
+            onClick={() => { alert('Your custom action'); }}
+            label="Show calendar"
+        >
+    
+        </Button>
+    </TopToolbar>
+);
 
 export const vehiclesList = () => (
-    <List>
+    <List   actions={<ListActions/>} title="List of vehicles" pagination={<PostPagination /> }>
         <Datagrid rowClick="edit">
              <NumberField source="id" />
             <TextField source="brand" />
@@ -11,13 +27,12 @@ export const vehiclesList = () => (
             <TextField source="color" />
             <TextField source="transmition" />
             <TextField source="air" />
-            <TextField source="seats" />
-            <TextField source="seats" />
             <TextField source="category" />
             <TextField source="photo" />
             <TextField source="availability" />
-            <TextField source="initialPrice" />
-            <TextField source="cityId" />
+            <NumberField source="initialPrice" />
+            <NumberField source="cityId" />
+            {/* <TextField source="seats"/> */}
 
         </Datagrid>
     </List>
