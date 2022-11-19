@@ -11,15 +11,14 @@ function validate(input){
             if(!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(input.email)){
                 errors.email ="El email es invalido"
             } 
-        }else if(input.email){
-          if (!/^[a-z A-Z]+$/.test(input.email)){
-          errors.email="Solo se aceptan letras"
-            }  
-        }                  
         
-         if(!input.password){
+        } if(!input.password){
             errors.password="Se requiere contraseña"
-        }                     
+        } else if(input.password){
+            if(!/^.{4,12}$/.test(input.password)){
+               errors.password= "de 4 a 12 digitos"
+            }
+        }                    
         
    return errors   
 
@@ -79,10 +78,11 @@ export const Login=() => {
                                 type="text"
                                 value={input.email}
                                 name="email"
+                                
                                 placerholder="Nombre..." 
                                 onChange={(e)=>handleChange(e)}
                                 className="" required/>
-                                {errors.email && <p>{errors.email}</p>}
+                                {errors.email && <p className="text-red-500">{errors.email}</p>}
                                 <span className="">E-mail</span>
                                 
                             </div>
@@ -97,15 +97,15 @@ export const Login=() => {
                             placerholder= "Contraseña..."
                             onChange={(e)=>handleChange(e)}
                             className="" required/>
-                            {errors. password && <p>{errors.password}</p>}
+                            {errors. password && <p className="text-red-500">{errors.password}</p>}
                             <span className="">Contraseña</span>
                             </div>
                         </div> 
                     </div>
                 </div>
                 <div className="flex flex-col justify-around items-center w-[300px] m-auto mt-12">
-                    <button className="w-full h-[40px] rounded-lg bg-[#009A88] text-white font-semibold"
-                    type="submit">Iniciar sesion</button>
+                    <button className="w-full h-[40px] rounded-lg px-8 py-3 text-white bg-[#41D3C0] rounded focus:outline-none disabled:opacity-70 bg-[#009A88] text-white font-semibold"
+                    type="submit"disabled={!input.email || !input.password || errors.email || errors.password}>Iniciar sesion</button>
                     <ButtonGoogle />
                     <span className="text-white mt-6">No tienes una cuenta? <Link to="/register" className="text-[#F97D67]">Registrate</Link></span>
                 </div>

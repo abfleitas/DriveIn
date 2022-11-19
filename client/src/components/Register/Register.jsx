@@ -7,49 +7,37 @@ import { registerUser, statusLogin, postMails } from "../../redux/actions/action
 import swal from "sweetalert";
 
 function validate(input){
-    let errors={};
-        if(!input.name){
-            errors.name="Se require un Nombre"; 
-        }else if(input.name){
-          if (!/^[a-z A-Z]+$/.test(input.name)){
-          errors.name="Solo se aceptan letras"
-            }  
-        }         
-        if (input.email){
-            if(!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(input.email)){
-                errors.email ="email invalido"
-            }             
-        }        
-        
-         if(!input.lastName){
-            errors.lastName ="Se requiere un Apellido"
-        }else if(input.lastName){
-            if (!/^[a-z A-Z]+$/.test(input.lastName)){
-                errors.lastName="Solo se aceptan letras"
-            }        
-        }
-        if(!input.password){
-            errors.password="Se requiere contraseña"
-        }
-        if(!input.password2){
-            errors.password2 ="Se requiere contraseña"
-        }else if(input.password2){
-            if(input.password2 !== input.password){
-                errors.password2 ="Las contraseñas no coinciden"
-            }
-        }
-        if(!input.phone){
-           errors.phone="Este campo es requerido"
-        }
-        if(!input.celular){
-            errors.celular="Este campo es requerido"
-        }
-       
-    
-        
-        
-   return errors   
+   let errors={}
+ 
 
+   if(input.name){
+    if (!/^[a-z A-Z]+$/.test(input.name)){
+        errors.name="Solo se aceptan letras"
+    }
+   } if(input.email){
+    if(!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/.test(input.email)){
+        errors.email ="email invalido"
+    }
+   }if (input.lastName){
+       if( (!/^[a-z A-Z]+$/.test(input.lastName))){
+        errors.lastName="Solo se aceptan letras" 
+       }
+   }if(input.password){
+    if(!/^.{4,12}$/.test(input.password)){
+     errors.password= " 4 a 12 digitos"
+      }
+    } if(input.password2){
+       if(input.password2 !== input.password){
+            errors.password2 ="Las contraseñas no coinciden"
+        }  
+    }if(input.whatsapp){
+        if(!/^.{7,16}$/.test(input.whatsapp)){
+         errors.whatsapp= " 7 a 16 digitos" 
+        } else if(!/[^a-z]$/.test(input.whatsapp)){
+            errors.whatsapp="Solo ingresar numeros"
+        }
+    }     
+   return errors   
 }
 
 
@@ -58,15 +46,15 @@ export const Register=() => {
     const navigate = useNavigate();
     const stateLogin = useSelector(state => state.user)
     const [errors, setErrors] =useState({});
+
     
     const [input,setInput]=useState({
         name:"",
         lastName:"",
         email:"",
         password:"",
-        password2:"",
-        phone: "",
-        whatsapp: "",
+        password2:"",        
+       whatsapp: "",
     });
     console.log(input);
 
@@ -91,8 +79,7 @@ export const Register=() => {
             name: input.name,
             lastName: input.lastName,
             email: input.email,
-            password: input.password,
-            phone: input.phone,
+            password: input.password,            
             whatsapp: input.whatsapp
         }
 
@@ -116,55 +103,55 @@ export const Register=() => {
         <div className="h-screen bg-slate-900 flex justify-center items-center container-reg">
             <div className="flex w-[600px] h-[600px] flex-col rounded-lg shadow-[0_35px_60px_-15px_#009A88] container-data">
                 <h2>Registrarme</h2>
-                <form onSubmit={handleSubmit}>
+                <form  onSubmit={handleSubmit}>
                     <div className="flex flex-row w-full justify-around">
                     <div className="flex flex-col w-2/5">
                         <div className="c-input">
                             <div className="data">
                                 <input
-                                type="text"
+                                type="text"                                
                                 value={input.name}
                                 name="name"                             
                                 onChange={(e)=>handleChange(e)}
                                 className="" required/>
-                                {errors.name && <p>{errors.name}</p>}
+                                {errors.name && <p className="text-red-500">{errors.name}</p>}
                                 <span className="">Nombre</span>
                                 
                             </div>
                         </div>
                         <div className="c-input mt-2">
                             <div className="data">
-                            <input
+                            <input                           
                             type="text"
                             value={input.email}
                             name="email"                        
                             onChange={(e)=> handleChange(e)}
                             className="" required/>
-                            {errors.email && <p>{errors.email}</p>}
+                            {errors.email && <p className="text-red-500">{errors.email}</p>}
                             <span className="">E-mail</span>
                             </div>
                         </div>
                         <div className="c-input mt-2">
                             <div className="data">
-                            <input 
+                            <input                             
                             type="password"
                             value={input.password}
                             name= "password"                       
                             onChange={(e)=>handleChange(e)}
                             className="" required/>
-                            {errors. password && <p>{errors.password}</p>}
+                            {errors. password && <p className="text-red-500">{errors.password}</p>}
                             <span className="">Contraseña</span>
                             </div>
                         </div>
                         <div className="c-input mt-2">
                             <div className="data">
-                            <input 
+                            <input                            
                             type="password"
                             value={input.password2}
                             name="password2"                        
                             onChange={(e)=>handleChange(e)}
                             className="" required/>
-                            {errors.password2 && <p>{errors.password2}</p>}
+                            {errors.password2 && <p className="text-red-500">{errors.password2}</p>}
                             <span className="">Repetir Contraseña</span>
                             </div>
                         </div>
@@ -172,45 +159,37 @@ export const Register=() => {
                     <div className="flex flex-col w-2/5">
                         <div className="c-input">
                             <div className="data">
-                            <input 
+                            <input                            
                             type="text" 
                             value={input.lastName}
                             name="lastName"                        
                             onChange={(e)=>handleChange(e)}
                             className="" required/>
-                            {errors.lastName && <p>{errors.lastName}</p>}
+                            {errors.lastName && <p className="text-red-500">{errors.lastName}</p>}
                             <span className="">Apellido</span>
                             </div>
                         </div>
+                        
                         <div className="c-input mt-2">
                             <div className="data">
-                            <input
-                            type="text"
-                            value={input.phone} 
-                            name="phone"                       
-                            onChange={(e)=>handleChange(e)}
-                            className="" required/>
-                            {errors.phone && <p>{errors.phone}</p>}
-                            <span className="">Telefono</span>
-                            </div>
-                        </div>
-                        <div className="c-input mt-2">
-                            <div className="data">
-                            <input 
+                            <input                             
                             type="text"
                             value={input.whatsapp}
                             name="whatsapp"                      
                             onChange={(e)=>handleChange(e)}
                             className="" required/>
-                            {errors.whatsapp && <p>{errors.phone}</p>}
+                            {errors.whatsapp && <p className="text-red-500">{errors.whatsapp}</p>}
                             <span className="">Celular</span>
                             </div>
                         </div>
                     </div>
                     </div>
-                    <div className="flex flex-col justify-around items-center w-[300px] m-auto">
-                        <button className="w-full h-[40px] rounded-lg bg-[#009A88] text-white font-semibold"
-                        type="submit">Registrarme</button>
+                    <br />
+                    <br />
+                    <div className="flex flex-col justify-around m-auto items-center w-[300px] ">
+                        <button className="w-full h-[40px] rounded-lg px-8 py-3 text-white bg-[#41D3C0] rounded focus:outline-none disabled:opacity-70 text-white font-semibold"
+                        type="submit"disabled={errors.name ||!input.name || !input.lastName|| !input.email|| !input.password|| !input.password2 || !input.whatsapp|| errors.lastName || errors.email || errors.password || errors.password2|| errors.whatsapp }
+                        >Registrarme</button>
                         <span className="text-white mt-6">Ya tienes una cuenta? <Link to="/login" className="text-[#F97D67]">Inicia sesión</Link></span>
                     </div>
                 </form>
