@@ -1,5 +1,5 @@
 const {Users, Vehicles, Rent} = require('../db.js')
-
+const {dashboard} = require ("../middlewares/dashboard")
 async function postUser(req, res) {
     const { name, lastName, phone, whatsapp, email, password} = req.body;
     const newUser ={ name, lastName, phone, whatsapp, email, password };
@@ -43,13 +43,17 @@ async function getUserById(req, res) {
   }
 
 async function getUsers(req, res) {
-    try {
+  const {order, corte, pagina} = dashboard(req.query)
 
+    try {
       let users = await Users.findAll({
         include: {
           model: Vehicles,
           model: Rent
-        }
+        },
+        order: order,
+        limit: corte,
+        offset: pagina
       });
       return res.status(200).json(users)
     } catch (error) {
