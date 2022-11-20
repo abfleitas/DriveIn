@@ -216,6 +216,14 @@ export const registerUser = (payload) => async (dispatch) => {
 
 export const loginUser = (payload) => async (dispatch) => {
   const user = await axios.post("/user/login", payload);
+  if(user.data === "Usuario deshabilitado") {
+    localStorage.removeItem("UserLogin");
+    return swal({
+      title: "Usuario deshabilitado",
+      text: `Ponte en contacto con un administrador`,
+      icon: "error",
+    });
+  }
   await localStorage.setItem("UserLogin", JSON.stringify(user.data));
   return dispatch({
     type: LOGIN_USER,

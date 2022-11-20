@@ -49,8 +49,7 @@ async function getUsers(req, res) {
 
     try {
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
-      console.log(await Users.findAll());
-
+      // console.log(await Users.findAll());
       let users = await Users.findAll({
         include: {
           model: Vehicles,
@@ -95,6 +94,7 @@ async function getLoginUser(req, res) {
         model: Rent,
       },
     });
+    if(!exist.active) return res.status(200).send("Usuario deshabilitado")
     if (exist) return res.status(200).send(exist);
     return res.status(400).send("No existe el usuario con esos datos");
   } catch (error) {
