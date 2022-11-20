@@ -1,6 +1,10 @@
 
 const {Users, Vehicles, Rent} = require('../db.js')
+
+const {dashboard} = require ("../middlewares/dashboard")
+
 const usersList = require('./users.json')
+
 
 
 async function postUser(req, res) {
@@ -41,14 +45,20 @@ async function getUserById(req, res) {
 
 async function getUsers(req, res) {
 
+  const {order, corte, pagina} = dashboard(req.query)
+
     try {
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
       console.log(await Users.findAll());
+
       let users = await Users.findAll({
         include: {
           model: Vehicles,
           model: Rent
-        }
+        },
+        order: order,
+        limit: corte,
+        offset: pagina
       });
       return res.status(200).json(users)
     } catch (error) {

@@ -5,12 +5,22 @@ const {
   getVehicleDetailsFn,
   getVehicles,
 } = require("../middlewares/vehicles");
+const {dashboard} = require ("../middlewares/dashboard")
 const vehicles = Router();
 
 vehicles.get("/", async (req, res) => {
+
+  const {order, corte, pagina} = dashboard(req.query)
+
   try {
     await getVehicles();
-    const all = await Vehicles.findAll();
+    const all = await Vehicles.findAll(
+      {
+        order: order,
+        limit: corte,
+        offset: pagina
+      }
+    );
     return res.status(200).send(all);
   } catch (error) {
     res.status(404).send(error);
