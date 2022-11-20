@@ -9,7 +9,7 @@ export default function SearchBar() {
   const cities = useSelector((state) => state.cities);
   const [input, setInput] = useState({
     country: "",
-    id: 1,
+    id: "",
   });
 
   const handleInputChange = (e) => {
@@ -21,18 +21,37 @@ export default function SearchBar() {
   };
   const handleCity = (e) => {
     e.preventDefault();
-    setInput({
-      ...input,
-      id: e.target.value,
-    });
+    if (e.target.value === "City") {
+      setInput({
+        ...input,
+        id: "",
+      });
+    } else {
+      setInput({
+        ...input,
+        id: e.target.value,
+      });
+    }
+
   };
   const handleCountry = (e) => {
     e.preventDefault();
-    setInput({
-      ...input,
-      country: e.target.value,
-    });
-    dispatch(getCities(e.target.value));
+    if (e.target.value === "City") {
+      setInput({
+        ...input,
+        country: "",
+        id: "",
+      });
+      cities = ""
+    } else {
+      setInput({
+        ...input,
+        country: e.target.value,
+      });
+      dispatch(getCities(e.target.value));
+    }
+
+
   };
 
   return (
@@ -97,6 +116,7 @@ export default function SearchBar() {
             />
           </div>
         </div>
+        {input.id &&
         <NavLink to={`/ciudad/${input.id}`}>
           <button
             type="submit"
@@ -107,7 +127,7 @@ export default function SearchBar() {
               Buscar
             </p>
           </button>
-        </NavLink>
+        </NavLink> }
       </form>
     </div>
   );
