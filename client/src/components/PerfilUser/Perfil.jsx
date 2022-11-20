@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setVehicleDetailsState } from "../../redux/actions/actions";
 
 export default function Perfil() {
-  const usuario = useSelector((state) => state.user);
+  const usuario = JSON.parse(localStorage.getItem("UserLogin"))
+  // const usuario = useSelector((state) => state.user);
   const [mostrarPass, setmostrarPass] = useState("");
   const { id } = useParams();
 

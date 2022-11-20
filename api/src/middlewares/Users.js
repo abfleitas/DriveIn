@@ -65,8 +65,6 @@ async function getUsers(req, res) {
       res.json(error);
       return;
     }
-
-  }
 }
 
 async function getUserByEmail(req, res) {

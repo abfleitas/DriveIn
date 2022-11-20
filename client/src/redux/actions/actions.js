@@ -344,5 +344,5 @@ export const deleteFavorite = (payload) => async(dispatch) => {
     console.log(error);
   }
 }
-};
+
 

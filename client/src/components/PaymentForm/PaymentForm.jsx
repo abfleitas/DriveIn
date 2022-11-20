@@ -129,7 +129,7 @@ const CheckOutForm = () => {
           </form>
         </div>
       ) : (
-        <NavLink to="/home">Mi perfil</NavLink>
+        <NavLink to="/user">Mi perfil</NavLink>
       )}
     </>
   );
