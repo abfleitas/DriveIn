@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { postUser, getUserById, getUsers, getUserByEmail, getLoginUser } = require("../middlewares/Users");
-const { Users, Vehicles} = require('../db')
+const { Users, Vehicles, Vehicles_Favorites} = require('../db')
 const user = Router();
 
 user.get("/", getUsers);
@@ -33,20 +33,42 @@ user.post("/login/auth0", async(req, res) => {
 })
 
 
-user.put("/addfavorites", async(req,res)=>{
+user.put("/addfavorite", async(req,res)=>{
     try {
-        const {vehicles, idUser} = req.body 
-        const usuario = await Users.findByPk(idUser);
+        const {id, idUser} = req.body 
+        const usuario = await Users.findOne({
+            where: {id: idUser},
+            include: Vehicles
+        });
         
         if(usuario){
-            let allVehicles = await Vehicles.findAll({where: {id: vehicles}});
-            await usuario.addVehicles(allVehicles);
-            return res.status(200).send("Favoritos agregados");
+            let vehicle = await Vehicles.findOne({where: {id: id}});
+            await usuario.addVehicles(vehicle);
+            return res.status(200).send("Favorito agregado");
         }
     }catch(error){
         res.status(404).send(error)
     }
-}) 
+});
+
+user.delete("/addFavorite", async(req, res) => {
+    try {
+        const {id, idUser} = req.query;
+        const exist = await Vehicles.findByPk(id);
+        if(exist){
+            const user = await Users.findByPk(idUser);
+            if(user){
+                await Vehicles_Favorites.destroy({
+                    where: {userId: idUser, vehicleId: id}
+                });
+                return res.status(200).send("Favorito eliminado")
+            }
+        }
+    } catch (error) {
+        res.status(404).send({error: error.message})
+    }
+})
+
 user.put("/:id", async (req, res) => {
   try {
     const state = req.body.active

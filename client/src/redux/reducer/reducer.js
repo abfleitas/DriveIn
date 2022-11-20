@@ -8,7 +8,7 @@ import {
   GET_CITY,
   GET_VEHICLES,
   GET_COMMENTS,
-  ADD_FAVORITES,
+  USER_FAVORITES,
   REMOVE_FAVORITES,
   POST_MAIL,
   GET_PAYMENT,
@@ -18,7 +18,8 @@ import {
   EXIT_SESION,
   GET_ALL_USERS,
   REFRESH_AUTH,
-  ADD_USER
+  ADD_USER,
+  VEHICLE_FAVORITE
 } from "../actions/actions";
 
 const initialState = {
@@ -109,11 +110,16 @@ export default function rootReducer(state = initialState, action) {
         vehiclesCopy: sortedPrice,
       };
     //ADD_FAVORITES
-    case ADD_FAVORITES:
+    case USER_FAVORITES:
       return {
         ...state,
-        favorites: [...state.favorites, action.payload],
+        favorites: action.payload.length ? action.payload : {error: "no tiene favoritos"},
       };
+    case VEHICLE_FAVORITE:
+      return {
+        ...state,
+        favorites: action.payload
+      }
     case POST_MAIL:
       return {
         ...state,
@@ -160,7 +166,7 @@ export default function rootReducer(state = initialState, action) {
     case REMOVE_FAVORITES:
       return {
         ...state,
-        favorites: state.favorites.filter((el) => el.id !== action.payload),
+        favorites: action.payload,
       };
     case GET_PAYMENT:
       return {
