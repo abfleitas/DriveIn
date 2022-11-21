@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setVehicleDetailsState } from "../../redux/actions/actions";
+import { setVehicleDetailsState, getRents } from "../../redux/actions/actions";
 import Navbar from "../NavBar/Navbar";
 
 export default function Perfil() {
@@ -9,6 +9,14 @@ export default function Perfil() {
   // const usuario = useSelector((state) => state.user);
   const [mostrarPass, setmostrarPass] = useState("");
   const { id } = useParams();
+
+  const rents = useSelector((state) => state.rents);
+console.log(rents)
+  const dispatch = useDispatch();
+  useEffect(() => {
+      dispatch(getRents(usuario.id));
+  }, [dispatch]);
+
 
   return (
     <div>
@@ -144,46 +152,38 @@ export default function Perfil() {
                           />
                         </svg>
                       </span>
-                      <span className="tracking-wide">Alquiados</span>
+                      <span className="tracking-wide">Alquilados</span>
                     </div>
                     <ul className="list-inside space-y-2">
-                      <li>
-                        <div className="text-teal-600 flex items-start">
-                          Auto 1.
-                        </div>
-                        <div className="text-gray-500 text-xs flex items-start">
-                          Fecha de alquiler tal vez
-                        </div>
-                      </li>
-                      <li>
-                        <div className="text-teal-600 flex items-start">
-                          Auto 1.
-                        </div>
-                        <div className="text-gray-500 text-xs flex items-start">
-                          Fecha de alquiler tal vez
-                        </div>
-                      </li>
-                      <li>
-                        <div className="text-teal-600 flex items-start">
-                          Auto 1.
-                        </div>
-                        <div className="text-gray-500 text-xs flex items-start">
-                          Fecha de alquiler tal vez
-                        </div>
-                      </li>
-                      <li>
-                        <div className="text-teal-600 flex items-start">
-                          Auto 1.
-                        </div>
-                        <div className="text-gray-500 text-xs flex items-start">
-                          Fecha de alquiler tal vez
-                        </div>
-                      </li>
+                      {rents.length? 
+                      rents.map(e =>  {
+                        return (
+                          <li>
+                          <div className="text-teal-600 flex items-start">
+                            {e.vehicle.brand
+                            }, 
+                            {e.vehicle.model }
+                          </div>
+                          <div className="text-gray-500 text-xs flex items-start">
+                          Desde:  { e.dateInit}
+                          </div>
+                          <div className="text-gray-500 text-xs flex items-start">
+                          Hasta: { e.dateFinish}
+                          </div>
+                        </li>
+                        )
+                      }
+                        )
+
+                      :
+                      <div className="text-gray-500 text-xs flex items-start"> No hay autos alquilados</div>
+                      }
+                     
                     </ul>
                   </div>
                   <div>
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                      <span clas="text-green-500">
+                      {/* <span clas="text-green-500">
                         <svg
                           className="h-5"
                           xmlns=""
@@ -203,11 +203,11 @@ export default function Perfil() {
                             d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
                           />
                         </svg>
-                      </span>
-                      <span className="tracking-wide">Devuelto</span>
+                      </span> */}
+                      {/* <span className="tracking-wide">Devuelto</span> */}
                     </div>
                     <ul className="list-inside space-y-2">
-                      <li>
+                      {/* <li>
                         <div className="text-teal-600 flex items-start">
                           Auto 1
                         </div>
@@ -222,7 +222,7 @@ export default function Perfil() {
                         <div className="text-gray-500 text-xs flex items-start">
                           Fecha de devolución tal vez
                         </div>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>

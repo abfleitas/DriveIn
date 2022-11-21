@@ -20,7 +20,8 @@ import {
   REFRESH_AUTH,
   ADD_USER,
   VEHICLE_FAVORITE,
-  DELETE_STATES
+  DELETE_STATES,
+  GET_RENTS
 } from "../actions/actions";
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
   comments: [],
   payment: [],
   users: [],
+  rents: [],
   statusLogin: true,
   user: 'No logueado'
 };
@@ -73,6 +75,12 @@ export default function rootReducer(state = initialState, action) {
         city: [],
          };
 // Borrado del store
+    case GET_RENTS:
+      return {
+        ...state,
+        rents: action.payload
+         };
+
     case FILTER:
       const filtrados = [];
       let vehiclefiltrado = state.vehiclesByCity;
