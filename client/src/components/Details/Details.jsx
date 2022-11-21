@@ -55,11 +55,15 @@ export default function Details() {
                   {vehicleDetailsState.brand}
                 </h1>
                 <p className="text-[#2E3A46] text-lg text-start tracking-wide mb-6 md:max-w-lg">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                Nuestras tarifas incluyen vehículos nuevos en excelentes condiciones equipados 
+                para la zona, silla para bebe, buster o elevador, seguro, 
+                entrega y recepción de los vehículos en aeropuerto, 
+                terminal, hoteles y conductores adicionales sin cargo. 
+                El vehículo se debe devolver con la misma cantidad de 
+                combustible que fue entregado, en caso contrario se cobrará 
+                la diferencia. Los días de alquiler se contabilizan a partir 
+                de que se entrega el vehículo y por 24 horas. 
+                Con 1 hora de tolerancia en la devolución, de lo contrario se cobraran horas extras.
                 </p>
               </div>
             </div>
