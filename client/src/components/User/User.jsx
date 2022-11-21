@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./user.css";
+import swal from "sweetalert";
 
 export const User = ({ img, name }) => {
   const { isAuthenticated, logout, isLoading } = useAuth0();
@@ -21,7 +22,12 @@ export const User = ({ img, name }) => {
       localStorage.removeItem("UserLogin");
       logout();
     } else {
-      dispatch(exitSesion());
+      localStorage.removeItem("UserLogin");
+      // dispatch(exitSesion());
+      swal({
+        title: "Has cerrado sesión.",
+        icon: "success",
+      });
       navigate("/home");
     }
   };

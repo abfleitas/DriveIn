@@ -20,7 +20,7 @@ const Creation = (props) => {
     const [model, setModel] = useState("");
     const [year, setYear] = useState(2000);
     const [color, setColor] = useState("");
-    const [transmition, setTrasmition] = useState("manual");
+    const [transmition, setTrasmition] = useState("Manual");
     const [air, setAir] = useState("true");
     const [seats, setSeats] = useState(2);
     const [category, setCategory] = useState("");
@@ -167,6 +167,20 @@ const Creation = (props) => {
             swal ( error ,  "El vehiculo no se pudo crear!" ,  "error" )
             setIsPending(false)
         });
+        console.log("entra aqui");
+        //reset de inputs
+        setCountry("")
+        setCity("")
+        setBrand("")
+        setModel("")
+        setYear(200)
+        setColor("")
+        setTrasmition("Manual")
+        setAir("true")
+        setSeats(2)
+        setCategory("")
+        setPrice("1.00")
+        setImageCloud("")
     }
     //-------------------------------Submit form-------------------------------------
     return (
@@ -273,7 +287,7 @@ const Creation = (props) => {
                         </div>
                     </div>
 
-                    { isPending ? <button disable="true" className="Creation_button">Creating ...</button> : <button className="Creation_button">Create</button>}
+                    { ImageCloud === "" ? <button disabled className="Creation_button" style={{opacity:"0.5"}}>Create</button> : <button className="Creation_button">Create</button>}
                 </form>
             </div>
         </div>
