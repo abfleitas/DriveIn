@@ -1,9 +1,11 @@
 
+
 const {Users, Vehicles, Rent} = require('../db.js')
 
 const {dashboard} = require ("../middlewares/dashboard")
 
 const usersList = require('./users.json')
+
 
 
 
@@ -45,6 +47,7 @@ async function getUserById(req, res) {
 
 async function getUsers(req, res) {
 
+
   const {order, corte, pagina} = dashboard(req.query)
 
     try {
@@ -64,6 +67,7 @@ async function getUsers(req, res) {
       res.json(error);
       return;
     }
+
   }
 
 async function getUserByEmail(req, res) {
