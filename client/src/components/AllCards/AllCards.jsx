@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 // import { getVehicles } from "../../redux/actions/actions";
 import Card from "../Card/Card";
 import { Link } from "react-router-dom";
@@ -52,7 +52,6 @@ export default function AllCards() {
    * Agregar la línea siguiente, en cada función de filtración ú ordenamiento.
    * => setChange(event.target.value); <=
    **/
-  const [change, setChange] = useState("");
 
   useEffect(() => {
     setCurrentPage(1);
