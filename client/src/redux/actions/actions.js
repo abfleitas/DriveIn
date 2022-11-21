@@ -22,7 +22,7 @@ export const LOGIN_USER_AUTH0 = "LOGIN_USER_AUTH0";
 export const REFRESH_AUTH = "REFRESH_AUTH";
 export const VEHICLE_FAVORITE = "VEHICLE_FAVORITE";
 export const DELETE_STATES = "DELETE_STATES";
-
+export const GET_RENTS = "GET_RENTS"
 
 export const deleteStates = () => {
   return {
@@ -128,6 +128,18 @@ export const getCities = (country) => {
     axios.get(`/cities?country=${country}`).then(
       (response) => {
         dispatch({ type: GET_CITIES, payload: response.data });
+      },
+      (error) => {
+        return error;
+      }
+    );
+  };
+};
+export const getRents = (userId) => {
+  return function (dispatch) {
+    axios.get(`/rent?userId=${userId}`).then(
+      (response) => {
+        dispatch({ type: GET_RENTS, payload: response.data });
       },
       (error) => {
         return error;

@@ -65,7 +65,8 @@ Vehicles.belongsTo(City)
 City.hasMany(Vehicles);
 Users.hasMany(Rent);
 Rent.belongsTo(Users);
-Vehicles.hasOne(Rent);
+Rent.belongsTo(Vehicles);
+Vehicles.hasMany(Rent);
 Users.belongsToMany(Comments, { through: 'comments_by_users'});
 Comments.belongsToMany(Users, { through: 'comments_by_users'});
 
