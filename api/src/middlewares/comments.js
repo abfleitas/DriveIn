@@ -23,7 +23,10 @@ const getAllComentarios = async () => {
         }
       };
     });
-    return allComments;
+
+
+
+    return data;
   } catch (error) {
     console.log();
   }
