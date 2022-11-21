@@ -195,7 +195,6 @@ export default function Navbar() {
                 <div>
                   <Link to="/login">
                   <div  class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-300 hover:bg-gray-100 text-sm text-[#2e3a46] font-bold font-sans  rounded-xl transition duration-200 hover:bg-[#f97d67] hover:ring-[#f97d67] cursor-pointer">
-                  
                     <NavLink to="/login">Iniciar Sesión</NavLink>
                   </div>
                   </Link>

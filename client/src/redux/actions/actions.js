@@ -21,6 +21,15 @@ export const EXIT_SESION = "EXIT_SESION";
 export const LOGIN_USER_AUTH0 = "LOGIN_USER_AUTH0";
 export const REFRESH_AUTH = "REFRESH_AUTH";
 export const VEHICLE_FAVORITE = "VEHICLE_FAVORITE";
+export const DELETE_STATES = "DELETE_STATES";
+
+
+export const deleteStates = () => {
+  return {
+    type: DELETE_STATES,
+
+  };
+};
 
 export const filter = (payload) => {
   return {

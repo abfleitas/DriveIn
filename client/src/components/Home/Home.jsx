@@ -9,11 +9,13 @@ import {
   getComments,
   getCountries,
   getVehicles,
+  deleteStates
 } from "../../redux/actions/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch(deleteStates())
     dispatch(getCountries());
     dispatch(getVehicles());
     dispatch(getComments());

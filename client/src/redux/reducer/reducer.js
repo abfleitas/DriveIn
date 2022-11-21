@@ -19,7 +19,8 @@ import {
   GET_ALL_USERS,
   REFRESH_AUTH,
   ADD_USER,
-  VEHICLE_FAVORITE
+  VEHICLE_FAVORITE,
+  DELETE_STATES
 } from "../actions/actions";
 
 const initialState = {
@@ -56,8 +57,22 @@ if (localStorage.getItem("favoriteItems")) {
 
 //Fin localStorage
 
+
+
+
+
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+// Borrado de store
+    case DELETE_STATES:
+      return {
+        ...state,
+        vehiclesCopy: [],
+        vehiclesByCity: [],
+        city: [],
+         };
+// Borrado del store
     case FILTER:
       const filtrados = [];
       let vehiclefiltrado = state.vehiclesByCity;
