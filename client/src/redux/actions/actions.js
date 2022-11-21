@@ -219,7 +219,11 @@ export const registerUser = (payload) => async (dispatch) => {
       type: ADD_USER,
     });
   } catch (error) {
-    console.log(error);
+    return swal({
+      title: "Ese usuario ya existe",
+      text: "Utiliza un mail distinto para registrarte",
+      icon: "error"
+    })
   }
 };
 

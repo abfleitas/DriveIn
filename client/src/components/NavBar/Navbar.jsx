@@ -27,7 +27,7 @@ export default function Navbar() {
 
   const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
   let location = useLocation();
-
+  console.log(userLogin)
   return (
     <div>
       <div className="bg-blue-500">

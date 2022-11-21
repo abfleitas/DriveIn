@@ -38,7 +38,7 @@ export const User = ({ img, name }) => {
         <figure className="w-[40px] h-[40px] ml-4 mt-[4px] m-auto">
           <img
             src={img}
-            alt="img-user"
+            alt="user"
             className=" w-full h-full rounded-full"
           />
         </figure>
