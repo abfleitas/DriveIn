@@ -1,5 +1,13 @@
-const { Users, Vehicles, Rent } = require("../db.js");
-const usersList = require("./users.json");
+
+
+const {Users, Vehicles, Rent} = require('../db.js')
+
+const {dashboard} = require ("../middlewares/dashboard")
+
+const usersList = require('./users.json')
+
+
+
 
 async function postUser(req, res) {
   const { name, lastName, phone, whatsapp, email, password } = req.body;
@@ -38,21 +46,29 @@ async function getUserById(req, res) {
 }
 
 async function getUsers(req, res) {
-  try {
-    if (!(await Users.findAll()).length) await Users.bulkCreate(usersList);
-    console.log(await Users.findAll());
-    let users = await Users.findAll({
-      include: {
-        model: Vehicles,
-        model: Rent,
-      },
-    });
-    return res.status(200).json(users);
-  } catch (error) {
-    res.json(error);
-    return;
+
+
+  const {order, corte, pagina} = dashboard(req.query)
+
+    try {
+      if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
+      // console.log(await Users.findAll());
+      let users = await Users.findAll({
+        include: {
+          model: Vehicles,
+          model: Rent
+        },
+        order: order,
+        limit: corte,
+        offset: pagina
+      });
+      return res.status(200).json(users)
+    } catch (error) {
+      res.json(error);
+      return;
+    }
+
   }
-}
 
 async function getUserByEmail(req, res) {
   try {
@@ -82,6 +98,7 @@ async function getLoginUser(req, res) {
         model: Rent,
       },
     });
+    if(!exist.active) return res.status(200).send("Usuario deshabilitado")
     if (exist) return res.status(200).send(exist);
     return res.status(400).send("No existe el usuario con esos datos");
   } catch (error) {

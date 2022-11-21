@@ -68,7 +68,7 @@ export default function AllCards() {
       <div className=" flex flex-wrap gap-x-16 gap-y-24 mt-10 mb-5 justify-center">
         {currentVehicles.length ? (
           currentVehicles.map((v, index) => (
-            <div>
+            <div key={index}>
               <Card
                 key={index + v.id}
                 id={v.id}

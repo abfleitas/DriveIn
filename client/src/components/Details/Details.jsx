@@ -27,6 +27,8 @@ export default function Details() {
     }
   };
 
+  const handleOnClose = () => setOpen(false);
+
   useEffect(() => {
     dispatch(setVehicleDetailsState(id));
   }, [dispatch, id]);
@@ -148,7 +150,7 @@ export default function Details() {
           >
             ALQUILAR
           </button>
-          {!open ? null : <PaymentForm />}
+          <PaymentForm onClose={handleOnClose} visible={open} />
         </div>
       )}
     </div>

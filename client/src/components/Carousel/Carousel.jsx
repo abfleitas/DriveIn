@@ -26,6 +26,7 @@ const Carousel = () => {
 
   return (
     <>
+
       <div className="ml-[20%] flex items-center text-2xl font-sans font-bold text-[#009A88]">
         <i className="fa-solid fa-star mr-5 flex"></i>
         <h1 className="flex ">
@@ -46,6 +47,7 @@ const Carousel = () => {
         z-10 opacity-50 cursor-pointer hover:opacity-90"
         />
 
+
         <div
           id="slider"
           className="flex overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
@@ -53,11 +55,8 @@ const Carousel = () => {
           {cities &&
             cities.map((c, index) => {
               return (
-                <NavLink to={`/ciudad/${c.id}`}>
-                  <div
-                    className="p-2 relative cursor-pointer h-[258px]"
-                    key={index}
-                  >
+                <NavLink to={`/ciudad/${c.id}`} key={index}>
+                  <div className="p-2 relative cursor-pointer h-[258px]">
                     <img
                       className=" rounded-lg max-w-sm h-full"
                       src={c.photo}
@@ -74,11 +73,13 @@ const Carousel = () => {
             })}
         </div>
         <img
+
           src={FlechaDerecha}
           alt="derecha"
           onClick={slideRight}
           className="w-[85px] h-[85px] p-4 bg-slate-300 rounded-full absolute z-10 right-0 opacity-50 cursor-pointer hover:opacity-100"
         />
+
       </div>
     </>
   );

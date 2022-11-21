@@ -5,36 +5,36 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import icon from "../../images/flecha.png";
 import "./user.css";
+import swal from "sweetalert";
 
 export const User = ({ img, name }) => {
   const { isAuthenticated, logout, isLoading } = useAuth0();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
 
   useEffect(() => {
     dispatch(refreshAuthUser());
   }, [isLoading]);
-
 
   const handlerExitSession = (e) => {
     if (isAuthenticated) {
       localStorage.removeItem("UserLogin");
       logout();
     } else {
-      dispatch(exitSesion());
+      localStorage.removeItem("UserLogin");
+      // dispatch(exitSesion());
+      swal({
+        title: "Has cerrado sesión.",
+        icon: "success",
+      });
       navigate("/home");
-
     }
   };
-  console.log(userLogin);
-
 
   return (
-    <nav className="w-[200px] h-[50px] bg-slate-900 rounded-xl header">
-      <div className="w-full flex flex-row justify-around">
+    <nav className="w-[200px] h-[50px] bg-[#2E3A46] rounded-xl header">
+      <div className="w-full flex flex-row justify-around ">
         <figure className="w-[40px] h-[40px] ml-4 mt-[4px] m-auto">
           <img
             src={img}
@@ -42,13 +42,13 @@ export const User = ({ img, name }) => {
             className=" w-full h-full rounded-full"
           />
         </figure>
-        <span className="text-white m-auto">{name}</span>
+        <span className="text-white font-bold align-center m-auto">{name}</span>
       </div>
-      <ul className="z-999 -mt-[2px] ml-16 hidden absolute r-0 w-[130px] bg-slate-900 list">
+      <ul className="z-999 -mt-[2px] ml-16 hidden absolute r-0 w-[130px] bg-slate-900 list rounded">
         <li>
           <Link to="/user">
-            <button className="w-full text-white border-none hover:bg-[#34d399]">
-              Usuario
+            <button className="w-full text-white border-none rounded hover:bg-[#34d399]">
+              Mi Perfil
             </button>
           </Link>
         </li>
@@ -73,7 +73,7 @@ export const User = ({ img, name }) => {
         <li className="list__item">
           <button
             onClick={() => handlerExitSession()}
-            className="w-full text-white border-none hover:bg-[#34d399]"
+            className="w-full text-white border-none rounded hover:bg-[#34d399]"
           >
             Salir
           </button>

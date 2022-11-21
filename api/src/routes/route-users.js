@@ -80,7 +80,7 @@ user.put("/:id", async (req, res) => {
     const userFinal = await Users.findByPk(id);
     res.status(201).send(userFinal);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(400).send(error.message);
   }
 

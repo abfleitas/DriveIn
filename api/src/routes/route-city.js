@@ -44,7 +44,12 @@ router.get("/:id", async (req, res) => {
         },
       },
     });
-    return res.status(200).send(allCars);
+    if (allCars.length) {
+      return res.status(200).send(allCars);
+    } else {
+      res.status(404).send("la busqueda fallo");
+    }
+
   } catch (error) {
     res.status(404).send("la busqueda fallo");
   }
