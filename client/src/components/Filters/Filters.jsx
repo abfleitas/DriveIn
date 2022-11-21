@@ -52,7 +52,6 @@ export default function Filters({ setChange }) {
 
   const handlerBrand = (e) => {
     dispatch(filter({ key: e.target.name, value: e.target.value }));
-
   };
   return (
     <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-white h-fit rounded-tr-[100px] rounded-br-2xl shadow-xl">
@@ -87,7 +86,9 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2 "
               />
-              <label htmlFor="all" className="">Todos</label>
+              <label htmlFor="all" className="">
+                Todos
+              </label>
             </div>
             <div>
               <input
@@ -230,16 +231,12 @@ export default function Filters({ setChange }) {
               <option value="all">Todas</option>
               {brand &&
                 brand.map((el, i) => (
-                  <>
-                    <option name="brand" value={el}>
-                      {el}
-                    </option>
-                  </>
+                  <option name="brand" value={el} key={i}>
+                    {el}
+                  </option>
                 ))}
             </select>
           </div>
-          {/* <p>{data.toyota}</p>
-          <p>{data.mitsubishi}</p> */}
         </div>
       </div>
     </div>

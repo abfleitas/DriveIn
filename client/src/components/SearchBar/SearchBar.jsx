@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCities } from "../../redux/actions/actions";
 import { NavLink } from "react-router-dom";
@@ -12,13 +12,6 @@ export default function SearchBar() {
     id: "",
   });
 
-  const handleInputChange = (e) => {
-    e.preventDefault();
-    setInput({
-      ...input,
-      [e.target.value]: e.target.value,
-    });
-  };
   const handleCity = (e) => {
     e.preventDefault();
     if (e.target.value === "City") {
@@ -32,7 +25,6 @@ export default function SearchBar() {
         id: e.target.value,
       });
     }
-
   };
   const handleCountry = (e) => {
     e.preventDefault();
@@ -42,7 +34,7 @@ export default function SearchBar() {
         country: "",
         id: "",
       });
-      cities = ""
+      cities = "";
     } else {
       setInput({
         ...input,
@@ -50,8 +42,6 @@ export default function SearchBar() {
       });
       dispatch(getCities(e.target.value));
     }
-
-
   };
 
   return (
@@ -94,7 +84,7 @@ export default function SearchBar() {
               );
             })}
         </select>
-        <div className="relative flex my-4 justify-center space-x-4">
+        {/* <div className="relative flex my-4 justify-center space-x-4">
           <div className="relative block">
             <label className="text-[#009A88] m-0">Desde</label>
             <input
@@ -115,19 +105,20 @@ export default function SearchBar() {
               className="relative flex  left-[40px] bottom-[23px] w-50  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm my-6"
             />
           </div>
-        </div>
-        {input.id &&
-        <NavLink to={`/ciudad/${input.id}`}>
-          <button
-            type="submit"
-            value="Buscar"
-            className="inline-block rounded-lg bg-[#009A88] px-4 py-1.5 text-base font-semibold leading-7 text-white ring-1 ring-[#6ee7b7] hover:bg-[#34d399] hover:ring-[#34d399] "
-          >
-            <p className="justify-items-center justify-center text-center px-4 py-1.5">
-              Buscar
-            </p>
-          </button>
-        </NavLink> }
+        </div> */}
+        {input.id && (
+          <NavLink to={`/ciudad/${input.id}`}>
+            <button
+              type="submit"
+              value="Buscar"
+              className="inline-block rounded-lg bg-[#009A88] px-4 py-1.5 text-base font-semibold leading-7 text-white ring-1 ring-[#6ee7b7] hover:bg-[#34d399] hover:ring-[#34d399] "
+            >
+              <p className="justify-items-center justify-center text-center px-4 py-1.5">
+                Buscar
+              </p>
+            </button>
+          </NavLink>
+        )}
       </form>
     </div>
   );

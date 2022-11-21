@@ -205,7 +205,7 @@ export const postMails = (payload) => {
 
 export const registerUser = (payload) => async (dispatch) => {
   try {
-    const newUser = await axios.post("/user/register", payload);
+    await axios.post("/user/register", payload);
     return dispatch({
       type: ADD_USER,
     });
@@ -236,18 +236,20 @@ export const loginUserAuth = (payload) => async (dispatch) => {
   }
 };
 
-export const exitSesion = () => async(dispatch) => {
+export const exitSesion = () => async (dispatch) => {
   try {
     const user = JSON.parse(localStorage.getItem("UserLogin"));
-    const favoritos = JSON.parse(localStorage.getItem("favoriteItems")).map(item => item.id)
+    const favoritos = JSON.parse(localStorage.getItem("favoriteItems")).map(
+      (item) => item.id
+    );
     const data = {
       vehicles: favoritos,
-      idUser: user.id
-    }
+      idUser: user.id,
+    };
     console.log(favoritos);
-    await axios.put('/user/addFavorites', data);
+    await axios.put("/user/addFavorites", data);
     localStorage.removeItem("UserLogin");
-    localStorage.removeItem("favoriteItems")
+    localStorage.removeItem("favoriteItems");
 
     return dispatch({
       type: EXIT_SESION,
@@ -304,45 +306,45 @@ export const getPayment = (payload) => {
   };
 };
 
-export const addFavorite = (payload) => async(dispatch) => {
+export const addFavorite = (payload) => async (dispatch) => {
   try {
-    await axios.put('/user/addfavorite', payload);
+    await axios.put("/user/addfavorite", payload);
     const user = JSON.parse(localStorage.getItem("UserLogin"));
     const dataUser = await axios.get(`/user/info/${user.email}`);
     return dispatch({
       type: VEHICLE_FAVORITE,
-      payload: dataUser.data.vehicles
-    })
+      payload: dataUser.data.vehicles,
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export const userFavorite = () => async(dispatch) => {
+export const userFavorite = () => async (dispatch) => {
   try {
     const user = JSON.parse(localStorage.getItem("UserLogin"));
-    const favorites = await axios.get(`/user/info/${user.email}`)
+    const favorites = await axios.get(`/user/info/${user.email}`);
     return dispatch({
       type: USER_FAVORITES,
-      payload: favorites.data.vehicles
-    })
+      payload: favorites.data.vehicles,
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
-export const deleteFavorite = (payload) => async(dispatch) => {
+export const deleteFavorite = (payload) => async (dispatch) => {
   try {
-    await axios.delete(`/user/addFavorite?id=${payload.id}&idUser=${payload.idUser}`);
+    await axios.delete(
+      `/user/addFavorite?id=${payload.id}&idUser=${payload.idUser}`
+    );
     const user = JSON.parse(localStorage.getItem("UserLogin"));
-    const favorites = await axios.get(`/user/info/${user.email}`)
+    const favorites = await axios.get(`/user/info/${user.email}`);
     return dispatch({
       type: REMOVE_FAVORITES,
-      payload: favorites.data.vehicles
-    })
+      payload: favorites.data.vehicles,
+    });
   } catch (error) {
     console.log(error);
   }
-}
-
-
+};

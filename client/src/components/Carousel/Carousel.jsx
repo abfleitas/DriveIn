@@ -24,14 +24,18 @@ const Carousel = () => {
   return (
     <>
       <div className="ml-[20%] flex items-center text-2xl font-sans font-bold">
-        <i className="fa-solid fa-star mr-5"></i>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3334/3334338.png"
+          className="h-[25px] mr-3"
+        ></img>
         <h1>DESTINOS FAVORITOS</h1>
       </div>
       <div className="relative flex items-center">
-        <i
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/271/271228.png"
           onClick={slideLeft}
-          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-90"
-        ></i>
+          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 opacity-50 cursor-pointer hover:opacity-80 rotate-180"
+        ></img>
         <div
           id="slider"
           className="flex overflow-x-scroll scroll whitespace-nowrap scroll-smooth scrollbar-hide"
@@ -39,11 +43,8 @@ const Carousel = () => {
           {cities &&
             cities.map((c, index) => {
               return (
-                <NavLink to={`/ciudad/${c.id}`}>
-                  <div
-                    className="p-2 relative cursor-pointer h-[258px]"
-                    key={index}
-                  >
+                <NavLink to={`/ciudad/${c.id}`} key={index}>
+                  <div className="p-2 relative cursor-pointer h-[258px]">
                     <img
                       className=" rounded-lg max-w-sm h-full"
                       src={c.photo}
@@ -59,10 +60,11 @@ const Carousel = () => {
               );
             })}
         </div>
-        <i
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/271/271228.png"
           onClick={slideRight}
-          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 right-0 opacity-50 cursor-pointer hover:opacity-100"
-        ></i>
+          className="w-[106px] h-[106px] p-10 bg-slate-300 rounded-full absolute z-10 right-0 opacity-50 cursor-pointer hover:opacity-80"
+        ></img>
       </div>
     </>
   );
