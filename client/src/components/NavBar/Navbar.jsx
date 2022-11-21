@@ -27,7 +27,6 @@ export default function Navbar() {
 
   const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
   let location = useLocation();
-  console.log(userLogin)
   return (
     <div>
       <div className="bg-blue-500">
@@ -87,6 +86,7 @@ export default function Navbar() {
                 Nosotros
               </div>
             </li>
+            {/*
             <li className="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ export default function Navbar() {
               >
                 Servicios
               </div>
-            </li>
+            </li> */}
             <li className="text-[#f97d67]">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -200,11 +200,9 @@ export default function Navbar() {
               location.pathname !== "/register" && (
                 <div>
                   <Link to="/login">
-
                     <div className="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-300 hover:bg-gray-100 text-sm text-[#2e3a46] font-bold font-sans  rounded-xl transition duration-200 hover:bg-[#f97d67] hover:ring-[#f97d67] cursor-pointer">
                       <NavLink to="/login">Iniciar Sesión</NavLink>
                     </div>
-
                   </Link>
                   <div className="hidden lg:inline-block py-2 px-6 bg-[#009A88] hover:bg-[#34d399] hover:ring-[#34d399] text-sm text-white font-bold font-sans rounded-xl transition duration-200 cursor-pointer">
                     <NavLink to="/register">Registrarse</NavLink>
