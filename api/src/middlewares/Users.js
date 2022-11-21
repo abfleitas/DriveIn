@@ -10,10 +10,10 @@ const usersList = require('./users.json')
 
 
 async function postUser(req, res) {
-  const { name, lastName, phone, whatsapp, email, password } = req.body;
-  const newUser = { name, lastName, phone, whatsapp, email, password };
+  const { name, lastName,  whatsapp, email, password } = req.body;
+  const newUser = { name, lastName,  whatsapp, email, password };
   try {
-    if (!name || !lastName || !phone || !whatsapp || !email || !password) {
+    if (!name || !lastName || !whatsapp || !email || !password) {
       return res.json({ error: "Incomplete information" });
     }
 
