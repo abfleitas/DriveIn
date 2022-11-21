@@ -58,7 +58,8 @@ export default function Filters({ setChange }) {
   return (
     <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-white h-fit rounded-tr-[100px] rounded-br-2xl shadow-xl">
       <div>
-        <h2 className="font-bold text-black mt-2">ORDENAR POR:</h2>
+        <br />
+        {/* <h2 className="font-bold text-black mt-2">ORDENAR POR:</h2> */}
         <div className="p-5">
           <select
             defaultValue="price"
@@ -73,10 +74,13 @@ export default function Filters({ setChange }) {
           </select>
         </div>
         <br></br>
-        <h2 className="font-bold text-black">FILTRAR POR:</h2>
+        <br />
+        {/* <h2 className="font-bold text-black">FILTRAR POR:</h2> */}
 
         <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
-          <label className="font-bold text-[#009A88]">Categoría: </label>
+          <label className="font-medium flex justify-start text-[#009A88]">
+            Categoría:{" "}
+          </label>
 
           <div className="rounded-md p-3  flex flex-col items-start">
             <div>
@@ -88,7 +92,9 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2 "
               />
-              <label htmlFor="all" className="">Todos</label>
+              <label htmlFor="all" className="">
+                Todos
+              </label>
             </div>
             <div>
               <input
@@ -99,7 +105,10 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2 "
               />
-              <label htmlFor="Sedan">Sedan {`(${data.Sedan})`} </label>
+              <label htmlFor="Sedan">
+                Sedan{" "}
+                <span className="text-[#94a3b8]">{`(${data.Sedan})`} </span>{" "}
+              </label>
             </div>
             <div>
               <input
@@ -110,7 +119,9 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="SUV">Suv {`(${data.SUV})`} </label>
+              <label htmlFor="SUV">
+                Suv <span className="text-[#94a3b8]">{`(${data.SUV})`} </span>{" "}
+              </label>
             </div>
             <div>
               <input
@@ -121,7 +132,10 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="Pickup">Pickup {`(${data.Pickup})`} </label>
+              <label htmlFor="Pickup">
+                Pickup{" "}
+                <span className="text-[#94a3b8]">{`(${data.Pickup})`} </span>{" "}
+              </label>
             </div>
             <div>
               <input
@@ -133,7 +147,8 @@ export default function Filters({ setChange }) {
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
               <label htmlFor="Hatchback">
-                Hatchback {`(${data.Hatchback})`}{" "}
+                Hatchback{" "}
+                <span className="text-[#94a3b8]">{`(${data.Hatchback})`} </span>{" "}
               </label>
             </div>
             <div>
@@ -145,12 +160,16 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="CUV">Cuv {`(${data.CUV})`}</label>
+              <label htmlFor="CUV">
+                Cuv <span className="text-[#94a3b8]">{`(${data.CUV})`} </span>
+              </label>
             </div>
           </div>
         </div>
         <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
-          <label className="font-bold text-[#009A88] ml-2">Transmisión: </label>
+          <label className="font-medium flex justify-start text-[#009A88] ml-2">
+            Transmisión:{" "}
+          </label>
 
           <div className="rounded-md  p-3 flex flex-col items-start">
             <div>
@@ -173,7 +192,10 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="Manual">Manual {`(${data.Manual})`} </label>
+              <label htmlFor="Manual">
+                Manual{" "}
+                <span className="text-[#94a3b8]">{`(${data.Manual})`} </span>{" "}
+              </label>
             </div>
             <div>
               <input
@@ -185,13 +207,18 @@ export default function Filters({ setChange }) {
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
               <label htmlFor="Automatico">
-                Automático {`(${data.Automatico})`}
+                Automático{" "}
+                <span className="text-[#94a3b8]">
+                  {`(${data.Automatico})`}{" "}
+                </span>
               </label>
             </div>
           </div>
         </div>
         <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
-          <label className="font-bold text-[#009A88]">Características: </label>
+          <label className="font-medium flex justify-start text-[#009A88]">
+            Características:{" "}
+          </label>
 
           <div className="rounded-md p-3 flex flex-wrap gap-x-2">
             <div>
@@ -203,7 +230,10 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="AC">Aire Acondicionado {`(${data.air})`} </label>
+              <label htmlFor="AC">
+                Aire Acondicionado{" "}
+                <span className="text-[#94a3b8]">{`(${data.air})`} </span>{" "}
+              </label>
             </div>
             <div>
               <input
@@ -214,12 +244,17 @@ export default function Filters({ setChange }) {
                 onChange={handleFilters}
                 className="border-gray-300 rounded h-5 w-5 mx-2"
               />
-              <label htmlFor="seats">+4 Asientos {`(${data.seats})`}</label>
+              <label htmlFor="seats">
+                +4 Asientos{" "}
+                <span className="text-[#94a3b8]">{`(${data.seats})`} </span>
+              </label>
             </div>
           </div>
         </div>
         <div className="p-5 bg-white text-[#2E3A46] rounded-br-2xl shadow-xl">
-          <label className="font-bold text-[#009A88]">Marca: </label>
+          <label className="font-medium flex justify-start text-[#009A88]">
+            Marca:{" "}
+          </label>
 
           <div>
             <select

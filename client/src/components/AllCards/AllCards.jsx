@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 // import { getVehicles } from "../../redux/actions/actions";
 import Card from "../Card/Card";
 import { Link } from "react-router-dom";
+import Siguiente from "../../images/flechablancader.png";
+import Anterior from "../../images/flechablancaizq.png";
 
 export default function AllCards() {
   const vehicles = useSelector((state) => state.vehiclesCopy);
@@ -89,21 +91,21 @@ export default function AllCards() {
         )}
       </div>
       {currentVehicles.length ? (
-        <footer className="mb-5">
+        <footer className="mb-5  space-x-4 inline-block align-middle  ">
           {currentPage !== 1 ? (
             <button
-              className="bg-[#009A88] p-3 rounded-full"
+              className="bg-[#009A88] hover:bg-[#72aca5] p-3 h-10 w-10 rounded-full "
               onClick={prevHandler}
             >
-              Anterior
+              <img src={Anterior} alt="anterior" />
             </button>
           ) : null}
           {pageNumbers.map((number) => (
             <button
               className={
                 currentPage === number
-                  ? "bg-[#F97D67] p-3 rounded-full"
-                  : " p-3 rounded-full"
+                  ? "bg-[#009A88] hover:bg-[#72aca5]  focus:bg-[#2E3A46] p-2 h-10 w-10 rounded-full flex-1 text-white text-center justify-center"
+                  : " bg-[#009A88] hover:bg-[#72aca5] p-2 h-10 w-10 rounded-full flex-1 text-white text-center justify-center"
               }
               key={number}
               onClick={() => Page(number)}
@@ -113,10 +115,10 @@ export default function AllCards() {
           ))}
           {currentPage !== pageNumbers.length ? (
             <button
-              className="bg-[#009A88] p-3 rounded-full"
+              className="bg-[#009A88] hover:bg-[#72aca5] p-3 h-10 w-10 rounded-full text-center justify-center "
               onClick={nextHandler}
             >
-              Siguiente
+              <img src={Siguiente} alt="siguiente" />
             </button>
           ) : null}
         </footer>
