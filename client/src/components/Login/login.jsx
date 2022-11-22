@@ -55,13 +55,13 @@ export const Login=() => {
         )
     }    
 
-    const handleSubmit = () => {
-        dispatch(loginUser(input))
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        dispatch(loginUser(input, navigate))
         setInput({
             email:"",       
             password:""
         })
-        navigate("/home")
     }
        
 
