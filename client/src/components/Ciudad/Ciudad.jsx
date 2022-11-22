@@ -26,13 +26,13 @@ export default function Ciudad() {
           <Filters />
         </div>
         <div className="w-10/12 h-full flex flex-col">
-          <div className="relative max-h-50 rounded-bl-3xl rounded-br-3xl m-auto">
+          <div className="relative max-h-50 rounded-bl-3xl rounded-br-3xl m-auto w-[600px]">
             <h1 className="absolute bottom-0 bg-slate-200 bg-opacity-50 p-2 rounded-bl-3xl rounded-tr-3xl font-bold text-3xl text-white">
               {city[0] && city[0].name}
             </h1>
             <img
               src={city[0] && city[0].photo}
-              className="rounded-b-3xl max-w-fit max-h-40 shadow-xl"
+              className="rounded-b-3xl w-full max-h-40 shadow-xl"
             />
           </div>
           <AllCards />
