@@ -11,6 +11,8 @@ export default function Ciudad() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const city = useSelector((state) => state.city);
+  const [change, setChange] = useState()
+
 
   useEffect(() => {
     dispatch(getCity(id));
@@ -23,7 +25,7 @@ export default function Ciudad() {
       </div>
       <div className="flex">
         <div className="w-2/12 bg-[#D9D9D9] mr-1">
-          <Filters />
+          <Filters setChange= {setChange} />
         </div>
         <div className="w-10/12 h-full flex flex-col">
           <div className="relative max-h-50 rounded-bl-3xl rounded-br-3xl m-auto w-[600px]">
