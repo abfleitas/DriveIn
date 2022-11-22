@@ -2,9 +2,10 @@ import * as React from "react";
 import { Admin, Resource, ListGuesser,useDataProvider, useGetMany, fetchUtils  } from 'react-admin';
 import simpleRestProvider  from 'ra-data-simple-rest';
 import { UserList } from './users';
-import {vehiclesList} from './vehicles'
- import { dataProvider } from './dataProvider';
-
+import {vehiclesList} from './vehicles';
+import { dataProvider } from './dataProvider';
+import CreateVehicle from "./CreateVehicle";
+import { commentsList } from "./comments";
  
 //const dataProvider = simpleRestProvider('http://localhost:3001')
 // const {id} = useGetOne("http://localhost:3001", {id})
@@ -14,7 +15,8 @@ const Administrador = () => (
         
             <Resource name="user"  list={UserList} />
             {/* <Resource name="comments" list={ListGuesser} /> */}
-            <Resource name="vehicles"  list={vehiclesList} />
+            <Resource name="vehicles" list={vehiclesList} create={CreateVehicle} />
+            <Resource name="comments" list={commentsList} />
         </Admin>
       
     );
