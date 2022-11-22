@@ -124,13 +124,14 @@ export default function rootReducer(state = initialState, action) {
     case FILTER_PRICE:
       function sorted5(action) {
         return action.payload === "lower"
-          ? state.vehiclesCopy.sort((a, b) => a.initialPrice - b.initialPrice)
-          : state.vehiclesCopy.sort((a, b) => b.initialPrice - a.initialPrice);
+          ? state.vehiclesByCity.sort((a, b) => a.initialPrice - b.initialPrice)
+          : state.vehiclesByCity.sort((a, b) => b.initialPrice - a.initialPrice);
       }
       let sortedPrice = sorted5(action);
       return {
         ...state,
-        vehiclesCopy: sortedPrice,
+        vehiclesByCity: sortedPrice,
+        vehicleCopy: sortedPrice
       };
     //ADD_FAVORITES
     case USER_FAVORITES:

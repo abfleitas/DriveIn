@@ -47,7 +47,8 @@ export default function Filters({ setChange }) {
 
   const handlePrice = (e) => {
     dispatch(filterPrice(e.target.value));
-    setChange(e.target.value);
+    console.log(vehiclesCopy)
+     setChange(e.target.value);
   };
 
   const handlerBrand = (e) => {
