@@ -1,11 +1,8 @@
-
-
 const {Users, Vehicles, Rent} = require('../db.js')
-
 const {dashboard} = require ("../middlewares/dashboard")
-
 const usersList = require('./users.json')
-
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 
 
@@ -50,12 +47,18 @@ async function getUserById(req, res) {
 async function getUsers(req, res) {
 
   let activos = true
+  let searchBar = ""
+  
   if (req.query.filter) {
     let filter = JSON.parse(req.query.filter);
     let categoria = filter.category
     if (categoria === "noActives") activos = false
-    console.log(activos)
+    if (filter.q) searchBar = filter.q
+    
+    console.log(searchBar)
+
   } 
+
   const {order, corte, pagina} = dashboard(req.query)
 
     try {
@@ -64,6 +67,7 @@ async function getUsers(req, res) {
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
       // console.log(await Users.findAll());
       let users = await Users.findAll({
+        
         include: {
           model: Vehicles,
           model: Rent
@@ -71,9 +75,12 @@ async function getUsers(req, res) {
         order: order,
         limit: corte,
         offset: pagina,
-        where: {active: activos}
+        where: {active: activos,
+                name: {
+                      [Op.iLike]: '%' + searchBar + '%'
+                      },
+        },
       }
-       
       );
       return res.status(200).json(users)
     } catch (error) {
