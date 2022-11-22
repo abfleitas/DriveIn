@@ -4,7 +4,7 @@ const vehicles = require('../routes/route-vehicles.js')
 
 async function getRent(userId) {
       try {
-        console.log(userId)
+        
         let rents = await Rent.findAll({
           where: {userId},
           include: {model: Vehicles}

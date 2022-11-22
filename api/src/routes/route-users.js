@@ -86,4 +86,33 @@ user.put("/:id", async (req, res) => {
 
 });
 
+// ***********************REACT ADMIN DELETE*****************
+
+user.delete("/", async (req, res) => {
+    try {
+      
+      const {filter} = req.query
+      console.log(req.query)
+      const id = JSON.parse(filter);
+      console.log(id.id)  
+      
+      id.id.map(async e => {
+        const user = await Users.findByPk(e) ;
+        if (user.active === true) user.active = false;
+        await user.update({e})
+        await user.save()
+        console.log(user) 
+      })
+      
+    
+      const userFinal = await Users.findByPk(id);
+      res.status(201).send(userFinal);
+    } catch (error) {
+      // console.log(error);
+      res.status(400).send(error.message);
+    }
+  
+  });
+
+// ***********************REACT ADMIN DELETE*****************
 module.exports = user;
