@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, NumberField, Pagination, Button, FilterButton, TopToolbar,ExportButton, CreateButton  } from 'react-admin';
+import { List, Datagrid, TextField, ImageField, NumberField, Pagination, Button, FilterButton, TopToolbar,ExportButton, CreateButton  } from 'react-admin';
 
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
 
@@ -20,7 +20,7 @@ const ListActions = (props) => (
 export const vehiclesList = () => (
     <List   actions={<ListActions/>} title="List of vehicles" pagination={<PostPagination /> }>
         <Datagrid rowClick="edit">
-             <NumberField source="id" />
+            <NumberField source="id" />
             <TextField source="brand" />
             <TextField source="model" />
             <TextField source="year" />
@@ -28,7 +28,7 @@ export const vehiclesList = () => (
             <TextField source="transmition" />
             <TextField source="air" />
             <TextField source="category" />
-            <TextField source="photo" />
+            <ImageField source="photo" />
             <TextField source="availability" />
             <NumberField source="initialPrice" />
             <NumberField source="cityId" />
