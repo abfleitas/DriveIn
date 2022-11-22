@@ -239,21 +239,39 @@ export const registerUser = (payload) => async (dispatch) => {
   }
 };
 
-export const loginUser = (payload) => async (dispatch) => {
-  const user = await axios.post("/user/login", payload);
-  if(user.data === "Usuario deshabilitado") {
-    localStorage.removeItem("UserLogin");
-    return swal({
-      title: "Usuario deshabilitado",
-      text: `Ponte en contacto con un administrador`,
-      icon: "error",
+export const loginUser = (payload, navigate) => async (dispatch) => {
+  try {
+    const user = await axios.post("/user/login", payload);
+    swal({
+      title: "Sesión iniciada",
+      timer: 2000,
+      icon: "success",
+      buttons: false,
     });
+    await localStorage.setItem("UserLogin", JSON.stringify(user.data));
+    navigate("/home")
+    return dispatch({
+      type: LOGIN_USER,
+      payload: "USUARIO LOGUEADO",
+    });
+  } catch (error) {
+    if(error.response.data === "No existe el usuario con esos datos") {
+      localStorage.removeItem("UserLogin");
+      return swal({
+        title: "Email o contraseña incorrecto",
+        text: `Intenta nuevamente`,
+        icon: "error",
+      });
+    }
+    if(error.response.data === "Usuario deshabilitado") {
+      localStorage.removeItem("UserLogin");
+      return swal({
+        title: "Usuario deshabilitado",
+        text: `Ponte en contacto con un administrador`,
+        icon: "error",
+      });
+    }
   }
-  await localStorage.setItem("UserLogin", JSON.stringify(user.data));
-  return dispatch({
-    type: LOGIN_USER,
-    payload: "USUARIO LOGUEADO",
-  });
 };
 
 export const loginUserAuth = (payload) => async (dispatch) => {

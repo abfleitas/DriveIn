@@ -98,11 +98,11 @@ async function getLoginUser(req, res) {
         model: Rent,
       },
     });
-    if(!exist.active) return res.status(200).send("Usuario deshabilitado")
+    if (!exist) throw Error("No existe el usuario con esos datos")
+    if(!exist.active) throw Error("Usuario deshabilitado")
     if (exist) return res.status(200).send(exist);
-    return res.status(400).send("No existe el usuario con esos datos");
   } catch (error) {
-    res.status(404).send(error);
+    res.status(404).send(error.message);
   }
 }
 
