@@ -45,12 +45,22 @@ async function getUserById(req, res) {
   }
 }
 
+
+
 async function getUsers(req, res) {
 
-
+  let activos = true
+  if (req.query.filter) {
+    let filter = JSON.parse(req.query.filter);
+    let categoria = filter.category
+    if (categoria === "noActives") activos = false
+    console.log(activos)
+  } 
   const {order, corte, pagina} = dashboard(req.query)
 
     try {
+      
+
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
       // console.log(await Users.findAll());
       let users = await Users.findAll({
@@ -60,8 +70,11 @@ async function getUsers(req, res) {
         },
         order: order,
         limit: corte,
-        offset: pagina
-      });
+        offset: pagina,
+        where: {active: activos}
+      }
+       
+      );
       return res.status(200).json(users)
     } catch (error) {
       res.json(error);

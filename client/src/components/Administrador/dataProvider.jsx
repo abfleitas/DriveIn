@@ -18,15 +18,9 @@ export const dataProvider= {
             range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
             filter: JSON.stringify(params.filter),
         };
-        console.log(stringify(query))
-        const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        console.log(httpClient(url))
-        console.log(httpClient(url).then(({ headers, json }) => ({
-            data: json,
-            total: parseInt(headers.get('content-range').split('/').pop(), 10),
-        }
         
-        )))
+        const url = `${apiUrl}/${resource}?${stringify(query)}`;
+      
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
@@ -91,15 +85,22 @@ export const dataProvider= {
             data: { ...params.data, id: json.id },
         })),
 
-    delete: (resource, params) =>
+    delete: (resource, params) => {
+        
         httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'DELETE',
-        }).then(({ json }) => ({ data: json })),
+        }).then(({ json }) => ({ data: json }))
+        
+    },
+   
+    
 
     deleteMany: (resource, params) => {
+        
         const query = {
             filter: JSON.stringify({ id: params.ids}),
         };
+        console.log(stringify(query))
         return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
             method: 'DELETE',
         }).then(({ json }) => ({ data: json }));
