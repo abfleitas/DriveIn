@@ -24,7 +24,7 @@ export default function CheckOutForm() {
   const disableDates = () => {
     let today, dd, mm, yyyy;
     today = new Date();
-    dd = today.getDate();
+    dd = today.getDate() + 1;
     mm = today.getMonth() + 1;
     yyyy = today.getFullYear();
     return yyyy + "-" + mm + "-" + dd;
@@ -79,6 +79,24 @@ export default function CheckOutForm() {
     }
   };
 
+  const maxDesde = () => {
+    let dato = date.Hasta && (date.Hasta).split("-")
+    let today = dato && new Date(dato[0], dato[1], dato[2])
+    let mm = today.getMonth();
+    let yyyy = today.getFullYear();
+    let dd = today.getDate() - 1;
+    return yyyy + "-" + mm + "-" + dd;
+  }
+
+  const minHasta = () => {
+    let dato = (date.Desde).split("-")
+    let today = dato && new Date(dato[0], dato[1], dato[2])
+    let mm = today.getMonth();
+    let yyyy = today.getFullYear();
+    let dd = today.getDate() + 1;
+    return yyyy + "-" + mm + "-" + dd;
+  }
+
   return (
     <>
       <div>
@@ -100,6 +118,7 @@ export default function CheckOutForm() {
             <input
               min={disableDates()}
               onChange={handleChange}
+              max={date.Hasta && maxDesde()}
               type="date"
               name="Desde"
               className="flex w-50  h-10  bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
@@ -108,10 +127,11 @@ export default function CheckOutForm() {
           <div className="block">
             <label className="relative text-black text-sm">Hasta</label>
             <input
-              min={date.Desde}
+              min={date.Desde && minHasta()}
               onChange={handleChange}
               type="date"
               name="Hasta"
+              disabled={date.Desde ? false : true}
               className="flex w-50  h-10  bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
             />
           </div>
