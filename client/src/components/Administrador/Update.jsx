@@ -1,16 +1,23 @@
-import { useUpdate, useRecordContext } from 'react-admin';
 
-export const IncreaseLikeButton = () => {
-    const record = useRecordContext();
-    const diff = { likes: record.likes + 1 };
-    const [update, { isLoading, error }] = useUpdate();
-    const handleClick = () => {
-        update(
-            'likes',
-            { id: record.id, data: diff, previousData: record }
-        )
-    }
-    if (error) { return <p>ERROR</p>; }
-    return <button disabled={isLoading} onClick={handleClick}>Like</button>;
-};
+import { useUpdate, useRecordContext, Create, Edit, SimpleForm, EmailInput, ImageInput, TextInput, NumberInput, BooleanInput } from "react-admin";
+
+export const Updates = () => (
+   
+        <Edit title="Edit a User">
+           <SimpleForm>
+            <TextInput disabled label="Id" source="id" />
+              <TextInput source="name" />
+              <TextInput source="lastName" />
+              <TextInput source="email" />
+              <NumberInput source="whatsapp" />
+              <TextInput source="password" />
+              <ImageInput source="photo" />
+              <NumberInput source="role" />
+              <BooleanInput source="active" />
+           </SimpleForm>
+        </Edit>
+    
+
+
+);
 

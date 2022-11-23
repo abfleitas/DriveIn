@@ -96,7 +96,7 @@ export const dataProvider= {
     
 
     deleteMany: (resource, params) => {
-        
+
         const query = {
             filter: JSON.stringify({ id: params.ids}),
         };
