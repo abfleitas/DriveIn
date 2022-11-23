@@ -1,22 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setVehicleDetailsState, getRents } from "../../redux/actions/actions";
+import { getRents, userUpdate } from "../../redux/actions/actions";
+import axios from "axios";
 import Navbar from "../NavBar/Navbar";
 
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
   const [mostrarPass, setmostrarPass] = useState("");
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [user, setUser] = useState(usuario);
+  const [input, setInput] = useState({ name: "", lastName: "", phone: "" });
+  console.log(user);
+
   const { id } = useParams();
 
   const rents = useSelector((state) => state.rents);
-console.log(rents)
+  console.log(rents);
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getRents(usuario.id));
+    dispatch(getRents(usuario.id));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(userUpdate(usuario.id));
   }, [dispatch]);
 
+  function handleInputChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  console.log("SOY EL INPUT", input);
+
+  async function handleUserData(e) {
+    e.preventDefault();
+    await axios.put(`http://localhost:3001/user?id=${usuario.id}`);
+  }
 
   return (
     <div>
@@ -76,7 +100,15 @@ console.log(rents)
                       />
                     </svg>
                   </span>
-                  <span className="tracking-wide ">Información</span>
+                  <span className="tracking-wide ">
+                    Información{" "}
+                    <button
+                      onClick={(e) => handleUserData(e)}
+                      className="h-8 w-8 bg-gray"
+                    >
+                      Editar
+                    </button>
+                  </span>
                 </div>
               </div>
               <div className="bg-white ">
@@ -155,30 +187,28 @@ console.log(rents)
                       <span className="tracking-wide">Alquilados</span>
                     </div>
                     <ul className="list-inside space-y-2">
-                      {rents.length? 
-                      rents.map(e =>  {
-                        return (
-                          <li>
-                          <div className="text-teal-600 flex items-start">
-                            {e.vehicle.brand
-                            }, 
-                            {e.vehicle.model }
-                          </div>
-                          <div className="text-gray-500 text-xs flex items-start">
-                          Desde:  { e.dateInit}
-                          </div>
-                          <div className="text-gray-500 text-xs flex items-start">
-                          Hasta: { e.dateFinish}
-                          </div>
-                        </li>
-                        )
-                      }
-                        )
-
-                      :
-                      <div className="text-gray-500 text-xs flex items-start"> No hay autos alquilados</div>
-                      }
-                     
+                      {rents.length ? (
+                        rents.map((e) => {
+                          return (
+                            <li>
+                              <div className="text-teal-600 flex items-start">
+                                {e.vehicle.brand},{e.vehicle.model}
+                              </div>
+                              <div className="text-gray-500 text-xs flex items-start">
+                                Desde: {e.dateInit}
+                              </div>
+                              <div className="text-gray-500 text-xs flex items-start">
+                                Hasta: {e.dateFinish}
+                              </div>
+                            </li>
+                          );
+                        })
+                      ) : (
+                        <div className="text-gray-500 text-xs flex items-start">
+                          {" "}
+                          No hay autos alquilados
+                        </div>
+                      )}
                     </ul>
                   </div>
                   <div>
@@ -228,6 +258,44 @@ console.log(rents)
                 </div>
               </div>
             </div>
+            <h1>Cambiar datos personales</h1>
+            <form>
+              <input
+                type="text"
+                name="name"
+                placeholder=" nuevo nombre"
+                value={input.name}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder=" nuevo apellido"
+                value={input.lastName}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder=" nuevo telefono"
+                value={input.phone}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <button
+                type="submit"
+                onClick={(e) => {
+                  handleUserData(e);
+                }}
+              >
+                Modificar Datos
+              </button>
+            </form>
           </div>
         </div>
       </div>
