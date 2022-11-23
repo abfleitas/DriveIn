@@ -3,6 +3,7 @@ import { Admin, Resource, ListGuesser,useDataProvider, useGetMany, fetchUtils  }
 import simpleRestProvider  from 'ra-data-simple-rest';
 import { UserList } from './users';
 import {vehiclesList} from './vehicles'
+import {rentsList} from './rents'
  import { dataProvider } from './dataProvider';
 
  
@@ -15,6 +16,7 @@ const Administrador = () => (
             <Resource name="user"  list={UserList} />
             {/* <Resource name="comments" list={ListGuesser} /> */}
             <Resource name="vehicles"  list={vehiclesList} />
+            <Resource name="rent"  list={rentsList} />
         </Admin>
       
     );

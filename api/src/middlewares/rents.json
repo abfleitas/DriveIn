@@ -1,0 +1,30 @@
+[
+    {
+        "dateInit" : "01 Jun 2022 12:00:00 -0700",
+        "dateFinish" : "03 Jun 2022 12:00:00 -0700",
+        "totalPrice" : "120.35",
+        "userId" : 1,
+        "vehicleId" : 1
+    },
+    {
+        "dateInit" : "05 Jun 2022 12:00:00 -0700",
+        "dateFinish" : "08 Jun 2022 12:00:00 -0700",
+        "totalPrice" : "300.00",
+        "userId" : 1,
+        "vehicleId" : 2
+    },
+    {
+        "dateInit" : "05 Jun 2022 12:00:00 -0700",
+        "dateFinish" : "15 Jun 2022 12:00:00 -0700",
+        "totalPrice" : "650.50",
+        "userId" : 2,
+        "vehicleId" : 1
+    },
+    {
+        "dateInit" : "15 Jun 2022 12:00:00 -0700",
+        "dateFinish" : "28 Jun 2022 12:00:00 -0700",
+        "totalPrice" : "800.85",
+        "userId" : 2,
+        "vehicleId" : 2
+    }
+]
