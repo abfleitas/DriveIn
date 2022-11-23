@@ -21,7 +21,8 @@ import {
   ADD_USER,
   VEHICLE_FAVORITE,
   DELETE_STATES,
-  GET_RENTS
+  GET_RENTS,
+  EDIT_USER,
 } from "../actions/actions";
 
 const initialState = {
@@ -46,7 +47,7 @@ const initialState = {
   users: [],
   rents: [],
   statusLogin: true,
-  user: 'No logueado'
+  user: "No logueado",
 };
 
 //Inicio localStorage
@@ -59,27 +60,22 @@ if (localStorage.getItem("favoriteItems")) {
 
 //Fin localStorage
 
-
-
-
-
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-
-// Borrado de store
+    // Borrado de store
     case DELETE_STATES:
       return {
         ...state,
         vehiclesCopy: [],
         vehiclesByCity: [],
         city: [],
-         };
-// Borrado del store
+      };
+    // Borrado del store
     case GET_RENTS:
       return {
         ...state,
-        rents: action.payload
-         };
+        rents: action.payload,
+      };
 
     case FILTER:
       const filtrados = [];
@@ -125,25 +121,29 @@ export default function rootReducer(state = initialState, action) {
       function sorted5(action) {
         return action.payload === "lower"
           ? state.vehiclesByCity.sort((a, b) => a.initialPrice - b.initialPrice)
-          : state.vehiclesByCity.sort((a, b) => b.initialPrice - a.initialPrice);
+          : state.vehiclesByCity.sort(
+              (a, b) => b.initialPrice - a.initialPrice
+            );
       }
       let sortedPrice = sorted5(action);
       return {
         ...state,
         vehiclesByCity: sortedPrice,
-        vehicleCopy: sortedPrice
+        vehicleCopy: sortedPrice,
       };
     //ADD_FAVORITES
     case USER_FAVORITES:
       return {
         ...state,
-        favorites: action.payload.length ? action.payload : {error: "no tiene favoritos"},
+        favorites: action.payload.length
+          ? action.payload
+          : { error: "no tiene favoritos" },
       };
     case VEHICLE_FAVORITE:
       return {
         ...state,
-        favorites: action.payload
-      }
+        favorites: action.payload,
+      };
     case POST_MAIL:
       return {
         ...state,
@@ -197,40 +197,45 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         payment: action.payload,
       };
-      case ADD_USER:
-        return {
-          ...state
-        }
-      case STATUS_LOGIN:
-        return {
-          ...state,
-          statusLogin: action.payload
-        }
-      case LOGIN_USER:
-        return {
-          ...state,
-          user: action.payload
-        }
-      case LOGIN_USER_AUTH0:
-        return {
-          ...state,
-          user: action.payload
-        }
-      case EXIT_SESION:
-        return {
-          ...state,
-          user: action.payload
-        }
-      case REFRESH_AUTH:
-        return {
-          ...state,
-          user: action.payload
-        }
-      case GET_ALL_USERS:
-        return {
-           ...state,
-           users: action.payload
-        }
+    case ADD_USER:
+      return {
+        ...state,
+      };
+    case EDIT_USER:
+      return {
+        ...state,
+        users: action.payload,
+      };
+    case STATUS_LOGIN:
+      return {
+        ...state,
+        statusLogin: action.payload,
+      };
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case LOGIN_USER_AUTH0:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case EXIT_SESION:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case REFRESH_AUTH:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        users: action.payload,
+      };
     default:
       return { ...state };
   }

@@ -22,12 +22,12 @@ export const LOGIN_USER_AUTH0 = "LOGIN_USER_AUTH0";
 export const REFRESH_AUTH = "REFRESH_AUTH";
 export const VEHICLE_FAVORITE = "VEHICLE_FAVORITE";
 export const DELETE_STATES = "DELETE_STATES";
-export const GET_RENTS = "GET_RENTS"
+export const GET_RENTS = "GET_RENTS";
+export const EDIT_USER = "GET_RENTS";
 
 export const deleteStates = () => {
   return {
     type: DELETE_STATES,
-
   };
 };
 
@@ -234,8 +234,8 @@ export const registerUser = (payload) => async (dispatch) => {
     return swal({
       title: "Ese usuario ya existe",
       text: "Utiliza un mail distinto para registrarte",
-      icon: "error"
-    })
+      icon: "error",
+    });
   }
 };
 
@@ -249,13 +249,13 @@ export const loginUser = (payload, navigate) => async (dispatch) => {
       buttons: false,
     });
     await localStorage.setItem("UserLogin", JSON.stringify(user.data));
-    navigate("/home")
+    navigate("/home");
     return dispatch({
       type: LOGIN_USER,
       payload: "USUARIO LOGUEADO",
     });
   } catch (error) {
-    if(error.response.data === "No existe el usuario con esos datos") {
+    if (error.response.data === "No existe el usuario con esos datos") {
       localStorage.removeItem("UserLogin");
       return swal({
         title: "Email o contraseña incorrecto",
@@ -263,7 +263,7 @@ export const loginUser = (payload, navigate) => async (dispatch) => {
         icon: "error",
       });
     }
-    if(error.response.data === "Usuario deshabilitado") {
+    if (error.response.data === "Usuario deshabilitado") {
       localStorage.removeItem("UserLogin");
       return swal({
         title: "Usuario deshabilitado",
@@ -368,6 +368,19 @@ export const addFavorite = (payload) => async (dispatch) => {
     });
   } catch (error) {
     console.log(error);
+  }
+};
+export const editUser = (payload) => async (dispatch) => {
+  try {
+    const user = JSON.parse(localStorage.getItem("UserLogin"));
+    console.log("SOY USER DE LAS ACTIONS", user);
+    const dataUser = await axios.put("/user/" + payload);
+    return dispatch({
+      type: EDIT_USER,
+      payload: dataUser.data,
+    });
+  } catch (error) {
+    console.log({ error: "ERROR AL EDITAR USUARIO" });
   }
 };
 

@@ -1,22 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setVehicleDetailsState, getRents } from "../../redux/actions/actions";
+import {
+  setVehicleDetailsState,
+  getRents,
+  editUser,
+} from "../../redux/actions/actions";
 import Navbar from "../NavBar/Navbar";
+import axios from "axios";
 
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
   const [mostrarPass, setmostrarPass] = useState("");
+  const [ImageCloud, setImageCloud] = useState("");
+  const [editUsuario, setEditUsuario] = useState();
+
   const { id } = useParams();
 
   const rents = useSelector((state) => state.rents);
-console.log(rents)
+  console.log(rents);
   const dispatch = useDispatch();
   useEffect(() => {
-      dispatch(getRents(usuario.id));
+    dispatch(getRents(usuario.id));
+  }, [dispatch]);
+  useEffect(() => {
+    dispatch(editUser(usuario.id));
   }, [dispatch]);
 
+  const handleEdit = (e) => {
+    e.preventeDefault();
+    setEditUsuario(editUsuario);
+  };
+
+  const handleUploadImage = (event) => {
+    const imageData = new FormData();
+    imageData.append("file", event.target.files[0]);
+    imageData.append("upload_preset", "DriveIn_upload");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dcr28dyuq/image/upload", imageData)
+      .then((response) => {
+        setImageCloud(response.data.secure_url);
+      });
+  };
+
+  const uploadImage = (files) => {
+    console.log(files[0]);
+  };
 
   return (
     <div>
@@ -26,7 +56,20 @@ console.log(rents)
           <div className="w-full md:w-3/12 md:mx-2">
             <div className="flex flex-col bg-[#2E3A46] text-white rounded p-2">
               <div className="image overflow-hidden self-center ">
-                <img src={usuario.photo} alt="yo" className="rounded" />
+                <img
+                  src={
+                    ImageCloud
+                      ? ImageCloud
+                      : "https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg"
+                  }
+                  className="Creation_Image"
+                  alt="yo"
+                />
+                <input
+                  type="file"
+                  onChange={(e) => handleUploadImage(e)}
+                  className="h-8 w-8"
+                />
               </div>
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
                 Hola, {usuario.name}!
@@ -86,7 +129,10 @@ console.log(rents)
                       Nombre
                     </div>
                     <div className="px-4 py-2 flex items-start ">
-                      {usuario.name}
+                      {usuario.name}{" "}
+                      <div>
+                        <button onClick={(e) => handleEdit(e)}>editar</button>
+                      </div>
                     </div>
                   </div>
                   <div className="grid grid-cols-2  ">
@@ -155,30 +201,28 @@ console.log(rents)
                       <span className="tracking-wide">Alquilados</span>
                     </div>
                     <ul className="list-inside space-y-2">
-                      {rents.length? 
-                      rents.map(e =>  {
-                        return (
-                          <li>
-                          <div className="text-teal-600 flex items-start">
-                            {e.vehicle.brand
-                            }, 
-                            {e.vehicle.model }
-                          </div>
-                          <div className="text-gray-500 text-xs flex items-start">
-                          Desde:  { e.dateInit}
-                          </div>
-                          <div className="text-gray-500 text-xs flex items-start">
-                          Hasta: { e.dateFinish}
-                          </div>
-                        </li>
-                        )
-                      }
-                        )
-
-                      :
-                      <div className="text-gray-500 text-xs flex items-start"> No hay autos alquilados</div>
-                      }
-                     
+                      {rents.length ? (
+                        rents.map((e) => {
+                          return (
+                            <li>
+                              <div className="text-teal-600 flex items-start">
+                                {e.vehicle.brand},{e.vehicle.model}
+                              </div>
+                              <div className="text-gray-500 text-xs flex items-start">
+                                Desde: {e.dateInit}
+                              </div>
+                              <div className="text-gray-500 text-xs flex items-start">
+                                Hasta: {e.dateFinish}
+                              </div>
+                            </li>
+                          );
+                        })
+                      ) : (
+                        <div className="text-gray-500 text-xs flex items-start">
+                          {" "}
+                          No hay autos alquilados
+                        </div>
+                      )}
                     </ul>
                   </div>
                   <div>
