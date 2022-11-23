@@ -6,22 +6,21 @@ const Op = Sequelize.Op;
 
 
 
-async function postUser(req, res) {
-  const { name, lastName,  whatsapp, email, password } = req.body;
+async function postUser(props) {
+  
+  const { name, lastName,  whatsapp, email, password } = props;
   const newUser = { name, lastName,  whatsapp, email, password };
+  
   try {
     if (!name || !lastName || !whatsapp || !email || !password) {
       return res.json({ error: "Incomplete information" });
     }
-
     const existUser = await Users.findOne({ where: { email } });
-
-    if (existUser)
-      return res.status(404).send("Ya existe un usuario con el ese e-mail");
-
+    if (existUser) return res.status(404).send("Ya existe un usuario con ese e-mail");
+    console.log(newUser)
     await Users.create(newUser);
-    res.status(200).json("Usuario creado");
-    return;
+    
+    return newUser
   } catch (error) {
     res.json(error);
     return;
@@ -126,10 +125,25 @@ async function getLoginUser(req, res) {
   }
 }
 
+async function deleteUser (id) {
+  try {
+    const user = await Users.findByPk(id) ;
+    if (user.active === true) user.active = false;
+    await user.update({id})
+    await user.save()
+
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+}
+
+
+
 module.exports = {
   postUser,
   getUserById,
   getUsers,
   getUserByEmail,
   getLoginUser,
+  deleteUser
 };
