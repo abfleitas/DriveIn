@@ -137,6 +137,19 @@ async function deleteUser (id) {
   }
 }
 
+async function putUser (id, body) {
+  try {
+    const user = await Users.findByPk(id) ;
+    const datos = body
+    user =  datos
+    await user.update({id})
+    await user.save()
+
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+}
+
 
 
 module.exports = {
