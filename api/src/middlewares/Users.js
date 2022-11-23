@@ -17,7 +17,7 @@ async function postUser(props) {
     }
     const existUser = await Users.findOne({ where: { email } });
     if (existUser) return res.status(404).send("Ya existe un usuario con ese e-mail");
-    console.log(newUser)
+    
     await Users.create(newUser);
     
     return newUser
@@ -29,9 +29,9 @@ async function postUser(props) {
 
 async function getUserById(req, res) {
   try {
+    
     const { id } = req.params;
-
-    let user = await Users.getByPk(id);
+    let user = await Users.findByPk(id);
     user
       ? res.status(200).json(user)
       : res.status(400).json("No existe ese usuario");
@@ -53,16 +53,12 @@ async function getUsers(req, res) {
     let categoria = filter.category
     if (categoria === "noActives") activos = false
     if (filter.q) searchBar = filter.q
-    
-    console.log(searchBar)
 
   } 
 
   const {order, corte, pagina} = dashboard(req.query)
-
     try {
       
-
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
       // console.log(await Users.findAll());
       let users = await Users.findAll({
@@ -141,10 +137,17 @@ async function putUser (id, body) {
   try {
     const user = await Users.findByPk(id) ;
     const datos = body
-    user =  datos
-    await user.update({id})
-    await user.save()
+    for (const proper in datos) {
+      user[proper] = datos[proper]
+      await user.update(
+        {where: {id: id}}
+        )
+      await user.save()
+      
+    }
 
+   
+    return user  
   } catch (error) {
     res.status(404).send(error.message);
   }
@@ -158,5 +161,6 @@ module.exports = {
   getUsers,
   getUserByEmail,
   getLoginUser,
-  deleteUser
+  deleteUser,
+  putUser
 };
