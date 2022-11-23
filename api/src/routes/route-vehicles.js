@@ -4,6 +4,7 @@ const {
   postVehicleFn,
   getVehicleDetailsFn,
   getVehicles,
+  deleteVehicle
 } = require("../middlewares/vehicles");
 const {dashboard} = require ("../middlewares/dashboard")
 const vehicles = Router();
@@ -56,6 +57,24 @@ vehicles.post("/:id", async (req, res) => {
     await vehicle.save()
     const VehicleFinal = await getVehicleDetailsFn(id);
     res.status(201).send(VehicleFinal);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+// ***********************REACT ADMIN *****************
+
+vehicles.delete("/", async (req, res) => {
+  try {
+    const { filter } = req.query;
+    const id = JSON.parse(filter);
+    const unactive = [
+      id.id.map(async e => {
+        await deleteVehicle(e)
+      })
+    ];
+
+    res.status(201).send(unactive);
   } catch (error) {
     res.status(400).send(error.message);
   }

@@ -25,8 +25,20 @@ const getVehicleDetailsFn = async (id) => {
     return vehicleDB
 }
 
+const deleteVehicle = async (id) => {
+    try {
+        const vehicle = await Vehicles.findByPk(id);
+        if (vehicle.availability === true) vehicle.availability = false;
+        await vehicle.update({ id });
+        await vehicle.save();
+    } catch (error) {
+        res.status(404).send(error.message);
+    }
+};
+
 module.exports = {
     getVehicles,
     postVehicleFn,
-    getVehicleDetailsFn
+    getVehicleDetailsFn,
+    deleteVehicle
 };
