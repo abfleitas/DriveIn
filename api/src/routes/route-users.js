@@ -86,6 +86,16 @@ user.put("/:id", async (req, res) => {
 
 });
 
+user.post("/", async (req, res) => {
+    try {
+    const {id} = req.query    
+    const details = await putUser(id);
+      res.status(201).send(details);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  });
+
 // ***********************REACT ADMIN *****************
 
 user.delete("/", async (req, res) => {
@@ -98,13 +108,9 @@ user.delete("/", async (req, res) => {
             await deleteUser(e)
           })
       ]
-
-      
-      
       
       res.status(201).send(unactive);
     } catch (error) {
-      // console.log(error);
       res.status(400).send(error.message);
     }
   
