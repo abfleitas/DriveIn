@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useDispatch, useSelector } from "react-redux";
 import swal from "sweetalert";
 import image from "../../images/stripe.png";
 import { getPayment } from "../../redux/actions/actions";
 import cancel from "../../images/cancelacion.PNG";
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function CheckOutForm() {
   const vehiclesDetail = useSelector((state) => state.details);
+
+  useEffect(()=>{
+    disableDates();
+  }, [])
+
   const dispatch = useDispatch();
   const [date, setDate] = useState({});
+  const [dateRange, setDateRange] = useState([new Date(), null]);
+  const [startDate, endDate] = dateRange;
   const [extras, setExtras] = useState({
     seguro: 50,
     bebe: 0,
@@ -33,35 +42,25 @@ export default function CheckOutForm() {
     let today, dd, mm, yyyy;
     today = new Date();
     dd = today.getDate() + 1;
-    mm = today.getMonth() + 1;
+    mm = today.getMonth();
     yyyy = today.getFullYear();
-    return yyyy + "-" + mm + "-" + dd;
+    setDateRange([new Date(yyyy, mm, dd), null]);
   };
-
-  const maxDesde = () => {
-    let dato = date.Hasta.split("-");
-    let today = dato && new Date(dato[0], dato[1], dato[2]);
-    let dd = today.getDate() - 1;
-    let mm = today.getMonth();
-    let yyyy = today.getFullYear();
-    return yyyy + "-" + mm + "-" + dd;
-  };
-
-  const minHasta = () => {
-    let dato = date.Desde.split("-");
-    let today = dato && new Date(dato[0], dato[1], dato[2]);
-    let dd = today.getDate() + 1;
-    let mm = today.getMonth();
-    let yyyy = today.getFullYear();
-    return yyyy + "-" + mm + "-" + dd;
-  };
+  
+  const subDays = (date, day) =>{
+    let dd = date.getDate() + day;
+    let mm = date.getMonth();
+    let yyyy = date.getFullYear();
+    let datoFinal = new Date(yyyy, mm, dd);
+    return datoFinal;
+  }
 
   const diffDays = (from, to) => {
     if (!from || !to) {
       return "Miss info";
     } else {
-      const fechaInicio = new Date(from).getTime();
-      const fechaFin = new Date(to).getTime();
+      const fechaInicio = from.getTime();
+      const fechaFin = to.getTime();
       const diff = fechaFin - fechaInicio;
       const days = diff / (1000 * 60 * 60 * 24);
       return days;
@@ -93,7 +92,7 @@ export default function CheckOutForm() {
   };
 
   const handlePrice = () => {
-    const dias = diffDays(date.Desde, date.Hasta);
+    const dias = diffDays(startDate, endDate);
     let finalPrice = handleExtras(dias) + vehiclesDetail.initialPrice * dias;
     return finalPrice;
   };
@@ -129,10 +128,11 @@ export default function CheckOutForm() {
     }
   };
 
+
   return (
     <>
       <div>
-        <div className="h-[90px] m-auto bg-white mt-[10px] flex flex-row justify-around mb-4">
+        <div className="m-auto bg-white mt-[10px] flex flex-row justify-around mb-4 p-2">
           <div className="w-[50px] h-[50px] m-auto">
             <img src={cancel} alt="img-cancelacion" className="w-full h-full" />
           </div>
@@ -217,27 +217,19 @@ export default function CheckOutForm() {
         </div>
 
         <h1 className="mt-4">Seleccione la fecha</h1>
-        <div className="flex mt-2 justify-center space-x-4">
+        <div className="flex mt-2 justify-center space-x-4 m-auto">
           <div className="block">
-            <label className="relative text-black text-sm">Desde</label>
-            <input
-              min={disableDates()}
-              onChange={handleChange}
-              max={date.Hasta && maxDesde()}
-              type="date"
-              name="Desde"
-              className="flex w-50  h-10  bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
-            />
-          </div>
-          <div className="block">
-            <label className="relative text-black text-sm">Hasta</label>
-            <input
-              min={date.Desde && minHasta()}
-              onChange={handleChange}
-              type="date"
-              name="Hasta"
-              disabled={date.Desde ? false : true}
-              className="flex w-50  h-10  bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
+            <DatePicker
+              selectsRange={true}
+              minDate={subDays(new Date(), 1)}
+              startDate={startDate}
+              endDate={endDate}
+              dateFormat="dd/MM/yyyy"
+              onChange={(update) => {
+                setDateRange(update);
+               }}
+              isClearable={true}
+              className="flex h-10 bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm m-auto cursor:pointer"
             />
           </div>
         </div>
