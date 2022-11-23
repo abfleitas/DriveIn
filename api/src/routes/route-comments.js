@@ -1,14 +1,17 @@
 const { Router } = require("express");
 const router = Router();
 const { postComments, getAllComentarios } = require("../middlewares/comments");
-const comments = require("../middlewares/comments.json");
+const getcomments = require("../middlewares/comments")
+//const getcomments = require("../middlewares/comments.json");
 
 router.post("/", async (req, res) => {
   try {
     const response = await postComments(req.body);
+    console.log(response);
     res.status(200).json(response);
+
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).json(error.message);
   }
 });
 
@@ -20,5 +23,8 @@ router.get("/", async (req, res) => {
     res.status(400).json(error);
   }
 });
+
+router.get("/user/:id", getcomments.getCommentsById);
+router.get("/vehicle/:id", getcomments.getCommentsByVehicleId);
 
 module.exports = router;

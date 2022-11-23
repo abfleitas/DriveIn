@@ -67,8 +67,12 @@ Users.hasMany(Rent);
 Rent.belongsTo(Users);
 Rent.belongsTo(Vehicles);
 Vehicles.hasMany(Rent);
-Users.belongsToMany(Comments, { through: 'comments_by_users'});
-Comments.belongsToMany(Users, { through: 'comments_by_users'});
+Users.hasMany(Comments, {foreignKey:'userId'});
+Comments.belongsTo(Users);
+Vehicles.hasMany(Comments, {foreignKey:'vehicleId'});
+Comments.belongsTo(Vehicles);
+//Users.belongsToMany(Comments, { through: 'comments_by_users'});
+//Comments.belongsToMany(Users, { through: 'comments_by_users'});
 
 module.exports = {
     ...sequelize.models,
