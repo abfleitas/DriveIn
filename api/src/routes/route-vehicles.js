@@ -13,6 +13,11 @@ vehicles.get("/", async (req, res) => {
   const {order, corte, pagina} = dashboard(req.query)
 
   try {
+    if (!req.query) {
+      await getVehicles();
+      const all = await Vehicles.findAll()
+      return res.status(200).send(all);
+    }
     await getVehicles();
     const all = await Vehicles.findAll(
       {
