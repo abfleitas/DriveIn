@@ -1,9 +1,10 @@
 const { Router } = require("express");
-const { postUser, getUserById, deleteUser, getUsers, getUserByEmail, getLoginUser } = require("../middlewares/Users");
+const { postUser, getUserById, putUser, deleteUser, getUsers, getUserByEmail, getLoginUser } = require("../middlewares/Users");
 const { Users, Vehicles, Vehicles_Favorites} = require('../db')
 const user = Router();
 
 user.get("/", getUsers);
+user.get("/:id", getUserById);
 
 user.get("/info/:email", getUserByEmail);
 
@@ -71,14 +72,11 @@ user.delete("/addFavorite", async(req, res) => {
 
 user.put("/:id", async (req, res) => {
   try {
-    const state = req.body.active
     const id = req.params.id
-    const user = await Users.findByPk(id);
-    user.active = state;
-    await user.update({id})
-    await user.save()
-    const userFinal = await Users.findByPk(id);
-    res.status(201).send(userFinal);
+    const body = req.body  
+    const details = await putUser(id, body);
+      res.status(201).send(details);
+
   } catch (error) {
     // console.log(error);
     res.status(400).send(error.message);
@@ -86,10 +84,11 @@ user.put("/:id", async (req, res) => {
 
 });
 
-user.post("/", async (req, res) => {
+user.put("/", async (req, res) => {
     try {
-    const {id} = req.query    
-    const details = await putUser(id);
+    const {id} = req.query 
+    const body = req.body  
+    const details = await putUser(id, body);
       res.status(201).send(details);
     } catch (error) {
       res.status(400).send(error);

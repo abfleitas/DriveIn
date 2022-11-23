@@ -1,7 +1,7 @@
 import * as React from "react";
 import { List, Datagrid, ImageField, TextField, EmailField, NumberField, Pagination, Button,  TopToolbar,ExportButton, CreateButton,  } from 'react-admin';
 import { PostFilterSidebar } from './PostFilterSidebar';
-import {IncreaseLikeButton} from './Update'
+
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
 
 
@@ -16,8 +16,8 @@ const ListActions = (props) => (
             label="Show calendar"
         >
         </Button>
-        <IncreaseLikeButton/>
-
+       
+          {/* <Update/>  */}
     </TopToolbar>
 );
 

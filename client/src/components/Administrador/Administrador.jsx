@@ -6,6 +6,7 @@ import {vehiclesList} from './vehicles';
 import { dataProvider } from './dataProvider';
 import CreateVehicle from "./CreateVehicle";
 import CreateUser from "./CreateUser";
+import {Updates} from './Update'
 import { commentsList } from "./comments";
  
 //const dataProvider = simpleRestProvider('http://localhost:3001')
@@ -14,7 +15,7 @@ const Administrador = () => (
     
         <Admin basename="/admin" dataProvider={dataProvider}>
         
-            <Resource name="user"  list={UserList} create={CreateUser} />
+            <Resource name="user"  list={UserList} create={CreateUser} edit = {Updates} />
             {/* <Resource name="comments" list={ListGuesser} /> */}
             <Resource name="vehicles" list={vehiclesList} create={CreateVehicle} />
             <Resource name="comments" list={commentsList} />
