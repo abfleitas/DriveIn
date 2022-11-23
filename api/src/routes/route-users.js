@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { postUser, getUserById, getUsers, getUserByEmail, getLoginUser } = require("../middlewares/Users");
+const { postUser, getUserById, deleteUser, getUsers, getUserByEmail, getLoginUser } = require("../middlewares/Users");
 const { Users, Vehicles, Vehicles_Favorites} = require('../db')
 const user = Router();
 
@@ -86,27 +86,23 @@ user.put("/:id", async (req, res) => {
 
 });
 
-// ***********************REACT ADMIN DELETE*****************
+// ***********************REACT ADMIN *****************
 
 user.delete("/", async (req, res) => {
     try {
       
       const {filter} = req.query
-      console.log(req.query)
       const id = JSON.parse(filter);
-      console.log(id.id)  
+      const unactive = [
+        id.id.map(async e => {
+            await deleteUser(e)
+          })
+      ]
+
       
-      id.id.map(async e => {
-        const user = await Users.findByPk(e) ;
-        if (user.active === true) user.active = false;
-        await user.update({e})
-        await user.save()
-        console.log(user) 
-      })
       
-    
-      const userFinal = await Users.findByPk(id);
-      res.status(201).send(userFinal);
+      
+      res.status(201).send(unactive);
     } catch (error) {
       // console.log(error);
       res.status(400).send(error.message);
@@ -114,5 +110,16 @@ user.delete("/", async (req, res) => {
   
   });
 
-// ***********************REACT ADMIN DELETE*****************
+  user.post("/", async (req, res) => {
+    try {
+    const details = await postUser(req.body);
+    
+      res.status(201).send(details);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  });
+
+
+// ***********************REACT ADMIN *****************
 module.exports = user;
