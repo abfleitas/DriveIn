@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, NumberField, Pagination, Button,  TopToolbar,ExportButton, CreateButton,  } from 'react-admin';
+import { List, Datagrid, ImageField, TextField, EmailField, NumberField, Pagination, Button,  TopToolbar,ExportButton, CreateButton,  } from 'react-admin';
 import { PostFilterSidebar } from './PostFilterSidebar';
 
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
@@ -16,8 +16,8 @@ const ListActions = (props) => (
             label="Show calendar"
         >
         </Button>
-        
-
+       
+          {/* <Update/>  */}
     </TopToolbar>
 );
 
@@ -25,10 +25,13 @@ export const UserList = () => (
     
     <List aside={<PostFilterSidebar/>} actions={<ListActions/>} title="List of Users" pagination={<PostPagination/>} >
         <Datagrid rowClick="edit">
-            <TextField source="id" />
+            <NumberField source="id" />
             <TextField source="name" />
             <EmailField source="email" />
-            <TextField source="phone" />
+            <NumberField source="whatsapp" />
+            <TextField source="password" />
+            <ImageField source="photo" />
+            <NumberField source="role" />
             <TextField source="active" />
         </Datagrid>
     </List>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setVehicleDetailsState } from "../../redux/actions/actions";
+import cancel from "../../images/cancelacion.PNG";
 import Aire from "../../images/aireVerde.png";
 import Asientos from "../../images/asientosVerde.png";
 import Dinero from "../../images/dineroVerde.png";
@@ -55,15 +56,16 @@ export default function Details() {
                   {vehicleDetailsState.brand}
                 </h1>
                 <p className="text-[#2E3A46] text-lg text-start tracking-wide mb-6 md:max-w-lg">
-                Nuestras tarifas incluyen vehículos nuevos en excelentes condiciones equipados 
-                para la zona, silla para bebe, buster o elevador, seguro, 
-                entrega y recepción de los vehículos en aeropuerto, 
-                terminal, hoteles y conductores adicionales sin cargo. 
-                El vehículo se debe devolver con la misma cantidad de 
-                combustible que fue entregado, en caso contrario se cobrará 
-                la diferencia. Los días de alquiler se contabilizan a partir 
-                de que se entrega el vehículo y por 24 horas. 
-                Con 1 hora de tolerancia en la devolución, de lo contrario se cobraran horas extras.
+                  Nuestras tarifas incluyen vehículos nuevos en excelentes
+                  condiciones equipados para la zona, silla para bebe, buster o
+                  elevador, seguro, entrega y recepción de los vehículos en
+                  aeropuerto, terminal, hoteles y conductores adicionales sin
+                  cargo. El vehículo se debe devolver con la misma cantidad de
+                  combustible que fue entregado, en caso contrario se cobrará la
+                  diferencia. Los días de alquiler se contabilizan a partir de
+                  que se entrega el vehículo y por 24 horas. Con 1 hora de
+                  tolerancia en la devolución, de lo contrario se cobraran horas
+                  extras.
                 </p>
               </div>
             </div>

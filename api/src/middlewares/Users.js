@@ -1,30 +1,26 @@
-
-
 const {Users, Vehicles, Rent} = require('../db.js')
-
 const {dashboard} = require ("../middlewares/dashboard")
-
 const usersList = require('./users.json')
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 
 
-
-async function postUser(req, res) {
-  const { name, lastName,  whatsapp, email, password } = req.body;
+async function postUser(props) {
+  
+  const { name, lastName,  whatsapp, email, password } = props;
   const newUser = { name, lastName,  whatsapp, email, password };
+  
   try {
     if (!name || !lastName || !whatsapp || !email || !password) {
       return res.json({ error: "Incomplete information" });
     }
-
     const existUser = await Users.findOne({ where: { email } });
-
-    if (existUser)
-      return res.status(404).send("Ya existe un usuario con el ese e-mail");
-
+    if (existUser) return res.status(404).send("Ya existe un usuario con ese e-mail");
+    
     await Users.create(newUser);
-    res.status(200).json("Usuario creado");
-    return;
+    
+    return newUser
   } catch (error) {
     res.json(error);
     return;
@@ -33,9 +29,9 @@ async function postUser(req, res) {
 
 async function getUserById(req, res) {
   try {
+    
     const { id } = req.params;
-
-    let user = await Users.getByPk(id);
+    let user = await Users.findByPk(id);
     user
       ? res.status(200).json(user)
       : res.status(400).json("No existe ese usuario");
@@ -50,20 +46,23 @@ async function getUserById(req, res) {
 async function getUsers(req, res) {
 
   let activos = true
+  let searchBar = ""
+  
   if (req.query.filter) {
     let filter = JSON.parse(req.query.filter);
     let categoria = filter.category
     if (categoria === "noActives") activos = false
-    console.log(activos)
-  } 
-  const {order, corte, pagina} = dashboard(req.query)
+    if (filter.q) searchBar = filter.q
 
+  } 
+
+  const {order, corte, pagina} = dashboard(req.query)
     try {
       
-
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
       // console.log(await Users.findAll());
       let users = await Users.findAll({
+        
         include: {
           model: Vehicles,
           model: Rent
@@ -71,9 +70,12 @@ async function getUsers(req, res) {
         order: order,
         limit: corte,
         offset: pagina,
-        where: {active: activos}
+        where: {active: activos,
+                name: {
+                      [Op.iLike]: '%' + searchBar + '%'
+                      },
+        },
       }
-       
       );
       return res.status(200).json(users)
     } catch (error) {
@@ -119,10 +121,46 @@ async function getLoginUser(req, res) {
   }
 }
 
+async function deleteUser (id) {
+  try {
+    const user = await Users.findByPk(id) ;
+    if (user.active === true) user.active = false;
+    await user.update({id})
+    await user.save()
+
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+}
+
+async function putUser (id, body) {
+  try {
+    const user = await Users.findByPk(id) ;
+    const datos = body
+    for (const proper in datos) {
+      user[proper] = datos[proper]
+      await user.update(
+        {where: {id: id}}
+        )
+      await user.save()
+      
+    }
+
+   
+    return user  
+  } catch (error) {
+    res.status(404).send(error.message);
+  }
+}
+
+
+
 module.exports = {
   postUser,
   getUserById,
   getUsers,
   getUserByEmail,
   getLoginUser,
+  deleteUser,
+  putUser
 };
