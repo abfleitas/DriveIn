@@ -19,7 +19,7 @@ export default function PaymentForm({ visible, onClose }) {
         onClick={handleOnClose}
         className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center"
       >
-        <div className="bg-white bg-opacity-75 p-2 rounded flex flex-col p-6">
+        <div className="bg-white bg-opacity-80 rounded flex flex-col p-6 w-5/12">
           <button
             onClick={onClose}
             className="self-end w-[25px] bg-[#2E3A46] text-white rounded-full hover:bg-red-600"
