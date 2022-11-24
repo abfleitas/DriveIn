@@ -163,8 +163,8 @@ export default function CheckOutForm() {
                 />
 
                 <span className="mx-2">Seguro (obligatorio)</span>
-                <span className="text-xs text-red-600 text-end">
-                  50 USD total
+                <span className="text-xs text-red-600 text-end mx-4 my-[5px]">
+                  50 USD / TOTAL
                 </span>
               </label>
             </div>
@@ -180,7 +180,7 @@ export default function CheckOutForm() {
                   onChange={handleExtraChange}
                 />
                 <span className="mx-2">Butaca para bebe</span>
-                <span className="text-xs text-red-600">10 USD / dia</span>
+                <span className="text-xs text-red-600 mx-[30px] my-[5px]">10 USD / DIA</span>
               </label>
             </div>
           </div>
@@ -195,7 +195,7 @@ export default function CheckOutForm() {
                   onChange={handleExtraChange}
                 />
                 <span className="mx-2">Butaca para niño</span>
-                <span className="text-xs text-red-600">10 USD / dia</span>
+                <span className="text-xs text-red-600 mx-[35px] my-[5px]">10 USD / DIA</span>
               </label>
             </div>
           </div>
@@ -210,7 +210,7 @@ export default function CheckOutForm() {
                   onChange={handleExtraChange}
                 />
                 <span className="mx-2">Portaequipaje</span>
-                <span className="text-xs text-red-600">20 USD / dia</span>
+                <span className="text-xs text-red-600 mx-[58px] my-[5px]">20 USD / DIA</span>
               </label>
             </div>
           </div>
