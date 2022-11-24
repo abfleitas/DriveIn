@@ -2,6 +2,7 @@ const { Router } = require("express");
 const router = Router();
 const { postComments, getAllComentarios } = require("../middlewares/comments");
 const getcomments = require("../middlewares/comments")
+const {Comments} = require('../db.js')
 //const getcomments = require("../middlewares/comments.json");
 
 router.post("/", async (req, res) => {
@@ -18,7 +19,9 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const comments = await getAllComentarios();
-    return res.status(200).json(comments);
+    let cantidad = await Comments.count()
+    console.log(cantidad)
+    return res.header('Content-Range',`0-10/${cantidad}`).status(200).json(comments);
   } catch (error) {
     res.status(400).json(error);
   }
