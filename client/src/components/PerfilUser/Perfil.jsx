@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRents, userUpdate } from "../../redux/actions/actions";
 import axios from "axios";
 import Navbar from "../NavBar/Navbar";
+import Rent from "../ModalRent/Rent";
 
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
 
   // const [user, setUser] = useState(usuario);
+  const [modal, setModal] = useState(false);
   const [input, setInput] = useState({
     name: usuario.name,
     lastName: usuario.lastName,
@@ -19,6 +21,7 @@ export default function Perfil() {
   console.log(usuario.photo);
   const [ImageCloud, setImageCloud] = useState("");
   const [image, setImage] = useState({ photo: usuario.photo });
+  const handleOnCloseModal = () => setModal(false);
 
   const { id } = useParams();
 
@@ -43,6 +46,11 @@ export default function Perfil() {
       .then((response) => {
         setImageCloud(response.data.secure_url);
       });
+  };
+
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    setModal(true);
   };
 
   function handleInputChange(e) {
@@ -210,7 +218,7 @@ export default function Perfil() {
                 Mas Información
               </button>
               <div className="bg-white p-3 shadow-sm rounded-sm">
-                <div className="grid grid-cols-2">
+                <div className="grid">
                   <div>
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                       <span clas="text-green-500">
@@ -235,17 +243,16 @@ export default function Perfil() {
                       {rents.length ? (
                         rents.map((e) => {
                           return (
-                            <li>
-                              <div className="text-teal-600 flex items-start">
-                                {e.vehicle.brand},{e.vehicle.model}
-                              </div>
-                              <div className="text-gray-500 text-xs flex items-start">
-                                Desde: {e.dateInit}
-                              </div>
-                              <div className="text-gray-500 text-xs flex items-start">
-                                Hasta: {e.dateFinish}
-                              </div>
-                            </li>
+                            <Rent
+                            img={e.vehicle.photo}
+                            brand={e.vehicle.brand}
+                            model={e.vehicle.model}
+                            fi={e.dateInit}
+                            ff={e.dateFinish}
+                            tp={e.totalPrice}
+                            city={e.vehicle.city.name}
+                            country={e.vehicle.city.country}
+                            />
                           );
                         })
                       ) : (
