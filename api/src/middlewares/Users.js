@@ -60,7 +60,7 @@ async function getUsers(req, res) {
     try {
       
       if(!(await Users.findAll()).length) await Users.bulkCreate(usersList);
-      // console.log(await Users.findAll());
+      
       let users = await Users.findAll({
         
         include: {
@@ -77,7 +77,11 @@ async function getUsers(req, res) {
         },
       }
       );
-      return res.status(200).json(users)
+      
+      let cantidad = await Users.count(
+        {where: {active: activos}}
+      )
+      return res.header('Content-Range',`0-10/${cantidad}`).status(200).json(users)
     } catch (error) {
       res.json(error);
       return;

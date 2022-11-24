@@ -20,7 +20,7 @@ server.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Range, Origin, X-Requested-With, Content-Type, Accept, Range');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
   res.header( 'Access-Control-Expose-Headers', 'Content-Range')
-  res.header('Content-Range','0-24/319')
+  // res.header('Content-Range','0-24/319')
   // res.header('Content-Range','vehicles 0-24/319')
   // res.header('X-Custom-Header', 'foobar');
   next();
