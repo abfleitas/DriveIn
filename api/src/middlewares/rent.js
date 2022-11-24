@@ -29,9 +29,6 @@ const allRents = async (req, res) => {
        return res.status(200).send(rent)
     }
     if (order || corte || pagina) {
-      // const vehiclesTest = await Vehicles.findByPk(1, {
-      //   include: Rent
-      // })
       const users = await  Users.findAll()
       const response = await  Rent.findAll({
         include : {
@@ -48,7 +45,8 @@ const allRents = async (req, res) => {
         rent.dataValues.userName = user[0].dataValues.name
         rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
       })
-      return res.status(200).send(response)
+      let cantidad = await Rent.count()
+      return res.header(`Content-Range","0-10/${cantidad}`).status(200).send(response)
     }
 
 
@@ -60,8 +58,42 @@ const allRents = async (req, res) => {
     console.log(error.message)
     res.status(404).send({error: error.message});
   }
-}
+};
+
+const cancelRent = async (req, res) => {
+  try {
+    const id = req.params.id
+    const rent = await Rent.findByPk(id);
+    rent.active = false;
+    await rent.update({id})
+    await rent.save()
+    const rentFinal = await Rent.findByPk(id);
+    res.status(201).send(rentFinal);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
+
+const cancelRentAdmin = async (req, res) => {
+  try {
+    const {filter} = req.query
+    const id = JSON.parse(filter);
+    const unactive = [
+      id.id.map(async e => {
+        const rent = await Rent.findByPk(e);
+        rent.active = false;
+        await rent.update({id})
+        await rent.save()
+        })
+    ]
+    res.status(201).send(unactive);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+};
 
 module.exports = {
-allRents
+allRents,
+cancelRent,
+cancelRentAdmin
 } 

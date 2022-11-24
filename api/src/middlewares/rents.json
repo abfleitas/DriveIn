@@ -26,5 +26,117 @@
         "totalPrice" : "800.85",
         "userId" : 2,
         "vehicleId" : 2
+    },
+    {
+        "dateInit" : "1 Jul 2022 12:00:00 -0700",
+        "dateFinish" : "28 Jul 2022 12:00:00 -0700",
+        "totalPrice" : "1000.00",
+        "userId" : 3,
+        "vehicleId" : 3
+    },
+    {
+        "dateInit" : "3 Nov 2022 12:00:00 -0700",
+        "dateFinish" : "5 Nov 2022 12:00:00 -0700",
+        "totalPrice" : "100.00",
+        "userId" : 3,
+        "vehicleId" : 15
+    },
+    {
+        "dateInit" : "5 Dec 2022 12:00:00 -0700",
+        "dateFinish" : " 15 Dec 2022 12:00:00 -0700",
+        "totalPrice" : "500.00",
+        "userId" : 4,
+        "vehicleId" : 16
+    },
+    {
+        "dateInit" : "25 Nov 2022 12:00:00 -0700",
+        "dateFinish" : " 5 Dec 2022 12:00:00 -0700",
+        "totalPrice" : "250.00",
+        "userId" : 4,
+        "vehicleId" : 25
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 5,
+        "vehicleId" : 36
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 5,
+        "vehicleId" : 1
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 6,
+        "vehicleId" : 45
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 6,
+        "vehicleId" : 26
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 7,
+        "vehicleId" : 20
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 7,
+        "vehicleId" : 10
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 8,
+        "vehicleId" : 11
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 8,
+        "vehicleId" : 14
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 9,
+        "vehicleId" : 38
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 9,
+        "vehicleId" : 31
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 10,
+        "vehicleId" : 15
+    },
+    {
+        "dateInit" : " 2022 12:00:00 -0700",
+        "dateFinish" : " 2022 12:00:00 -0700",
+        "totalPrice" : "",
+        "userId" : 10,
+        "vehicleId" : 8
     }
 ]
