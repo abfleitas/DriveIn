@@ -63,10 +63,10 @@ Users.belongsToMany(Vehicles, { through: 'Vehicles_Favorites'});
 Vehicles.belongsToMany(Users, { through: 'Vehicles_Favorites'});
 Vehicles.belongsTo(City)
 City.hasMany(Vehicles);
-Users.hasMany(Rent);
+Users.hasMany(Rent, {foreignKey:'userId'});
 Rent.belongsTo(Users);
 Rent.belongsTo(Vehicles);
-Vehicles.hasMany(Rent);
+Vehicles.hasMany(Rent, {foreignKey:'vehicleId'});
 Users.hasMany(Comments, {foreignKey:'userId'});
 Comments.belongsTo(Users);
 Vehicles.hasMany(Comments, {foreignKey:'vehicleId'});
