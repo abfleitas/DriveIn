@@ -8,29 +8,52 @@ import Navbar from "../NavBar/Navbar";
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
-  const [mostrarPass, setmostrarPass] = useState("");
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [user, setUser] = useState(usuario);
-  const [input, setInput] = useState({ name: "", lastName: "", phone: "" });
-  console.log(user);
+
+  // const [user, setUser] = useState(usuario);
+  const [input, setInput] = useState({
+    name: usuario.name,
+    lastName: usuario.lastName,
+    phone: usuario.phone,
+    password: usuario.password,
+  });
+  console.log(usuario.photo);
+  const [ImageCloud, setImageCloud] = useState("");
+  const [image, setImage] = useState({ photo: usuario.photo });
 
   const { id } = useParams();
 
   const rents = useSelector((state) => state.rents);
   console.log(rents);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getRents(usuario.id));
   }, [dispatch]);
-  useEffect(() => {
-    dispatch(userUpdate(usuario.id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(userUpdate(usuario.id));
+  // }, [dispatch]);
+
+  const imageCloudChangeHandler = (event) => {
+    const imageData = new FormData();
+    imageData.append("file", event.target.files[0]);
+    imageData.append("upload_preset", "DriveIn_upload");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dcr28dyuq/upload", imageData)
+      .then((response) => {
+        setImageCloud(response.data.secure_url);
+      });
+  };
 
   function handleInputChange(e) {
     setInput({
       ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function handlePhotoChange(e) {
+    setImage({
+      ...image,
       [e.target.name]: e.target.value,
     });
   }
@@ -39,7 +62,17 @@ export default function Perfil() {
 
   async function handleUserData(e) {
     e.preventDefault();
-    await axios.put(`http://localhost:3001/user?id=${usuario.id}`);
+    // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
+    dispatch(userUpdate(usuario.id));
+    alert("Cambios realizados con éxito");
+    // navigate("/login");
+  }
+  async function handleUserPhoto(e) {
+    e.preventDefault();
+    // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
+    dispatch(userUpdate(usuario.id));
+    alert("Foto cambiada con éxito");
+    // navigate("/login");
   }
 
   return (
@@ -50,7 +83,25 @@ export default function Perfil() {
           <div className="w-full md:w-3/12 md:mx-2">
             <div className="flex flex-col bg-[#2E3A46] text-white rounded p-2">
               <div className="image overflow-hidden self-center ">
-                <img src={usuario.photo} alt="yo" className="rounded" />
+                {/* <img src={usuario.photo} alt="yo" className="rounded" /> */}
+                <img
+                  name="photo"
+                  value={usuario.photo}
+                  onChange={(e) => handlePhotoChange(e)}
+                  src={ImageCloud ? ImageCloud : usuario.photo}
+                  className="rounded"
+                  alt="yo"
+                />
+              </div>
+              <div>
+                <form onSubmit={(e) => handleUserPhoto(e)}>
+                  <input
+                    type="file"
+                    onChange={imageCloudChangeHandler}
+                    className="Creation_Image_input"
+                  ></input>
+                  <button type="submit">Cambiar Foto</button>
+                </form>
               </div>
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
                 Hola, {usuario.name}!
@@ -101,13 +152,7 @@ export default function Perfil() {
                     </svg>
                   </span>
                   <span className="tracking-wide ">
-                    Información{" "}
-                    <button
-                      onClick={(e) => handleUserData(e)}
-                      className="h-8 w-8 bg-gray"
-                    >
-                      Editar
-                    </button>
+                    Información <button className=" bg-gray">Editar</button>
                   </span>
                 </div>
               </div>
@@ -259,7 +304,11 @@ export default function Perfil() {
               </div>
             </div>
             <h1>Cambiar datos personales</h1>
-            <form>
+            <form
+              onSubmit={(e) => {
+                handleUserData(e);
+              }}
+            >
               <input
                 type="text"
                 name="name"
@@ -281,17 +330,24 @@ export default function Perfil() {
               <input
                 type="text"
                 name="phone"
-                placeholder=" nuevo telefono"
+                placeholder="nuevo telefono"
                 value={input.phone}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <input
+                type="text"
+                name="password"
+                placeholder="nuevo password"
+                value={input.password}
                 onChange={(e) => {
                   handleInputChange(e);
                 }}
               />
               <button
                 type="submit"
-                onClick={(e) => {
-                  handleUserData(e);
-                }}
+                className="border-green border-2 bg-green text-white"
               >
                 Modificar Datos
               </button>

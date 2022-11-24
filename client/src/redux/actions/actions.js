@@ -400,11 +400,15 @@ export const deleteFavorite = (payload) => async (dispatch) => {
   }
 };
 
-export const userUpdate = (payload) => async (dispatch) => {
+export const userUpdate = (payload, body) => async (dispatch) => {
   try {
-    await axios.put(`http://localhost:3001/user?id=${payload}`);
     const user = JSON.parse(localStorage.getItem("UserLogin"));
-    console.log("SOY EL USER DE ACTIONS", user);
+    console.log(user);
+    const cualquiera = await axios.put(
+      `http://localhost:3001/user?id=${payload}`,
+      body
+    );
+    console.log("SOY EL USER DE ACTIONS", cualquiera);
     // const edit = await axios.get(`/user/${user}`);
     // console.log("SOY EL edit DE ACTIONS", edit);
     return dispatch({
