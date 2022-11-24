@@ -4,7 +4,8 @@ const {
   postVehicleFn,
   getVehicleDetailsFn,
   getVehicles,
-  deleteVehicle
+  deleteVehicle,
+  putVehicle
 } = require("../middlewares/vehicles");
 const {dashboard} = require ("../middlewares/dashboard")
 const vehicles = Router();
@@ -87,6 +88,17 @@ vehicles.delete("/", async (req, res) => {
     res.status(201).send(unactive);
   } catch (error) {
     res.status(400).send(error.message);
+  }
+});
+
+vehicles.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const vehicle = await putVehicle(id, body);
+    res.status(201).send(vehicle);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 
