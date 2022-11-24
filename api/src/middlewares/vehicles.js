@@ -1,4 +1,4 @@
-const { Vehicles } = require('../db.js');
+const { Vehicles, Rent } = require('../db.js');
 const vehiculos = require('./vehicles.json')
 
 const getVehicles = async () => {
@@ -20,7 +20,12 @@ const postVehicleFn = async (data) => {
 
 
 const getVehicleDetailsFn = async (id) => {
-    let vehicleDB = await Vehicles.findAll({where: {id}});
+    let vehicleDB = await Vehicles.findAll({
+        where: {id},
+        include: {
+            model: Rent
+        }
+    });
     vehicleDB = vehicleDB[0].dataValues
     return vehicleDB
 }
@@ -36,9 +41,23 @@ const deleteVehicle = async (id) => {
     }
 };
 
+const putVehicle = async (id, body) => {
+    try {
+        const vehicle = await Vehicles.findByPk(id);
+        for (const prop in body) {
+            vehicle[prop] = body[prop];
+        }
+        await vehicle.save();
+        return vehicle;
+    } catch (error) {
+        res.status(404).send(error);
+    }
+};
+
 module.exports = {
     getVehicles,
     postVehicleFn,
     getVehicleDetailsFn,
-    deleteVehicle
+    deleteVehicle,
+    putVehicle
 };

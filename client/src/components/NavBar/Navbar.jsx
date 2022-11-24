@@ -20,6 +20,7 @@ export default function Navbar() {
         name: user.given_name,
         email: user.email,
         photo: user.picture,
+        lastName: user.family_name
       };
       dispatch(loginUserAuth(nuevo));
     }

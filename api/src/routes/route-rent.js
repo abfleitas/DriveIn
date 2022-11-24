@@ -1,17 +1,10 @@
 const { Router } = require("express");
-const { getRent } = require("../middlewares/rent");
+const { allRents, cancelRent, cancelRentAdmin } = require("../middlewares/rent");
 const router = Router();
 
+router.get("/", allRents)
 
-router.get("/", async (req, res) => {
-    try {
-      const {userId} = req.query  
-      const allRents = await getRent(userId);
-     
-      return res.status(200).send(allRents);
-    } catch (error) {
-      res.status(404).send({error: error.message});
-    }
-  });
+router.put("/:id", cancelRent)
+router.delete("/", cancelRentAdmin)
 
 module.exports = router;

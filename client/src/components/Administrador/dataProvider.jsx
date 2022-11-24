@@ -1,7 +1,10 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = 'http://localhost:3001';
+
+console.log(process.env.REACT_APP_REACTADMIN_REQ);
+
+const apiUrl = process.env.REACT_APP_REACTADMIN_REQ ? process.env.REACT_APP_REACTADMIN_REQ : 'http://localhost:3001';
 const httpClient = fetchUtils.fetchJson;
 
 export const dataProvider= {

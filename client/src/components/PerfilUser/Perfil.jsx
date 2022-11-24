@@ -1,22 +1,87 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setVehicleDetailsState, getRents } from "../../redux/actions/actions";
+import { getRents, userUpdate } from "../../redux/actions/actions";
+import axios from "axios";
 import Navbar from "../NavBar/Navbar";
+import Rent from "../ModalRent/Rent";
 
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
-  const [mostrarPass, setmostrarPass] = useState("");
+
+  // const [user, setUser] = useState(usuario);
+  const [modal, setModal] = useState(false);
+  const [input, setInput] = useState({
+    name: usuario.name,
+    lastName: usuario.lastName,
+    phone: usuario.phone,
+    password: usuario.password,
+  });
+  console.log(usuario.photo);
+  const [ImageCloud, setImageCloud] = useState("");
+  const [image, setImage] = useState({ photo: usuario.photo });
+  const handleOnCloseModal = () => setModal(false);
+
   const { id } = useParams();
 
   const rents = useSelector((state) => state.rents);
-console.log(rents)
+  console.log(rents);
   const dispatch = useDispatch();
-  useEffect(() => {
-      dispatch(getRents(usuario.id));
-  }, [dispatch]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(getRents(usuario.id));
+  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(userUpdate(usuario.id));
+  // }, [dispatch]);
+
+  const imageCloudChangeHandler = (event) => {
+    const imageData = new FormData();
+    imageData.append("file", event.target.files[0]);
+    imageData.append("upload_preset", "DriveIn_upload");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dcr28dyuq/upload", imageData)
+      .then((response) => {
+        setImageCloud(response.data.secure_url);
+      });
+  };
+
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+    setModal(true);
+  };
+
+  function handleInputChange(e) {
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+  }
+  function handlePhotoChange(e) {
+    setImage({
+      ...image,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  console.log("SOY EL INPUT", input);
+
+  async function handleUserData(e) {
+    e.preventDefault();
+    // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
+    dispatch(userUpdate(usuario.id));
+    alert("Cambios realizados con éxito");
+    // navigate("/login");
+  }
+  async function handleUserPhoto(e) {
+    e.preventDefault();
+    // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
+    dispatch(userUpdate(usuario.id));
+    alert("Foto cambiada con éxito");
+    // navigate("/login");
+  }
 
   return (
     <div>
@@ -26,7 +91,25 @@ console.log(rents)
           <div className="w-full md:w-3/12 md:mx-2">
             <div className="flex flex-col bg-[#2E3A46] text-white rounded p-2">
               <div className="image overflow-hidden self-center ">
-                <img src={usuario.photo} alt="yo" className="rounded" />
+                {/* <img src={usuario.photo} alt="yo" className="rounded" /> */}
+                <img
+                  name="photo"
+                  value={usuario.photo}
+                  onChange={(e) => handlePhotoChange(e)}
+                  src={ImageCloud ? ImageCloud : usuario.photo}
+                  className="rounded"
+                  alt="yo"
+                />
+              </div>
+              <div>
+                <form onSubmit={(e) => handleUserPhoto(e)}>
+                  <input
+                    type="file"
+                    onChange={imageCloudChangeHandler}
+                    className="Creation_Image_input"
+                  ></input>
+                  <button type="submit">Cambiar Foto</button>
+                </form>
               </div>
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
                 Hola, {usuario.name}!
@@ -76,7 +159,9 @@ console.log(rents)
                       />
                     </svg>
                   </span>
-                  <span className="tracking-wide ">Información</span>
+                  <span className="tracking-wide ">
+                    Información <button className=" bg-gray">Editar</button>
+                  </span>
                 </div>
               </div>
               <div className="bg-white ">
@@ -133,7 +218,7 @@ console.log(rents)
                 Mas Información
               </button>
               <div className="bg-white p-3 shadow-sm rounded-sm">
-                <div className="grid grid-cols-2">
+                <div className="grid">
                   <div>
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                       <span clas="text-green-500">
@@ -155,30 +240,27 @@ console.log(rents)
                       <span className="tracking-wide">Alquilados</span>
                     </div>
                     <ul className="list-inside space-y-2">
-                      {rents.length? 
-                      rents.map(e =>  {
-                        return (
-                          <li>
-                          <div className="text-teal-600 flex items-start">
-                            {e.vehicle.brand
-                            }, 
-                            {e.vehicle.model }
-                          </div>
-                          <div className="text-gray-500 text-xs flex items-start">
-                          Desde:  { e.dateInit}
-                          </div>
-                          <div className="text-gray-500 text-xs flex items-start">
-                          Hasta: { e.dateFinish}
-                          </div>
-                        </li>
-                        )
-                      }
-                        )
-
-                      :
-                      <div className="text-gray-500 text-xs flex items-start"> No hay autos alquilados</div>
-                      }
-                     
+                      {rents.length ? (
+                        rents.map((e) => {
+                          return (
+                            <Rent
+                            img={e.vehicle.photo}
+                            brand={e.vehicle.brand}
+                            model={e.vehicle.model}
+                            fi={e.dateInit}
+                            ff={e.dateFinish}
+                            tp={e.totalPrice}
+                            city={e.vehicle.city.name}
+                            country={e.vehicle.city.country}
+                            />
+                          );
+                        })
+                      ) : (
+                        <div className="text-gray-500 text-xs flex items-start">
+                          {" "}
+                          No hay autos alquilados
+                        </div>
+                      )}
                     </ul>
                   </div>
                   <div>
@@ -228,6 +310,55 @@ console.log(rents)
                 </div>
               </div>
             </div>
+            <h1>Cambiar datos personales</h1>
+            <form
+              onSubmit={(e) => {
+                handleUserData(e);
+              }}
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder=" nuevo nombre"
+                value={input.name}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder=" nuevo apellido"
+                value={input.lastName}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="nuevo telefono"
+                value={input.phone}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <input
+                type="text"
+                name="password"
+                placeholder="nuevo password"
+                value={input.password}
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+              <button
+                type="submit"
+                className="border-green border-2 bg-green text-white"
+              >
+                Modificar Datos
+              </button>
+            </form>
           </div>
         </div>
       </div>

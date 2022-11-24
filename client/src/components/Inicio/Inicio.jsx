@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../Inicio/Inicio.css";
 import Logo from "../../images/LogoVerde.png";
@@ -7,8 +7,25 @@ import Face from "../../images/FaceBlanco.png";
 import YT from "../../images/YTblanco.png";
 
 //import image from "../componentes/image/poke-landing.png";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getComments,
+  getCountries,
+  getVehicles,
+  deleteStates
+} from "../../redux/actions/actions";
 
 export default function Landing() {
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(deleteStates())
+    dispatch(getCountries());
+    dispatch(getVehicles());
+    dispatch(getComments());
+  }, []);
+
+
   return (
     <div className="landing">
       <img className="logo" src={Logo} alt="" />

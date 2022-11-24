@@ -4,7 +4,8 @@ const {
   postVehicleFn,
   getVehicleDetailsFn,
   getVehicles,
-  deleteVehicle
+  deleteVehicle,
+  putVehicle
 } = require("../middlewares/vehicles");
 const {dashboard} = require ("../middlewares/dashboard")
 const vehicles = Router();
@@ -15,6 +16,11 @@ vehicles.get("/", async (req, res) => {
 
   try {
     await getVehicles();
+    if (!req.query) {
+      const all = await Vehicles.findAll()
+      return res.status(200).send(all);
+    }
+    await getVehicles();
     const all = await Vehicles.findAll(
       {
         order: order,
@@ -22,7 +28,12 @@ vehicles.get("/", async (req, res) => {
         offset: pagina
       }
     );
-    return res.status(200).send(all);
+
+     let cantidad = await Vehicles.count(
+    
+    )
+    console.log(cantidad)
+    return res.header('Content-Range',`0-10/${cantidad}`).status(200).send(all);
   } catch (error) {
     res.status(404).send(error);
   }
@@ -77,6 +88,17 @@ vehicles.delete("/", async (req, res) => {
     res.status(201).send(unactive);
   } catch (error) {
     res.status(400).send(error.message);
+  }
+});
+
+vehicles.put("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const body = req.body;
+    const vehicle = await putVehicle(id, body);
+    res.status(201).send(vehicle);
+  } catch (error) {
+    res.status(404).send(error);
   }
 });
 

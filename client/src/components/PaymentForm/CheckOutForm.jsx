@@ -10,14 +10,27 @@ import "react-datepicker/dist/react-datepicker.css";
 
 export default function CheckOutForm() {
   const vehiclesDetail = useSelector((state) => state.details);
+  const fechasNoDisponibles = vehiclesDetail.rents && vehiclesDetail.rents.map(r => {
+    let inicio = r.dateInit.split("-");
+    let mm = inicio[1] - 1;
+    let fin = r.dateFinish.split("-");
+    let mm2 = fin[1] - 1;
+    let start = new Date(inicio[0], mm, inicio[2]);
+    let end = new Date(fin[0], mm2, fin[2]);
+    let obj = {
+      start,
+      end
+    }
+    return obj
+  })
 
   useEffect(()=>{
     disableDates();
   }, [])
 
+
   const dispatch = useDispatch();
-  const [date, setDate] = useState({});
-  const [dateRange, setDateRange] = useState([new Date(), null]);
+  const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, endDate] = dateRange;
   const [extras, setExtras] = useState({
     seguro: 50,
@@ -29,14 +42,6 @@ export default function CheckOutForm() {
   const user = JSON.parse(localStorage.getItem("UserLogin"));
   const stripe = useStripe();
   const elements = useElements();
-
-  const handleChange = (e) => {
-    e.preventDefault();
-    setDate({
-      ...date,
-      [e.target.name]: e.target.value,
-    });
-  };
 
   const disableDates = () => {
     let today, dd, mm, yyyy;
@@ -114,8 +119,8 @@ export default function CheckOutForm() {
         category: vehiclesDetail.category,
         vehicleId: vehiclesDetail.id,
         user: user,
-        dateInit: date.Desde,
-        dateFinish: date.Hasta,
+        dateInit: dateRange[0],
+        dateFinish: dateRange[1],
       };
       const response = dispatch(getPayment(payload));
       swal({
@@ -163,8 +168,8 @@ export default function CheckOutForm() {
                 />
 
                 <span className="mx-2">Seguro (obligatorio)</span>
-                <span className="text-xs text-red-600 text-end">
-                  50 USD total
+                <span className="text-xs text-red-600 text-end mx-4 my-[5px]">
+                  50 USD / TOTAL
                 </span>
               </label>
             </div>
@@ -180,7 +185,7 @@ export default function CheckOutForm() {
                   onChange={handleExtraChange}
                 />
                 <span className="mx-2">Butaca para bebe</span>
-                <span className="text-xs text-red-600">10 USD / dia</span>
+                <span className="text-xs text-red-600 mx-[30px] my-[5px]">10 USD / DIA</span>
               </label>
             </div>
           </div>
@@ -195,7 +200,7 @@ export default function CheckOutForm() {
                   onChange={handleExtraChange}
                 />
                 <span className="mx-2">Butaca para niño</span>
-                <span className="text-xs text-red-600">10 USD / dia</span>
+                <span className="text-xs text-red-600 mx-[35px] my-[5px]">10 USD / DIA</span>
               </label>
             </div>
           </div>
@@ -210,7 +215,7 @@ export default function CheckOutForm() {
                   onChange={handleExtraChange}
                 />
                 <span className="mx-2">Portaequipaje</span>
-                <span className="text-xs text-red-600">20 USD / dia</span>
+                <span className="text-xs text-red-600 mx-[58px] my-[5px]">20 USD / DIA</span>
               </label>
             </div>
           </div>
@@ -225,10 +230,11 @@ export default function CheckOutForm() {
               startDate={startDate}
               endDate={endDate}
               dateFormat="dd/MM/yyyy"
+              excludeDateIntervals={fechasNoDisponibles}
               onChange={(update) => {
                 setDateRange(update);
                }}
-              isClearable={true}
+              withPortal
               className="flex h-10 bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm m-auto cursor:pointer"
             />
           </div>
