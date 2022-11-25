@@ -5,9 +5,9 @@ import Inicio from "./components/Inicio/Inicio";
 import Details from "./components/Details/Details";
 import { Register } from "./components/Register/Register";
 import { Login } from "./components/Login/login";
-
+import Nosotros from "./components/Nosotros/Nosotros";
 import Administrador from "./components/Administrador/Administrador";
-
+import Contacto from "./components/Contacto/Contacto";
 import Vehicles from "./components/Vehicles/Vehicles";
 import Users from "./components/Users/Users";
 
@@ -33,6 +33,8 @@ function App() {
           <Route path="/vehicles-list-test" element={<Vehicles />} />
           <Route path="/users-list-test" element={<Users />} />
           <Route path="/user" element={<Perfil />} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/contacto" element={<Contacto />} />
         </Routes>
       </div>
     </BrowserRouter>

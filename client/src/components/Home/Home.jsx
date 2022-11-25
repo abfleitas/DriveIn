@@ -1,24 +1,21 @@
 import React, { useEffect } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import Carousel from "../Carousel/Carousel";
-import Comments from "../Comments/Comments";
 import banner from "../../images/banner.jpg";
 import Navbar from "../NavBar/Navbar";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  getComments,
   getCountries,
   getVehicles,
-  deleteStates
+  deleteStates,
 } from "../../redux/actions/actions";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(deleteStates())
+    dispatch(deleteStates());
     dispatch(getCountries());
     dispatch(getVehicles());
-    dispatch(getComments());
   }, [dispatch]);
   return (
     <div className="bg-[#D9D9D9] h-full">
@@ -40,9 +37,6 @@ export default function Home() {
       </div>
       <div className="mt-8">
         <Carousel />
-      </div>
-      <div className="mt-8">
-        <Comments />
       </div>
     </div>
   );
