@@ -187,14 +187,14 @@ export const getVehicles = () => {
   };
 };
 
-export const getComments = (id) => {
+export const getComments = () => {
   return function (dispatch) {
-    axios.get(`/comments/vehicle/${id}`).then(
+    axios.get("/comments").then(
       (response) => {
         dispatch({ type: GET_COMMENTS, payload: response.data });
       },
       (error) => {
-        dispatch({ type: GET_COMMENTS, payload: error.message });
+        return error;
       }
     );
   };
@@ -421,15 +421,18 @@ export const userUpdate = (payload, body) => async (dispatch) => {
   }
 };
 
+
 export const GetAllLists = () => async (dispatch) => {
   try {
+
     await axios.get("/country");
     await axios.get("/cities");
     await axios.get("/vehicles");
     await axios.get("/user");
     await axios.get("/rent");
     await axios.get("/comments");
+
   } catch (error) {
     console.log({ error: error.message });
   }
-};
+}
