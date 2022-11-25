@@ -12,7 +12,7 @@ const allRents = async (req, res) => {
   try {
     const {order, corte, pagina} = dashboard(req.query)
     
-    // if(!(await Rent.findAll()).length) await Rent.bulkCreate(rents);
+    if(!(await Rent.findAll()).length) await Rent.bulkCreate(rents);
 
     if(req.query.id) {
       const rent = await Rent.findByPk(req.query.id)
@@ -33,6 +33,31 @@ const allRents = async (req, res) => {
       if (!rent.length) throw Error("No se encontraron trasacciones")
        return res.status(200).send(rent)
     }
+    
+    let filter = JSON.parse(req.query.filter);
+    let categoria = filter.category
+    console.log(categoria);
+    if (categoria) {
+      const users = await  Users.findAll()
+      let rentsInactive = await Rent.findAll({
+        include : {
+          model: Vehicles,
+          required: false
+        },
+        order: order,
+        limit:corte,
+        offset: pagina,
+        where: {active: false}
+      })
+      await rentsInactive.forEach(rent => {
+        const user = users.filter(user => user.id === rent.userId);
+        rent.dataValues.userEmail = user[0].dataValues.email
+        rent.dataValues.userName = user[0].dataValues.name
+        rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
+      })
+      let cantidad = await Rent.count()
+      return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(rentsInactive)
+    };
     if (order || corte || pagina) {
       const users = await  Users.findAll()
       const response = await  Rent.findAll({
@@ -51,7 +76,6 @@ const allRents = async (req, res) => {
         rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
       })
       let cantidad = await Rent.count()
-      console.log(cantidad);
       return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(response)
     }
 
