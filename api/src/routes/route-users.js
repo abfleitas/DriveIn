@@ -118,15 +118,7 @@ user.delete("/", async (req, res) => {
   }
 });
 
-user.post("/", async (req, res) => {
-  try {
-    const details = await postUser(req.body);
-
-    res.status(201).send(details);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
+user.post("/", postUser);
 
 // ***********************REACT ADMIN *****************
 module.exports = user;

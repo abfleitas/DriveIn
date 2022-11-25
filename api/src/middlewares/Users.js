@@ -20,7 +20,7 @@ async function postUser(req, res) {
     
     await Users.create(newUser);
     
-    return newUser
+    return res.status(200).json(newUser)
   } catch (error) {
     res.json(error);
     return;
