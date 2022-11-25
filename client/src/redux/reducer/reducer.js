@@ -79,7 +79,7 @@ export default function rootReducer(state = initialState, action) {
 
     case FILTER:
       const filtrados = [];
-      let vehiclefiltrado = state.vehiclesByCity;
+      let vehiclefiltrado = state.vehiclesCopy;
       state.filters.map((filter) => {
         if (filter.key === action.payload.key) {
           let value = action.payload.value;
@@ -115,21 +115,19 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         filters: filtrados,
-        vehiclesCopy: vehiclefiltrado,
+        vehiclesByCity: vehiclefiltrado,
       };
     case FILTER_PRICE:
-      function sorted5(action) {
-        return action.payload === "lower"
+      let sortedPrice =  action.payload === "lower"
           ? state.vehiclesByCity.sort((a, b) => a.initialPrice - b.initialPrice)
           : state.vehiclesByCity.sort(
               (a, b) => b.initialPrice - a.initialPrice
             );
-      }
-      let sortedPrice = sorted5(action);
+      
+     
       return {
         ...state,
         vehiclesByCity: sortedPrice,
-        vehicleCopy: sortedPrice,
       };
     //ADD_FAVORITES
     case USER_FAVORITES:

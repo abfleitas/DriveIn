@@ -8,7 +8,7 @@ import Siguiente from "../../images/flechablancader.png";
 import Anterior from "../../images/flechablancaizq.png";
 
 export default function AllCards() {
-  const vehicles = useSelector((state) => state.vehiclesCopy);
+  const vehicles = useSelector((state) => state.vehiclesByCity);
   //Paginado inicio bloque...
   const [currentPage, setCurrentPage] = useState(1);
   const vehicleByPage = 8;
