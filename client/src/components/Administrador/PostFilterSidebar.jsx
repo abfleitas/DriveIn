@@ -8,10 +8,7 @@ export const PostFilterSidebar = () => (
         <CardContent>
             <SavedQueriesList />
             <FilterLiveSearch />
-            <FilterList label="Subscribed to newsletter" icon={<MailIcon />}>
-                <FilterListItem label="Yes" value={{ has_newsletter: true }} />
-                <FilterListItem label="No" value={{ has_newsletter: false }} />
-            </FilterList>
+
             <FilterList label="Category" icon={<CategoryIcon />}>
                 <FilterListItem label="No activos" value={{ category: 'noActives' }} />
 

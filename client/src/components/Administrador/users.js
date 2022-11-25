@@ -1,23 +1,19 @@
 import * as React from "react";
-import { List, Datagrid, ImageField, TextField, EmailField, NumberField, Pagination, Button,  TopToolbar,ExportButton, CreateButton,  } from 'react-admin';
+import { List, Datagrid, ImageField, BooleanField, TextField, EmailField, NumberField, Pagination, Button,  TopToolbar,ExportButton, CreateButton,  } from 'react-admin';
 import { PostFilterSidebar } from './PostFilterSidebar';
 
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
-
 
 
 const ListActions = (props) => (
     <TopToolbar>
         <CreateButton/>
         <ExportButton/>
-        {/* Add your custom actions */}
         <Button
             onClick={() => { alert('Your custom action'); }}
-            label="Show calendar"
-        >
+            label="Show calendar">
         </Button>
        
-          {/* <Update/>  */}
     </TopToolbar>
 );
 
@@ -32,7 +28,7 @@ export const UserList = () => (
             <TextField source="password" />
             <ImageField source="photo" />
             <NumberField source="role" />
-            <TextField source="active" />
+            <BooleanField source="active" />
         </Datagrid>
     </List>
 );
