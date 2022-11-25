@@ -124,11 +124,11 @@ export default function Perfil() {
         <div className="md:flex no-wrap md:-mx-2 ">
           <div className="w-full md:w-3/12 md:mx-2">
             <div className="flex flex-col bg-[#2E3A46] text-white rounded p-2">
-              <div className="image overflow-hidden self-center ">
+              <div className="image overflow-hidden self-center w-[100px] h-[100px]">
                 {/* <img src={usuario.photo} alt="yo" className="rounded" /> */}
                 <img
                   src={ImageCloud ? ImageCloud : usuario.photo}
-                  className="rounded"
+                  className="rounded h-full w-full"
                   alt="yo"
                 />
               </div>

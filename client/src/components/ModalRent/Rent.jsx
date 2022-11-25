@@ -40,8 +40,8 @@ const Rent = ({ img, brand, model, fi, ff, tp, city, country }) => {
         <span className="font-semibold text-sm">Total:</span>
         <span className="text-sm">{tp} USD</span>
       </div>
-      <div className="text-gray-500 text-xs flex items-start">
-        <button onClick={() => handleReview()}>Déjanos tu comentario</button>
+      <div className="mr-2">
+        <button onClick={() => handleReview()} className="w-[90px] h-[38px] rounded-lg bg-slate-700 text-white font-bold text-xs hover:bg-[#f97d67]">Déjanos tu comentario</button>
       </div>
       <CommentsForm onClose={handleOnClose} visible={open}/>
     </div>
