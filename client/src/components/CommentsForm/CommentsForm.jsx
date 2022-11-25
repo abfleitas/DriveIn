@@ -25,8 +25,9 @@ export default function CommentsForm({ rent, visible, onClose }) {
    });
    console.log("confort ", input.confort);
    console.log("performance ", input.performance);
-   console.log("confort ", input.priceQuality);
-   console.log("confort ", input.recommended);
+   console.log("security ", input.security);
+   console.log("priceQuality ", input.priceQuality);
+   console.log("recommended ", input.recommended);
    
    const handleChange = (e) => {
       setInput({
