@@ -9,6 +9,7 @@ import CreateVehicle from "./CreateVehicle";
 import CreateUser from "./CreateUser";
 import {Updates} from './Update'
 import { commentsList } from "./comments";
+import { UpdateVehicle } from "./UpdateVehicle";
  
 //const dataProvider = simpleRestProvider('http://localhost:3001')
 // const {id} = useGetOne("http://localhost:3001", {id})
@@ -18,7 +19,7 @@ const Administrador = () => (
         
             <Resource name="user"  list={UserList} create={CreateUser} edit = {Updates} />
             {/* <Resource name="comments" list={ListGuesser} /> */}
-            <Resource name="vehicles" list={vehiclesList} create={CreateVehicle} />
+            <Resource name="vehicles" list={vehiclesList} create={CreateVehicle} edit={UpdateVehicle} />
             <Resource name="comments" list={commentsList} />
             <Resource name="rent"  list={rentsList} />
         </Admin>

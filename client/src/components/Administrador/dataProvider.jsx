@@ -1,7 +1,10 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = 'http://localhost:3001';
+
+console.log(process.env.REACT_APP_REACTADMIN_REQ);
+
+const apiUrl = process.env.REACT_APP_REACTADMIN_REQ ? process.env.REACT_APP_REACTADMIN_REQ : 'http://localhost:3001';
 const httpClient = fetchUtils.fetchJson;
 
 export const dataProvider= {
@@ -20,7 +23,7 @@ export const dataProvider= {
         };
         
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
-      
+        httpClient(url).then(({ headers, json }) => (console.log(headers)))
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
