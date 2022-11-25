@@ -22,6 +22,7 @@ const Administrador = () => (
             <Resource name="vehicles" list={vehiclesList} create={CreateVehicle} edit={UpdateVehicle} />
             <Resource name="comments" list={commentsList} />
             <Resource name="rent"  list={rentsList} />
+            <Resource name="cities" recordRepresentation="name" />
         </Admin>
       
     );

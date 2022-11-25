@@ -9,10 +9,20 @@ const {
 } = require("../middlewares/vehicles");
 const {dashboard} = require ("../middlewares/dashboard")
 const vehicles = Router();
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 vehicles.get("/", async (req, res) => {
 
-  const {order, corte, pagina} = dashboard(req.query)
+  let availability = true;
+  let searchBar = "";
+
+  if (req.query.filter) {
+    let filter = JSON.parse(req.query.filter);
+    if (filter.availability === "noActive") availability = false;
+    if (filter.q) searchBar = filter.q;
+  }
+  const { order, corte, pagina } = dashboard(req.query);
 
   try {
     await getVehicles();
@@ -25,15 +35,18 @@ vehicles.get("/", async (req, res) => {
       {
         order: order,
         limit: corte,
-        offset: pagina
+        offset: pagina,
+        where: {
+          availability,
+          brand: { [Op.iLike]: "%" + searchBar + "%" }
+        }
       }
     );
 
-     let cantidad = await Vehicles.count(
-    
-    )
-    console.log(cantidad)
-    return res.header('Content-Range',`0-10/${cantidad}`).status(200).send(all);
+    let cantidad = await Vehicles.count(
+      {where: {availability}}
+    );
+    return res.header('Content-Range', `0-10/${cantidad}`).status(200).send(all);
   } catch (error) {
     res.status(404).send(error);
   }

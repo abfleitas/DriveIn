@@ -1,24 +1,17 @@
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, NumberField, Pagination, Button, FilterButton, TopToolbar,ExportButton, CreateButton  } from 'react-admin';
+import { List, Datagrid, TextField, ImageField, NumberField, Pagination, TopToolbar, CreateButton, ReferenceField } from 'react-admin';
+import { FilterSidebarVehi } from "./FilterSidebarVehi";
 
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
 
-const ListActions = (props) => (
+const ListActions = () => (
     <TopToolbar>
-        <CreateButton/>
-        <ExportButton/>
-        {/* Add your custom actions */}
-        <Button
-            onClick={() => { alert('Your custom action'); }}
-            label="Show calendar"
-        >
-    
-        </Button>
+        <CreateButton />
     </TopToolbar>
 );
 
 export const vehiclesList = () => (
-    <List   actions={<ListActions/>} title="List of vehicles" pagination={<PostPagination /> }>
+    <List aside={<FilterSidebarVehi />} actions={<ListActions />} title="List of vehicles" pagination={<PostPagination />}>
         <Datagrid rowClick="edit">
             <NumberField source="id" />
             <TextField source="brand" />
@@ -31,10 +24,8 @@ export const vehiclesList = () => (
             <ImageField source="photo" />
             <TextField source="availability" />
             <NumberField source="initialPrice" />
-            <NumberField source="cityId" />
+            <ReferenceField source="cityId" reference="cities" />
             {/* <TextField source="seats"/> */}
-
         </Datagrid>
     </List>
 );
-
