@@ -73,7 +73,7 @@ export default function Perfil() {
 
   const handleOpenModal = (e) => {
     e.preventDefault();
-    setModal(true);
+
   };
 
   function handleInputChange(e) {
