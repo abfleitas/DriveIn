@@ -1,6 +1,6 @@
 import * as React from "react";
 import { BooleanField, ReferenceField, List, Datagrid, TextField, EmailField, NumberField, Pagination, Button, FilterButton, TopToolbar,ExportButton, CreateButton  } from 'react-admin';
-import { PostFilterSidebar } from './PostFilterSidebar';
+import { PostFilterSidebarRent } from './PostFilterSidebarRent';
 
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
 
@@ -13,7 +13,7 @@ const ListActions = (props) => (
 
 
 export const rentsList = () => (
-    <List actions={<ListActions/>} title="List of Rents" pagination={<PostPagination /> }>
+    <List aside={<PostFilterSidebarRent/>} actions={<ListActions/>} title="List of Rents" pagination={<PostPagination /> }>
         <Datagrid rowClick="edit">
              <NumberField source="id" />
              <TextField source="dateInit" />

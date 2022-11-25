@@ -74,7 +74,6 @@ export default function Perfil() {
 
   const handleOpenModal = (e) => {
     e.preventDefault();
-
   };
 
   function handleInputChange(e) {
@@ -233,7 +232,7 @@ export default function Perfil() {
                       Teléfono
                     </div>
                     <div className="px-4 py-2 flex items-start ">
-                      {usuario.phone}
+                      {usuario.whatsapp}
                     </div>
                   </div>
                   <div className="grid grid-cols-2">
