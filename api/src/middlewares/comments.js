@@ -73,7 +73,7 @@ const getCommentsByVehicleId = async (req, res) => {
     console.log("Soy id ", id);
     const getCommentVehicle = await Comments.findAll({
       where: { vehicleId: id },
-      include:{model:Users}
+      include: { model: Users },
     });
     console.log("Comentario vehiculo ", getCommentVehicle);
     res.status(200).send(getCommentVehicle);
