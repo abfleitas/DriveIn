@@ -16,7 +16,7 @@ const postComments = async (data) => {
     //if (!description || !id) throw Error("There is nothing to comment");
     const findcomment = await Comments.findOne({
       where: {
-        [Op.and]: [{ userId:id }, { vehicleId:vehicleId }],
+        [Op.and]: [{ userId: id }, { vehicleId: vehicleId }],
       },
     });
     console.log("Repetido ", findcomment);
@@ -27,9 +27,9 @@ const postComments = async (data) => {
         security: security,
         priceQuality: priceQuality,
         recommended: recommended,
-        description: description
+        description: description,
       });
-     console.log("Proto ", createComment.__proto__);
+      console.log("Proto ", createComment.__proto__);
       await createComment.setUser(id); //Setear la relación del usuario con el comentario...
       await createComment.setVehicle(vehicleId); //Setear la relacion del vehiculo con el comentario...
       return "Creado Satisfactoriamente!!!";
@@ -43,7 +43,9 @@ const postComments = async (data) => {
 
 const getAllComentarios = async () => {
   try {
-    const allCommentsDb = await Comments.findAll();
+    const allCommentsDb = await Comments.findAll({
+      include: [{ model: Vehicles }, { model: Users }],
+    });
     return allCommentsDb;
   } catch (error) {
     console.log(error.message);
@@ -55,30 +57,31 @@ const getCommentsById = async (req, res) => {
     const { id } = req.params;
     console.log("Soy id ", id);
     const getCommentUser = await Comments.findAll({
-      where:{userId:id},
-    })
-    console.log("Comentario usuario ",getCommentUser);
+      where: { userId: id },
+    });
+    console.log("Comentario usuario ", getCommentUser);
     res.status(200).send(getCommentUser);
   } catch (error) {
     console.log(error.message);
     res.status(400).send("Hubo un error en la petición!!!");
   }
-}
+};
 
 const getCommentsByVehicleId = async (req, res) => {
   try {
     const { id } = req.params;
     console.log("Soy id ", id);
     const getCommentVehicle = await Comments.findAll({
-      where:{vehicleId:id},
-    })
-    console.log("Comentario vehiculo ",getCommentVehicle);
+      where: { vehicleId: id },
+      include:{model:Users}
+    });
+    console.log("Comentario vehiculo ", getCommentVehicle);
     res.status(200).send(getCommentVehicle);
   } catch (error) {
     console.log(error.message);
     res.status(400).send("Hubo un error en la petición!!!");
   }
-}
+};
 
 module.exports = {
   postComments,

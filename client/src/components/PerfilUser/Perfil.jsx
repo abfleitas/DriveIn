@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getRents, userUpdate } from "../../redux/actions/actions";
-import CommentsForm from "../CommentsForm/CommentsForm";
+//import CommentsForm from "../CommentsForm/CommentsForm";
 import axios from "axios";
 import Navbar from "../NavBar/Navbar";
 
@@ -110,14 +110,7 @@ export default function Perfil() {
     // navigate("/login");
   }
 
-  const [open, setOpen] = useState(false);
-  const handleOnClose = () => {
-    setOpen(false);
-  }
 
-  const handleReview = () => {
-    setOpen(true);
-  }
 
   return (
     <>
@@ -282,22 +275,7 @@ export default function Perfil() {
                         rents.map((e) => {
                           return (
 
-                            <li>
-                              <div className="text-teal-600 flex items-start">
-                                {e.vehicle.brand},{e.vehicle.model} 
-                              </div>
-                              <div className="text-gray-500 text-xs flex items-start">
-                                Desde: {e.dateInit}
-                              </div>
-                              <div className="text-gray-500 text-xs flex items-start">
-                                Hasta: {e.dateFinish}
-                              </div>
-                              <div className="text-gray-500 text-xs flex items-start">
-                                <button onClick={(() => handleReview())}>Déjanos tu comentario</button>
-                              </div>
-                            </li>
-
-                            <Rent
+                            <Rent 
                             img={e.vehicle.photo}
                             brand={e.vehicle.brand}
                             model={e.vehicle.model}
@@ -306,6 +284,7 @@ export default function Perfil() {
                             tp={e.totalPrice}
                             city={e.vehicle.city.name}
                             country={e.vehicle.city.country}
+
                             />
 
                           );
@@ -377,8 +356,6 @@ export default function Perfil() {
           </div>
         </div>
       </div>
-      <CommentsForm onClose={handleOnClose} visible={open}/>
-    </div>
 
 
       {/* <EditForm visible={panel} cambiarEstado={setPanel} /> */}
