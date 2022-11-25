@@ -23,7 +23,7 @@ export const dataProvider= {
         };
         
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
-      
+        httpClient(url).then(({ headers, json }) => (console.log(headers)))
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),

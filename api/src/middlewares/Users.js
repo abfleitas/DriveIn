@@ -6,9 +6,9 @@ const Op = Sequelize.Op;
 
 
 
-async function postUser(props) {
+async function postUser(req, res) {
   
-  const { name, lastName,  whatsapp, email, password } = props;
+  const { name, lastName,  whatsapp, email, password } = req.body;
   const newUser = { name, lastName,  whatsapp, email, password };
   
   try {
@@ -20,7 +20,7 @@ async function postUser(props) {
     
     await Users.create(newUser);
     
-    return newUser
+    return res.status(200).json(newUser)
   } catch (error) {
     res.json(error);
     return;

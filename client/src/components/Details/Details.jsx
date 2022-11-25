@@ -18,6 +18,7 @@ export default function Details() {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const vehicleDetailsState = useSelector((state) => state.details);
+  console.log(vehicleDetailsState);
   const user = JSON.parse(localStorage.getItem("UserLogin"));
   const navigate = useNavigate();
 

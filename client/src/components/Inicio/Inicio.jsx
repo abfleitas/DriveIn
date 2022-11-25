@@ -8,22 +8,13 @@ import YT from "../../images/YTblanco.png";
 
 //import image from "../componentes/image/poke-landing.png";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getComments,
-  getCountries,
-  getVehicles,
-  deleteStates
-} from "../../redux/actions/actions";
+import { GetAllLists } from "../../redux/actions/actions";
 
 export default function Landing() {
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(deleteStates())
-    dispatch(getCountries());
-    dispatch(getVehicles());
-    dispatch(getComments());
-  }, []);
+
+  useEffect(() => { dispatch(GetAllLists()) }, []);
 
 
   return (

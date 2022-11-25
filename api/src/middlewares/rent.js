@@ -1,5 +1,5 @@
 const { Model } = require('sequelize')
-const {Vehicles, Rent, Users} = require('../db.js')
+const {Vehicles, Rent, Users, City} = require('../db.js')
 const rents = require('./rents.json')
 const {dashboard} = require ("../middlewares/dashboard")
 
@@ -12,7 +12,7 @@ const allRents = async (req, res) => {
   try {
     const {order, corte, pagina} = dashboard(req.query)
     
-    if(!(await Rent.findAll()).length) await Rent.bulkCreate(rents);
+    // if(!(await Rent.findAll()).length) await Rent.bulkCreate(rents);
 
     if(req.query.id) {
       const rent = await Rent.findByPk(req.query.id)
@@ -23,7 +23,12 @@ const allRents = async (req, res) => {
       const userId = req.query.userId
       let rent = await Rent.findAll({
         where: {userId},
-        include: {model: Vehicles}
+        include: {
+          model: Vehicles,
+          include: {
+            model: City
+          }
+        }
       })
       if (!rent.length) throw Error("No se encontraron trasacciones")
        return res.status(200).send(rent)

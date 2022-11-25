@@ -5,7 +5,7 @@ import { filterPrice, filter, getVehicles } from "../../redux/actions/actions";
 export default function Filters({ setChange }) {
   const vehicles = useSelector((state) => state.allVehicles);
   const brand = [...new Set(vehicles.map((el) => el.brand))];
-  const vehiclesCopy = useSelector((state) => state.vehiclesCopy);
+  const vehiclesByCity = useSelector((state) => state.vehiclesByCity);
   let data = {
     Sedan: 0,
     SUV: 0,
@@ -16,21 +16,13 @@ export default function Filters({ setChange }) {
     Automatico: 0,
     air: 0,
     seats: 0,
-    toyota: 0,
-    mitsubishi: 0,
   };
-  vehiclesCopy.map((v) => {
-    if (v.category === "Sedan") data.Sedan++;
-    if (v.category === "SUV") data.SUV++;
-    if (v.category === "Pickup") data.Pickup++;
-    if (v.category === "Hatchback") data.Hatchback++;
-    if (v.category === "CUV") data.CUV++;
-    if (v.transmition === "Manual") data.Manual++;
+  vehiclesByCity.map((v) => {
+    if (v.category) data[v.category]++
+    if (v.transmition === "Manual" ) data.Manual++;
     if (v.transmition === "Automatico") data.Automatico++;
     if (v.air) data.air++;
     if (v.seats > 4) data.seats++;
-    if (v.brand === "Toyota") data.toyota++;
-    if (v.brand === "Mitsubishi") data.mitsubishi++;
   });
 
   const dispatch = useDispatch();
@@ -47,8 +39,7 @@ export default function Filters({ setChange }) {
 
   const handlePrice = (e) => {
     dispatch(filterPrice(e.target.value));
-    console.log(vehiclesCopy)
-     setChange(e.target.value);
+    setChange(e.target.value);
   };
 
   const handlerBrand = (e) => {

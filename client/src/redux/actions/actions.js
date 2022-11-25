@@ -404,6 +404,7 @@ export const userUpdate = (payload, body) => async (dispatch) => {
   try {
     const user = JSON.parse(localStorage.getItem("UserLogin"));
     console.log(user);
+    console.log(body);
     const cualquiera = await axios.put(
       `http://localhost:3001/user?id=${payload}`,
       body
@@ -413,9 +414,25 @@ export const userUpdate = (payload, body) => async (dispatch) => {
     // console.log("SOY EL edit DE ACTIONS", edit);
     return dispatch({
       type: EDIT_USER,
-      payload: user.data,
+      payload: cualquiera.data,
     });
   } catch (error) {
     console.log({ error: payload });
   }
 };
+
+
+export const GetAllLists = () => async (dispatch) => {
+  try {
+
+    await axios.get("/country");
+    await axios.get("/cities");
+    await axios.get("/vehicles");
+    await axios.get("/user");
+    await axios.get("/rent");
+    await axios.get("/comments");
+
+  } catch (error) {
+    console.log({ error: error.message });
+  }
+}

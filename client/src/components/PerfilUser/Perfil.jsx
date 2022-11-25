@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getRents, userUpdate } from "../../redux/actions/actions";
@@ -6,22 +7,45 @@ import CommentsForm from "../CommentsForm/CommentsForm";
 import axios from "axios";
 import Navbar from "../NavBar/Navbar";
 
+import EditForm from "./EditForm";
+
+import Rent from "../ModalRent/Rent";
+
+
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
 
   // const [user, setUser] = useState(usuario);
+
+  
+
+
+ 
+
   const [input, setInput] = useState({
     name: usuario.name,
     lastName: usuario.lastName,
     phone: usuario.phone,
     password: usuario.password,
+    photo: usuario.photo,
   });
   console.log(usuario.photo);
+
+
+  const [panel, setPanel] = useState(false);
+  const handleOpen = (e) => {
+    e.preventDefault();
+
+    setPanel(true);
+  };
+
   const [ImageCloud, setImageCloud] = useState("");
-  const [image, setImage] = useState({ photo: usuario.photo });
+ 
+
 
   const { id } = useParams();
+  // const handleOnClose = () => setOpen(false);
 
   const rents = useSelector((state) => state.rents);
   console.log(rents);
@@ -31,9 +55,6 @@ export default function Perfil() {
   useEffect(() => {
     dispatch(getRents(usuario.id));
   }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(userUpdate(usuario.id));
-  // }, [dispatch]);
 
   const imageCloudChangeHandler = (event) => {
     const imageData = new FormData();
@@ -42,8 +63,18 @@ export default function Perfil() {
     axios
       .post("https://api.cloudinary.com/v1_1/dcr28dyuq/upload", imageData)
       .then((response) => {
+        setInput({
+          ...input,
+          [event.target.name]: response.data.secure_url,
+        });
         setImageCloud(response.data.secure_url);
+        // return response.data.secure_url;
       });
+  };
+
+  const handleOpenModal = (e) => {
+    e.preventDefault();
+
   };
 
   function handleInputChange(e) {
@@ -52,10 +83,12 @@ export default function Perfil() {
       [e.target.name]: e.target.value,
     });
   }
-  function handlePhotoChange(e) {
-    setImage({
-      ...image,
-      [e.target.name]: e.target.value,
+  async function handlePhotoChange(e) {
+    e.preventDefault();
+    const url = await imageCloudChangeHandler(e);
+    setInput({
+      ...input,
+      [e.target.name]: url,
     });
   }
 
@@ -64,14 +97,15 @@ export default function Perfil() {
   async function handleUserData(e) {
     e.preventDefault();
     // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
-    dispatch(userUpdate(usuario.id));
+    dispatch(userUpdate(usuario.id, input));
+
     alert("Cambios realizados con éxito");
-    // navigate("/login");
+    //navigate("/login");
   }
   async function handleUserPhoto(e) {
     e.preventDefault();
     // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
-    dispatch(userUpdate(usuario.id));
+    dispatch(userUpdate(usuario.id, input));
     alert("Foto cambiada con éxito");
     // navigate("/login");
   }
@@ -86,8 +120,14 @@ export default function Perfil() {
   }
 
   return (
-    <div>
+    <>
       <Navbar />
+      <div>
+        <button onClick={handleOpen}>Edit</button>
+        {/* <button onClick={(e) => handleOpen(e)}>
+          Editar info
+        </button> */}
+      </div>
       <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
           <div className="w-full md:w-3/12 md:mx-2">
@@ -95,9 +135,6 @@ export default function Perfil() {
               <div className="image overflow-hidden self-center ">
                 {/* <img src={usuario.photo} alt="yo" className="rounded" /> */}
                 <img
-                  name="photo"
-                  value={usuario.photo}
-                  onChange={(e) => handlePhotoChange(e)}
                   src={ImageCloud ? ImageCloud : usuario.photo}
                   className="rounded"
                   alt="yo"
@@ -106,8 +143,9 @@ export default function Perfil() {
               <div>
                 <form onSubmit={(e) => handleUserPhoto(e)}>
                   <input
+                    name="photo"
                     type="file"
-                    onChange={imageCloudChangeHandler}
+                    onChange={(e) => imageCloudChangeHandler(e)}
                     className="Creation_Image_input"
                   ></input>
                   <button type="submit">Cambiar Foto</button>
@@ -161,9 +199,7 @@ export default function Perfil() {
                       />
                     </svg>
                   </span>
-                  <span className="tracking-wide ">
-                    Información <button className=" bg-gray">Editar</button>
-                  </span>
+                  <span className="tracking-wide ">Información</span>
                 </div>
               </div>
               <div className="bg-white ">
@@ -220,7 +256,7 @@ export default function Perfil() {
                 Mas Información
               </button>
               <div className="bg-white p-3 shadow-sm rounded-sm">
-                <div className="grid grid-cols-2">
+                <div className="grid">
                   <div>
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
                       <span clas="text-green-500">
@@ -245,6 +281,7 @@ export default function Perfil() {
                       {rents.length ? (
                         rents.map((e) => {
                           return (
+
                             <li>
                               <div className="text-teal-600 flex items-start">
                                 {e.vehicle.brand},{e.vehicle.model} 
@@ -259,6 +296,18 @@ export default function Perfil() {
                                 <button onClick={(() => handleReview())}>Déjanos tu comentario</button>
                               </div>
                             </li>
+
+                            <Rent
+                            img={e.vehicle.photo}
+                            brand={e.vehicle.brand}
+                            model={e.vehicle.model}
+                            fi={e.dateInit}
+                            ff={e.dateFinish}
+                            tp={e.totalPrice}
+                            city={e.vehicle.city.name}
+                            country={e.vehicle.city.country}
+                            />
+
                           );
                         })
                       ) : (
@@ -270,48 +319,8 @@ export default function Perfil() {
                     </ul>
                   </div>
                   <div>
-                    <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                      {/* <span clas="text-green-500">
-                        <svg
-                          className="h-5"
-                          xmlns=""
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                        >
-                          <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
-                          <path
-                            fill="#fff"
-                            d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                          />
-                        </svg>
-                      </span> */}
-                      {/* <span className="tracking-wide">Devuelto</span> */}
-                    </div>
-                    <ul className="list-inside space-y-2">
-                      {/* <li>
-                        <div className="text-teal-600 flex items-start">
-                          Auto 1
-                        </div>
-                        <div className="text-gray-500 text-xs flex items-start">
-                          Fecha de devolución tal vez
-                        </div>
-                      </li>
-                      <li>
-                        <div className="text-teal-600 flex items-start">
-                          Auto 1
-                        </div>
-                        <div className="text-gray-500 text-xs flex items-start">
-                          Fecha de devolución tal vez
-                        </div>
-                      </li> */}
-                    </ul>
+                    <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3"></div>
+                    <ul className="list-inside space-y-2"></ul>
                   </div>
                 </div>
               </div>
@@ -370,5 +379,10 @@ export default function Perfil() {
       </div>
       <CommentsForm onClose={handleOnClose} visible={open}/>
     </div>
+
+
+      {/* <EditForm visible={panel} cambiarEstado={setPanel} /> */}
+    </>
+
   );
 }
