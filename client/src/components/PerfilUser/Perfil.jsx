@@ -283,7 +283,8 @@ export default function Perfil() {
                             tp={e.totalPrice}
                             city={e.vehicle.city.name}
                             country={e.vehicle.city.country}
-
+                            id={usuario.id}
+                            vehicleId={e.vehicle.id}
                             />
 
                           );
