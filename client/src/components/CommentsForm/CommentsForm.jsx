@@ -1,10 +1,12 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { renderMatches } from "react-router-dom";
 import { postComment } from "../../redux/actions/actions";
 import StarRating from "../Star/Star_rating";
+import swal from "sweetalert";
 
-export default function CommentsForm({ rent, visible, onClose }) {
+export default function CommentsForm({ id, vehicleId, visible, onClose }) {
    const dispatch = useDispatch();
    const user = JSON.parse(localStorage.getItem("UserLogin"));
    
@@ -14,20 +16,16 @@ export default function CommentsForm({ rent, visible, onClose }) {
       setInput({ ...input, [name]: data });
    };
    const [input, setInput] = useState({
-      id: user.id,
+      id: id,
       confort: 0,
       performance: 0,
       security: 0,
       priceQuality: 0,
       recommended: 0,
       description: "",
-      //vehicleId: rent.id,
+      vehicleId: vehicleId,
    });
-   console.log("confort ", input.confort);
-   console.log("performance ", input.performance);
-   console.log("security ", input.security);
-   console.log("priceQuality ", input.priceQuality);
-   console.log("recommended ", input.recommended);
+
    
    const handleChange = (e) => {
       setInput({
@@ -38,13 +36,32 @@ export default function CommentsForm({ rent, visible, onClose }) {
    
    const handleSubmit = (e) => {
       e.preventDefault();
-    dispatch(postComment(input));
+    //dispatch(postComment(input));
+    axios.post("http://localhost:3001/comments", input)
+    .then(()=>{
+       return swal({
+          title: "Gracias por dejarnos tu comentario",
+          timer: 2000,
+          icon: "success",
+          buttons: false,
+         });
+      })
+
     setInput({
-       description: "",
-       id: [],
+      id: "",
+      confort: 0,
+      performance: 0,
+      security: 0,
+      priceQuality: 0,
+      recommended: 0,
+      description: "",
+      vehicleId: "",
       });
    };
-   
+   // const handleRelease = (e) => {
+   //    if (e.target.id === "container") onRelease();
+   // };
+
    const handleOnClose = (e) => {
       if (e.target.id === "container") onClose();
    };
