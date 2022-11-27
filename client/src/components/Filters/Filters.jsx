@@ -7,11 +7,17 @@ export default function Filters({ setChange }) {
   const brand = [...new Set(vehicles.map((el) => el.brand))];
   const vehiclesByCity = useSelector((state) => state.vehiclesByCity);
   let data = {
+    Micro: 0,
     Sedan: 0,
-    SUV: 0,
-    Pickup: 0,
-    Hatchback: 0,
     CUV: 0,
+    SUV: 0,
+    Hatchback: 0,
+    Convertible: 0,
+    Cabriolet: 0,
+    Pickup: 0,
+    Coupe: 0,
+    Deportivo: 0,
+    Minivan: 0,
     Manual: 0,
     Automatico: 0,
     air: 0,
@@ -24,7 +30,7 @@ export default function Filters({ setChange }) {
     if (v.air) data.air++;
     if (v.seats > 4) data.seats++;
   });
-
+  console.log(data);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getVehicles());
@@ -86,74 +92,180 @@ export default function Filters({ setChange }) {
                 Todos
               </label>
             </div>
-            <div>
-              <input
-                type="radio"
-                name="category"
-                id="Sedan"
-                value="Sedan"
-                onChange={handleFilters}
-                className="border-gray-300 rounded h-5 w-5 mx-2 "
-              />
-              <label htmlFor="Sedan">
-                Sedan{" "}
-                <span className="text-[#94a3b8]">{`(${data.Sedan})`} </span>{" "}
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="category"
-                id="SUV"
-                value="SUV"
-                onChange={handleFilters}
-                className="border-gray-300 rounded h-5 w-5 mx-2"
-              />
-              <label htmlFor="SUV">
-                Suv <span className="text-[#94a3b8]">{`(${data.SUV})`} </span>{" "}
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="category"
-                id="Pickup"
-                value="Pickup"
-                onChange={handleFilters}
-                className="border-gray-300 rounded h-5 w-5 mx-2"
-              />
-              <label htmlFor="Pickup">
-                Pickup{" "}
-                <span className="text-[#94a3b8]">{`(${data.Pickup})`} </span>{" "}
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="category"
-                id="Hatchback"
-                value="Hatchback"
-                onChange={handleFilters}
-                className="border-gray-300 rounded h-5 w-5 mx-2"
-              />
-              <label htmlFor="Hatchback">
-                Hatchback{" "}
-                <span className="text-[#94a3b8]">{`(${data.Hatchback})`} </span>{" "}
-              </label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="category"
-                id="CUV"
-                value="CUV"
-                onChange={handleFilters}
-                className="border-gray-300 rounded h-5 w-5 mx-2"
-              />
-              <label htmlFor="CUV">
-                Cuv <span className="text-[#94a3b8]">{`(${data.CUV})`} </span>
-              </label>
-            </div>
+            {data.Micro > -1 &&
+                        <div>
+                          <input
+                            type="radio"
+                            name="category"
+                            id="Micro"
+                            value="Micro"
+                            onChange={handleFilters}
+                            className="border-gray-300 rounded h-5 w-5 mx-2 "
+                          />
+                          <label htmlFor="Micro">
+                            Micro{" "}
+                            <span className="text-[#94a3b8]">{`(${data.Micro})`} </span>{" "}
+                          </label>
+                        </div>
+            }
+            {data.Sedan > -1 &&
+                        <div>
+                          <input
+                            type="radio"
+                            name="category"
+                            id="Sedan"
+                            value="Sedan"
+                            onChange={handleFilters}
+                            className="border-gray-300 rounded h-5 w-5 mx-2 "
+                          />
+                          <label htmlFor="Sedan">
+                            Sedan{" "}
+                            <span className="text-[#94a3b8]">{`(${data.Sedan})`} </span>{" "}
+                          </label>
+                        </div>
+            }
+            {data.CUV > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="CUV"
+                          value="CUV"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="CUV">
+                          Cuv <span className="text-[#94a3b8]">{`(${data.CUV})`} </span>
+                        </label>
+                      </div>
+            }
+            {data.SUV > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="SUV"
+                          value="SUV"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="SUV">
+                          Suv <span className="text-[#94a3b8]">{`(${data.SUV})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Hatchback > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Hatchback"
+                          value="Hatchback"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Hatchback">
+                          Hatchback{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Hatchback})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Convertible > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Convertible"
+                          value="Convertible"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Convertible">
+                          Convertible{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Convertible})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Cabriolet > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Cabriolet"
+                          value="Cabriolet"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Cabriolet">
+                        Cabriolet{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Cabriolet})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Pickup > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Pickup"
+                          value="Pickup"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Pickup">
+                          Pickup{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Pickup})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Coupe > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Coupe"
+                          value="Coupe"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Coupe">
+                          Coupe{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Coupe})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Deportivo > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Deportivo"
+                          value="Deportivo"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Deportivo">
+                          Deportivo{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Deportivo})`} </span>{" "}
+                        </label>
+                      </div>
+            }
+            {data.Minivan > -1 &&
+                        <div>
+                        <input
+                          type="radio"
+                          name="category"
+                          id="Minivan"
+                          value="Minivan"
+                          onChange={handleFilters}
+                          className="border-gray-300 rounded h-5 w-5 mx-2"
+                        />
+                        <label htmlFor="Minivan">
+                          Minivan{" "}
+                          <span className="text-[#94a3b8]">{`(${data.Minivan})`} </span>{" "}
+                        </label>
+                      </div>
+            }
           </div>
         </div>
         <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
