@@ -19,7 +19,7 @@ const postComments = async (data) => {
         [Op.and]: [{ userId: id }, { vehicleId: vehicleId }],
       },
     });
-    console.log("Repetido ", findcomment);
+
     if (!findcomment) {
       const createComment = await Comments.create({
         confort: confort,
@@ -29,7 +29,6 @@ const postComments = async (data) => {
         recommended: recommended,
         description: description,
       });
-      console.log("Proto ", createComment.__proto__);
       await createComment.setUser(id); //Setear la relación del usuario con el comentario...
       await createComment.setVehicle(vehicleId); //Setear la relacion del vehiculo con el comentario...
       return "Creado Satisfactoriamente!!!";
@@ -55,11 +54,11 @@ const getAllComentarios = async () => {
 const getCommentsById = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Soy id ", id);
+
     const getCommentUser = await Comments.findAll({
       where: { userId: id },
     });
-    console.log("Comentario usuario ", getCommentUser);
+
     res.status(200).send(getCommentUser);
   } catch (error) {
     console.log(error.message);
@@ -70,12 +69,12 @@ const getCommentsById = async (req, res) => {
 const getCommentsByVehicleId = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("Soy id ", id);
+
     const getCommentVehicle = await Comments.findAll({
       where: { vehicleId: id },
       include: { model: Users },
     });
-    console.log("Comentario vehiculo ", getCommentVehicle);
+
     res.status(200).send(getCommentVehicle);
   } catch (error) {
     console.log(error.message);
