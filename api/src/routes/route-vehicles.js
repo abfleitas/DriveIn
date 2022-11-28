@@ -43,7 +43,14 @@ vehicles.get("/", async (req, res) => {
       }
     );
 
-    let cantidad = all.length
+    let cantidad = await Vehicles.count(
+      {where: {
+        availability,
+        brand: { [Op.iLike]: "%" + searchBar + "%" }
+      }
+      }
+    )
+
     return res.header('Content-Range', `0-10/${cantidad}`).status(200).send(all);
   } catch (error) {
     res.status(404).send(error);
