@@ -5,7 +5,6 @@ import "./Users.css";
 const Users = () => {
   const [UsersListLocal, setUsersListLocal] = useState([]);
 
-  //-------------------------Users List-----------------------------------------
   const fun = async () => {
     let list = await axios.get("/user");
     list = list.data.sort(function (a, b) {
@@ -28,9 +27,7 @@ const Users = () => {
           {user.role === 3 && <p className="Users_Text4">Administrador</p>}
           {user.role === 4 && <p className="Users_Text4">Dueño</p>}
         </div>
-
         <p className="Users_Text3">{`${user.name} ${user.lastName}`}</p>
-
         <p style={{ width: "180px" }}>{user.email}</p>
         <p style={{ margin: "0px 0px 0px 50px" }}>{user.phone}</p>
         {user.active ? (
@@ -63,7 +60,6 @@ const Users = () => {
     ));
     setUsersListLocal(UsersList);
   };
-  //-------------------------Users List-----------------------------------------
 
   useEffect(() => {
     fun();

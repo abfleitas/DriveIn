@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 export default function SearchBar() {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
-  const cities = useSelector((state) => state.cities);
+  let cities = useSelector((state) => state.cities);
   const [input, setInput] = useState({
     country: "",
     id: "",
@@ -84,28 +84,6 @@ export default function SearchBar() {
               );
             })}
         </select>
-        {/* <div className="relative flex my-4 justify-center space-x-4">
-          <div className="relative block">
-            <label className="text-[#009A88] m-0">Desde</label>
-            <input
-              onChange={handleInputChange}
-              type="date"
-              placeholder="FI"
-              name="FI"
-              className="relative flex left-px w-50  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
-            />
-          </div>
-          <div className="relative block">
-            <label className="relative text-[#009A88]">Hasta</label>
-            <input
-              onChange={handleInputChange}
-              type="date"
-              placeholder="Hasta"
-              name="Hasta"
-              className="relative flex  left-[40px] bottom-[23px] w-50  h-10 cursor-default rounded-md border border-[#F97D67] bg-[#F97D67] py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm my-6"
-            />
-          </div>
-        </div> */}
         {input.id && (
           <NavLink to={`/ciudad/${input.id}`}>
             <button

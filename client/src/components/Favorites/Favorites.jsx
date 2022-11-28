@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userFavorite } from "../../redux/actions/actions";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Card from "../Card/Card";
 import Navbar from "../NavBar/Navbar";
 
@@ -31,7 +31,6 @@ export default function Favorites() {
           Ir Atras
         </button>
         <div className="w-3/5 flex flex-wrap gap-x-16 gap-y-24 mt-10 justify-around m-auto">
-          {/* css maquetadores, son la mera verg.... */}
           {favorites.length
             ? favorites.map((v, index) => {
                 return (
