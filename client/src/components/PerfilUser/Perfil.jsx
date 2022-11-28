@@ -6,22 +6,18 @@ import { getRents, userUpdate } from "../../redux/actions/actions";
 //import CommentsForm from "../CommentsForm/CommentsForm";
 import axios from "axios";
 import Navbar from "../NavBar/Navbar";
+import Editar from "../../images/editar.png";
 
 import EditForm from "./EditForm";
 
 import Rent from "../ModalRent/Rent";
-
+import swal from "sweetalert";
 
 export default function Perfil() {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
   // const usuario = useSelector((state) => state.user);
 
   // const [user, setUser] = useState(usuario);
-
-  
-
-
- 
 
   const [input, setInput] = useState({
     name: usuario.name,
@@ -32,17 +28,14 @@ export default function Perfil() {
   });
   console.log(usuario.photo);
 
-
   const [panel, setPanel] = useState(false);
-  const handleOpen = (e) => {
-    e.preventDefault();
+  const abrirCerrarModal = () => {
+    setPanel(!panel);
 
     setPanel(true);
   };
 
   const [ImageCloud, setImageCloud] = useState("");
- 
-
 
   const { id } = useParams();
   // const handleOnClose = () => setOpen(false);
@@ -105,30 +98,37 @@ export default function Perfil() {
     e.preventDefault();
     // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
     dispatch(userUpdate(usuario.id, input));
-    alert("Foto cambiada con éxito");
+    swal({
+      title: "Felicitaciones!",
+      icon: "success",
+      text: "Cambiaste la foto. Presiona el botón para volver al Loging",
+
+      button: {
+        text: "Ok, ir a Login",
+        value: navigate("/login"),
+      },
+    });
     // navigate("/login");
   }
 
-
-
   return (
     <>
+      <EditForm open={panel} onClose={abrirCerrarModal} />
       <Navbar />
-      <div>
-        <button onClick={handleOpen}>Edit</button>
-        {/* <button onClick={(e) => handleOpen(e)}>
-          Editar info
+      {/* <div className="z-30 bg-[#2E3A46] bg-opacity-30 h-full w-full absolute"> */}
+      {/* <button className="rounded-full bg-white hover:bg-slate-200 flex-none w-14 h-14 relative">
+          x
         </button> */}
-      </div>
+      {/* </div> */}
       <div className="container mx-auto my-5 p-5">
         <div className="md:flex no-wrap md:-mx-2 ">
           <div className="w-full md:w-3/12 md:mx-2">
             <div className="flex flex-col bg-[#2E3A46] text-white rounded p-2">
-              <div className="image overflow-hidden self-center ">
+              <div className="image overflow-hidden self-center w-[100px] h-[100px]">
                 {/* <img src={usuario.photo} alt="yo" className="rounded" /> */}
                 <img
                   src={ImageCloud ? ImageCloud : usuario.photo}
-                  className="rounded"
+                  className="rounded h-full w-full"
                   alt="yo"
                 />
               </div>
@@ -138,9 +138,13 @@ export default function Perfil() {
                     name="photo"
                     type="file"
                     onChange={(e) => imageCloudChangeHandler(e)}
-                    className="Creation_Image_input"
                   ></input>
-                  <button type="submit">Cambiar Foto</button>
+                  <button
+                    type="submit"
+                    className="rounded bg-slate-400 p-2 flex flex-initial hover:bg-slate-300 "
+                  >
+                    Cambiar Foto
+                  </button>
                 </form>
               </div>
               <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
@@ -192,6 +196,15 @@ export default function Perfil() {
                     </svg>
                   </span>
                   <span className="tracking-wide ">Información</span>
+                  <div className="flex justify-end relative">
+                    <img
+                      src={Editar}
+                      className="rounded-full bg-[#41D3C0] h-8 hover:bg-slate-300 p-1"
+                      onClick={(e) => abrirCerrarModal(e)}
+                      alt="edit"
+                      title="Editar Información"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="bg-white ">
@@ -273,19 +286,18 @@ export default function Perfil() {
                       {rents.length ? (
                         rents.map((e) => {
                           return (
-
-                            <Rent 
-                            img={e.vehicle.photo}
-                            brand={e.vehicle.brand}
-                            model={e.vehicle.model}
-                            fi={e.dateInit}
-                            ff={e.dateFinish}
-                            tp={e.totalPrice}
-                            city={e.vehicle.city.name}
-                            country={e.vehicle.city.country}
-
+                            <Rent
+                              img={e.vehicle.photo}
+                              brand={e.vehicle.brand}
+                              model={e.vehicle.model}
+                              fi={e.dateInit}
+                              ff={e.dateFinish}
+                              tp={e.totalPrice}
+                              city={e.vehicle.city.name}
+                              country={e.vehicle.city.country}
+                              id={usuario.id}
+                              vehicleId={e.vehicle.id}
                             />
-
                           );
                         })
                       ) : (
@@ -303,62 +315,62 @@ export default function Perfil() {
                 </div>
               </div>
             </div>
-            <h1>Cambiar datos personales</h1>
-            <form
-              onSubmit={(e) => {
-                handleUserData(e);
-              }}
-            >
-              <input
-                type="text"
-                name="name"
-                placeholder=" nuevo nombre"
-                value={input.name}
-                onChange={(e) => {
-                  handleInputChange(e);
+
+            {/* <div>
+              <h1>Cambiar datos personales</h1>
+              <button onClick={() => abrirCerrarModal()}>X</button>
+              <form
+                onSubmit={(e) => {
+                  handleUserData(e);
                 }}
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder=" nuevo apellido"
-                value={input.lastName}
-                onChange={(e) => {
-                  handleInputChange(e);
-                }}
-              />
-              <input
-                type="text"
-                name="phone"
-                placeholder="nuevo telefono"
-                value={input.phone}
-                onChange={(e) => {
-                  handleInputChange(e);
-                }}
-              />
-              <input
-                type="text"
-                name="password"
-                placeholder="nuevo password"
-                value={input.password}
-                onChange={(e) => {
-                  handleInputChange(e);
-                }}
-              />
-              <button
-                type="submit"
-                className="border-green border-2 bg-green text-white"
               >
-                Modificar Datos
-              </button>
-            </form>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder=" nuevo nombre"
+                  value={input.name}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                  }}
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder=" nuevo apellido"
+                  value={input.lastName}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                  }}
+                />
+                <input
+                  type="text"
+                  name="phone"
+                  placeholder="nuevo telefono"
+                  value={input.phone}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                  }}
+                />
+                <input
+                  type="text"
+                  name="password"
+                  placeholder="nuevo password"
+                  value={input.password}
+                  onChange={(e) => {
+                    handleInputChange(e);
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="border-green border-2 bg-green text-white"
+                >
+                  Modificar Datos
+                </button>
+              </form>
+            </div> */}
           </div>
         </div>
       </div>
-
-
-      {/* <EditForm visible={panel} cambiarEstado={setPanel} /> */}
     </>
-
   );
 }
