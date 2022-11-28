@@ -1,4 +1,7 @@
 import { Create, SimpleForm, TextInput, NumberInput, BooleanInput, SelectInput, Toolbar, SaveButton, useNotify, useRedirect } from "react-admin";
+import { useState, useEffect} from "react";
+import axios from "axios";
+
 
 const validateCreation = (values) => {
    const errors = {};
@@ -35,33 +38,20 @@ const validateCreation = (values) => {
    return errors;
 };
 
-/* const MyToolbar = () => {
-   // const notify = useNotify();
-   const redirect = useRedirect();
-   return (
-      <Toolbar>
-         <SaveButton 
-            label="Crear"
-            mutationOptions={{
-               onSuccess: () => {
-                  // notify("Vehiculo Creado");
-                  swal({
-                     icon: "success",
-                     title: "Vehiculo Creado",
-                     text: "Se ha creado correctamente",
-                     buttons: false,
-                     timer: 2000
-                  });
-                  redirect("/admin/vehicles");
-               }
-            }}
-            type="button"
-         />
-      </Toolbar>
-   );
-}; */
+
 
 const CreateVehicle = () => {
+
+   const [ImageCloud, setImageCloud] = useState("");
+
+   const imageCloudChangeHandler = (event) => {
+      const imageData = new FormData()
+      imageData.append("file", event.target.files[0])
+      imageData.append("upload_preset", "drivein_uploader")
+      axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+      .then(response => {setImageCloud( response.data.secure_url)})
+   };
+
    return (
       <Create title="Create a Vehicle" redirect="list">
          <SimpleForm validate={validateCreation}>
@@ -76,7 +66,8 @@ const CreateVehicle = () => {
             <BooleanInput source="air" />
             <NumberInput source="seats" label="Asientos" />
             <TextInput source="category" label="Categoría" />
-            <TextInput source="photo" label="Imagen" />
+            <input type="file" onChange={imageCloudChangeHandler}></input>
+            {ImageCloud !== "" &&  <TextInput source="photo" defaultValue={ImageCloud}/>}
             <BooleanInput source="availability" label="Disponibilidad" />
             <NumberInput source="initialPrice" label="Precio" />
             <SelectInput source="cityId" label="Ciudad" choices={[

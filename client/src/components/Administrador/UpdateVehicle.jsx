@@ -1,7 +1,20 @@
 import { Edit, SimpleForm, TextInput, NumberInput, BooleanInput, ImageField, SelectInput } from "react-admin";
 
+import axios from "axios";
+
+let ImageCloud = ""
+const imageCloudChangeHandler = (event) => {
+   const imageData = new FormData()
+   console.log(event.target.files[0]);
+   imageData.append("file", event.target.files[0])
+   imageData.append("upload_preset", "drivein_uploader")
+   axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+   .then(response => {ImageCloud = ( response.data.secure_url)})
+};
+
 const validateCreation = (values) => {
    const errors = {};
+   if(values.photo) {values.photo = ImageCloud}
    if (!values.brand) errors.brand = "Escriba la marca";
    else if (!/^[a-zA-Z0-9ñ]+$/.test(values.brand)) {
       errors.brand = "Solo se aceptan letras y numeros";
@@ -49,8 +62,8 @@ export const UpdateVehicle = () => (
          <BooleanInput source="air" />
          <NumberInput source="seats" label="Asientos" />
          <TextInput source="category" label="Categoría" />
-         <TextInput source="photo" label="Imagen" />
-         <ImageField source="photo" />
+         <input type="file" onChange={imageCloudChangeHandler}></input>
+         <TextInput source="photo" value={ImageCloud}/>
          <BooleanInput source="availability" label="Disponibilidad" />
          <NumberInput source="initialPrice" label="Precio" />
          <SelectInput source="cityId" label="Ciudad" choices={[

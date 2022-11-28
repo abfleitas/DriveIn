@@ -1,5 +1,7 @@
 import React from "react";
 import { Create, SimpleForm, SelectInput, ImageInput, TextInput, NumberInput, BooleanInput } from "react-admin";
+import axios from "axios";
+import { useState, useEffect} from "react";
 
 const validateCreation = (values) => {
    const errors = {};
@@ -28,6 +30,17 @@ const validateCreation = (values) => {
 
 
 const CreateUser = () => {
+
+   const [ImageCloud, setImageCloud] = useState("");
+
+   const imageCloudChangeHandler = (event) => {
+      const imageData = new FormData()
+      imageData.append("file", event.target.files[0])
+      imageData.append("upload_preset", "drivein_uploader")
+      axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+      .then(response => {setImageCloud( response.data.secure_url)})
+   };
+
    return (
       <Create title="Create a User">
          <SimpleForm validate={validateCreation}>
@@ -36,9 +49,9 @@ const CreateUser = () => {
             <TextInput source="email" />
             <NumberInput source="whatsapp" />
             <TextInput source="password" />
-            <ImageInput source="photo" />
-            <SelectInput source="role" defaultValue={1} choices={[
-               { id: "1", name: 1 },
+            <input type="file" onChange={imageCloudChangeHandler}></input>
+            {ImageCloud !== "" &&  <TextInput source="photo" defaultValue={ImageCloud}/>}
+            <SelectInput source="role" defaultValue={2} choices={[
                { id: "2", name: 2},
                { id: "3", name: 3},
                { id: "4", name: 4}
