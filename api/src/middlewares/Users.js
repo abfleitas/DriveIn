@@ -78,7 +78,13 @@ async function getUsers(req, res) {
       }
       );
       
-      let cantidad = users.length
+      let cantidad = users.count({
+        where: {active: activos,
+          name: {
+                [Op.iLike]: '%' + searchBar + '%'
+                },
+  },
+      })
       return res.header('Content-Range',`0-10/${cantidad}`).status(200).json(users)
     } catch (error) {
       res.json(error);
