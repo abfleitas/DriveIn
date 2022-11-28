@@ -9,7 +9,6 @@ const Vehicles = () => {
 
   const [vehiclesListLocal, setVehiclesListLocal] = useState([]);
 
-  //-----------------------Vehicles List------------------------------
   const city = useSelector((state) => state.city);
   const fun = async () => {
     let list = await axios.get("/vehicles");
@@ -65,7 +64,6 @@ const Vehicles = () => {
     });
     setVehiclesListLocal(vehicleList);
   };
-  //-----------------------Vehicles List------------------------------
 
   useEffect(() => {
     fun();

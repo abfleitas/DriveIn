@@ -19,9 +19,6 @@ router.post("/", async (req, res) => {
       dateInit,
       dateFinish,
     } = req.body;
-    //vehicleId para actualizar estado del vehiculo
-
-    // Faltan datos de usuario para hacer las actualizaciones necesarias en su perfil
 
     const payment = await stripe.paymentIntents.create({
       amount,

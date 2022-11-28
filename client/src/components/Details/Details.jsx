@@ -5,7 +5,6 @@ import {
   setVehicleDetailsState,
   getComments,
 } from "../../redux/actions/actions";
-import cancel from "../../images/cancelacion.PNG";
 import blind from "../../images/blindaje.png";
 import atras from "../../images/flecha-izquierda.png";
 import signo from "../../images/signo.png";
@@ -275,7 +274,7 @@ export default function Details() {
           reviews.map((r) => {
             return (
               <div className=" h-full w-[990px] py-2 px-10 m-auto bg-white flex border mt-2">
-                <img src={r.user.photo} className="w-[50px] rounded-full" />
+                <img src={r.user.photo} className="w-[50px] rounded-full" alt="perfil"/>
                 <h4 className="self-center ml-1">
                   {r.user.name} {r.user.lastName}
                 </h4>

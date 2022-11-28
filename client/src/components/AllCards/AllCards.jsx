@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-// import { getVehicles } from "../../redux/actions/actions";
 import Card from "../Card/Card";
 import { Link } from "react-router-dom";
 import Siguiente from "../../images/flechablancader.png";
@@ -9,7 +8,6 @@ import Anterior from "../../images/flechablancaizq.png";
 
 export default function AllCards() {
   const vehicles = useSelector((state) => state.vehiclesByCity);
-  //Paginado inicio bloque...
   const [currentPage, setCurrentPage] = useState(1);
   const vehicleByPage = 8;
   const lastVehicle = currentPage * vehicleByPage;
@@ -19,7 +17,6 @@ export default function AllCards() {
   const pageNumbers = [];
   const totalVehicles = vehicles && vehicles.length;
 
-  //Realizar la división del total de vehículos disponibles y posterior asignación al arreglo.
   for (
     let index = 0;
     index < Math.ceil(totalVehicles / vehicleByPage);
@@ -28,30 +25,21 @@ export default function AllCards() {
     pageNumbers.push(index + 1);
   }
 
-  //Establecer el número de la página actual.
   const Page = (page) => {
     setCurrentPage(page);
   };
 
-  //Botón primero, hacia atras.
   const prevHandler = () => {
     const prevPage = currentPage - 1;
     if (prevPage < 1) return;
     setCurrentPage(prevPage);
   };
 
-  //Botón último, hacia adelante.
   const nextHandler = () => {
     const nextPage = currentPage + 1;
     if (nextPage > pageNumbers.length) return;
     setCurrentPage(nextPage);
   };
-
-  /**
-   * Establecer la página 1 con cada cambio por ordenamiento o filtración.
-   * Agregar la línea siguiente, en cada función de filtración ú ordenamiento.
-   * => setChange(event.target.value); <=
-   **/
 
   useEffect(() => {
     setCurrentPage(1);
