@@ -32,12 +32,33 @@ const allRents = async (req, res) => {
       if (!rent.length) throw Error("No se encontraron trasacciones")
        return res.status(200).send(rent)
     }
-    
-let cantidad = await rentsInactive.length
+
+    if (req.query.filter) {
+      let filter = JSON.parse(req.query.filter);
+      let categoria = filter.category
+      console.log(categoria);
+      if (categoria) {
+        const users = await  Users.findAll()
+        let rentsInactive = await Rent.findAll({
+          include : {
+            model: Vehicles,
+            required: false
+          },
+          order: order,
+          limit:corte,
+          offset: pagina,
+          where: {active: false}
+        })
+        await rentsInactive.forEach(rent => {
+          const user = users.filter(user => user.id === rent.userId);
+          rent.dataValues.userEmail = user[0].dataValues.email
+          rent.dataValues.userName = user[0].dataValues.name
+          rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
+        })
+        let cantidad = rentsInactive.length
         return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(rentsInactive)
       };
     }
-
     if (order || corte || pagina) {
       const users = await  Users.findAll()
       const response = await  Rent.findAll({
