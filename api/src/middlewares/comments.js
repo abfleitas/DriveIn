@@ -1,6 +1,8 @@
 const data = require("./comments.json");
 const { Comments, Users, Vehicles } = require("../db");
 const { Op } = require("sequelize");
+const {dashboard} = require ("../middlewares/dashboard")
+
 const postComments = async (data) => {
   const {
     id,
@@ -40,11 +42,22 @@ const postComments = async (data) => {
   }
 };
 
-const getAllComentarios = async () => {
+const getAllComentarios = async (props) => {
+  
+  const {order, corte, pagina} = dashboard(props)
+
   try {
     const allCommentsDb = await Comments.findAll({
       include: [{ model: Vehicles }, { model: Users }],
+      order: order,
+      limit:corte,
+      offset: pagina,
     });
+    for (const elements of allCommentsDb) {
+      const user = await Users.findByPk(elements.userId)
+      elements.userId = user.name
+    }
+ 
     return allCommentsDb;
   } catch (error) {
     console.log(error.message);

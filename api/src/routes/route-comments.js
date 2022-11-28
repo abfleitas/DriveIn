@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const comments = await getAllComentarios();
+    const comments = await getAllComentarios(req.query);
     let cantidad = await comments.length;
 
     return res
