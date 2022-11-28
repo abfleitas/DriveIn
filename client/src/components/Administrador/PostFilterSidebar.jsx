@@ -6,7 +6,6 @@ import CategoryIcon from '@mui/icons-material/LocalOffer';
 export const PostFilterSidebar = () => (
     <Card sx={{ order: -1, mr: 2, mt: 8, width: 200 }}>
         <CardContent>
-            <SavedQueriesList />
             <FilterLiveSearch />
 
             <FilterList label="Category" icon={<CategoryIcon />}>
