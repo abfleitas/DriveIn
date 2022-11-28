@@ -15,8 +15,11 @@ import Ciudad from "./components/Ciudad/Ciudad";
 import Creation from "./components/Creation/Creation";
 import Favorites from "./components/Favorites/Favorites";
 import Perfil from "./components/PerfilUser/Perfil";
+import ProtectUser from "./components/ProtectRoutes/ProtectUser";
+import ProtectLogin from "./components/ProtectRoutes/ProtectLogin";
 
 function App() {
+  const user = JSON.parse(localStorage.getItem("UserLogin"))
   return (
     <BrowserRouter>
       <div className="App">
@@ -24,15 +27,15 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/home" element={<Home />} />
           <Route path="/ciudad/:id" element={<Ciudad />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="login" element={<Login />} />
+          <Route path="/register" element={<ProtectLogin user={user}><Register /></ProtectLogin>} />
+          <Route path="/login" element={<ProtectLogin user={user}><Login /></ProtectLogin>} />
           <Route path="/details/:id" element={<Details />} />
           <Route path="/creation" element={<Creation />} />
           <Route path="/admin/*" element={<Administrador />} />
           <Route path="/favorite" element={<Favorites />} />
           <Route path="/vehicles-list-test" element={<Vehicles />} />
           <Route path="/users-list-test" element={<Users />} />
-          <Route path="/user" element={<Perfil />} />
+          <Route path="/user" element={<ProtectUser user={user}><Perfil /></ProtectUser>}/>
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/contacto" element={<Contacto />} />
         </Routes>
