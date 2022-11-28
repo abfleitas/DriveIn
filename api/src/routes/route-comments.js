@@ -19,7 +19,8 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const comments = await getAllComentarios();
-    let cantidad = await Comments.count()
+    let cantidad = await comments.length
+
     console.log(cantidad)
     return res.header('Content-Range',`0-10/${cantidad}`).status(200).json(comments);
   } catch (error) {
