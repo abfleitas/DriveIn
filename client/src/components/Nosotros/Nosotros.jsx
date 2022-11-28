@@ -79,7 +79,7 @@ export default function Nosotros() {
   };
 
   return (
-    <div className="bg-[#D9D9D9] h-[700px]">
+    <div className="bg-[#D9D9D9] min-h-screen">
       <div>
         <NavBar />
       </div>
