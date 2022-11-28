@@ -78,9 +78,7 @@ async function getUsers(req, res) {
       }
       );
       
-      let cantidad = await Users.count(
-        {where: {active: activos}}
-      )
+      let cantidad = users.length
       return res.header('Content-Range',`0-10/${cantidad}`).status(200).json(users)
     } catch (error) {
       res.json(error);

@@ -33,32 +33,11 @@ const allRents = async (req, res) => {
        return res.status(200).send(rent)
     }
     
-    if (req.query.filter) {
-      let filter = JSON.parse(req.query.filter);
-      let categoria = filter.category
-      console.log(categoria);
-      if (categoria) {
-        const users = await  Users.findAll()
-        let rentsInactive = await Rent.findAll({
-          include : {
-            model: Vehicles,
-            required: false
-          },
-          order: order,
-          limit:corte,
-          offset: pagina,
-          where: {active: false}
-        })
-        await rentsInactive.forEach(rent => {
-          const user = users.filter(user => user.id === rent.userId);
-          rent.dataValues.userEmail = user[0].dataValues.email
-          rent.dataValues.userName = user[0].dataValues.name
-          rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
-        })
-        let cantidad = await Rent.count()
+let cantidad = await rentsInactive.length
         return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(rentsInactive)
       };
     }
+
     if (order || corte || pagina) {
       const users = await  Users.findAll()
       const response = await  Rent.findAll({
@@ -76,7 +55,7 @@ const allRents = async (req, res) => {
         rent.dataValues.userName = user[0].dataValues.name
         rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
       })
-      let cantidad = await Rent.count()
+      let cantidad = await response.length
       return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(response)
     }
 
