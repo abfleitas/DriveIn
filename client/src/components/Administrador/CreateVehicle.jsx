@@ -1,5 +1,4 @@
 import { Create, SimpleForm, TextInput, NumberInput, BooleanInput, SelectInput, Toolbar, SaveButton, useNotify, useRedirect } from "react-admin";
-import swal from "sweetalert";
 
 const validateCreation = (values) => {
    const errors = {};
@@ -27,17 +26,16 @@ const validateCreation = (values) => {
    else if (!/^[a-zA-Zñ]+$/.test(values.category)) {
       errors.category = "Solo se aceptan letras";
    }
+   if (!values.photo) errors.photo = "Agregar una foto";
    if (values.initialPrice < 1) {
       errors.initialPrice = "Precio tiene que ser mayor a 1";
    }
-   if (!values.cityId) errors.cityId = "Escriba la ciudad";
-   // else if (!/^[a-zA-Zñ]+$/.test(values.cityId)) {
-   //    errors.cityId = "Solo se aceptan letras";
-   // }
+   if (!values.cityId) errors.cityId = "Seleccione la ciudad";
+
    return errors;
 };
 
-const MyToolbar = () => {
+/* const MyToolbar = () => {
    // const notify = useNotify();
    const redirect = useRedirect();
    return (
@@ -48,9 +46,11 @@ const MyToolbar = () => {
                onSuccess: () => {
                   // notify("Vehiculo Creado");
                   swal({
+                     icon: "success",
                      title: "Vehiculo Creado",
                      text: "Se ha creado correctamente",
-                     icon: "success"
+                     buttons: false,
+                     timer: 2000
                   });
                   redirect("/admin/vehicles");
                }
@@ -59,36 +59,12 @@ const MyToolbar = () => {
          />
       </Toolbar>
    );
-};
-
-/* const PostSaveButton = () => {
-   const notify = useNotify();
-   const [approve] = useUpdate(
-      "",
-      {},
-      {
-         onSuccess: (data) => {
-            notify("Vehiculo Creado");
-         },
-         onError: (error) => {
-            notify(`error: ${error.message}`);
-            // swal( error, "Llene los campos correctamente", "error");
-         }
-      }
-   );
-   return <SaveButton label="Crear" onClick={() => approve()} />
-};
-
-const MyToolbar = () => (
-   <Toolbar>
-      <PostSaveButton />
-   </Toolbar>
-); */
+}; */
 
 const CreateVehicle = () => {
    return (
-      <Create title="Create a Vehicle">
-         <SimpleForm validate={validateCreation} toolbar={<MyToolbar />}>
+      <Create title="Create a Vehicle" redirect="list">
+         <SimpleForm validate={validateCreation}>
             <TextInput source="brand" label="Marca" />
             <TextInput source="model" label="Modelo" />
             <NumberInput source="year" label="Año" defaultValue={2010} />
@@ -103,7 +79,23 @@ const CreateVehicle = () => {
             <TextInput source="photo" label="Imagen" />
             <BooleanInput source="availability" label="Disponibilidad" />
             <NumberInput source="initialPrice" label="Precio" />
-            <TextInput source="cityId" label="Ciudad" />
+            <SelectInput source="cityId" label="Ciudad" choices={[
+               { id: 1, name: "Villa Carlos Paz" },
+               { id: 2, name: "San Rafael" },
+               { id: 3, name: "Cancun" },
+               { id: 4, name: "Mérida" },
+               { id: 5, name: "Cartagena" },
+               { id: 6, name: "Medellin" },
+               { id: 7, name: "Caracas" },
+               { id: 8, name: "Valencia" },
+               { id: 9, name: "Maracaibo" },
+               { id: 10, name: "Punta del Este" },
+               { id: 11, name: "Piriapolis" },
+               { id: 12, name: "Rio de Janeiro" },
+               { id: 13, name: "Florianópolis" },
+               { id: 14, name: "Quito" },
+               { id: 15, name: "La Paz" }
+            ]} />
          </SimpleForm>
       </Create>
    );
