@@ -1,19 +1,17 @@
-/* .container-reg{
+.container-reg{
     background-image: url('../../images/inicio.jpg');
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
     background-size: cover;
     background-position: center;
-} */
+}
 
 .container-data h2{
     font-family: "Poppins", sans-serif;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    transform: translateX(-190px);
+    transform: translateX(-160px);
     font-size: x-large;
     color: antiquewhite;
+    margin-top: 20px;
 }
 
 .c-input{
