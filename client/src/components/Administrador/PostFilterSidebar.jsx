@@ -4,7 +4,7 @@ import MailIcon from '@mui/icons-material/MailOutline';
 import CategoryIcon from '@mui/icons-material/LocalOffer';
 
 export const PostFilterSidebar = () => (
-    <Card sx={{ order: -1, mr: 2, mt: 9, width: 200 }}>
+    <Card sx={{ order: -1, mr: 2, mt: 8, width: 200 }}>
         <CardContent>
             <SavedQueriesList />
             <FilterLiveSearch />

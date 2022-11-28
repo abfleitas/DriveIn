@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, NumberField, Pagination, TopToolbar, CreateButton, ReferenceField } from 'react-admin';
+import { List, Datagrid, TextField, ImageField, NumberField, BooleanField, Pagination, TopToolbar, CreateButton, ReferenceField } from 'react-admin';
 import { FilterSidebarVehi } from "./FilterSidebarVehi";
 
 const PostPagination = () => <Pagination rowsPerPageOptions={[10, 25, 50, 100]} />;
@@ -19,13 +19,13 @@ export const vehiclesList = () => (
             <TextField source="year" />
             <TextField source="color" />
             <TextField source="transmition" />
-            <TextField source="air" />
+            <BooleanField source="air" />
+            <TextField source="seats"/>
             <TextField source="category" />
             <ImageField source="photo" />
-            <TextField source="availability" />
+            <BooleanField source="availability" />
             <NumberField source="initialPrice" />
             <ReferenceField source="cityId" reference="cities" />
-            {/* <TextField source="seats"/> */}
         </Datagrid>
     </List>
 );

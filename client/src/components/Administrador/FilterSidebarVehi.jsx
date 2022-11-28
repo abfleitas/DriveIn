@@ -3,7 +3,7 @@ import { SavedQueriesList, FilterLiveSearch, FilterList, FilterListItem } from "
 import CategoryIcon from "@mui/icons-material/LocalOffer";
 
 export const FilterSidebarVehi = () => (
-    <Card>
+    <Card sx={{ order: -1, mr: 2, mt: 8, width: 200 }}>
         <CardContent>
             <SavedQueriesList />
             <FilterLiveSearch />

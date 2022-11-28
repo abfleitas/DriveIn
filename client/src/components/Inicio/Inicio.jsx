@@ -5,25 +5,19 @@ import Logo from "../../images/LogoVerde.png";
 import Insta from "../../images/InstBlanco.png";
 import Face from "../../images/FaceBlanco.png";
 import YT from "../../images/YTblanco.png";
-
-//import image from "../componentes/image/poke-landing.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { GetAllLists } from "../../redux/actions/actions";
 
 export default function Landing() {
-
   const dispatch = useDispatch();
 
-  useEffect(() => { dispatch(GetAllLists()) }, []);
-
+  useEffect(() => {
+    dispatch(GetAllLists());
+  }, []);
 
   return (
     <div className="landing">
       <img className="logo" src={Logo} alt="" />
-      {/* <hr /> */}
-      {/* <div className="titulo">
-        <h1>Alquilamos </h1>
-      </div> */}
       <Link to="/home" style={{ color: "transparent" }}>
         <button className="button">INGRESAR</button>
       </Link>

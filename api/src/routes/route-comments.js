@@ -3,7 +3,6 @@ const router = Router();
 const { postComments, getAllComentarios } = require("../middlewares/comments");
 const getcomments = require("../middlewares/comments")
 const {Comments} = require('../db.js')
-//const getcomments = require("../middlewares/comments.json");
 
 router.post("/", async (req, res) => {
   try {

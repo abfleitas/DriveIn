@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useDispatch } from "react-redux";
 import { getRents, userUpdate } from "../../redux/actions/actions";
 import axios from "axios";
 
@@ -8,9 +8,6 @@ import swal from "sweetalert";
 
 export default function EditForm({ name, lastName, phone, open, onClose }) {
   const usuario = JSON.parse(localStorage.getItem("UserLogin"));
-  // const usuario = useSelector((state) => state.user);
-
-  // const [user, setUser] = useState(usuario);
   const [ImageCloud, setImageCloud] = useState("");
   const [input, setInput] = useState({
     name: usuario.name,
@@ -19,6 +16,7 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
     password: usuario.password,
     photo: usuario.photo,
   });
+
   console.log(usuario.photo);
 
   const [panel, setPanel] = useState(false);
@@ -41,15 +39,11 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
 
   const rents = useSelector((state) => state.rents);
   console.log(rents);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getRents(usuario.id));
   }, [dispatch]);
-  // useEffect(() => {
-  //   dispatch(userUpdate(usuario.id));
-  // }, [dispatch]);
 
   const imageCloudChangeHandler = (event) => {
     const imageData = new FormData();
@@ -63,7 +57,6 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
           [event.target.name]: response.data.secure_url,
         });
         setImageCloud(response.data.secure_url);
-        // return response.data.secure_url;
       });
   };
 
@@ -73,25 +66,17 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
       [e.target.name]: e.target.value,
     });
   }
-  async function handlePhotoChange(e) {
-    e.preventDefault();
-    const url = await imageCloudChangeHandler(e);
-    setInput({
-      ...input,
-      [e.target.name]: url,
-    });
-  }
-
-  console.log("SOY EL INPUT", input);
 
   async function handleUserData(e) {
     e.preventDefault();
-    // await axios.get(`http://localhost:3001/user?id=${usuario.id}`);
     dispatch(userUpdate(usuario.id, input));
     swal({
       title: "Felicitaciones!",
       icon: "success",
       text: "Cambiaste tus datos personales. Presiona el botón para volver al Loging",
+
+
+    alert("Cambios realizados con éxito");
 
       button: {
         text: "Ok, ir a Login",
@@ -107,6 +92,7 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
     dispatch(userUpdate(usuario.id, input));
     alert("Foto cambiada con éxito");
     // navigate("/login");
+
   }
 
   return (

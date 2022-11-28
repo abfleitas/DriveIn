@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { filterPrice, filter, getVehicles } from "../../redux/actions/actions";
 
@@ -24,8 +24,8 @@ export default function Filters({ setChange }) {
     seats: 0,
   };
   vehiclesByCity.map((v) => {
-    if (v.category) data[v.category]++
-    if (v.transmition === "Manual" ) data.Manual++;
+    if (v.category) data[v.category]++;
+    if (v.transmition === "Manual") data.Manual++;
     if (v.transmition === "Automatico") data.Automatico++;
     if (v.air) data.air++;
     if (v.seats > 4) data.seats++;
@@ -55,7 +55,6 @@ export default function Filters({ setChange }) {
     <div className="flex flex-col mt-[190px] w-full font-medium text-white bg-white h-fit rounded-tr-[100px] rounded-br-2xl shadow-xl">
       <div>
         <br />
-        {/* <h2 className="font-bold text-black mt-2">ORDENAR POR:</h2> */}
         <div className="p-5">
           <select
             defaultValue="price"
@@ -71,8 +70,6 @@ export default function Filters({ setChange }) {
         </div>
         <br></br>
         <br />
-        {/* <h2 className="font-bold text-black">FILTRAR POR:</h2> */}
-
         <div className="p-5 bg-white text-[#2E3A46] shadow-xl">
           <label className="font-medium flex justify-start text-[#009A88]">
             Categoría:{" "}
