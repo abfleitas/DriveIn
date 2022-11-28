@@ -84,7 +84,7 @@ user.put("/:id", async (req, res) => {
     const details = await putUser(id, body);
     res.status(201).send(details);
   } catch (error) {
-    // console.log(error);
+    console.log(error.message);
     res.status(400).send(error.message);
   }
 });
@@ -96,6 +96,7 @@ user.put("/", async (req, res) => {
     const details = await putUser(id, body);
     res.status(201).send(details);
   } catch (error) {
+    console.log(error.message);
     res.status(400).send(error);
   }
 });

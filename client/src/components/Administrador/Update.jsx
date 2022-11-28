@@ -1,8 +1,22 @@
 
-import {  SelectInput, Edit, SimpleForm, ImageInput, TextInput, NumberInput, BooleanInput } from "react-admin";
+import {  FileInput, SelectInput, Edit, SimpleForm, ImageInput, TextInput, NumberInput, BooleanInput } from "react-admin";
+import {ImageField } from 'react-admin';
+import axios from "axios";
+
+let ImageCloud = ""
+const imageCloudChangeHandler = (event) => {
+   const imageData = new FormData()
+   console.log(event.target.files[0]);
+   imageData.append("file", event.target.files[0])
+   imageData.append("upload_preset", "drivein_uploader")
+   axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+   .then(response => {ImageCloud = ( response.data.secure_url)})
+};
+
 
 const validateCreation = (values) => {
    const errors = {};
+   if(values.photo) {values.photo = ImageCloud}
    if (!values.name) errors.name = "Escriba el nombre";
    else if (!/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(values.name)) {
       errors.name = "Solo se aceptan letras";
@@ -37,7 +51,9 @@ export const Updates = () => (
               <TextInput source="email" />
               <NumberInput source="whatsapp" />
               <TextInput source="password" />
-              <ImageInput source="photo" />
+              <input type="file" onChange={imageCloudChangeHandler}></input>
+              {ImageCloud !== "" }
+              <TextInput source="photo" value={ImageCloud}/>
               <SelectInput source="role" defaultValue={1} choices={[
                { id: "1", name: 1 },
                { id: "2", name: 2},
