@@ -62,7 +62,7 @@ export default function Details() {
   }, [dispatch, id]);
 
   return (
-    <div className="bg-[#D9D9D9] min-h-screen">
+    <div className="bg-[#D9D9D9]">
       <div>
         <NavBar />
       </div>
@@ -262,28 +262,35 @@ export default function Details() {
           </div>
           <button
             onClick={handleOpen}
-            className="flex-row  flex border-2 px-8 py-3 rounded-md border-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative m-auto"
+            className="flex-row  flex ring-2 px-8 py-3 rounded-md ring-[#41D3C0] text-[#41D3C0] hover:bg-[#41D3C0] hover:text-indigo-100 transition duration-75 relative m-auto"
           >
             ALQUILAR
           </button>
           <PaymentForm onClose={handleOnClose} visible={open} />
         </div>
       )}
-      <div className="mt-5">
-        {reviews.length &&
+      <div className="mt-5 w-[990px] m-auto ring-1 ring-[#41D3C0]">
+        {reviews.length ? (
           reviews.map((r) => {
             return (
-              <div className=" h-full w-[990px] py-2 px-10 m-auto bg-white flex border mt-2">
-                <img src={r.user.photo} className="w-[50px] rounded-full" alt="perfil"/>
-                <h4 className="self-center ml-1">
+              <div className="py-2 px-10 m-auto bg-white flex mt-2">
+                <img
+                  src={r.user.photo}
+                  className="w-[50px] rounded-full"
+                  alt="perfil"
+                />
+                <span className="self-center ml-1 font-bold">
                   {r.user.name} {r.user.lastName}
-                </h4>
-                <div className="bg-[#D9D9D9] ml-1 text-start self-center p-2 min-w-[800px] ">
-                  <p>{r.description}</p>
-                </div>
+                </span>
+                <p className="bg-[#D9D9D9] ml-1 self-center p-2 w-[800px] min-h-full">
+                  {r.description}
+                </p>
               </div>
             );
-          })}
+          })
+        ) : (
+          <div className="bg-[#D9D9D9] h-[10px]"></div>
+        )}
       </div>
     </div>
   );

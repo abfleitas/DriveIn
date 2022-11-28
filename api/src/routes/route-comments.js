@@ -1,15 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const { postComments, getAllComentarios } = require("../middlewares/comments");
-const getcomments = require("../middlewares/comments")
-const {Comments} = require('../db.js')
+const getcomments = require("../middlewares/comments");
+const { Comments } = require("../db.js");
 
 router.post("/", async (req, res) => {
   try {
     const response = await postComments(req.body);
-    console.log(response);
-    res.status(200).json(response);
 
+    res.status(200).json(response);
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -18,10 +17,12 @@ router.post("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const comments = await getAllComentarios();
-    let cantidad = await comments.length
+    let cantidad = await comments.length;
 
-    console.log(cantidad)
-    return res.header('Content-Range',`0-10/${cantidad}`).status(200).json(comments);
+    return res
+      .header("Content-Range", `0-10/${cantidad}`)
+      .status(200)
+      .json(comments);
   } catch (error) {
     res.status(400).json(error);
   }
