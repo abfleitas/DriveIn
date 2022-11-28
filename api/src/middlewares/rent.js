@@ -4,10 +4,7 @@ const rents = require('./rents.json')
 const {dashboard} = require ("../middlewares/dashboard")
 
 
-//obtiene todas las rentas
-//obtiene renta por id por query
-//obtiene rentas de usuario por userId por query
-//obtiene todas las rentas para admin
+
 const allRents = async (req, res) => {
   try {
     const {order, corte, pagina} = dashboard(req.query)
@@ -36,7 +33,7 @@ const allRents = async (req, res) => {
     if (req.query.filter) {
       let filter = JSON.parse(req.query.filter);
       let categoria = filter.category
-      console.log(categoria);
+
       if (categoria) {
         const users = await  Users.findAll()
         let rentsInactive = await Rent.findAll({
@@ -55,7 +52,9 @@ const allRents = async (req, res) => {
           rent.dataValues.userName = user[0].dataValues.name
           rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
         })
-        let cantidad = rentsInactive.length
+        let cantidad = Rent.count({
+          where: {active: false}
+        })
         return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(rentsInactive)
       };
     }
@@ -76,17 +75,14 @@ const allRents = async (req, res) => {
         rent.dataValues.userName = user[0].dataValues.name
         rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
       })
-      let cantidad = await response.length
+      let cantidad = await Rent.count()
       return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(response)
     }
 
-
     const response = await  Rent.findAll()
     res.status(200).send(response)
-    
 
   } catch (error) {
-    console.log(error.message)
     res.status(404).send({error: error.message});
   }
 };
