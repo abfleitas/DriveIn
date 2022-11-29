@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getRents, userUpdate } from "../../redux/actions/actions";
+import { getRents, getUser, userUpdate } from "../../redux/actions/actions";
 import swal from "sweetalert";
 
 export default function EditForm({ name, lastName, phone, open, onClose }) {
@@ -21,6 +21,7 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
 
   useEffect(() => {
     dispatch(getRents(usuario.id));
+    dispatch(getUser(usuario.email))
   }, [dispatch]);
 
   function handleInputChange(e) {
@@ -33,20 +34,18 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
   async function handleUserData(e) {
     e.preventDefault();
     dispatch(userUpdate(usuario.id, input));
+    dispatch(getUser(usuario.email));
     swal({
       title: "Felicitaciones!",
       icon: "success",
-      text: "Cambiaste tus datos personales. Presiona el botón para volver al Loging",
+      text: "Cambiaste tus datos personales correctamente",
       button: {
-        text: "Ok, ir a Login",
-        value: navigate("/login"),
+        text: "Ok",
       },
     });
-
-    // alert("Cambios realizados con éxito");
-    navigate("/login");
-
+    navigate("/home");
   }
+
   async function handleUserPhoto(e) {
     e.preventDefault();
     dispatch(userUpdate(usuario.id, input));
@@ -158,6 +157,7 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
                     Submit
                   </button>
                   <button
+                    onClick={onClose}
                     type="button"
                     className="focus:outline-none focus:ring-2 focus:ring-offset-2 text-white border-[#F97D67] border-2 focus:ring-gray-400 ml-3 bg-[#F97D67] transition duration-150 text-gray-600 ease-in-out hover:border-[#f89786] hover:bg-[#f89786]  rounded px-8 py-2 text-sm"
                   >

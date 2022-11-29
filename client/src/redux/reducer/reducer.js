@@ -181,8 +181,8 @@ export default function rootReducer(state = initialState, action) {
     case GET_CITY:
       return {
         ...state,
-        vehiclesCopy: action.payload[0].vehicles,
-        vehiclesByCity: action.payload[0].vehicles,
+        vehiclesCopy: action.payload[0].vehicles.filter(v => v.availability === true),
+        vehiclesByCity: action.payload[0].vehicles.filter(v => v.availability === true),
         city: action.payload,
       };
     case GET_COMMENTS:

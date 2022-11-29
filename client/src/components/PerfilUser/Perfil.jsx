@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCommentsUser,
@@ -98,13 +98,14 @@ export default function Perfil() {
               <div>
                 <form onSubmit={(e) => handleUserPhoto(e)}>
                   <input
+                    className="mt-2 h-8"
                     name="photo"
                     type="file"
                     onChange={(e) => imageCloudChangeHandler(e)}
                   ></input>
                   <button
                     type="submit"
-                    className="rounded bg-slate-400 p-2 flex flex-initial hover:bg-slate-300 "
+                    className="rounded bg-slate-400 p-2 flex flex-initial hover:bg-slate-300 m-auto mt-2"
                   >
                     Cambiar Foto
                   </button>
@@ -220,10 +221,10 @@ export default function Perfil() {
                   </div>
                 </div>
               </div>
-              <button className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
+              <div className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">
                 Mas Información
-              </button>
-              <div className="bg-white p-3 shadow-sm rounded-sm">
+              </div>
+              {usuario.role === 1 ? <div className="bg-white p-3 shadow-sm rounded-sm">
                 <div className="grid">
                   <div>
                     <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
@@ -276,7 +277,11 @@ export default function Perfil() {
                     <ul className="list-inside space-y-2"></ul>
                   </div>
                 </div>
-              </div>
+              </div>: <NavLink to="/admin">
+                  <button className="mx-auto shadow bg-[#009A88] hover:bg-[#41D3C0] focus:shadow-outline focus:outline-none text-white text-xs py-3 px-10 rounded">
+                    Ir a panel de Administración
+                  </button>
+                </NavLink>}
             </div>
           </div>
         </div>

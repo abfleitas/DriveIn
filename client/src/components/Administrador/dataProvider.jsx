@@ -66,19 +66,28 @@ export const dataProvider= {
        {
         
    console.log(params.data.photo)
-         const imageData = new FormData()
-        imageData.append("file", params.data.photo.rawFile)
-        imageData.append("upload_preset", "DriveIn_users")
-        await axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
-        .then(response => { params.data.photo = response.data.secure_url})
-    
+         if(params.data.photo.rawFile){
+            const imageData = new FormData()
+            imageData.append("file", params.data.photo.rawFile)
+            imageData.append("upload_preset", "DriveIn_users")
+            await axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+            .then(response => { params.data.photo = response.data.secure_url})
         
+            
+            
+            .then( res => httpClient(`${apiUrl}/${resource}/${params.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(params.data),
+            
+            })).then(( {json} ) => ( {data: json})  )
+         }else{
+            httpClient(`${apiUrl}/${resource}/${params.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(params.data),
+             
+            }).then(( {json} ) => ( {data: json})  )
+         }
         
-        .then( res => httpClient(`${apiUrl}/${resource}/${params.id}`, {
-            method: 'PUT',
-            body: JSON.stringify(params.data),
-         
-        })).then(( {json} ) => ( {data: json})  )
 
     },
 
