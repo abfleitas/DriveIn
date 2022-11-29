@@ -24,7 +24,11 @@ export const VEHICLE_FAVORITE = "VEHICLE_FAVORITE";
 export const DELETE_STATES = "DELETE_STATES";
 export const GET_RENTS = "GET_RENTS";
 export const EDIT_USER = "EDIT_USER";
+
+export const GET_COMMENTS_USER = "GET_COMMENTS_USER";
+
 export const REFRESH_USER = "REFRESH_USER";
+
 
 export const deleteStates = () => {
   return {
@@ -46,29 +50,6 @@ export const filterPrice = (payload) => {
   };
 };
 
-//Action agregar auto a favoritos.
-// export const addFavorites = (data) => {
-//   //const favoriteItems = localStorage.setItem("favoriteItems", JSON.stringify(data));
-//   const favoriteItems = localStorage.getItem("favoriteItems")
-//     ? JSON.parse(localStorage.getItem("favoriteItems"))
-//     : [];
-//   const duplicates = favoriteItems.filter(
-//     (favoriteItem) => favoriteItem.id === data.id
-//   );
-//   if (duplicates.length === 0) {
-//     const vehicleToAdd = {
-//       ...data,
-//       //data,
-//     };
-//     favoriteItems.push(vehicleToAdd);
-//     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
-//   }
-//   return {
-//     type: ADD_FAVORITE,
-//     payload: data,
-//   };
-// };
-
 export const removeFavorites = (id) => {
   const deleteFromFavorites = localStorage.getItem("favoriteItems")
     ? JSON.parse(localStorage.getItem("favoriteItems"))
@@ -82,21 +63,6 @@ export const removeFavorites = (id) => {
 
   return { type: REMOVE_FAVORITES, payload: id };
 };
-
-// export function setVehicleDetailsState(id) {
-//   return async function (dispatch) {
-//     try {
-//       let detailsJson = await axios.get(`/vehicles/${id}`);
-//       console.log("SOY AUTOS", detailsJson.data);
-//       return dispatch({
-//         type: "GET_DETAILS",
-//         payload: detailsJson.data,
-//       });
-//     } catch (error) {
-//       alert("No se encontró ningun Vehículo con ese ID");
-//     }
-//   };
-// }
 
 export function setVehicleDetailsState(id) {
   return function (dispatch) {
@@ -136,6 +102,7 @@ export const getCities = (country) => {
     );
   };
 };
+
 export const getRents = (userId) => {
   return function (dispatch) {
     axios.get(`/rent?userId=${userId}`).then(
@@ -196,6 +163,19 @@ export const getComments = (id) => {
       },
       (error) => {
         dispatch({ type: GET_COMMENTS, payload: error.message });
+      }
+    );
+  };
+};
+
+export const getCommentsUser = (id) => {
+  return function (dispatch) {
+    axios.get(`/comments/user/${id}`).then(
+      (response) => {
+        dispatch({ type: GET_COMMENTS_USER, payload: response.data });
+      },
+      (error) => {
+        dispatch({ type: GET_COMMENTS_USER, payload: error.message });
       }
     );
   };
@@ -298,7 +278,6 @@ export const exitSesion = () => async (dispatch) => {
       vehicles: favoritos,
       idUser: user.id,
     };
-    console.log(favoritos);
     await axios.put("/user/addFavorites", data);
     localStorage.removeItem("UserLogin");
     localStorage.removeItem("favoriteItems");
@@ -412,8 +391,6 @@ export const deleteFavorite = (payload) => async (dispatch) => {
 export const userUpdate = (payload, body) => async (dispatch) => {
   try {
     const user = JSON.parse(localStorage.getItem("UserLogin"));
-    console.log(user);
-    console.log(body);
     const cualquiera = await axios.put(
       `http://localhost:3001/user?id=${payload}`,
       body

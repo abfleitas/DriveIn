@@ -1,8 +1,25 @@
 import React from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import CommentsForm from "../CommentsForm/CommentsForm";
 
-const Rent = ({ img, brand, model, fi, ff, tp, city, country, id, vehicleId }) => {
+const Rent = ({
+  img,
+  brand,
+  model,
+  fi,
+  ff,
+  tp,
+  city,
+  country,
+  id,
+  vehicleId,
+}) => {
+  const validate = useSelector((state) => state.commentsUser);
+  const exist =
+    validate &&
+    validate.filter((r) => r.vehicleId === vehicleId && r.userId === id);
+
   const [open, setOpen] = useState(false);
   const handleOnClose = () => {
     setOpen(false);
@@ -41,9 +58,20 @@ const Rent = ({ img, brand, model, fi, ff, tp, city, country, id, vehicleId }) =
         <span className="text-sm">{tp} USD</span>
       </div>
       <div className="mr-2">
-        <button onClick={() => handleReview()} className="w-[90px] h-[38px] rounded-lg bg-slate-700 text-white font-bold text-xs hover:bg-[#f97d67]">Déjanos tu comentario</button>
+        <button
+          onClick={() => handleReview()}
+          className="w-[90px] h-[38px] rounded-lg bg-slate-700 text-white font-bold text-xs hover:bg-[#f97d67]"
+        >
+          Déjanos tu comentario
+        </button>
       </div>
-      <CommentsForm id={id} vehicleId={vehicleId} onClose={handleOnClose} visible={open}/>
+      <CommentsForm
+        exist={exist.length}
+        id={id}
+        vehicleId={vehicleId}
+        onClose={handleOnClose}
+        visible={open}
+      />
     </div>
   );
 };

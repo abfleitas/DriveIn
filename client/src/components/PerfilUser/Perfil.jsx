@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getRents, userUpdate } from "../../redux/actions/actions";
+import {
+  getCommentsUser,
+  getRents,
+  userUpdate,
+} from "../../redux/actions/actions";
 import axios from "axios";
 import Navbar from "../NavBar/Navbar";
 import Editar from "../../images/editar.png";
-
 import EditForm from "./EditForm";
-
 import Rent from "../ModalRent/Rent";
 import swal from "sweetalert";
 
@@ -21,7 +23,6 @@ export default function Perfil() {
     password: usuario.password,
     photo: usuario.photo,
   });
-  console.log(usuario.photo);
 
   const [panel, setPanel] = useState(false);
   const abrirCerrarModal = () => {
@@ -31,11 +32,12 @@ export default function Perfil() {
   const [ImageCloud, setImageCloud] = useState("");
 
   const rents = useSelector((state) => state.rents);
-  console.log(rents);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(getCommentsUser(usuario.id));
     dispatch(getRents(usuario.id));
   }, [dispatch]);
 
@@ -51,7 +53,6 @@ export default function Perfil() {
           [event.target.name]: response.data.secure_url,
         });
         setImageCloud(response.data.secure_url);
-        // return response.data.secure_url;
       });
   };
 
@@ -162,7 +163,7 @@ export default function Perfil() {
                     <img
                       src={Editar}
                       className="rounded-full bg-[#41D3C0] h-8 hover:bg-slate-300 p-1"
-                      onClick={() => setPanel(true) }
+                      onClick={() => setPanel(true)}
                       alt="edit"
                       title="Editar Información"
                     />

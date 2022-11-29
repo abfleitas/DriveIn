@@ -26,7 +26,6 @@ export default function PaymentForm({ visible, onClose }) {
           >
             x
           </button>
-
           <div>
             <CheckOutForm />
           </div>

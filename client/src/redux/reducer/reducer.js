@@ -23,7 +23,11 @@ import {
   DELETE_STATES,
   GET_RENTS,
   EDIT_USER,
+
+  GET_COMMENTS_USER,
+
   REFRESH_USER
+
 } from "../actions/actions";
 
 const initialState = {
@@ -44,6 +48,7 @@ const initialState = {
   details: [],
   city: [],
   comments: [],
+  commentsUser: [],
   payment: [],
   users: [],
   rents: [],
@@ -119,13 +124,13 @@ export default function rootReducer(state = initialState, action) {
         vehiclesByCity: vehiclefiltrado,
       };
     case FILTER_PRICE:
-      let sortedPrice =  action.payload === "lower"
+      let sortedPrice =
+        action.payload === "lower"
           ? state.vehiclesByCity.sort((a, b) => a.initialPrice - b.initialPrice)
           : state.vehiclesByCity.sort(
               (a, b) => b.initialPrice - a.initialPrice
             );
-      
-     
+
       return {
         ...state,
         vehiclesByCity: sortedPrice,
@@ -239,6 +244,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         users: action.payload,
+      };
+    case GET_COMMENTS_USER:
+      return {
+        ...state,
+        commentsUser: action.payload,
       };
     default:
       return { ...state };
