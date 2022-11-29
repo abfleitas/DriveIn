@@ -42,6 +42,10 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
         value: navigate("/login"),
       },
     });
+
+    // alert("Cambios realizados con éxito");
+    navigate("/login");
+
   }
   async function handleUserPhoto(e) {
     e.preventDefault();
