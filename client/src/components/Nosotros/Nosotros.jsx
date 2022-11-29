@@ -8,7 +8,7 @@ export default function Nosotros() {
     {
       nombre: "Agustin Reynoso",
       image:
-        "https://png.pngtree.com/png-vector/20220520/ourlarge/pngtree-man-profile-person-silhouette-user-isolated-vector-illustration-png-image_4672200.png",
+        "https://i.ibb.co/3Wx9mrr/Whats-App-Image-2022-11-29-at-17-49-47.jpg",
       linkedin:
         "https://www.linkedin.com/in/juan-agust%C3%ADn-reynoso-mujica-ba068144/",
       github: "https://github.com/jagustinrm",
@@ -29,8 +29,7 @@ export default function Nosotros() {
     },
     {
       nombre: "Javier Moyano",
-      image:
-        "https://png.pngtree.com/png-vector/20220520/ourlarge/pngtree-man-profile-person-silhouette-user-isolated-vector-illustration-png-image_4672200.png",
+      image: "https://i.ibb.co/r5KK1xY/JaviM.jpg",
       linkedin: "https://www.linkedin.com/in/javier-moyano-1ba2691b3/",
       github: "https://github.com/Javymoyano",
     },

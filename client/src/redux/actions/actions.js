@@ -220,6 +220,13 @@ export const registerUser = (payload) => async (dispatch) => {
   }
 };
 
+export const getUser = (email) => {
+  return async function () {
+    const response = await axios.get(`/user/info/${email}`);
+    localStorage.setItem("UserLogin", JSON.stringify(response.data));
+  };
+}
+
 export const loginUser = (payload, navigate) => async (dispatch) => {
   try {
     const user = await axios.post("/user/login", payload);

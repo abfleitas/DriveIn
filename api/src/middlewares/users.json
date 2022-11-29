@@ -1,145 +1,113 @@
 [
     {
-        "name" : "Pablo",
-        "lastName" : "Mendoza",
-        "phone" : 12345678,
-        "whatsapp" : 12345678,
-        "email": "email1@email.com",
-        "password" : "Gatito123",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM4_cctqsb.jpg",
-        "active" : true
-    },    
+      "name": "Pablo",
+      "lastName": "Mendoza",
+      "phone": 12345678,
+      "whatsapp": 12345678,
+      "email": "email1@email.com",
+      "password": "Gatito123",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM4_cctqsb.jpg",
+      "active": true
+    },
     {
-        "name" : "Mike",
-        "lastName" : "Wazousky",
-        "phone" : 87654321,
-        "whatsapp" : 87654321,
-        "email": "email2@email.com",
-        "password" : "Cacatua85",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM5_qr2uwo.jpg",
-        "active" : true
-    },    
+      "name": "Mike",
+      "lastName": "Wazousky",
+      "phone": 87654321,
+      "whatsapp": 87654321,
+      "email": "email2@email.com",
+      "password": "Cacatua85",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM5_qr2uwo.jpg",
+      "active": true
+    },
     {
-        "name" : "Marty",
-        "lastName" : "McFly",
-        "phone" : 52675816,
-        "whatsapp" : 52675816,
-        "email": "email3@email.com",
-        "password" : "Caramel23",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM3_jyqwrc.jpg",
-        "active" : true
-    },    
+      "name": "Marty",
+      "lastName": "McFly",
+      "phone": 52675816,
+      "whatsapp": 52675816,
+      "email": "email3@email.com",
+      "password": "Caramel23",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM3_jyqwrc.jpg",
+      "active": true
+    },
     {
-        "name" : "Marco",
-        "lastName" : "Ramirez",
-        "phone" : 25493581,
-        "whatsapp" : 25493581,
-        "email": "email4@email.com",
-        "password" : "Patata111",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM2_wiuiw8.jpg",
-        "active" : true
-    },    
+      "name": "Marco",
+      "lastName": "Ramirez",
+      "phone": 25493581,
+      "whatsapp": 25493581,
+      "email": "email4@email.com",
+      "password": "Patata111",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM2_wiuiw8.jpg",
+      "active": true
+    },
     {
-        "name" : "Nepomuseno",
-        "lastName" : "Acosta",
-        "phone" : 24316952,
-        "whatsapp" : 24316952,
-        "email": "email5@email.com",
-        "password" : "Caramia56",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM1_ta8fel.jpg",
-        "active" : true
-    },    
+      "name": "Nepomuseno",
+      "lastName": "Acosta",
+      "phone": 24316952,
+      "whatsapp": 24316952,
+      "email": "email5@email.com",
+      "password": "Caramia56",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeM1_ta8fel.jpg",
+      "active": true
+    },
     {
-        "name" : "Kiriko",
-        "lastName" : "Haruko",
-        "phone" : 32165236,
-        "whatsapp" : 32165236,
-        "email": "email6@email.com",
-        "password" : "Nyancat123",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF2_a5dq7g.jpg",
-        "active" : true
-    },    
+      "name": "Kiriko",
+      "lastName": "Haruko",
+      "phone": 32165236,
+      "whatsapp": 32165236,
+      "email": "email6@email.com",
+      "password": "Nyancat123",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF2_a5dq7g.jpg",
+      "active": true
+    },
     {
-        "name" : "Marta",
-        "lastName" : "Torrez",
-        "phone" : 52354897,
-        "whatsapp" : 52354897,
-        "email": "email7@email.com",
-        "password" : "Tron582",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF4_wtagll.jpg",
-        "active" : true
-    },    
+      "name": "Marta",
+      "lastName": "Torrez",
+      "phone": 52354897,
+      "whatsapp": 52354897,
+      "email": "email7@email.com",
+      "password": "Tron582",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF4_wtagll.jpg",
+      "active": true
+    },
     {
-        "name" : "Cintia",
-        "lastName" : "Cruz",
-        "phone" : 23165897,
-        "whatsapp" : 23165897,
-        "email": "email8@email.com",
-        "password" : "Parapara12",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF5_axz4zu.jpg",
-        "active" : true
-    },    
+      "name": "Cintia",
+      "lastName": "Cruz",
+      "phone": 23165897,
+      "whatsapp": 23165897,
+      "email": "email8@email.com",
+      "password": "Parapara12",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF5_axz4zu.jpg",
+      "active": true
+    },
     {
-        "name" : "Carol",
-        "lastName" : "Reyez",
-        "phone" : 23485321,
-        "whatsapp" : 23485321,
-        "email": "email9@email.com",
-        "password" : "Aura987",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF1_fqvozj.jpg",
-        "active" : true
-    },    
+      "name": "Carol",
+      "lastName": "Reyez",
+      "phone": 23485321,
+      "whatsapp": 23485321,
+      "email": "email9@email.com",
+      "password": "Aura987",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF1_fqvozj.jpg",
+      "active": true
+    },
     {
-        "name" : "Rebeca",
-        "lastName" : "Hylton",
-        "phone" : 34826571,
-        "whatsapp" : 34826571,
-        "email": "email10@email.com",
-        "password" : "Porky16",
-        "photo" : "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF3_com3eu.jpg",
-        "active" : true
-    },    
-
-
-
-
-
-
-
-
-
-
+      "name": "Rebeca",
+      "lastName": "Hylton",
+      "phone": 34826571,
+      "whatsapp": 34826571,
+      "email": "email10@email.com",
+      "password": "Porky16",
+      "photo": "https://res.cloudinary.com/dbmhbouib/image/upload/v1668607080/Users/FakeF3_com3eu.jpg",
+      "active": true
+    },
     {
-        "name" : "Soy el M",
-        "lastName" : "Moderador",
-        "phone" : 23156824,
-        "whatsapp" : 23156824,
-        "email": "email11@email.com",
-        "password" : "Moderador123",
-        "photo" : "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-news-webcast-illustration-image_1467059.jpg",
-        "active" : true,
-        "role" : 2
-    },    
-    {
-        "name" : "Soy el A",
-        "lastName" : "Administrador",
-        "phone" : 21352113,
-        "whatsapp" : 21352113,
-        "email": "email12@email.com",
-        "password" : "Administrador123",
-        "photo" : "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-news-webcast-illustration-image_1467059.jpg",
-        "active" : true,
-        "role" : 3
-    },    
-    {
-        "name" : "Soy el D",
-        "lastName" : "Dueño",
-        "phone" : 95267515,
-        "whatsapp" : 95267515,
-        "email": "email13@email.com",
-        "password" : "Dueño123",
-        "photo" : "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-news-webcast-illustration-image_1467059.jpg",
-        "active" : true,
-        "role" : 4
+      "name": "Admin",
+      "lastName": "Master",
+      "phone": 21352113,
+      "whatsapp": 21352113,
+      "email": "admin@email.com",
+      "password": "Administrador123",
+      "photo": "https://png.pngtree.com/element_our/20190604/ourmid/pngtree-cartoon-news-webcast-illustration-image_1467059.jpg",
+      "active": true,
+      "role": 2
     }
-]
+  ]

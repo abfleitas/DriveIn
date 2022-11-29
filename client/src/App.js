@@ -17,19 +17,20 @@ import Favorites from "./components/Favorites/Favorites";
 import Perfil from "./components/PerfilUser/Perfil";
 import ProtectUser from "./components/ProtectRoutes/ProtectUser";
 import ProtectLogin from "./components/ProtectRoutes/ProtectLogin";
+import ProtectAdmin from "./components/ProtectRoutes/ProtectAdmin";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { refreshUser } from "./redux/actions/actions";
 
 function App() {
-  // const user = JSON.parse(localStorage.getItem("UserLogin"))
+  const usuario = JSON.parse(localStorage.getItem("UserLogin"))
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(refreshUser)
   }, [user]);
-
+console.log(user);
   return (
     <BrowserRouter>
       <div className="App">
@@ -41,7 +42,7 @@ function App() {
           <Route path="/login" element={<ProtectLogin user={user}><Login /></ProtectLogin>} />
           <Route path="/details/:id" element={<Details />} />
           <Route path="/creation" element={<Creation />} />
-          <Route path="/admin/*" element={<Administrador />} />
+          <Route path="/admin/*" element={<ProtectAdmin role={usuario && usuario.role}><Administrador /></ProtectAdmin>} />
           <Route path="/favorite" element={<Favorites />} />
           <Route path="/vehicles-list-test" element={<Vehicles />} />
           <Route path="/users-list-test" element={<Users />} />
