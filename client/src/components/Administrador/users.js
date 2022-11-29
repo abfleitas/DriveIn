@@ -9,10 +9,6 @@ const ListActions = (props) => (
     <TopToolbar>
         <CreateButton/>
         <ExportButton/>
-        <Button
-            onClick={() => { alert('Your custom action'); }}
-            label="Show calendar">
-        </Button>
        
     </TopToolbar>
 );

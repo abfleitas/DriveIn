@@ -37,7 +37,7 @@ const allRents = async (req, res) => {
         let rentsInactive = await Rent.findAll({
           include : {
             model: Vehicles,
-            required: false
+            required: false,
           },
           order: order,
           limit:corte,
@@ -73,6 +73,7 @@ const allRents = async (req, res) => {
         rent.dataValues.userName = user[0].dataValues.name
         rent.dataValues.vehicle = rent.dataValues.vehicle.brand + " " + rent.dataValues.vehicle.model
       })
+      
       let cantidad = await Rent.count()
       return res.header("Content-Range",`0-10/${cantidad}`).status(200).send(response)
     }

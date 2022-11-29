@@ -21,10 +21,11 @@ export const rentsList = () => (
              <NumberField source="totalPrice" />
              <TextField source="createdAt" />
              <NumberField source="userId" />
-             <TextField source="userName" />
-             <EmailField source="userEmail" />
-             <NumberField source="vehicleId" />
-             <TextField source="vehicle"/>
+             {/* <TextField source="userName" />
+             <EmailField source="userEmail" /> */}
+             <NumberField source="vehicleId"  />
+             {/* <TextField source="vehicle"/> */}
+             {/* <ReferenceField source="vehicleId" reference="vehicles" /> */}
              <BooleanField source="active" />
         </Datagrid>
     </List>
