@@ -36,26 +36,24 @@ export default function CommentsForm({ id, vehicleId, visible, onClose }) {
    
    const handleSubmit = (e) => {
       e.preventDefault();
-    //dispatch(postComment(input));
-    axios.post("http://localhost:3001/comments", input)
-    .then(()=>{
-       return swal({
-          title: "Gracias por dejarnos tu comentario",
-          timer: 2000,
-          icon: "success",
-          buttons: false,
-         });
-      })
-
-    setInput({
-      id: "",
-      confort: 0,
-      performance: 0,
-      security: 0,
-      priceQuality: 0,
-      recommended: 0,
-      description: "",
-      vehicleId: "",
+      dispatch(postComment(input));
+   
+      setInput({
+         id: "",
+         confort: 0,
+         performance: 0,
+         security: 0,
+         priceQuality: 0,
+         recommended: 0,
+         description: "",
+         vehicleId: "",
+      });
+      
+      return swal({
+         title: "Gracias por dejarnos tu comentario",
+         timer: 2000,
+         icon: "success",
+         buttons: false,
       });
    };
    // const handleRelease = (e) => {
