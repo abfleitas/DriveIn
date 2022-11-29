@@ -68,6 +68,7 @@ const CreateVehicle = () => {
             <TextInput source="category" label="Categoría" />
             <input type="file" onChange={imageCloudChangeHandler}></input>
             {ImageCloud !== "" &&  <TextInput source="photo" defaultValue={ImageCloud}/>}
+            {ImageCloud !== "" &&  <img src={ImageCloud} alt="upload" style={{height: "100px"}}/>}
             <BooleanInput source="availability" label="Disponibilidad" />
             <NumberInput source="initialPrice" label="Precio" />
             <SelectInput source="cityId" label="Ciudad" choices={[
