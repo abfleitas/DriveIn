@@ -1,4 +1,4 @@
-import { Edit, SimpleForm, TextInput, NumberInput, BooleanInput, ImageField, SelectInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, NumberInput, BooleanInput, ImageInput, SelectInput } from "react-admin";
 
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const imageCloudChangeHandler = (event) => {
 
 const validateCreation = (values) => {
    const errors = {};
-   if(values.photo) {values.photo = ImageCloud}
+   // if(values.photo) {values.photo = ImageCloud}
    if (!values.brand) errors.brand = "Escriba la marca";
    else if (!/^[a-zA-Z0-9ñ]+$/.test(values.brand)) {
       errors.brand = "Solo se aceptan letras y numeros";
@@ -39,7 +39,7 @@ const validateCreation = (values) => {
    else if (!/^[a-zA-Zñ]+$/.test(values.category)) {
       errors.category = "Solo se aceptan letras";
    }
-   if (!values.photo) errors.photo = "Agregar una foto";
+   // if (!values.photo) errors.photo = "Agregar una foto";
    if (values.initialPrice < 1) {
       errors.initialPrice = "Precio tiene que ser mayor a 1";
    }
@@ -62,8 +62,7 @@ export const UpdateVehicle = () => (
          <BooleanInput source="air" />
          <NumberInput source="seats" label="Asientos" />
          <TextInput source="category" label="Categoría" />
-         <input type="file" onChange={imageCloudChangeHandler}></input>
-         <TextInput source="photo" value={ImageCloud}/>
+          <ImageInput source="photo"/>
          <BooleanInput source="availability" label="Disponibilidad" />
          <NumberInput source="initialPrice" label="Precio" />
          <SelectInput source="cityId" label="Ciudad" choices={[
