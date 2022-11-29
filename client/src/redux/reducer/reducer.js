@@ -23,6 +23,7 @@ import {
   DELETE_STATES,
   GET_RENTS,
   EDIT_USER,
+  REFRESH_USER
 } from "../actions/actions";
 
 const initialState = {
@@ -47,7 +48,7 @@ const initialState = {
   users: [],
   rents: [],
   statusLogin: true,
-  user: "No logueado",
+  user: null,
 };
 
 //Inicio localStorage
@@ -220,6 +221,11 @@ export default function rootReducer(state = initialState, action) {
         user: action.payload,
       };
     case REFRESH_AUTH:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case REFRESH_USER:
       return {
         ...state,
         user: action.payload,
