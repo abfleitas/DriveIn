@@ -399,7 +399,7 @@ export const userUpdate = (payload, body) => async (dispatch) => {
   try {
     const user = JSON.parse(localStorage.getItem("UserLogin"));
     const cualquiera = await axios.put(
-      `http://localhost:3001/user?id=${payload}`,
+      `/user?id=${payload}`,
       body
     );
     console.log("SOY EL USER DE ACTIONS", cualquiera);
