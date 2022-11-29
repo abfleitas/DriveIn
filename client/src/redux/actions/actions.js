@@ -24,6 +24,7 @@ export const VEHICLE_FAVORITE = "VEHICLE_FAVORITE";
 export const DELETE_STATES = "DELETE_STATES";
 export const GET_RENTS = "GET_RENTS";
 export const EDIT_USER = "EDIT_USER";
+export const REFRESH_USER = "REFRESH_USER";
 
 export const deleteStates = () => {
   return {
@@ -304,7 +305,7 @@ export const exitSesion = () => async (dispatch) => {
 
     return dispatch({
       type: EXIT_SESION,
-      payload: "USUARIO NO LOGUEADO",
+      payload: null,
     });
   } catch (error) {
     console.log(error);
@@ -330,9 +331,17 @@ export const refreshAuthUser = () => {
   const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
   return {
     type: REFRESH_AUTH,
-    payload: userLogin ? userLogin : "No hay usuario",
+    payload: userLogin ? userLogin : null,
   };
 };
+
+export const refreshUser = () => {
+  const userLogin = JSON.parse(localStorage.getItem("UserLogin"));
+  return {
+    type: REFRESH_USER,
+    payload: userLogin ? userLogin : null,
+  };
+}
 
 export const getPayment = (payload) => {
   return async function (dispatch) {

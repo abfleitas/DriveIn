@@ -12,8 +12,7 @@ const allRents = async (req, res) => {
 
     if(req.query.id) {
       const rent = await Rent.findByPk(req.query.id)
-      if (!rent) throw Error("No se encontro transaccion con esa ID")
-       return res.status(200).send(rent)
+      if (rent) return res.status(200).send(rent)
     }
     if(req.query.userId) {
       const userId = req.query.userId
@@ -26,8 +25,7 @@ const allRents = async (req, res) => {
           }
         }
       })
-      if (!rent.length) throw Error("No se encontraron trasacciones")
-       return res.status(200).send(rent)
+      return res.status(200).send(rent)
     }
 
     if (req.query.filter) {

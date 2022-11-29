@@ -97,7 +97,7 @@ export default function EditForm({ name, lastName, phone, open, onClose }) {
       },
     });
     // alert("Cambios realizados con éxito");
-    //navigate("/login");
+    navigate("/login");
   }
   async function handleUserPhoto(e) {
     e.preventDefault();

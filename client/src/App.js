@@ -17,9 +17,19 @@ import Favorites from "./components/Favorites/Favorites";
 import Perfil from "./components/PerfilUser/Perfil";
 import ProtectUser from "./components/ProtectRoutes/ProtectUser";
 import ProtectLogin from "./components/ProtectRoutes/ProtectLogin";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { refreshUser } from "./redux/actions/actions";
 
 function App() {
-  const user = JSON.parse(localStorage.getItem("UserLogin"))
+  // const user = JSON.parse(localStorage.getItem("UserLogin"))
+  const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(refreshUser)
+  }, [user]);
+
   return (
     <BrowserRouter>
       <div className="App">
