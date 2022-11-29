@@ -225,6 +225,7 @@ export default function CheckOutForm() {
         <div className="flex mt-2 justify-center space-x-4 m-auto">
           <div className="block">
             <DatePicker
+              placeholderText="Seleccionar fecha"
               selectsRange={true}
               minDate={subDays(new Date(), 1)}
               startDate={startDate}
@@ -234,7 +235,7 @@ export default function CheckOutForm() {
               onChange={(update) => {
                 setDateRange(update);
                }}
-              withPortal
+              isClearable={true}
               className="flex h-10 bg-[#2E3A46] text-white  rounded-xl py-2 pl-3 pr-3 text-left shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm m-auto cursor:pointer"
             />
           </div>

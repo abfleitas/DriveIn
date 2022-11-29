@@ -74,10 +74,10 @@ export default function Perfil() {
       text: "Cambiaste la foto. Presiona el botón para volver al Loging",
 
       button: {
-        text: "Ok, ir a Login",
-        value: navigate("/login"),
+        text: "Ok",
       },
     });
+    navigate("/home");
   }
 
   return (
