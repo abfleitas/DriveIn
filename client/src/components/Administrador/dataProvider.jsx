@@ -1,8 +1,7 @@
 import { fetchUtils } from "react-admin";
 import { stringify } from "query-string";
+import axios from "axios";
 
-
-console.log(process.env.REACT_APP_REACTADMIN_REQ);
 
 const apiUrl = process.env.REACT_APP_REACTADMIN_REQ ? process.env.REACT_APP_REACTADMIN_REQ : 'http://localhost:3001';
 const httpClient = fetchUtils.fetchJson;
@@ -23,7 +22,6 @@ export const dataProvider= {
         };
         
         const url = `${apiUrl}/${resource}?${stringify(query)}`;
-        httpClient(url).then(({ headers, json }) => (console.log(headers)))
         return httpClient(url).then(({ headers, json }) => ({
             data: json,
             total: parseInt(headers.get('content-range').split('/').pop(), 10),
@@ -64,11 +62,25 @@ export const dataProvider= {
         }));
     },
 
-    update: (resource, params) =>
-        httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    update: async (resource, params) =>
+       {
+        
+   console.log(params.data.photo)
+         const imageData = new FormData()
+        imageData.append("file", params.data.photo.rawFile)
+        imageData.append("upload_preset", "DriveIn_users")
+        await axios.post("https://api.cloudinary.com/v1_1/dbmhbouib/upload", imageData)
+        .then(response => { params.data.photo = response.data.secure_url})
+    
+        
+        
+        .then( res => httpClient(`${apiUrl}/${resource}/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify(params.data),
-        }).then(({ json }) => ({ data: json })),
+         
+        })).then(( {json} ) => ( {data: json})  )
+
+    },
 
     updateMany: (resource, params) => {
         const query = {

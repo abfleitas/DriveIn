@@ -147,7 +147,13 @@ async function putUser (id, body) {
     const user = await Users.findByPk(id) ;
     const datos = body
     for (const proper in datos) {
-      user[proper] = datos[proper]
+
+   
+        user[proper] = datos[proper]
+      
+
+
+
       await user.update(
         {where: {id: id}}
         )

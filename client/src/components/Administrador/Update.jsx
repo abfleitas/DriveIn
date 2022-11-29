@@ -30,6 +30,7 @@ export const Updates = () => (
               <TextInput disabled source="name" />
               <TextInput disabled source="lastName" />
               <TextInput disabled source="email" />
+              {/* <ImageInput source = "photo"/> */}
               {/* <NumberInput source="whatsapp" />
               <TextInput source="password" />
               <input type="file" onChange={imageCloudChangeHandler}></input>
