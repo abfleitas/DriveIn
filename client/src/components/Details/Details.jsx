@@ -148,7 +148,7 @@ export default function Details() {
                         Aire Acondicionado
                       </span>
                       <h1 className="text-xl font-bold text-[#F97D67]">
-                        {vehicleDetailsState.air ? "Si" : null}
+                        {vehicleDetailsState.air ? "Si" : "No"}
                       </h1>
                     </div>
                   )}
