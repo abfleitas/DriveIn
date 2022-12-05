@@ -61,6 +61,9 @@ El sitio web es un e-commerce que consiste en la prestación de servicios  de al
 <p align="right">
   <img  src="./client/src/images/DriveInHome.jpeg" />
 </p>
+<p align="right">
+  <img  src="./client/src/images/home.jpeg" />
+</p>
 
 ### <a href="https://drivein.vercel.app/">Link a la aplicación</a>
 
