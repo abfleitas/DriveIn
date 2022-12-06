@@ -58,11 +58,20 @@ El sitio web es un e-commerce que consiste en la prestación de servicios  de al
 
 # 💻 Capturas en Escritorio 💻
 
-<p align="right">
+<p align="center">
   <img  src="./client/src/images/DriveInHome.jpeg" />
 </p>
-<p align="right">
+<p align="center">
   <img  src="./client/src/images/home.jpeg" />
+</p>
+<p align="center">
+  <img  src="./client/src/images/detail.jpeg" />
+</p>
+<p align="center">
+  <img  src="./client/src/images/perfil.jpeg" />
+</p>
+<p align="center">
+  <img  src="./client/src/images/admin.jpeg" />
 </p>
 
 ### <a href="https://drivein.vercel.app/">Link a la aplicación</a>
